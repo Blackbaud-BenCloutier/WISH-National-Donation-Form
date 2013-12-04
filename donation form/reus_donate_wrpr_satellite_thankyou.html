@@ -1,0 +1,569 @@
+<!--
+Explanation of conditionals on this page:
+
+if [[S80:designeeName(1-5)]] is not empty
+  donate.donation.amount.single = [[S80:designeeAmt(1-5)]]
+  donate.donation.amount.pledge = null
+  if [[S80:productURL(1-5)]] is not empty
+    if [[S80:productURL(1-5)]] contains ecard
+      donate.donation.behalf.card = null
+      donate.donation.behalf.eCard = [[S80:occasion(1-5)]]
+      donate.donation.behalf.eCert = null
+    if [[S80:productURL(1-5)]] contains line(1-5)
+      donate.donation.behalf.card = [[S80:occasion(1-5)]]
+      donate.donation.behalf.eCard = null
+      donate.donation.behalf.eCert = null
+    if [[S80:productURL(1-5)]] contains blank
+      donate.donation.behalf.card = [[S80:occasion(1-5)]]
+      donate.donation.behalf.eCard = null
+      donate.donation.behalf.eCert = null
+    else
+      donate.donation.behalf.card = null
+      donate.donation.behalf.eCard = null
+      donate.donation.behalf.eCert = [[S80:occasion(1-5)]]
+  else
+    donate.donation.behalf.card = null
+    donate.donation.behalf.eCard = null
+    donate.donation.behalf.eCert = null
+  donate.donation.destination = ''
+  donate.donation.donationChapter = ''
+  donate.donation.skew = ''
+else
+  do nothing
+
+Here's what the _mawData object looks like after the conditionals kick in:
+
+{
+  donate: {
+    company: null,
+    currencyCode: null,
+    locale: {
+      city: [[S120:dc:donorCity]],
+      country: [[S120:dc:donorCountry]],
+      state: [[S120:dc:donorState]],
+      zip: [[S120:dc:donorZip]]
+    }
+    paymentType: [[S120:dc:paymentMethod]],
+    donation: [ dynamic content ],
+    transactionId: [[S120:dc:transactionID]],
+    totalTransactionValue: [[S120:dc:giftAmount]]
+  },
+  form: {
+    fID: Donate,
+    errorField: null
+  },
+  intSearch: {
+    term: null,
+    results: null
+  },
+  language: en,
+  login: {
+    loggedIn: false,
+    userName: null,
+    donor: null
+  },
+  pageCat: {
+    primary: Ways To Help,
+    secondary: Giving,
+    tertiary: Donate,
+    hierarchy: Ways To Help:Giving:Donate:Thank You,
+    pageId: Thank You
+  },
+  siteId: [[S80:cid]],
+  ThirdPartyId: Convio,
+  IsMobile: false
+}
+-->
+<script type='text/javascript'>
+var _mawData = {
+  "donate": {
+    "company": null,
+    "currencyCode": null,
+    "locale": {
+      "city":"[[S120:dc:donorCity]]",
+      "country":"[[S120:dc:donorCountry]]",
+      "state":"[[S120:dc:donorState]]",
+      "zip":"[[S120:dc:donorZip]]"
+    },
+    "paymentType":"[[S120:dc:paymentMethod]]",
+    "donation": [
+      <convio:choose>
+        <convio:when title="hasDonation1" test="nempty">
+          <convio:op>
+            <convio:session title="designeeName1" name="80" param="designeeName1"></convio:session>
+          </convio:op>
+          <convio:then>
+            {
+              "amount": {
+                "single": "<convio:session title="designeeAmt1" name="80" param="designeeAmt1"></convio:session>",
+                "pledge": null
+              },
+            <convio:choose>
+              <convio:when title="hasProductURL1" test="nempty">
+                <convio:op>
+                  <convio:session title="productURL1" name="80" param="productURL1"></convio:session>
+                </convio:op>
+                <convio:then>
+                  <convio:choose>
+                    <convio:when title="isEcard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL1" name="80" param="productURL1"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        ecard
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": null,
+                          "eCard": "<convio:session title="occassion" name="80" param="occassion1"></convio:session>",
+                          "eCert": null  
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL1" name="80" param="productURL1"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        line1
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion1"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCardBlank" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL1" name="80" param="productURL1"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        blank
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion1"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:otherwise>
+                      "behalf": {
+                        "card": null,
+                        "eCard": null,
+                        "eCert": "<convio:session title="occassion" name="80" param="occassion1"></convio:session>" 
+                      },
+                    </convio:otherwise>
+                  </convio:choose>
+                </convio:then>
+              </convio:when>
+              <convio:otherwise title="Unknown">
+                "behalf": {
+                  "card": null,
+                  "eCard": null,
+                  "eCert": null  
+                },
+              </convio:otherwise>
+            </convio:choose>
+              "destination": "",
+              "donationChapter": "",
+              "skew": ""
+            },
+          </convio:then>
+        </convio:when>  
+        <convio:otherwise title="Unknown"></convio:otherwise>
+      </convio:choose>
+
+      <convio:choose>
+        <convio:when title="hasDonation2" test="nempty">
+          <convio:op>
+            <convio:session title="designeeName2" name="80" param="designeeName2"></convio:session>
+          </convio:op>
+          <convio:then>
+            {
+              "amount": {
+                "single": "<convio:session title="designeeAmt2" name="80" param="designeeAmt2"></convio:session>",
+                "pledge": null
+              },
+            <convio:choose>
+              <convio:when title="hasProductURL2" test="nempty">
+                <convio:op>
+                  <convio:session title="productURL2" name="80" param="productURL2"></convio:session>
+                </convio:op>
+                <convio:then>
+                  <convio:choose>
+                    <convio:when title="isEcard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL2" name="80" param="productURL2"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        ecard
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": null,
+                          "eCard": "<convio:session title="occassion" name="80" param="occassion2"></convio:session>",
+                          "eCert": null  
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL2" name="80" param="productURL2"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        line2
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion2"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCardBlank" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL2" name="80" param="productURL2"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        blank
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion2"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:otherwise>
+                      "behalf": {
+                        "card": null,
+                        "eCard": null,
+                        "eCert": "<convio:session title="occassion" name="80" param="occassion2"></convio:session>" 
+                      },
+                    </convio:otherwise>
+                  </convio:choose>
+                </convio:then>
+              </convio:when>
+              <convio:otherwise title="Unknown">
+                "behalf": {
+                  "card": null,
+                  "eCard": null,
+                  "eCert": null  
+                },
+              </convio:otherwise>
+            </convio:choose>
+              "destination": "",
+              "donationChapter": "",
+              "skew": ""
+            },
+          </convio:then>
+        </convio:when>  
+        <convio:otherwise title="Unknown"></convio:otherwise>
+      </convio:choose>
+
+      <convio:choose>
+        <convio:when title="hasDonation3" test="nempty">
+          <convio:op>
+            <convio:session title="designeeName3" name="80" param="designeeName3"></convio:session>
+          </convio:op>
+          <convio:then>
+            {
+              "amount": {
+                "single": "<convio:session title="designeeAmt3" name="80" param="designeeAmt3"></convio:session>",
+                "pledge": null
+              },
+            <convio:choose>
+              <convio:when title="hasProductURL3" test="nempty">
+                <convio:op>
+                  <convio:session title="productURL3" name="80" param="productURL3"></convio:session>
+                </convio:op>
+                <convio:then>
+                  <convio:choose>
+                    <convio:when title="isEcard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL3" name="80" param="productURL3"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        ecard
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": null,
+                          "eCard": "<convio:session title="occassion" name="80" param="occassion3"></convio:session>",
+                          "eCert": null  
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL3" name="80" param="productURL3"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        line3
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion3"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCardBlank" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL3" name="80" param="productURL3"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        blank
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion3"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:otherwise>
+                      "behalf": {
+                        "card": null,
+                        "eCard": null,
+                        "eCert": "<convio:session title="occassion" name="80" param="occassion3"></convio:session>" 
+                      },
+                    </convio:otherwise>
+                  </convio:choose>
+                </convio:then>
+              </convio:when>
+              <convio:otherwise title="Unknown">
+                "behalf": {
+                  "card": null,
+                  "eCard": null,
+                  "eCert": null  
+                },
+              </convio:otherwise>
+            </convio:choose>
+              "destination": "",
+              "donationChapter": "",
+              "skew": ""
+            },
+          </convio:then>
+        </convio:when>  
+        <convio:otherwise title="Unknown"></convio:otherwise>
+      </convio:choose>
+
+      <convio:choose>
+        <convio:when title="hasDonation4" test="nempty">
+          <convio:op>
+            <convio:session title="designeeName4" name="80" param="designeeName4"></convio:session>
+          </convio:op>
+          <convio:then>
+            {
+              "amount": {
+                "single": "<convio:session title="designeeAmt4" name="80" param="designeeAmt4"></convio:session>",
+                "pledge": null
+              },
+            <convio:choose>
+              <convio:when title="hasProductURL4" test="nempty">
+                <convio:op>
+                  <convio:session title="productURL4" name="80" param="productURL4"></convio:session>
+                </convio:op>
+                <convio:then>
+                  <convio:choose>
+                    <convio:when title="isEcard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL4" name="80" param="productURL4"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        ecard
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": null,
+                          "eCard": "<convio:session title="occassion" name="80" param="occassion4"></convio:session>",
+                          "eCert": null  
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL4" name="80" param="productURL4"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        line4
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion4"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCardBlank" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL4" name="80" param="productURL4"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        blank
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion4"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:otherwise>
+                      "behalf": {
+                        "card": null,
+                        "eCard": null,
+                        "eCert": "<convio:session title="occassion" name="80" param="occassion4"></convio:session>" 
+                      },
+                    </convio:otherwise>
+                  </convio:choose>
+                </convio:then>
+              </convio:when>
+              <convio:otherwise title="Unknown">
+                "behalf": {
+                  "card": null,
+                  "eCard": null,
+                  "eCert": null  
+                },
+              </convio:otherwise>
+            </convio:choose>
+              "destination": "",
+              "donationChapter": "",
+              "skew": ""
+            },
+          </convio:then>
+        </convio:when>  
+        <convio:otherwise title="Unknown"></convio:otherwise>
+      </convio:choose>
+
+      <convio:choose>
+        <convio:when title="hasDonation5" test="nempty">
+          <convio:op>
+            <convio:session title="designeeName5" name="80" param="designeeName5"></convio:session>
+          </convio:op>
+          <convio:then>
+            {
+              "amount": {
+                "single": "<convio:session title="designeeAmt5" name="80" param="designeeAmt5"></convio:session>",
+                "pledge": null
+              },
+            <convio:choose>
+              <convio:when title="hasProductURL5" test="nempty">
+                <convio:op>
+                  <convio:session title="productURL5" name="80" param="productURL5"></convio:session>
+                </convio:op>
+                <convio:then>
+                  <convio:choose>
+                    <convio:when title="isEcard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL5" name="80" param="productURL5"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        ecard
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": null,
+                          "eCard": "<convio:session title="occassion" name="80" param="occassion5"></convio:session>",
+                          "eCert": null  
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCard" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL5" name="80" param="productURL5"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        line5
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion5"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:when title="isCardBlank" test="contains">
+                      <convio:op>
+                        <convio:session title="productURL5" name="80" param="productURL5"></convio:session>
+                      </convio:op>
+                      <convio:op>
+                        blank
+                      </convio:op>
+                      <convio:then>
+                        "behalf": {
+                          "card": "<convio:session title="occassion" name="80" param="occassion5"></convio:session>",
+                          "eCard": null,
+                          "eCert": null 
+                        },
+                      </convio:then>
+                    </convio:when>
+                    <convio:otherwise>
+                      "behalf": {
+                        "card": null,
+                        "eCard": null,
+                        "eCert": "<convio:session title="occassion" name="80" param="occassion5"></convio:session>" 
+                      },
+                    </convio:otherwise>
+                  </convio:choose>
+                </convio:then>
+              </convio:when>
+              <convio:otherwise title="Unknown">
+                "behalf": {
+                  "card": null,
+                  "eCard": null,
+                  "eCert": null  
+                },
+              </convio:otherwise>
+            </convio:choose>
+              "destination": "",
+              "donationChapter": "",
+              "skew": ""
+            },
+          </convio:then>
+        </convio:when>  
+        <convio:otherwise title="Unknown"></convio:otherwise>
+      </convio:choose>
+    ],
+    "transactionId": "[[S120:dc:transactionID]]",
+    "totalTransactionValue": "[[S120:dc:giftAmount]]"
+  },
+  "form": {
+    "fID": "Donate",
+    "errorField": null
+  },
+  "intSearch": {
+    "term": null,
+    "results": null
+  },
+  "language": "en",
+  "login": {
+    "loggedIn": false,
+    "userName": null,
+    "donor": null
+  },
+  "pageCat": {
+    "primary": "Ways To Help",
+    "secondary": "Giving",
+    "tertiary": "Donate",
+    "hierarchy": "Ways To Help:Giving:Donate:Thank You",
+    "pageId": "Thank You"
+  },
+  "siteId": "[[S80:cid]]",
+  "ThirdPartyId": "Convio",
+  "IsMobile": false
+} 
+</script>
+

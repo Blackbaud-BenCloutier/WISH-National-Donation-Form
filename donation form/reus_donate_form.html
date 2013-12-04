@@ -1,0 +1,427 @@
+<form method="post" action="#" id="mainform" autocomplete="off">
+<input type="hidden" name="foreign_key1" value="[[S334:set.custom.foreign_key1]]">
+<input type="hidden" name="foreign_key2" value="[[S334:set.custom.foreign_key2]]">
+<input type="hidden" name="foreign_key3" value="[[S334:set.custom.foreign_key3]]">
+<input type="hidden" name="foreign_key4" value="[[S334:set.custom.foreign_key4]]">
+<input type="hidden" name="foreign_key5" value="[[S334:set.custom.foreign_key5]]">
+			
+[[?xxxx::xx[[S334:campaign]]xx::
+<!-- There's no campaign variable  -->
+[[S51:reus_donate_form_default_intro]]
+::
+<!-- There is a campaign variable -->
+[[E51:reus_donate_form_[[S334:campaign]]_intro]]
+]]
+
+<div class="userForm jsDonateValidate">
+    <div class="donate-wrap wrap-emphasis jsFormSection" data-bind="css: {done: sectionTypeState().done}">
+        <!-- BEGIN DONATION CONFIG FORM WRAP -->
+        <div class="formtop clearfix">
+            <div class="row_2 step">
+                Step
+                <span class="big">
+                    1/4
+                </span>
+            </div>
+            <div class="row_4">
+                <h3>
+                    My donation(s)
+                </h3>
+            </div>
+            <div class="grid_2 status">
+            </div>
+        </div>
+        <!-- Form repeater container -->
+        <div data-bind="foreach: donations">
+            <!-- BEGIN INSET -->
+            <div class="js_donationConfigurator donationConfig inset" data-bind="visible: isInProcess(), attr: {'data-donation-id': donationID()}">
+                <!-- BEGIN FIELDSET -->
+                <fieldset>
+                    <div class="clearfix">
+                        <label for="dType">
+                            My donation is
+                        </label>
+                        <!-- BEGIN DONATION TYPE BUTTONS -->
+                        <div class="float-right grid_6" id="giftTypes">
+                            
+                                    <a 
+                                        href="#" 
+                                        class="type-btn selected"
+                                        data-bind="text: $root.donationType1Label, click: function() {donationType(1); }, css: {selected: donationType() == 1 }" id="singleGift">A Single Gift</a>
+                                
+                                    <a 
+                                        href="#" 
+                                        class="type-btn "
+                                        data-bind="text: $root.donationType2Label, click: function() {donationType(2); ecardFinish(false); hasProduct(false);}, css: {selected: donationType() == 2 }" id="monthlyGift">A Monthly Pledge</a>
+                                
+                        </div>
+                    </div>
+                    <!-- START MONTHLY OPTIONS -->
+                    <div class="monthly-wrap clearfix grid_6" style="display: none" data-bind="visible: donationType() == 2">
+                        <!-- BEGIN TOP -->
+                        <div class="top clearfix">
+                            <!-- BEGIN LEFT -->
+                            <div class="left">
+                                
+                                        <!--<a href="#" class="month-btn" data-bind="click: function(){monthlyStartType('date1');}, text: $root.startDate1Pretty, css: {selected: monthlyStartType() == 'date1'}">
+                                        </a>
+                                    
+                                        <a href="#" class="month-btn" data-bind="click: function(){monthlyStartType('date2');}, text: $root.startDate2Pretty, css: {selected: monthlyStartType() == 'date2'}">
+                                        </a>-->
+                                    
+                                <p data-bind="visible: donationType() == 2">
+                                    Your first donation will be charged today and then monthly starting on <i class="nextMonth"></i>. 
+
+                                </p>
+                            </div>
+                            <!-- END LEFT -->
+                            <!-- BEGIN RIGHT -->
+                            <div class="right">
+                                <a href="#js-learn-more" class="fb-inline">
+                                    Learn more about our monthly donor program and benefits.
+                                </a>
+                            </div>
+                            <!-- END RIGHT -->
+                        </div>
+                        <!-- END TOP -->
+                    </div>
+                    <!-- END MONTHLY OPTIONS -->
+                    
+[[S51:reus_donate_form_product_select]]
+                </fieldset>
+                <!-- END FIELDSET -->
+                <!-- BEGIN FIELDSET -->
+                <fieldset>
+                    <div class="clearfix">
+                        <label for="dAmount" data-bind="css: {error: x_donationAmountErrorType() === 'buttons' || x_donationAmountErrorType() === 'odm'}">
+                            My donation amount
+                            <span class="lblerror error" style="display: none" data-bind="visible: x_donationAmountErrorType() === 'buttons'">
+                                <br />
+                                Please select how much you'd like to donate.
+                            </span>
+                        </label>
+                        <!-- BEGIN DONATION AMOUNT BUTTONS -->
+                        <div class="float-right grid_6">
+<input type="hidden" name="level_id" value="1882" />
+                        [[?xxxx::xx[[S334:campaign]]xx::
+                        <!-- There's no campaign variable  -->
+                        [[S51:reus_donate_form_default_levels]]
+                        ::
+                        <!-- There is a campaign variable -->
+                        [[E51:reus_donate_form_[[S334:campaign]]_levels]]
+                        ]]
+                        </div>
+                        <!-- END DONATION AMOUNT BUTTONS -->
+                    </div>
+                </fieldset>
+                <!-- END FIELDSET -->
+                <!-- BEGIN FIELDSET -->
+                <fieldset>
+                    <label for="dDest">
+                        Direct my donation to
+                    </label>
+                    <!-- BEGIN DESTINATION BUTTONS -->
+                    <div class="float-right">
+                        <a class="dest-btn jschap" data-bind="css: {selected: donationDestType() == 'chapter'}">
+                            A local chapter
+                            <br />
+                            <span>
+                                Serves children in a specific region
+                            </span>
+                            <input type="radio" name="donationDestType" value="chapter" class="button-cover jsSkipUniform" id="dDest" data-bind="click: function(cx, evt) { donorIntent(''); $root.clearChapterLocatorError(evt); }, checked: donationDestType">
+                        </a>
+                        
+                        <a href="#" class="dest-btn jsnat" data-bind="css: {selected: donationDestType() == 'national'}">
+                            National
+                            <br />
+                            <span>
+                                Serves children throughout the US
+                            </span>
+                            <input type="radio" name="donationDestType" value="national" class="button-cover jsSkipUniform" data-bind="click: function() { donorIntent($root.nationalID()); }, checked: donationDestType">
+                        </a>
+                        
+                        <a href="#" class="dest-btn jsinter" data-bind="css: {selected: donationDestType() == 'international'}">
+                            International
+                            <br />
+                            <span>
+                                Serves children outside the US
+                            </span>
+                            <input type="radio" name="donationDestType" value="international" class="button-cover jsSkipUniform" data-bind="click: function() { donorIntent($root.internationalID()); }, checked: donationDestType">
+                        </a>
+                    </div>
+                    <!-- END DESTINATION BUTTONS -->
+                    
+                    
+[[S51:reus_donate_form_chapter_country_search]]
+                </fieldset>
+                <!-- END FIELDSET -->
+                <!-- BEGIN ACTIONS -->
+                <div class="actions clearfix">
+                    <a href="#" class="cancel-btn" data-bind="click: $root.cancelDonation, visible: newDonation()">
+                        Cancel
+                    </a>
+                     <div class="float-right clearfix">
+                        <a href="#" class="action-btn ab-light" id="saveAdd" data-bind="click: $root.saveAndAdd, visible: newDonation() && mawf.CartView.donations().length < 5, css: { disabled: x_donationAmountError() }">
+                            Save and add another donation
+                        </a>
+                        <a href="#" class="action-btn ab-short" id="saveContinue" data-bind="click: $root.saveDonation, visible: newDonation(), css: { disabled: x_donationAmountError() }">
+                            Save and continue
+                        </a>
+                        <a href="#" class="action-btn ab-light" style="display: none" data-bind="click: $root.discardChanges, visible: !newDonation()">
+                            Discard changes
+                        </a>
+                        <a href="#" class="action-btn" style="display: none" data-bind="click: $root.saveChanges, visible: !newDonation(), css: { disabled: x_donationAmountError() }">
+                            Save changes
+                        </a>
+                    </div>
+                </div>
+                <!-- END ACTIONS -->
+            </div>
+            <!-- END INSET -->
+[[S51:reus_donate_form_summary_module]]
+        </div>
+        <!-- end form repeater container -->
+    </div>
+    <!-- END DONATON CONFIG FORM WRAP -->
+    <!-- START ADD ANOTHER DONATION BAR -->
+    <div class="donate-wrap clear-wrap center clearfix" data-bind="visible: ! donationSelectInProcess() && mawf.CartView.donations().length < 5">
+        <a href="#" class="add-button" data-bind="click: addDonation">
+            Add another donation
+        </a>
+    </div>
+    <!-- END ADD ANOTHER DONATION BAR -->
+    <!-- USER INFO FORM START -->
+    <div class="jsDisableWrap" style="display: none;" data-bind="css: {disabled: donationSelectInProcess()}, visible: showSecondFormSection">
+        <div class="form-wrap donate-wrap jsFormSection clearfix">
+            <div class="formtop clearfix">
+                <div class="row_2 step">
+                    Step
+                    <span class="big">
+                        2/4
+                    </span>
+                </div>
+                <div class="row_4">
+                    <h3>
+                        My information
+                    </h3>
+                </div>
+                <div class="grid_2 status" data-bind="css: sectionPersonalState()">
+                </div>
+            </div>
+            <div class="inset">
+                <div class="module-form-combo clearfix">
+                    <div class="grid_6">
+                        <div class="row_2 clearfix">
+                            <label for="nameTitle">
+                                Title
+                            </label>
+                        </div>
+                        <div class="row_4 module-form-tiled clearfix">
+                            
+                                    <select id="nameTitle" name="billing.name.title">
+                                        <option value="" selected="selected">Please select</option>
+                                
+                                        <option value="Mr.">Mr.</option>
+                                
+                                        <option value="Mrs.">Mrs.</option>
+                                
+                                        <option value="Ms.">Ms.</option>
+                                
+                                        <option value="Miss">Miss</option>
+                                
+                                        <option value="Dr.">Dr.</option>
+                                
+                                        <option value="The Honorable">The Honorable</option>
+                                
+                                        <option value="Prof.">Prof.</option>
+                                
+                                        <option value="Rev.">Rev.</option>
+                                
+                                    </select>
+                                
+                        </div>
+                    </div>
+                    <div class="grid_2 clearfix">
+                        <span class="info-sec">
+                            Optional
+                        </span>
+                    </div>
+                </div>
+                <div class="module-form-labeled clearfix">
+                    <div class="grid_6">
+                        <label for="fname1">
+                            Name
+                        </label>
+                        <input class="js_fname jsreq fnamefld" type="text" placeholder="First name"
+                            name="billing.name.first" id="fname1">
+                        <input class="mnamefld" type="text" value="" name="billing.name.middle" id="mname1" maxlength="3" placeholder="M.I.">
+                    </div>
+                </div>
+                <div class="module-form-labeled clearfix">
+                    <div class="grid_6">
+                        <input class="js_lname jsreq" type="text" placeholder="Last name"
+                            name="billing.name.last" id="lname1">
+                    </div>
+                </div>
+                <div class="module-form-labeled clearfix">
+                    <div class="grid_6">
+                        <label for="eAdd">
+                            Email address
+                        </label>
+                        <input class="js_email jsreq" type="text" placeholder="your_email@domain.com"
+                            name="donor.email" id="eAdd">
+                    </div>
+                </div>
+                <div class="module-form-labeled clearfix">
+                    <div class="grid_6">
+                        <label for="eAddConfirm">
+                            Confirm your email address
+                        </label>
+                        <input class="js_emailCompare jsreq" type="text" placeholder="your_email@domain.com"
+                            name="eAddConfirm" id="eAddConfirm" data-bind="value: eAddConfirm">
+                        <p class="info">
+                            Please confirm your email address. We want to make sure you get your email receipt.
+                        </p>
+                    </div>
+                </div>
+                <div class="module-form-labeled clearfix">
+                    <div class="grid_6">
+                        <label for="phone">
+                            Phone number
+                        </label>
+                        <input type="text" class="js_phone" placeholder="000-000-0000"
+                            name="donor.phone" id="phone">
+                        <p class="info">
+                        </p>
+                    </div>
+                    <div class="grid_2 clearfix">
+                        <span class="info-sec">
+                            Optional
+                        </span>
+                    </div>
+                </div>
+                <div class="module-form-labeled clearfix">
+                    <div class="grid_6">
+                        <label for="orgName">
+                            Company
+                        </label>
+                        <input type="text" placeholder="Company name"
+                            name="donor.employer" id="orgName">
+                        <p class="info">
+                            If this donation is on behalf of a company, school or other organization, please enter the name here.
+                        </p>
+                    </div>
+                    <div class="grid_2 clearfix">
+                        <span class="info-sec">
+                            Optional
+                        </span>
+                    </div>
+                </div>
+                <div class="intouch-box module-form-intouch">
+                    <div class="left clearfix">
+                        <h6>
+                            Keep me in touch
+                        </h6>
+                    </div>
+                    <div class="intouch-container clearfix" data-bind="css: { selected: updateNational }" id="nationalOptin">
+                        <div class="module-form-labeled grid_6 clearfix">
+                            <div class="input-wrap clearfix">
+                                <label>
+                                    <!--<div class="checker" id="uniform-undefined">
+                                        <span class="" data-bind="click: function(){ updateNational() ? updateNational(false):updateNational(true)}, css: { checked: updateNational()}">
+                                        </span>
+                                    </div>--> <!-- Removed pending acceptance of a native input -->
+                                    <input id="optinNational" type="checkbox" name="sitNational" data-bind="checked: updateNational" />
+                                    Yes! I want to subscribe to receive email communications featuring wish stories, news and ways to help from Make-A-Wish<sup>®</sup> America.
+                                </label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="intouch-container clearfix" data-bind="css: { selected: updateLocal() == true }" id="localOptin">
+                        <div class="module-form-labeled grid_6 clearfix">
+                            <div class="input-wrap clearfix">
+                                <label>
+                                    <!--<div class="checker" id="uniform-undefined">
+                                        <span class="" data-bind="click: function(){ updateLocal() ? updateLocal(false):updateLocal(true)}, css: { checked: updateLocal()}">
+                                        </span>
+                                    </div>--> <!-- Removed pending acceptance of native input -->
+                                    <input id="optinChapter" type="checkbox" name="sitNational" data-bind="checked: updateLocal" />
+                                    Yes! I want to receive email updates from my local chapter.
+                                </label>
+                            </div>
+                        </div>
+                        <div id="body_2_content_0_maincontent_0_Div3" class="module-form-labeled grid_6 clearfix">
+                            <div class="input-chapter-wrap js_chapterSearch clearfix">
+                                <h3>
+                                    Local chapter
+                                </h3>
+                                <!-- BEGIN CHAPTER SEARCH BOX -->
+                                <div class="chapter-search">
+                                    <input type="hidden" class="js-cl-id" name="sitChapterDestinationID" data-bind="value: sitChapterID" />   
+                               
+                                    <input type="text" class="js_genericChapLoc jsreq" placeholder="Zip code or state"
+                                        name="sitChapter" data-bind="value: sitChapter">
+                                    <ul class="search-menu">
+                                    </ul>
+                                </div>
+                                <!-- END CHAPTER SEARCH BOX -->
+                                <a href="#" class="js-cl-btn js-chapter-modal-launcher button">
+                                    Chapter list
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- OPTIONAL INTERNATIONAL SIGN UP OPT-IN -->
+                    <div class="intouch-container clearfix" data-bind="visible: hasInternationalIntent(), css: {selected: updateInternational()}">
+                        <div class="module-form-labeled grid_6 clearfix">
+                            <div class="input-wrap clearfix">
+                                <label>
+                                    <div class="checker" id="uniform-undefined">
+                                        <span id="optinInternational" data-bind="click: function() {updateInternational() ? updateInternational(false) : updateInternational(true);}, css: {checked: updateInternational()}"></span>
+                                    </div>
+                                    Yes! I want to receive Wish Messenger<sup>&reg;</sup>, a quarterly email featuring wish stories, news and other updates from Make-A-Wish<sup>&reg;</sup> International.
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-sec clearfix">
+                            Optional
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PERSONAL -->
+        
+        
+		[[S51:reus_donate_form_billing_info]]
+        
+        
+        [[S51:reus_donate_form_payment_type]]
+        
+        
+        <!-- START MASTER SUMMARY/SUBMIT BAR -->
+        <div class="donate-wrap clearfix">
+            <div class="inset">
+  				[[S51:reus_donate_form_master_summary]]
+                [[S51:reus_donate_form_clear_submit]]
+            </div>
+        </div>
+        <!-- END SUMMARY/SUBMIT BAR -->
+    </div>
+    <!-- END DISABLE WRAP -->
+[[S51:reus_donate_form_fine_print]]
+
+[[S51:reus_donate_form_country_list]]
+
+[[S51:reus_donate_form_whats_this]]
+   
+[[S51:reus_donate_form_learn_more]]
+
+</div>
+
+[[S51:reus_donate_form_product_config]]
+
+[[S51:reus_donate_form_chapter_locator]]
+
+</form>

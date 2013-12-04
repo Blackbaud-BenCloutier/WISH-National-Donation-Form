@@ -1,0 +1,47 @@
+<!--
+Donation page conditionals:
+
+If admin page...
+	do nothing
+else
+	If [[S80:cid]] doesn't exist...
+		If [[S334:cid]] doesn't exist...
+			[[U0:cid=100-000]] Make-A-Wish America
+		else
+			[[U0:cid=[[S334:cid]]]]
+	else
+		If [[S334:cid]] doesn't exist...
+			do nothing
+		else
+			If [[S334:cid]] and [[S80:cid]] are the same
+				do nothing
+			else
+				[[U0:cid=[[S334:cid]]]]
+	[[U0:cid_short=(first 3 digits of cid)]]
+	Load reus_donate_wrpr_meta_session_[[S80:cid_short]]
+-->
+
+[[?[[S8]]::/admin/::
+	<!-- admin page -->
+::
+	[[?x[[S80:cid]]x::xx::
+		[[?x[[S334:cid]]x::xx::
+			[[U0:cid=100-000]]
+		::
+			[[U0:cid=[[S334:cid]]]]
+		]]
+	::
+		<!--change cid if url parameter is different-->
+		[[?x[[S334:cid]]x::xx::
+			<!--do nothing-->
+		::
+			[[?x[[S334:cid]]x::x[[S80:cid]]x::
+				<!--same, do nothing-->
+			::
+				[[U0:cid=[[S334:cid]]]]
+			]]
+		]]
+	]]
+	[[U0:cid_short=[[E130:[[S80:cid]] 0 3 substring]]]]
+	[[E51:reus_donate_wrpr_meta_session_[[S80:cid_short]]]]
+]]
