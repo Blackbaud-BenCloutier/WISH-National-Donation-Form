@@ -22,7 +22,7 @@ Important functions:
 <script src="../assets/js/jquery.infinite-carousel.js" type="text/javascript"></script>
 
 <script>
-$.fn.infiniteCarousel = function () {
+$.fn.infiniteCarousel = function () { // this is the card selection carousel
 
   function repeat(str, num) {
     return new Array(num + 1).join(str);
@@ -101,16 +101,22 @@ $.fn.infiniteCarousel = function () {
 
 $(document).ready(function () {
 
+  // BDC
+
+  $('#saveAdd').hide();
+
+  // BDC
+
   $.jStorage.deleteKey("hideGiftType");
 
-  var donationID = $('.js_donationConfigurator').attr('data-donation-id');
-  var cardsList = [];
+  var donationID = $('.js_donationConfigurator').attr('data-donation-id'), //random number
+  cardsList = [], // empty array
+  giftTypeButtons = $("#giftTypes").html(), // single and monthly buttons
+  initProducts = $("ul#products").html(); // greyed out preview cards
 
-  var giftTypeButtons = $("#giftTypes").html();
-
-  $("#saveAdd, .add-button").live('click', function () {
-    donationID = $('.js_donationConfigurator').attr('data-donation-id');
-
+  $("#saveAdd, .add-button").live('click', function () { // add donation buttons
+    donationID = $('.js_donationConfigurator').attr('data-donation-id'); // dup
+    // grey out donation button that's not clicked
     if ($("a#monthlyGift").hasClass("selected")) {
       $("a#monthlyGift").removeClass('disabled').addClass('selected').removeAttr("disabled").css("cursor", "pointer");
       $("a#monthlyGift").trigger("click");
@@ -119,6 +125,7 @@ $(document).ready(function () {
         e.preventDefault();
       });
     }
+    // grey out donation button that's not clicked
     if ($("a#singleGift").hasClass("selected")) {
       $("a#monthlyGift").addClass('disabled').attr('disabled', true).unbind('click').css("cursor", "not-allowed");
       $("a#monthlyGift").click(function (e) {
@@ -127,25 +134,14 @@ $(document).ready(function () {
     }
   });
 
-  var initProducts = $("ul#products").html();
-
-  $('.infiniteCarousel').infiniteCarousel();
-
-  $('select.event-select').customSelectMenu();
-  $('select.type-select').customSelectMenu();
-
-  // option list - BDC 12/3/2013
-  $('.option-one li:first').remove();
-  $('.option-two li:first').remove();
-  // option list - BDC 12/3/2013
-
-  if ($("select.event-select option").val() == '') {
-
-    // select-area list - BDEC 12/3/2013
+  $('.infiniteCarousel').infiniteCarousel(); // init infiniteCarousel
+  $('select.event-select').customSelectMenu(); // select occasion
+  $('select.type-select').customSelectMenu(); // select card type
+  $('.option-one li:first').remove(); // remove list item
+  $('.option-two li:first').remove(); // remove list item
+  if ($("select.event-select option").val() == '') { // if no occasion chosen, disable everything
     $('.select-area-2').addClass('disabled');
     $('.select-area-3').addClass("disabled");
-    // select-area list - BDEC 12/3/2013
-
     $('#carousel-gallery').addClass("disabled");
     $('.option-two ul').css({
       opacity: 0
@@ -156,26 +152,18 @@ $(document).ready(function () {
     $('.top-actions .back-btn').hide();
     $('.top-actions .help-btn, .top-actions .cancel-btn').show();
     $('#lightbox-main h1').text('Select a certificate, card, or e-card');
-
-    // step list - BDC 12/3/2013
     $('#step1').show();
     $('#step2').hide();
     $('#step3').hide();
-    // step list - BDC 12/3/2013
-
   }
 
   var showStep2 = function () {
     $('.top-actions .back-btn').show();
     $('.top-actions .help-btn, .top-actions .cancel-btn').hide();
     $('#lightbox-main h1').text('Select a certificate, card, or e-card');
-
-    // step list - BDC 12/3/2013
     $('#step1').hide();
     $('#step2').show();
     $('#step3').hide();
-    // step list - BDC 12/3/2013
-
   }
 
   function getUrlVars() {
@@ -438,15 +426,11 @@ $(document).ready(function () {
   var card_name = "";
   var card_type = "";
   var occasion_type = "";
-
-  // card_image list - BDC 12/3/2013
   var card_image1 = "";
   var card_image2 = "";
   var card_image3 = "";
   var card_image4 = "";
   var card_image5 = "";
-  // card_image list - BDC 12/3/2013
-
   var card_thumbnail = "";
   var product_url = "";
   var skew = "";
@@ -472,15 +456,11 @@ $(document).ready(function () {
         card_name = arr['card_name'];
         card_type = arr['card_type'];
         occasion_type = arr['occasion_type'];
-
-        // card_image list - BDC 12/3/2013
         card_image1 = arr['card_image1'];
         card_image2 = arr['card_image2'] || false;
         card_image3 = arr['card_image3'] || false;
         card_image4 = arr['card_image4'] || false;
         card_image5 = arr['card_image5'] || false;
-        // card_image list - BDC 12/3/2013
-
         card_thumbnail = arr['card_thumbnail'] || "https://secure2.convio.net/wish/Card images/General/Certficates/blank.png";
         product_url = arr['product_url'] || false;
         return false;
@@ -505,8 +485,6 @@ $(document).ready(function () {
     });
 
     $('.cardDescription').load('https://secure2.convio.net/wish/site/SPageNavigator/reus_card_' + cardID + '.html #container');
-
-    // card_image list - BDC 12/3/2013
     if (card_type = "card") {
       var cardThumbs = '<img src="' + card_image2 + '" width="40" height="40" class="card-thumb" />';
 
@@ -521,7 +499,6 @@ $(document).ready(function () {
       }
       $(".card-thumbs").html(cardThumbs);
     }
-    // card_image list - BDC 12/3/2013
 
     $("img.card-thumb").click(function (e) {
       e.preventDefault();
@@ -549,15 +526,11 @@ $(document).ready(function () {
         card_name = arr['card_name'];
         card_type = arr['card_type'];
         occasion_type = arr['occasion_type'];
-
-        // card_image list - BDC 12/3/2013
         card_image1 = arr['card_image1'];
         card_image2 = arr['card_image2'] || false;
         card_image3 = arr['card_image3'] || false;
         card_image4 = arr['card_image4'] || false;
         card_image5 = arr['card_image5'] || false;
-        // card_image list - BDC 12/3/2013
-
         card_thumbnail = arr['card_thumbnail'] || "https://secure2.convio.net/wish/Card images/General/Certficates/blank.png";
         product_url = arr['product_url'] || false;
         skew = cardID;
@@ -613,12 +586,9 @@ $(document).ready(function () {
     $("#step3 input").val("");
     $("#step3 textarea").val("");
     $("#State_X option:first").attr("selected", "selected");
-
-    // step list - BDC 12/3/2013
     $('#step1').show();
     $('#step2').hide();
     $('#step3').hide();
-    // step list - BDC 12/3/2013
 
     toFirstName = "";
     toMI = "";
@@ -638,13 +608,9 @@ $(document).ready(function () {
     cardName = "";
     cardType = "";
     occasionType = "";
-
-    // cardImage list - BDC 12/3/2013
     cardImage1 = "";
     cardImage2 = "";
     cardImage3 = "";
-    // cardImage list - BDC 12/3/2013
-
     cardThumbnail = "";
     productURL = "";
     skew = "";
@@ -656,16 +622,10 @@ $(document).ready(function () {
     showStep1();
   });
 
-  // cardImage list - BDC 12/3/2013
   var showStep3 = function (ecardID, cardName, cardType, occasionType, cardImage1, cardImage2, cardImage3, cardThumbnail, productURL, thisSkew) {
-  // cardImage list - BDC 12/3/2013
-
-    // step list - BDC 12/3/2013
     $('#step1, #step2, .top-actions .help-btn, .top-actions .back-btn').hide();
     $('#step3, .top-actions .cancel-btn').show();
     $('#step3 #productTitle').text(cardName);
-    // step list - BDC 12/3/2013
-
     $('.cardThumbnail').attr('src', cardThumbnail);
 
     var toFirstName = "";
@@ -1034,6 +994,7 @@ $(document).ready(function () {
       certNum++;
     }
 
+    // product_url list - BDC 12/3/2013
     if (data.indexOf("product_url_1") == -1) {
       data = data + "&product_url_1=none&s_productURL1=none&s_productURL1Name=none";
     }
@@ -1049,6 +1010,7 @@ $(document).ready(function () {
     if (data.indexOf("product_url_5") == -1) {
       data = data + "&product_url_5=none&s_productURL5=none&s_productURL5Name=none";
     }
+    // product_url list - BDC 12/3/2013
 
     console.log("Data: " + data);
   } // getDonationInfo()
@@ -1301,8 +1263,6 @@ chaptersjson = (function () {
 
   $(document).on('keyup', '.js_donationDest', function (e) {
     var thisZip = $(this).val();
-    //console.log(thisZip.length);
-    //console.log(thisZip);
 
     if (thisZip.length < 5 || thisZip.length > 5) {
       $('ul.search-menu').html('');
@@ -1327,8 +1287,6 @@ chaptersjson = (function () {
 
   $(document).on('keyup', '.js_genericChapLoc', function (e) {
     var thisZip = $(this).val();
-    //console.log(thisZip.length);
-    //console.log(thisZip);
 
     if (thisZip.length < 5 || thisZip.length > 5) {
       $('ul.search-menu').html('');
