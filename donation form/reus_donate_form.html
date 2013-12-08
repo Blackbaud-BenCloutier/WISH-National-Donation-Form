@@ -1,19 +1,11 @@
 <form method="post" action="#" id="mainform" autocomplete="off">
-<!--
-Removing the S334 - BDC 12/5/2013
-<input type="hidden" name="foreign_key1" value="[[S334:set.custom.foreign_key1]]">
-<input type="hidden" name="foreign_key2" value="[[S334:set.custom.foreign_key2]]">
-<input type="hidden" name="foreign_key3" value="[[S334:set.custom.foreign_key3]]">
-<input type="hidden" name="foreign_key4" value="[[S334:set.custom.foreign_key4]]">
-<input type="hidden" name="foreign_key5" value="[[S334:set.custom.foreign_key5]]">
--->
 
-<!-- Blank inputs modified with JS - BDC 12/5/2013 -->
-<input type="hidden" name="foreign_key1" value="MN0014">
-<input type="hidden" name="foreign_key2" value="">
-<input type="hidden" name="foreign_key3" value="">
-<input type="hidden" name="foreign_key4" value="">
-<input type="hidden" name="foreign_key5" value="Dev-Multimedia Online">
+<!-- Leave foreign_keys blank if none are present in URL - BDC 12/8/2013 -->
+<input type="hidden" name="foreign_key1" value="[[?xx::x[[S334:set.custom.foreign_key1]]x::[[S334:set.custom.foreign_key1]]::]]">
+<input type="hidden" name="foreign_key2" value="[[?xx::x[[S334:set.custom.foreign_key2]]x::[[S334:set.custom.foreign_key2]]::]]">
+<input type="hidden" name="foreign_key3" value="[[?xx::x[[S334:set.custom.foreign_key3]]x::[[S334:set.custom.foreign_key3]]::]]">
+<input type="hidden" name="foreign_key4" value="[[?xx::x[[S334:set.custom.foreign_key4]]x::[[S334:set.custom.foreign_key4]]::]]">
+<input type="hidden" name="foreign_key5" value="[[?xx::x[[S334:set.custom.foreign_key5]]x::[[S334:set.custom.foreign_key5]]::]]">
 			
 [[?xxxx::xx[[S334:campaign]]xx::
 <!-- There's no campaign variable  -->
