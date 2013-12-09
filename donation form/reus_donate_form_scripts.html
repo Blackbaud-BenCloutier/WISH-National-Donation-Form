@@ -4,13 +4,31 @@
 [[U0:productURL1=""]]
 [[U0:productURL1Name=""]]
 
-<style>.chapter-list-btn{color:gray !important;}</style>
+<style>.chapter-list-btn, .country-list-btn {color:gray !important;}</style>
 
 <script src="../assets/js/jquery.zoom-min.js"></script>
 <script src="../assets/js/jquery.jswipe.js" type="text/javascript"></script>
 <script src="../assets/js/jquery.infinite-carousel.js" type="text/javascript"></script>
 
 <script>
+
+// AJAX call to grab XML that associates centers to form IDs -- MRD 12/6/2013
+
+center_forms = (function () {
+  var xml = null;
+  $.ajax({
+    'async': false,
+    'global': false,
+    'url': 'https://secure2.convio.net/wish/assets/xml/center_info.xml',
+    'dataType': "xml",
+    'success': function (data) {
+      xml = data;
+    }
+  });
+  return xml;
+})();
+
+
 $.fn.infiniteCarousel = function () { // this is the card selection carousel
 
   function repeat(str, num) {
@@ -983,7 +1001,6 @@ $(document).ready(function () {
       certNum++;
     }
 
-    // product_url list - BDC 12/3/2013
     if (data.indexOf("product_url_1") == -1) {
       data = data + "&product_url_1=none&s_productURL1=none&s_productURL1Name=none";
     }
@@ -999,7 +1016,6 @@ $(document).ready(function () {
     if (data.indexOf("product_url_5") == -1) {
       data = data + "&product_url_5=none&s_productURL5=none&s_productURL5Name=none";
     }
-    // product_url list - BDC 12/3/2013
 
     console.log("Data: " + data);
   } // getDonationInfo()

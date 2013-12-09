@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<centers>
+	<center id="1021" name="Make-A-Wish Alabama">
+		<office id="059" />
+		<form id="1540" />
+	</center>
+	<center id="1044" name="Make-A-Wish Alaska and Washington">
+		<office id="048" />
+		<form id="1541" />
+	</center>
+	<center id="1001" name="Make-A-Wish America">
+		<office id="100" />
+		<form id="1542" />
+	</center>
+	<center id="1022" name="Make-A-Wish Arizona">
+		<office id="001" />
+		<form id="1543" />
+	</center>
+	<center id="1066" name="Make-A-Wish Central California">
+		<office id="044" />
+		<form id="1547" />
+	</center>
+	<center id="1061" name="Make-A-Wish Central New York">
+		<office id="033" />
+		<form id="1548" />
+	</center>
+	<center id="1081" name="Make-A-Wish Central and Northern Florida">
+		<office id="080" />
+		<form id="1544" />
+	</center>
+	<center id="1060" name="Make-A-Wish Central and South Texas">
+		<office id="031" />
+		<form id="1545" />
+	</center>
+	<center id="1067" name="Make-A-Wish Central and Western North Carolina">
+		<office id="047" />
+		<form id="1546" />
+	</center>
+	<center id="1050" name="Make-A-Wish Colorado">
+		<office id="009" />
+		<form id="1549" />
+	</center>
+	<center id="1069" name="Make-A-Wish Connecticut">
+		<office id="054" />
+		<form id="1550" />
+	</center>
+	<center id="1023" name="Make-A-Wish East Tennessee">
+		<office id="068" />
+		<form id="1551" />
+	</center>
+	<center id="1024" name="Make-A-Wish Eastern North Carolina">
+		<office id="064" />
+		<form id="1552" />
+	</center>
+	<center id="1025" name="Make-A-Wish Georgia">
+		<office id="081" />
+		<form id="1553" />
+	</center>
+	<center id="1055" name="Make-A-Wish Greater Bay Area">
+		<office id="025" />
+		<form id="1554" />
+	</center>
+	<center id="1026" name="Make-A-Wish Greater Los Angeles">
+		<office id="015" />
+		<form id="1555" />
+	</center>
+	<center id="1049" name="Make-A-Wish Greater Pennsylvania and Southern West Virginia">
+		<office id="008" />
+		<form id="1556" />
+	</center>
+	<center id="1075" name="Make-A-Wish Greater Virginia">
+		<office id="067" />
+		<form id="1557" />
+	</center>
+	<center id="1079" name="Make-A-Wish Guam">
+		<office id="077" />
+		<form id="1558" />
+	</center>
+	<center id="1052" name="Make-A-Wish Hawaii">
+		<office id="013" />
+		<form id="1559" />
+	</center>
+	<center id="1068" name="Make-A-Wish Hudson Valley">
+		<office id="053" />
+		<form id="1560" />
+	</center>
+	<center id="1070" name="Make-A-Wish Idaho">
+		<office id="056" />
+		<form id="1561" />
+	</center>
+	<center id="1027" name="Make-A-Wish Illinois">
+		<office id="045" />
+		<form id="1562" />
+	</center>
+	<center id="1101" name="Make-A-Wish International">
+		<office id="" />
+		<form id="1563" />
+	</center>
+	<center id="1073" name="Make-A-Wish Iowa">
+		<office id="065" />
+		<form id="1564" />
+	</center>
+	<center id="1057" name="Make-A-Wish Kansas">
+		<office id="028" />
+		<form id="1565" />
+	</center>
+	<center id="1080" name="Make-A-Wish Maine">
+		<office id="079" />
+		<form id="1566" />
+	</center>
+	<center id="1074" name="Make-A-Wish Massachusetts and Rhode Island">
+		<office id="" />
+		<form id="1567" />
+	</center>
+	<center id="1051" name="Make-A-Wish Metro New York and Western New York">
+		<office id="066" />
+		<form id="1568" />
+	</center>
+	<center id="1045" name="Make-A-Wish Michigan">
+		<office id="022" />
+		<form id="1569" />
+	</center>
+	<center id="1028" name="Make-A-Wish Mid-Atlantic">
+		<office id="016" />
+		<form id="1570" />
+	</center>
+	<center id="1029" name="Make-A-Wish Mid-South">
+		<office id="049" />
+		<form id="1571" />
+	</center>
+	<center id="1083" name="Make-A-Wish Middle Tennessee">
+		<office id="085" />
+		<form id="1572" />
+	</center>
+	<center id="1059" name="Make-A-Wish Minnesota">
+		<office id="030" />
+		<form id="1573" />
+	</center>
+	<center id="1063" name="Make-A-Wish Mississippi">
+		<office id="036" />
+		<form id="1574" />
+	</center>
+	<center id="1030" name="Make-A-Wish Missouri">
+		<office id="073" />
+		<form id="1575" />
+	</center>
+	<center id="1064" name="Make-A-Wish Montana">
+		<office id="041" />
+		<form id="1576" />
+	</center>
+	<center id="1053" name="Make-A-Wish Nebraska">
+		<office id="018" />
+		<form id="1577" />
+	</center>
+	<center id="1032" name="Make-A-Wish New Hampshire">
+		<office id="058" />
+		<form id="1578" />
+	</center>
+	<center id="1046" name="Make-A-Wish New Jersey">
+		<office id="003" />
+		<form id="1579" />
+	</center>
+	<center id="1071" name="Make-A-Wish New Mexico">
+		<office id="057" />
+		<form id="1580" />
+	</center>
+	<center id="1033" name="Make-A-Wish North Dakota">
+		<office id="050" />
+		<form id="1581" />
+	</center>
+	<center id="1034" name="Make-A-Wish North Texas">
+		<office id="006" />
+		<form id="1582" />
+	</center>
+	<center id="1072" name="Make-A-Wish Northeast New York">
+		<office id="060" />
+		<form id="1583" />
+	</center>
+	<center id="1031" name="Make-A-Wish Northeastern California and Northern Nevada">
+		<office id="012" />
+		<form id="1584" />
+	</center>
+	<center id="1077" name="Make-A-Wish Northern West Virginia">
+		<office id="070" />
+		<form id="1585" />
+	</center>
+	<center id="1035" name="Make-A-Wish Ohio, Kentucky and Indiana">
+		<office id="011" />
+		<form id="1586" />
+	</center>
+	<center id="1036" name="Make-A-Wish Oklahoma">
+		<office id="063" />
+		<form id="1587" />
+	</center>
+	<center id="1048" name="Make-A-Wish Orange County and the Inland Empire">
+		<office id="007" />
+		<form id="1588" />
+	</center>
+	<center id="1047" name="Make-A-Wish Oregon">
+		<office id="005" />
+		<form id="1589" />
+	</center>
+	<center id="1037" name="Make-A-Wish Philadelphia and Susquehanna Valley">
+		<office id="051" />
+		<form id="1590" />
+	</center>
+	<center id="1078" name="Make-A-Wish Puerto Rico">
+		<office id="071" />
+		<form id="1591" />
+	</center>
+	<center id="1082" name="Make-A-Wish Rio Grande Valley">
+		<office id="084" />
+		<form id="1592" />
+	</center>
+	<center id="1054" name="Make-A-Wish San Diego">
+		<office id="024" />
+		<form id="1593" />
+	</center>
+	<center id="1038" name="Make-A-Wish South Carolina">
+		<office id="034" />
+		<form id="1594" />
+	</center>
+	<center id="1056" name="Make-A-Wish South Dakota">
+		<office id="027" />
+		<form id="1595" />
+	</center>
+	<center id="1039" name="Make-A-Wish Southern Florida">
+		<office id="017" />
+		<form id="1596" />
+	</center>
+	<center id="1040" name="Make-A-Wish Southern Nevada">
+		<office id="083" />
+		<form id="1597" />
+	</center>
+	<center id="1041" name="Make-A-Wish Suffolk County">
+		<office id="014" />
+		<form id="1598" />
+	</center>
+	<center id="1062" name="Make-A-Wish Texas Gulf Coast and Louisiana">
+		<office id="035" />
+		<form id="1599" />
+	</center>
+	<center id="1042" name="Make-A-Wish Tri-Counties">
+		<office id="039" />
+		<form id="1600" />
+	</center>
+	<center id="1043" name="Make-A-Wish Utah">
+		<office id="042" />
+		<form id="1601" />
+	</center>
+	<center id="1076" name="Make-A-Wish Vermont">
+		<office id="069" />
+		<form id="1602" />
+	</center>
+	<center id="1058" name="Make-A-Wish Wisconsin">
+		<office id="029" />
+		<form id="1603" />
+	</center>
+	<center id="1065" name="Make-A-Wish Wyoming">
+		<office id="043" />
+		<form id="1604" />
+	</center>
+</centers>
