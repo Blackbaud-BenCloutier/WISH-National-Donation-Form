@@ -12,6 +12,14 @@
 
 <script>
 
+// Editable metadata fields - BDC 12/11/2013
+
+[[S51:reus_donate_form_metadata]]
+
+// Putting all the ZIP Codes into a variable for fast access - BDC 12/10/2013
+
+var zip_array; $.getJSON('../assets/js/zip-codes.json', function (data) {zip_array = data});
+
 // AJAX call to grab XML that associates centers to form IDs -- MRD 12/6/2013
 
 center_forms = (function () {
@@ -25,6 +33,9 @@ center_forms = (function () {
       xml = data;
     }
   });
+
+  console.log(xml);
+
   return xml;
 })();
 
@@ -891,6 +902,58 @@ $(document).ready(function () {
         });
       }
 
+      // BDC 12/10/2013
+      // --------------
+
+      var short_cid = cid.substr(0,3),
+        form_cid = $('.logo a').attr('href').match(/\d+/)[0];
+
+      if( !(short_cid === '500') ) { // No international form yet
+        var donation_form_id = $(center_forms).find('office#' + short_cid + ' + form').attr('id');
+        data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
+        data += '&s_cid=' + cid;
+      }
+
+      if( form_cid === '100' ) {
+        if( short_cid === '100' ) {
+          // National form, national donation
+          $('#foreign_key1').val(metadata_campaign_id);
+          $('#foreign_key2').val('UR-' + short_cid + '-01');
+          $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_national_office_code);
+          $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
+          $('#foreign_key5').val(metadata_subtype);
+        }
+        else {
+          // National form, chapter donation
+          $('#foreign_key1').val(metadata_campaign_id);
+          $('#foreign_key2').val('UR-' + short_cid + '-01');
+          $('#foreign_key3').val(metadata_appeal_year + '-82S-' + metadata_chapter_office_code);
+          $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
+          $('#foreign_key5').val(metadata_subtype);
+        }
+      }
+      else {
+        if( form_cid === short_cid ) {
+          // Chapter form, same chapter
+          $('#foreign_key1').val(metadata_campaign_id);
+          $('#foreign_key2').val('UR-' + short_cid + '-01');
+          $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_chapter_office_code);
+          $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_cid);
+          $('#foreign_key5').val(metadata_subtype);
+        }
+        else {
+          // Chapter form, different chapter
+          $('#foreign_key1').val(metadata_campaign_id);
+          $('#foreign_key2').val('UR-' + short_cid + '-01');
+          $('#foreign_key3').val(metadata_appeal_year +'-82S-CHFF');
+          $('#foreign_key4').val('ON-'+ metadata_chapter_office_code + '-' + form_cid);
+          $('#foreign_key5').val(metadata_subtype);
+        }
+      }
+
+      // --------------
+      // BDC 12/10/2013
+
       // If donation type is 2, this is a monthly gift
       if (type == 2) {
         monthly = true;
@@ -1423,12 +1486,23 @@ function finishGift() {
     survey_ids.push("1625");
   }
   if ($('#optinChapter').is(':checked')) {
-    var optThisChapter = $("input[name='sitChapterDestinationID']").val();
+    $(zip_array['chapter']).each(function (index, arr) {
+      if (arr['zip_code'] == $('#ccPostal').val()) {
+        optThisChapter = arr['chapter_id'];
+        $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+          if (arr['office_id'] == optThisChapter) {
+            survey_ids.push(arr['surveyID']);
+          }
+        });
+      }
+    });
+    /*var optThisChapter = $("input[name='sitChapterDestinationID']").val();
     $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
       if (arr['office_id'] == optThisChapter) {
         survey_ids.push(arr['surveyID']);
       }
-    });
+    });*/
+    // BDC 12/11/bdsc
   }
 
   if (survey_ids.length > 0) {

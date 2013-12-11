@@ -1,12 +1,12 @@
 <form method="post" action="#" id="mainform" autocomplete="off">
 
 <!-- Leave foreign_keys blank if none are present in URL - BDC 12/8/2013 -->
-<input type="hidden" name="foreign_key1" value="[[?xx::x[[S334:set.custom.foreign_key1]]x::[[S334:set.custom.foreign_key1]]::]]">
-<input type="hidden" name="foreign_key2" value="[[?xx::x[[S334:set.custom.foreign_key2]]x::[[S334:set.custom.foreign_key2]]::]]">
-<input type="hidden" name="foreign_key3" value="[[?xx::x[[S334:set.custom.foreign_key3]]x::[[S334:set.custom.foreign_key3]]::]]">
-<input type="hidden" name="foreign_key4" value="[[?xx::x[[S334:set.custom.foreign_key4]]x::[[S334:set.custom.foreign_key4]]::]]">
-<input type="hidden" name="foreign_key5" value="[[?xx::x[[S334:set.custom.foreign_key5]]x::[[S334:set.custom.foreign_key5]]::]]">
-			
+<input type="hidden" id="foreign_key1" name="foreign_key1" value="[[?xx::x[[S334:set.custom.foreign_key1]]x::[[S334:set.custom.foreign_key1]]::]]">
+<input type="hidden" id="foreign_key2" name="foreign_key2" value="[[?xx::x[[S334:set.custom.foreign_key2]]x::[[S334:set.custom.foreign_key2]]::]]">
+<input type="hidden" id="foreign_key3" name="foreign_key3" value="[[?xx::x[[S334:set.custom.foreign_key3]]x::[[S334:set.custom.foreign_key3]]::]]">
+<input type="hidden" id="foreign_key4" name="foreign_key4" value="[[?xx::x[[S334:set.custom.foreign_key4]]x::[[S334:set.custom.foreign_key4]]::]]">
+<input type="hidden" id="foreign_key5" name="foreign_key5" value="[[?xx::x[[S334:set.custom.foreign_key5]]x::[[S334:set.custom.foreign_key5]]::]]">
+            
 [[?xxxx::xx[[S334:campaign]]xx::
 <!-- There's no campaign variable  -->
 [[S51:reus_donate_form_default_intro]]
@@ -340,7 +340,7 @@
                         </div>
                         
                     </div>
-                    <div class="intouch-container clearfix" data-bind="visible: false, css: { selected: updateLocal() == true }" id="localOptin">
+                    <div class="intouch-container clearfix" data-bind="css: { selected: updateLocal() == true }" id="localOptin">
                         <div class="module-form-labeled grid_6 clearfix">
                             <div class="input-wrap clearfix">
                                 <label>
@@ -353,7 +353,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="body_2_content_0_maincontent_0_Div3" class="module-form-labeled grid_6 clearfix">
+                        <div style="display: none;" id="body_2_content_0_maincontent_0_Div3" class="module-form-labeled grid_6 clearfix">
                             <div class="input-chapter-wrap js_chapterSearch clearfix">
                                 <h3>
                                     Local chapter
@@ -396,7 +396,7 @@
         <!-- END PERSONAL -->
         
         
-		[[S51:reus_donate_form_billing_info]]
+        [[S51:reus_donate_form_billing_info]]
         
         
         [[S51:reus_donate_form_payment_type]]
@@ -405,7 +405,7 @@
         <!-- START MASTER SUMMARY/SUBMIT BAR -->
         <div class="donate-wrap clearfix">
             <div class="inset">
-  				[[S51:reus_donate_form_master_summary]]
+                [[S51:reus_donate_form_master_summary]]
                 [[S51:reus_donate_form_clear_submit]]
             </div>
         </div>
