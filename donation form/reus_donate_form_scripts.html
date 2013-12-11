@@ -906,13 +906,11 @@ $(document).ready(function () {
       // --------------
 
       var short_cid = cid.substr(0,3),
-        form_cid = $('.logo a').attr('href').match(/\d+/)[0];
+        form_cid = $('.logo a').attr('href').match(/\d+/)[0],
+        donation_form_id = $(center_forms).find('office#' + short_cid + ' + form').attr('id');
 
-      if( !(short_cid === '500') ) { // No international form yet
-        var donation_form_id = $(center_forms).find('office#' + short_cid + ' + form').attr('id');
-        data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
-        data += '&s_cid=' + cid;
-      }
+      data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
+      data += '&s_cid=' + cid;
 
       if( form_cid === '100' ) {
         if( short_cid === '100' ) {
@@ -1300,11 +1298,6 @@ chaptersjson = (function () {
   } else {
     console.log('CID is not set');
   }
-
-  $("a.jsinter").click(function (e) {
-    e.preventDefault();
-    $("#optinInternational").addClass("checked");
-  });
 
   data = 'method=donate&form_id=1420';
 
