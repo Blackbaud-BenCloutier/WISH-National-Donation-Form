@@ -345,6 +345,8 @@ $(document).ready(function () {
   function optionTwo(thisCardType) {
 
     var occasionType = $('#selectOccasion input[type=hidden]').val();
+    // Add occasion type to hidden input field for Satellite Data
+    $("input[name='s_sat_occasion_type']").val(occasionType);
     var products = [];
     var cardCount = 0;
 
@@ -742,6 +744,9 @@ $(document).ready(function () {
           thisCertificateProduct = [donationID, 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
           cardsList[numCard] = thisCertificateProduct;
 
+          // Add Skew information to hidden input field for Satellite Data
+          $("input[name='s_sat_skew']").val(thisSkew);
+          
           console.log("push certificate: " + cardsList[numCard][4]);
           $.fancybox.close();
           resetProducts();
