@@ -563,6 +563,10 @@ $(document).ready(function () {
         card_thumbnail = arr['card_thumbnail'] || "https://secure2.convio.net/wish/Card images/General/Certficates/blank.png";
         product_url = arr['product_url'] || false;
         skew = cardID;
+        
+        // Setting Skew information to hidden input field for Satellite Data - MRD 12/12/13
+        $("input[name='s_sat_skew']").val(skew);
+        
         return false;
       }
     });
@@ -650,6 +654,9 @@ $(document).ready(function () {
     cardThumbnail = "";
     productURL = "";
     skew = "";
+    
+    // Setting Skew information to hidden input field for Satellite Data - MRD 12/12/13
+    $("input[name='s_sat_skew']").val(skew);
   }
 
   // If the "Back to Selection" button is clicked, go to step 1
@@ -765,9 +772,6 @@ $(document).ready(function () {
           // Add the card info to the card list to process later
           thisCertificateProduct = [donationID, 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
           cardsList[numCard] = thisCertificateProduct;
-
-          // Add Skew information to hidden input field for Satellite Data
-          $("input[name='s_sat_skew']").val(thisSkew);
 
           console.log("push certificate: " + cardsList[numCard][4]);
           $.fancybox.close();
