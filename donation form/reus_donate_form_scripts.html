@@ -915,37 +915,37 @@ $(document).ready(function () {
       if( form_cid === '100' ) {
         if( short_cid === '100' ) {
           // National form, national donation
-          $('#foreign_key1').val(metadata_campaign_id);
-          $('#foreign_key2').val('UR-' + short_cid + '-01');
-          $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_national_office_code);
-          $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
-          $('#foreign_key5').val(metadata_subtype);
+          if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
+          if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_national_office_code);
+          if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
+          if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
         }
         else {
           // National form, chapter donation
-          $('#foreign_key1').val(metadata_campaign_id);
-          $('#foreign_key2').val('UR-' + short_cid + '-01');
-          $('#foreign_key3').val(metadata_appeal_year + '-82S-' + metadata_chapter_office_code);
-          $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
-          $('#foreign_key5').val(metadata_subtype);
+          if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
+          if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-82S-' + metadata_chapter_office_code);
+          if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
+          if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
         }
       }
       else {
         if( form_cid === short_cid ) {
           // Chapter form, same chapter
-          $('#foreign_key1').val(metadata_campaign_id);
-          $('#foreign_key2').val('UR-' + short_cid + '-01');
-          $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_chapter_office_code);
-          $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_cid);
-          $('#foreign_key5').val(metadata_subtype);
+          if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
+          if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_chapter_office_code);
+          if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_cid);
+          if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
         }
         else {
           // Chapter form, different chapter
-          $('#foreign_key1').val(metadata_campaign_id);
-          $('#foreign_key2').val('UR-' + short_cid + '-01');
-          $('#foreign_key3').val(metadata_appeal_year +'-82S-CHFF');
-          $('#foreign_key4').val('ON-'+ metadata_chapter_office_code + '-' + form_cid);
-          $('#foreign_key5').val(metadata_subtype);
+          if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
+          if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year +'-82S-' + metadata_chapter_office_code);
+          if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-'+ metadata_chapter_office_code + '-' + form_cid);
+          if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
         }
       }
 
