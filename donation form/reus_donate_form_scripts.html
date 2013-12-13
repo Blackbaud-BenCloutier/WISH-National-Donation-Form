@@ -1492,6 +1492,8 @@ function finishGift() {
   });
 
   $('#chapter_id').val(id_from_billing_zip);
+  // Setting chapter id information to hidden input field for Satellite Data - MRD 12/13/13
+  $("input[name='s_sat_chapter_id']").val(id_from_billing_zip);
 
   if ($('#optinNational').is(':checked')) {
     survey_ids.push("1604");
