@@ -345,8 +345,7 @@ $(document).ready(function () {
   function optionTwo(thisCardType) {
 
     var occasionType = $('#selectOccasion input[type=hidden]').val();
-    // Add occasion type to hidden input field for Satellite Data
-    $("input[name='s_sat_occasion_type']").val(occasionType);
+    
     var products = [];
     var cardCount = 0;
 
@@ -572,6 +571,8 @@ $(document).ready(function () {
   $('.cancel-btn').click(function () {
     $.fancybox.close();
     resetProducts();
+    // Setting Skew information to hidden input field for Satellite Data - MRD 12/13/13
+    $("input[name='s_sat_skew']").val('');
   });
 
   //Reset Products
@@ -638,7 +639,6 @@ $(document).ready(function () {
     cardThumbnail = "";
     productURL = "";
     skew = "";
-
   }
 
   // If the "Back to Selection" button is clicked, go to step 1
@@ -670,7 +670,10 @@ $(document).ready(function () {
 
     // Show the correct fields based on card type
     if (cardType == "E-Card") {
-
+      
+    // Add occasion type to hidden input field for Satellite Data
+    $("input[name='s_sat_ecard_occasion_type']").val(occasionType);
+    
       $('#js-prod-personalizer h1').text('Customize E-Card');
 
       $('fieldset.memorial .inMemoryOf, fieldset.memorial .ifEmptyDefault, fieldset.memorial .ifEmptyCard, fieldset.sendTo .defaultTo, fieldset.sendTo .defaultName, fieldset.sendTo .js_mname, fieldset.sendTo .weddingName, fieldset.sendTo .physical, fieldset.memorialHonorOf, fieldset.fromInfo .infoForCert, fieldset.fromInfo .infoForCard, fieldset.messageInfo .cardMessage, .bottomButtons .leaveBlank, #finishCard, #finishCertificate').hide();
@@ -714,7 +717,10 @@ $(document).ready(function () {
       }); //click
 
     } else if (cardType == "Certificate") {
-
+      
+      // Add occasion type to hidden input field for Satellite Data
+      $("input[name='s_sat_ecert_occasion_type']").val(occasionType);
+      
       $('#js-prod-personalizer h1').text('Customize Certificate');
 
       $('fieldset.memorial .inMemoryOf, fieldset.memorial .ifEmptyEcard, fieldset.memorial .ifEmptyCard, fieldset.sendTo, fieldset.memorialHonorOf, fieldset.fromInfo .infoForCard, fieldset.messageInfo, .bottomButtons .leaveBlank, #finisheCard, #finishCard').hide();
@@ -759,6 +765,9 @@ $(document).ready(function () {
       }); //click
 
     } else if (cardType == "Card") {
+      
+      // Add occasion type to hidden input field for Satellite Data
+      $("input[name='s_sat_card_occasion_type']").val(occasionType);
 
       $('#js-prod-personalizer h1').text('Customize Card');
 
@@ -1177,13 +1186,13 @@ chaptersjson = (function () {
   var chapter_prefix = cid.substring(0, 3);
 
   if (level1 < 1 || isNaN(level1)) {
-    level1 = 50;
+    level1 = 30;
   } else {
     level1 = Math.floor(level1);
   }
 
   if (level2 < 1 || isNaN(level2)) {
-    level2 = 75;
+    level2 = 50;
   } else {
     level2 = Math.floor(level2);
   }
@@ -1490,8 +1499,6 @@ function finishGift() {
   });
 
   $('#chapter_id').val(id_from_billing_zip);
-  // Setting chapter id information to hidden input field for Satellite Data - MRD 12/13/13
-  $("input[name='s_sat_chapter_id']").val(id_from_billing_zip);
 
   if ($('#optinNational').is(':checked')) {
     survey_ids.push("1604");
