@@ -1491,6 +1491,9 @@ function finishGift() {
   console.log("finish gift");
   var survey_ids = [];
   var id_from_billing_zip;
+  
+  // Setting chapter id information to hidden input field for Satellite Data - re-added MRD 12/16/13
+  $("input[name='s_sat_chapter_id']").val(id_from_billing_zip);
 
   $(zip_array['chapter']).each(function (index, arr) {
     if (arr['zip_code'] == $('#ccPostal').val()) {
