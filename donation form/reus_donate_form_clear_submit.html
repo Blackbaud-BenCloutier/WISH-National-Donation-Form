@@ -1,0 +1,12 @@
+<div class="module-form-labeled2 summarybot clearfix">
+                    <a href="#" class="js-btn-cancel button-cancel-link" data-bind="click: function(vC){ mawf.confirmModal.launch({boxSelector:'#js-modal-confirm', message:$root.clearFormMessage(), btnCount: 2, yes_cb:$root.reset, btnYesTxt:$root.clearFormMessageYes(), no_cb: function(){return null;}, btnNoTxt:$root.clearFormMessageNo() }); }">
+                        Clear form and start over
+                    </a><a href="#" class="button-submit" data-bind="visible: paymentType() == 'creditCard'">
+                        Submit donation
+                    </a><a href="#" class="button-submit button-submit-paypal" data-bind="visible: paymentType() == 'PayPal'">
+                        Pay with PayPal
+                    </a>
+                    <p class="pp-boiler" data-bind="visible: paymentType() == 'PayPal'">
+                        You will be taken to PayPal to process your donation and be returned on completion.
+                    </p>
+                </div>

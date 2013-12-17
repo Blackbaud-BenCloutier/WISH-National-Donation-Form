@@ -1,28 +1,46 @@
 <!-- Copied from v41 -->
 
-<!--
-
-BDC 12/3/2013
-+++++++++++++
-
-Important functions:
-  showStep1(), showStep2(), showStep3()
-
--->
-
 <!-- All except productURL1 and productURL1Name were removed. - BDC 12/2/2013 -->
 [[U0:productURL1=""]]
 [[U0:productURL1Name=""]]
 
-<!-- Rogue style tag - BDC 12/2/2013 -->
-<style>.chapter-list-btn{color:gray !important;}</style>
+<style>.chapter-list-btn, .country-list-btn {color:gray !important;}</style>
 
 <script src="../assets/js/jquery.zoom-min.js"></script>
 <script src="../assets/js/jquery.jswipe.js" type="text/javascript"></script>
 <script src="../assets/js/jquery.infinite-carousel.js" type="text/javascript"></script>
 
 <script>
-$.fn.infiniteCarousel = function () {
+
+// Editable metadata fields - BDC 12/11/2013
+
+[[S51:reus_donate_form_metadata]]
+
+// Putting all the ZIP Codes into a variable for fast access - BDC 12/10/2013
+
+var zip_array; $.getJSON('../assets/js/zip-codes.json', function (data) {zip_array = data});
+
+// AJAX call to grab XML that associates centers to form IDs -- MRD 12/6/2013
+
+center_forms = (function () {
+  var xml = null;
+  $.ajax({
+    'async': false,
+    'global': false,
+    'url': 'https://secure2.convio.net/wish/assets/xml/center_info.xml',
+    'dataType': "xml",
+    'success': function (data) {
+      xml = data;
+    }
+  });
+
+  console.log(xml);
+
+  return xml;
+})();
+
+
+$.fn.infiniteCarousel = function () { // this is the card selection carousel
 
   function repeat(str, num) {
     return new Array(num + 1).join(str);
@@ -101,16 +119,22 @@ $.fn.infiniteCarousel = function () {
 
 $(document).ready(function () {
 
+  // BDC
+
+  $('#saveAdd').hide();
+
+  // BDC
+
   $.jStorage.deleteKey("hideGiftType");
 
-  var donationID = $('.js_donationConfigurator').attr('data-donation-id');
-  var cardsList = [];
+  var donationID = $('.js_donationConfigurator').attr('data-donation-id'), //random number
+  cardsList = [], // empty array
+  giftTypeButtons = $("#giftTypes").html(), // single and monthly buttons
+  initProducts = $("ul#products").html(); // greyed out preview cards
 
-  var giftTypeButtons = $("#giftTypes").html();
-
-  $("#saveAdd, .add-button").live('click', function () {
-    donationID = $('.js_donationConfigurator').attr('data-donation-id');
-
+  $("#saveAdd, .add-button").live('click', function () { // add donation buttons
+    donationID = $('.js_donationConfigurator').attr('data-donation-id'); // dup
+    // grey out donation button that's not clicked
     if ($("a#monthlyGift").hasClass("selected")) {
       $("a#monthlyGift").removeClass('disabled').addClass('selected').removeAttr("disabled").css("cursor", "pointer");
       $("a#monthlyGift").trigger("click");
@@ -119,6 +143,7 @@ $(document).ready(function () {
         e.preventDefault();
       });
     }
+    // grey out donation button that's not clicked
     if ($("a#singleGift").hasClass("selected")) {
       $("a#monthlyGift").addClass('disabled').attr('disabled', true).unbind('click').css("cursor", "not-allowed");
       $("a#monthlyGift").click(function (e) {
@@ -127,25 +152,14 @@ $(document).ready(function () {
     }
   });
 
-  var initProducts = $("ul#products").html();
-
-  $('.infiniteCarousel').infiniteCarousel();
-
-  $('select.event-select').customSelectMenu();
-  $('select.type-select').customSelectMenu();
-
-  // option list - BDC 12/3/2013
-  $('.option-one li:first').remove();
-  $('.option-two li:first').remove();
-  // option list - BDC 12/3/2013
-
-  if ($("select.event-select option").val() == '') {
-
-    // select-area list - BDEC 12/3/2013
+  $('.infiniteCarousel').infiniteCarousel(); // init infiniteCarousel
+  $('select.event-select').customSelectMenu(); // select occasion
+  $('select.type-select').customSelectMenu(); // select card type
+  $('.option-one li:first').remove(); // remove list item
+  $('.option-two li:first').remove(); // remove list item
+  if ($("select.event-select option").val() == '') { // if no occasion chosen, disable everything
     $('.select-area-2').addClass('disabled');
     $('.select-area-3').addClass("disabled");
-    // select-area list - BDEC 12/3/2013
-
     $('#carousel-gallery').addClass("disabled");
     $('.option-two ul').css({
       opacity: 0
@@ -156,26 +170,18 @@ $(document).ready(function () {
     $('.top-actions .back-btn').hide();
     $('.top-actions .help-btn, .top-actions .cancel-btn').show();
     $('#lightbox-main h1').text('Select a certificate, card, or e-card');
-
-    // step list - BDC 12/3/2013
     $('#step1').show();
     $('#step2').hide();
     $('#step3').hide();
-    // step list - BDC 12/3/2013
-
   }
 
   var showStep2 = function () {
     $('.top-actions .back-btn').show();
     $('.top-actions .help-btn, .top-actions .cancel-btn').hide();
     $('#lightbox-main h1').text('Select a certificate, card, or e-card');
-
-    // step list - BDC 12/3/2013
     $('#step1').hide();
     $('#step2').show();
     $('#step3').hide();
-    // step list - BDC 12/3/2013
-
   }
 
   function getUrlVars() {
@@ -339,8 +345,7 @@ $(document).ready(function () {
   function optionTwo(thisCardType) {
 
     var occasionType = $('#selectOccasion input[type=hidden]').val();
-    // Add occasion type to hidden input field for Satellite Data
-    $("input[name='s_sat_occasion_type']").val(occasionType);
+
     var products = [];
     var cardCount = 0;
 
@@ -440,15 +445,11 @@ $(document).ready(function () {
   var card_name = "";
   var card_type = "";
   var occasion_type = "";
-
-  // card_image list - BDC 12/3/2013
   var card_image1 = "";
   var card_image2 = "";
   var card_image3 = "";
   var card_image4 = "";
   var card_image5 = "";
-  // card_image list - BDC 12/3/2013
-
   var card_thumbnail = "";
   var product_url = "";
   var skew = "";
@@ -474,15 +475,11 @@ $(document).ready(function () {
         card_name = arr['card_name'];
         card_type = arr['card_type'];
         occasion_type = arr['occasion_type'];
-
-        // card_image list - BDC 12/3/2013
         card_image1 = arr['card_image1'];
         card_image2 = arr['card_image2'] || false;
         card_image3 = arr['card_image3'] || false;
         card_image4 = arr['card_image4'] || false;
         card_image5 = arr['card_image5'] || false;
-        // card_image list - BDC 12/3/2013
-
         card_thumbnail = arr['card_thumbnail'] || "https://secure2.convio.net/wish/Card images/General/Certficates/blank.png";
         product_url = arr['product_url'] || false;
         return false;
@@ -507,8 +504,6 @@ $(document).ready(function () {
     });
 
     $('.cardDescription').load('https://secure2.convio.net/wish/site/SPageNavigator/reus_card_' + cardID + '.html #container');
-
-    // card_image list - BDC 12/3/2013
     if (card_type = "card") {
       var cardThumbs = '<img src="' + card_image2 + '" width="40" height="40" class="card-thumb" />';
 
@@ -523,7 +518,6 @@ $(document).ready(function () {
       }
       $(".card-thumbs").html(cardThumbs);
     }
-    // card_image list - BDC 12/3/2013
 
     $("img.card-thumb").click(function (e) {
       e.preventDefault();
@@ -551,19 +545,15 @@ $(document).ready(function () {
         card_name = arr['card_name'];
         card_type = arr['card_type'];
         occasion_type = arr['occasion_type'];
-
-        // card_image list - BDC 12/3/2013
         card_image1 = arr['card_image1'];
         card_image2 = arr['card_image2'] || false;
         card_image3 = arr['card_image3'] || false;
         card_image4 = arr['card_image4'] || false;
         card_image5 = arr['card_image5'] || false;
-        // card_image list - BDC 12/3/2013
-
         card_thumbnail = arr['card_thumbnail'] || "https://secure2.convio.net/wish/Card images/General/Certficates/blank.png";
         product_url = arr['product_url'] || false;
         skew = cardID;
-        
+
         // Setting Skew information to hidden input field for Satellite Data - MRD 12/12/13
         $("input[name='s_sat_skew']").val(skew);
         
@@ -581,6 +571,8 @@ $(document).ready(function () {
   $('.cancel-btn').click(function () {
     $.fancybox.close();
     resetProducts();
+    // Setting Skew information to hidden input field for Satellite Data - MRD 12/13/13
+    $("input[name='s_sat_skew']").val('');
   });
 
   //Reset Products
@@ -619,12 +611,9 @@ $(document).ready(function () {
     $("#step3 input").val("");
     $("#step3 textarea").val("");
     $("#State_X option:first").attr("selected", "selected");
-
-    // step list - BDC 12/3/2013
     $('#step1').show();
     $('#step2').hide();
     $('#step3').hide();
-    // step list - BDC 12/3/2013
 
     toFirstName = "";
     toMI = "";
@@ -644,13 +633,9 @@ $(document).ready(function () {
     cardName = "";
     cardType = "";
     occasionType = "";
-
-    // cardImage list - BDC 12/3/2013
     cardImage1 = "";
     cardImage2 = "";
     cardImage3 = "";
-    // cardImage list - BDC 12/3/2013
-
     cardThumbnail = "";
     productURL = "";
     skew = "";
@@ -665,16 +650,10 @@ $(document).ready(function () {
     showStep1();
   });
 
-  // cardImage list - BDC 12/3/2013
   var showStep3 = function (ecardID, cardName, cardType, occasionType, cardImage1, cardImage2, cardImage3, cardThumbnail, productURL, thisSkew) {
-  // cardImage list - BDC 12/3/2013
-
-    // step list - BDC 12/3/2013
     $('#step1, #step2, .top-actions .help-btn, .top-actions .back-btn').hide();
     $('#step3, .top-actions .cancel-btn').show();
     $('#step3 #productTitle').text(cardName);
-    // step list - BDC 12/3/2013
-
     $('.cardThumbnail').attr('src', cardThumbnail);
 
     var toFirstName = "";
@@ -694,7 +673,10 @@ $(document).ready(function () {
 
     // Show the correct fields based on card type
     if (cardType == "E-Card") {
-
+      
+    // Add occasion type to hidden input field for Satellite Data
+    $("input[name='s_sat_ecard_occasion_type']").val(occasionType);
+    
       $('#js-prod-personalizer h1').text('Customize E-Card');
 
       $('fieldset.memorial .inMemoryOf, fieldset.memorial .ifEmptyDefault, fieldset.memorial .ifEmptyCard, fieldset.sendTo .defaultTo, fieldset.sendTo .defaultName, fieldset.sendTo .js_mname, fieldset.sendTo .weddingName, fieldset.sendTo .physical, fieldset.memorialHonorOf, fieldset.fromInfo .infoForCert, fieldset.fromInfo .infoForCard, fieldset.messageInfo .cardMessage, .bottomButtons .leaveBlank, #finishCard, #finishCertificate').hide();
@@ -738,7 +720,10 @@ $(document).ready(function () {
       }); //click
 
     } else if (cardType == "Certificate") {
-
+      
+      // Add occasion type to hidden input field for Satellite Data
+      $("input[name='s_sat_ecert_occasion_type']").val(occasionType);
+      
       $('#js-prod-personalizer h1').text('Customize Certificate');
 
       $('fieldset.memorial .inMemoryOf, fieldset.memorial .ifEmptyEcard, fieldset.memorial .ifEmptyCard, fieldset.sendTo, fieldset.memorialHonorOf, fieldset.fromInfo .infoForCard, fieldset.messageInfo, .bottomButtons .leaveBlank, #finisheCard, #finishCard').hide();
@@ -783,6 +768,9 @@ $(document).ready(function () {
       }); //click
 
     } else if (cardType == "Card") {
+      
+      // Add occasion type to hidden input field for Satellite Data
+      $("input[name='s_sat_card_occasion_type']").val(occasionType);
 
       $('#js-prod-personalizer h1').text('Customize Card');
 
@@ -932,6 +920,58 @@ $(document).ready(function () {
           }
         });
       }
+
+      // BDC 12/10/2013
+      // --------------
+
+      var short_cid = cid.substr(0,3),
+        form_cid = $('.logo a').attr('href').match(/\d+/)[0],
+        donation_form_id = $(center_forms).find('office#' + short_cid + ' + form').attr('id');
+
+      data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
+      data += '&s_cid=' + cid;
+
+      if( form_cid === '100' ) {
+        if( short_cid === '100' ) {
+          // National form, national donation
+          if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
+          if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_national_office_code);
+          if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
+          if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
+        }
+        else {
+          // National form, chapter donation
+          if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
+          if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-82S-' + metadata_national_office_code);
+          if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
+          if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
+        }
+      }
+      else {
+        if( form_cid === short_cid ) {
+          // Chapter form, same chapter
+          if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
+          if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_chapter_office_code);
+          if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_cid);
+          if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
+        }
+        else {
+          // Chapter form, different chapter
+          if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
+          if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year +'-82S-' + metadata_chapter_office_code);
+          if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-'+ metadata_chapter_office_code + '-' + form_cid);
+          if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
+        }
+      }
+
+      $('#source').val($('#foreign_key2').val() + ',' + $('#foreign_key3').val() + ',' + $('#foreign_key4').val())
+
+      // --------------
+      // BDC 12/10/2013
 
       // If donation type is 2, this is a monthly gift
       if (type == 2) {
@@ -1305,8 +1345,6 @@ chaptersjson = (function () {
 
   $(document).on('keyup', '.js_donationDest', function (e) {
     var thisZip = $(this).val();
-    //console.log(thisZip.length);
-    //console.log(thisZip);
 
     if (thisZip.length < 5 || thisZip.length > 5) {
       $('ul.search-menu').html('');
@@ -1331,8 +1369,6 @@ chaptersjson = (function () {
 
   $(document).on('keyup', '.js_genericChapLoc', function (e) {
     var thisZip = $(this).val();
-    //console.log(thisZip.length);
-    //console.log(thisZip);
 
     if (thisZip.length < 5 || thisZip.length > 5) {
       $('ul.search-menu').html('');
@@ -1457,6 +1493,19 @@ function lastStep() {
 function finishGift() {
   console.log("finish gift");
   var survey_ids = [];
+  var id_from_billing_zip;
+  
+  // Setting chapter id information to hidden input field for Satellite Data - re-added MRD 12/16/13
+  $("input[name='s_sat_chapter_id']").val(id_from_billing_zip);
+
+  $(zip_array['chapter']).each(function (index, arr) {
+    if (arr['zip_code'] == $('#ccPostal').val()) {
+      id_from_billing_zip = arr['chapter_id'];
+    }
+  });
+
+  $('#chapter_id').val(id_from_billing_zip);
+
   if ($('#optinNational').is(':checked')) {
     survey_ids.push("1604");
   }
@@ -1464,9 +1513,8 @@ function finishGift() {
     survey_ids.push("1625");
   }
   if ($('#optinChapter').is(':checked')) {
-    var optThisChapter = $("input[name='sitChapterDestinationID']").val();
     $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-      if (arr['office_id'] == optThisChapter) {
+      if (arr['office_id'] == id_from_billing_zip) {
         survey_ids.push(arr['surveyID']);
       }
     });

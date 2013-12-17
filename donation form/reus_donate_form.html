@@ -1,13 +1,20 @@
 <form method="post" action="#" id="mainform" autocomplete="off">
-<input type="hidden" name="foreign_key1" value="[[S334:set.custom.foreign_key1]]">
-<input type="hidden" name="foreign_key2" value="[[S334:set.custom.foreign_key2]]">
-<input type="hidden" name="foreign_key3" value="[[S334:set.custom.foreign_key3]]">
-<input type="hidden" name="foreign_key4" value="[[S334:set.custom.foreign_key4]]">
-<input type="hidden" name="foreign_key5" value="[[S334:set.custom.foreign_key5]]">
 
-<input type="hidden" name="s_sat_occasion_type" value="">
+<!-- Leave foreign_keys blank if none are present in URL - BDC 12/8/2013 -->
+<input type="hidden" id="foreign_key1" name="foreign_key1" value="[[?xx::x[[S334:Campaign_ID]]x::::[[S334:Campaign_ID]]]]">
+<input type="hidden" id="foreign_key2" name="foreign_key2" value="[[?xx::x[[S334:Fund_ID]]x::::[[S334:Fund_ID]]]]">
+<input type="hidden" id="foreign_key3" name="foreign_key3" value="[[?xx::x[[S334:Appeal_ID]]x::::[[S334:Appeal_ID]]]]">
+<input type="hidden" id="foreign_key4" name="foreign_key4" value="[[?xx::x[[S334:Package_ID]]x::::[[S334:Package_ID]]]]">
+<input type="hidden" id="foreign_key5" name="foreign_key5" value="[[?xx::x[[S334:Subtype]]x::::[[S334:Subtype]]]]">
+
+<input type="hidden" id="source" name="source" value="">
+<input type="hidden" id="chapter_id" name="chapter_id" value="">
+<input type="hidden" name="s_sat_chapter_id" value="">
+<input type="hidden" name="s_sat_ecard_occasion_type" value="">
+<input type="hidden" name="s_sat_ecert_occasion_type" value="">
+<input type="hidden" name="s_sat_card_occasion_type" value="">
 <input type="hidden" name="s_sat_skew" value="">
-			
+
 [[?xxxx::xx[[S334:campaign]]xx::
 <!-- There's no campaign variable  -->
 [[S51:reus_donate_form_default_intro]]
@@ -164,7 +171,7 @@
                         Cancel
                     </a>
                      <div class="float-right clearfix">
-                        <a href="#" class="action-btn ab-light" id="saveAdd" data-bind="click: $root.saveAndAdd, visible: newDonation() && mawf.CartView.donations().length < 5, css: { disabled: x_donationAmountError() }">
+                        <a href="#" class="action-btn ab-light" id="saveAdd" data-bind="click: $root.saveAndAdd, visible: false, css: { disabled: x_donationAmountError() }">
                             Save and add another donation
                         </a>
                         <a href="#" class="action-btn ab-short" id="saveContinue" data-bind="click: $root.saveDonation, visible: newDonation(), css: { disabled: x_donationAmountError() }">
@@ -187,7 +194,7 @@
     </div>
     <!-- END DONATON CONFIG FORM WRAP -->
     <!-- START ADD ANOTHER DONATION BAR -->
-    <div class="donate-wrap clear-wrap center clearfix" data-bind="visible: ! donationSelectInProcess() && mawf.CartView.donations().length < 5">
+    <div class="donate-wrap clear-wrap center clearfix" data-bind="visible: false">
         <a href="#" class="add-button" data-bind="click: addDonation">
             Add another donation
         </a>
@@ -349,12 +356,12 @@
                                         <span class="" data-bind="click: function(){ updateLocal() ? updateLocal(false):updateLocal(true)}, css: { checked: updateLocal()}">
                                         </span>
                                     </div>--> <!-- Removed pending acceptance of native input -->
-                                    <input id="optinChapter" type="checkbox" name="sitNational" data-bind="checked: updateLocal" />
+                                    <input id="optinChapter" type="checkbox" name="sitNational" data-bind="checked: false" />
                                     Yes! I want to receive email updates from my local chapter.
                                 </label>
                             </div>
                         </div>
-                        <div id="body_2_content_0_maincontent_0_Div3" class="module-form-labeled grid_6 clearfix">
+                        <div style="display: none;" id="body_2_content_0_maincontent_0_Div3" class="module-form-labeled grid_6 clearfix">
                             <div class="input-chapter-wrap js_chapterSearch clearfix">
                                 <h3>
                                     Local chapter
@@ -397,7 +404,7 @@
         <!-- END PERSONAL -->
         
         
-		[[S51:reus_donate_form_billing_info]]
+        [[S51:reus_donate_form_billing_info]]
         
         
         [[S51:reus_donate_form_payment_type]]
@@ -406,7 +413,7 @@
         <!-- START MASTER SUMMARY/SUBMIT BAR -->
         <div class="donate-wrap clearfix">
             <div class="inset">
-  				[[S51:reus_donate_form_master_summary]]
+                [[S51:reus_donate_form_master_summary]]
                 [[S51:reus_donate_form_clear_submit]]
             </div>
         </div>

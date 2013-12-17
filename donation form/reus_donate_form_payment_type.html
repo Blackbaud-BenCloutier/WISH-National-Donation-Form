@@ -1,0 +1,118 @@
+<!-- START PAYMENT TYPE -->
+        <div class="form-wrap donate-wrap jsFormSection clearfix">
+            <div class="formtop clearfix">
+                <div class="row_2 step">
+                    Step
+                    <span class="big">
+                        4/4
+                    </span>
+                </div>
+                <div class="row_4">
+                    <h3>
+                        My payment
+                    </h3>
+                </div>
+                <div class="grid_2 status" data-bind="">
+                </div>
+            </div>
+            <div class="inset">
+                <div class="credit clearfix">
+                    <!--<div class="left">
+                        <h6>
+                            Choose type
+                        </h6>
+                    </div>-->
+                    <!--<div class="grid_6 payment-types">
+                        
+                                <a href="#" class="button" data-bind="click: function() { paymentType('creditCard'); }, css: {selected: paymentType() == 'creditCard'}">
+                                    Credit Card
+                                </a>
+                            
+                                <a href="#" class="button" data-bind="visible: hasMonthlyDonation() === false, click: function() { paymentType('PayPal'); clearCC(); }, css: {selected: paymentType() == 'PayPal'}">
+                                    Paypal
+                                </a>
+                            
+                    </div>-->
+                </div>
+                <div class="card-container" data-bind="visible: paymentType() == 'creditCard'">
+                    <!--<div class="module-form-labeled clearfix">
+                        <div class="grid_6">
+                            <label for="ccFName">
+                                Card holder's name
+                            </label>
+                            <input class="js_ccFName jsreq" type="text" placeholder="Full name"
+                                name="ccFName" data-bind="value: x_ccFName" id="ccFName">
+                        </div>
+                        <div class="grid_2">
+                        </div>
+                    </div>-->
+                    <div class="module-form-labeled clearfix">
+                        <div class="grid_6">
+                            <label for="ccNumber">
+                                Card number
+                            </label>
+                            <input class="js_ccNumber jsreq" type="text" placeholder="0000-0000-0000-0000"
+                                name="card_number" id="ccNumber">
+                        </div>
+                        <div class="card-grid">
+                            <img class="visa" src="../assets/images/form-cc-visa.png" alt="" />
+                            <img class="mc" src="../assets/images/form-cc-mastercard.png" alt="" />
+                            <img class="amex" src="../assets/images/form-cc-amex.png" alt="" />
+                            <img class="discover" src="../assets/images/form-cc-discover.png" alt="" />
+                        </div>
+                    </div>
+                    <div class="module-form-labeled clearfix">
+                        <div class="grid_6 halfwidth">
+                            <label for="ccExpMonth">
+                                Expiration date
+                            </label>
+                            <div class="expire-grid">
+                                <select name="card_exp_date_month" id="ccExpMonth" class="js_ccExpMonth jsreq">
+                                    <option value="">
+                                        Month</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <select name="card_exp_date_year" id="ccExpYear" class="js_ccExpYear jsreq">
+                                    <option value="">
+                                        Year</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                </select>
+                                <p id="expMonthErr" class="info form-error errorActive"></p>
+                                <p id="expYearErr" class="info form-error errorActive"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="module-form-labeled clearfix">
+                        <div class="grid_6">
+                            <label for="ccSecNumber">
+                                Security code
+                            </label>
+                            <input class="js_ccSecNumber jsreq" id="ccSecNumber" type="text" maxlength="4" placeholder="000"
+                                name="card_cvv">
+                        </div>
+                        <div class="card-grid clearfix">
+                            <span class="info-sec"><a href="#" data-bind="click: launchWhatsThis">
+                                What's this?
+                            </a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAYMENT TYPE -->
