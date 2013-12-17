@@ -640,8 +640,6 @@ $(document).ready(function () {
     productURL = "";
     skew = "";
     
-    // Setting Skew information to hidden input field for Satellite Data - MRD 12/12/13
-    $("input[name='s_sat_skew']").val(skew);
   }
 
   // If the "Back to Selection" button is clicked, go to step 1
@@ -1490,21 +1488,24 @@ function lastStep() {
   window.location = "https://secure2.convio.net/wish/site/SPageNavigator/donate_thankyou.html";
 }
 
-function finishGift() {
-  console.log("finish gift");
-  var survey_ids = [];
+$('#ccPostal').blur(function(e){
+  console.log("zip code blur");
   var id_from_billing_zip;
-  
-  // Setting chapter id information to hidden input field for Satellite Data - re-added MRD 12/16/13
-  $("input[name='s_sat_chapter_id']").val(id_from_billing_zip);
 
   $(zip_array['chapter']).each(function (index, arr) {
     if (arr['zip_code'] == $('#ccPostal').val()) {
       id_from_billing_zip = arr['chapter_id'];
+      $('#chapter_id').val(id_from_billing_zip);
+      $("input[name='s_sat_chapter_id']").val(id_from_billing_zip);
     }
   });
+  
+});
 
-  $('#chapter_id').val(id_from_billing_zip);
+
+function finishGift() {
+  console.log("finish gift");
+  var survey_ids = [];  
 
   if ($('#optinNational').is(':checked')) {
     survey_ids.push("1604");
@@ -1514,7 +1515,7 @@ function finishGift() {
   }
   if ($('#optinChapter').is(':checked')) {
     $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-      if (arr['office_id'] == id_from_billing_zip) {
+      if (arr['office_id'] == $('#chapter_id').val()) {
         survey_ids.push(arr['surveyID']);
       }
     });
