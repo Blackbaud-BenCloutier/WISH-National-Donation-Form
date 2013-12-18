@@ -270,6 +270,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"honor",
 			";jsessionid=4EAE49159F71020697ADCD527D892892.app276a",
 			"cardType",
 			"certificate",
@@ -396,8 +397,7 @@
 			"data",
 			"custom",
 			"donationType",
-			"donationType2Label",
-			"input"
+			"donationType2Label"
 		],
 		"highlight": true,
 		"in_selection": false,
