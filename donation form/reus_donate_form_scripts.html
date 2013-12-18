@@ -1334,8 +1334,10 @@ chaptersjson = (function () {
     $('.intouch-container:eq(0)').addClass('selected');
     $('.intouch-container:eq(0) input').prop('checked', true);
     console.log('CID is set to: ' + cid);
+    $("input[name='s_sat_chapter_id']").val(cid);
   } else {
     console.log('CID is not set');
+    $("input[name='s_sat_chapter_id']").val("100-000");
   }
 
   data = 'method=donate&form_id=1420';

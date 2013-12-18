@@ -1,49 +1,3 @@
-<!--
-
-Here's what the _mawData object looks like:
-
-{
-  donate: {
-    company: null,
-    currencyCode: null,
-    locale: {
-      city: [[S120:dc:donorCity]],
-      country: [[S120:dc:donorCountry]],
-      state: [[S120:dc:donorState]],
-      zip: [[S120:dc:donorZip]]
-    }
-    paymentType: [[S120:dc:paymentMethod]],
-    donation: [ dynamic content ],
-    transactionId: [[S120:dc:transactionID]],
-    totalTransactionValue: [[S120:dc:giftAmount]]
-  },
-  form: {
-    fID: Donate,
-    errorField: null
-  },
-  intSearch: {
-    term: null,
-    results: null
-  },
-  language: en,
-  login: {
-    loggedIn: false,
-    userName: null,
-    donor: null
-  },
-  pageCat: {
-    primary: Ways To Help,
-    secondary: Giving,
-    tertiary: Donate,
-    hierarchy: Ways To Help:Giving:Donate:Thank You,
-    pageId: Thank You
-  },
-  siteId: [[S80:cid]],
-  ThirdPartyId: Convio,
-  IsMobile: false
-}
-
--->
 <script type='text/javascript'>
 
 var _mawData = {
@@ -99,10 +53,10 @@ var _mawData = {
     "primary": "Ways To Help",
     "secondary": "Giving",
     "tertiary": "Donate",
-    "hierarchy": "Ways To Help:Giving:Donate",
+    "hierarchy": "Ways To Help:Giving:Donate:Thank You",
     "pageId": "Thank You"
   },
-  "siteId": "[[S80:cid]]",
+  "siteId": "[[S80:sat_chapter_id]]",
   "ThirdPartyId": "Convio",
   "IsMobile": false
 } 
