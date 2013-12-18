@@ -142,13 +142,16 @@ $(document).ready(function () {
       $("a#singleGift").click(function (e) {
         e.preventDefault();
       });
+
     }
     // grey out donation button that's not clicked
     if ($("a#singleGift").hasClass("selected")) {
+
       $("a#monthlyGift").addClass('disabled').attr('disabled', true).unbind('click').css("cursor", "not-allowed");
       $("a#monthlyGift").click(function (e) {
         e.preventDefault();
       });
+
     }
   });
 
@@ -269,6 +272,7 @@ $(document).ready(function () {
       width: '1018px',
       height: '585px',
       padding: 0,
+      scrolling: 'no',
       modal: true,
       closeBtn: false,
       margin: [5, 5, 5, 5],
@@ -345,7 +349,7 @@ $(document).ready(function () {
   function optionTwo(thisCardType) {
 
     var occasionType = $('#selectOccasion input[type=hidden]').val();
-
+    
     var products = [];
     var cardCount = 0;
 
@@ -556,7 +560,7 @@ $(document).ready(function () {
 
         // Setting Skew information to hidden input field for Satellite Data - MRD 12/12/13
         $("input[name='s_sat_skew']").val(skew);
-        
+
         return false;
       }
     });
@@ -639,7 +643,6 @@ $(document).ready(function () {
     cardThumbnail = "";
     productURL = "";
     skew = "";
-    
   }
 
   // If the "Back to Selection" button is clicked, go to step 1
@@ -899,7 +902,19 @@ $(document).ready(function () {
       var amnt = parseFloat(donations[i].prettyDonationAmount());
       var type = donations[i].donationType();
       var designee = "";
-      var officeID
+      var officeID;
+
+      if($("input[name='s_sat_skew']").val() === '') {
+        if(type === 1){
+          $("input[name='s_sat_skew']").val('DO02-01');
+        } else if(type === 2) {
+          $("input[name='s_sat_skew']").val('MG05-01');
+        } else {
+          console.log('error: s_sat_skew is blank but was not set');
+        }
+      } else {
+        console.log('s_sat_skew should be an hon/mem id');
+      } 
 
       if (cid === "100-000") {
         designation = "1066";
@@ -924,17 +939,22 @@ $(document).ready(function () {
 
       var short_cid = cid.substr(0,3),
         form_cid = $('.logo a').attr('href').match(/\d+/)[0],
-        donation_form_id = $(center_forms).find('office#' + short_cid + ' + form').attr('id');
+        donation_form_id = $(center_forms).find('office#' + short_cid + ' + form').attr('id'),
+        isMonthly = false;
 
       data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
       data += '&s_cid=' + cid;
+
+      if($('#monthlyGift.selected').length > 0) {
+        isMonthly = true;
+      }
 
       if( form_cid === '100' ) {
         if( short_cid === '100' ) {
           // National form, national donation
           if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
           if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
-          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_national_office_code);
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_national_monthly : metadata_national_office_code) );
           if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
           if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
         }
@@ -942,7 +962,7 @@ $(document).ready(function () {
           // National form, chapter donation
           if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
           if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
-          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-82S-' + metadata_national_office_code);
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-82S-' + (isMonthly ? metadata_national_monthly : metadata_national_office_code) );
           if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
           if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
         }
@@ -952,7 +972,7 @@ $(document).ready(function () {
           // Chapter form, same chapter
           if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
           if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
-          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + metadata_chapter_office_code);
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_chapter_monthly : metadata_chapter_office_code) );
           if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_cid);
           if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
         }
@@ -960,7 +980,7 @@ $(document).ready(function () {
           // Chapter form, different chapter
           if($('#foreign_key1').val() === '') $('#foreign_key1').val(metadata_campaign_id);
           if($('#foreign_key2').val() === '') $('#foreign_key2').val('UR-' + short_cid + '-01');
-          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year +'-82S-' + metadata_chapter_office_code);
+          if($('#foreign_key3').val() === '') $('#foreign_key3').val(metadata_appeal_year +'-82S-' + (isMonthly ? metadata_chapter_monthly : metadata_chapter_office_code) );
           if($('#foreign_key4').val() === '') $('#foreign_key4').val('ON-'+ metadata_chapter_office_code + '-' + form_cid);
           if($('#foreign_key5').val() === '') $('#foreign_key5').val(metadata_subtype);
         }
@@ -1489,23 +1509,22 @@ function lastStep() {
 }
 
 $('#ccPostal').blur(function(e){
-  console.log("zip code blur");
-  var id_from_billing_zip;
+  console.log("zip code blur 006");
+  var id_from_billing_zip;  
 
   $(zip_array['chapter']).each(function (index, arr) {
     if (arr['zip_code'] == $('#ccPostal').val()) {
       id_from_billing_zip = arr['chapter_id'];
+      
       $('#chapter_id').val(id_from_billing_zip);
-      $("input[name='s_sat_chapter_id']").val(id_from_billing_zip);
-    }
-  });
+    } 
+  });  
   
 });
 
-
 function finishGift() {
   console.log("finish gift");
-  var survey_ids = [];  
+  var survey_ids = [];
 
   if ($('#optinNational').is(':checked')) {
     survey_ids.push("1604");
