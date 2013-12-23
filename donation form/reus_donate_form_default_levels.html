@@ -1,24 +1,24 @@
-<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt1()}">
-    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt1()"></span>
-    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform js_donationAmount" id="dAmount" data-bind="click: function(donation, e) { donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt1" />
+<a href="#" class="ammount-btn">
+    <span></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform js_donationAmount" id="dAmount" />
 </a>
 
-<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt2()}">
-    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt2()"></span>
-    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" data-bind=" click: function(donation, e) {donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt2" />
+<a href="#" class="ammount-btn">
+    <span></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" />
 </a>
 
-<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt3()}">
-    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt3()"></span>
-    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" data-bind="click: function(donation, e) {donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt3" />
+<a href="#" class="ammount-btn">
+    <span></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" />
 </a>
 
-<div id="body_2_content_0_maincontent_0_Div2" class="other" data-bind="css: {selected: otherDonationActive()}">
-    <label for="otherDonationAmount"  data-bind="css: {error: x_donationAmountErrorType() === 'odm'}">
+<div id="body_2_content_0_maincontent_0_Div2" class="other">
+    <label for="otherDonationAmount" >
         Other
     </label>
-    <input name="otherDonationAmount" type="text" data-bind="value: otherDonationUserEntry, valueUpdate: 'keyup', event: {keyup: setOtherDonation}, css: {'input-error': x_donationAmountErrorType() === 'odm'}" />
-    <span data-bind="css: {error: x_donationAmountErrorType() === 'odm'}"><i data-bind="text: $root.localizedCurrencySymbol() + $root.minimumDonation()">
+    <input name="otherDonationAmount" type="text" />
+    <span><i>
     </i>
         <br />
         

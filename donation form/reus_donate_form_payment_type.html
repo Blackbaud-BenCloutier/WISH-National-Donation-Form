@@ -24,24 +24,24 @@
                     </div>-->
                     <!--<div class="grid_6 payment-types">
                         
-                                <a href="#" class="button" data-bind="click: function() { paymentType('creditCard'); }, css: {selected: paymentType() == 'creditCard'}">
+                                <a href="#" class="button">
                                     Credit Card
                                 </a>
                             
-                                <a href="#" class="button" data-bind="visible: hasMonthlyDonation() === false, click: function() { paymentType('PayPal'); clearCC(); }, css: {selected: paymentType() == 'PayPal'}">
+                                <a href="#" class="button">
                                     Paypal
                                 </a>
                             
                     </div>-->
                 </div>
-                <div class="card-container" data-bind="visible: paymentType() == 'creditCard'">
+                <div class="card-container">
                     <!--<div class="module-form-labeled clearfix">
                         <div class="grid_6">
                             <label for="ccFName">
                                 Card holder's name
                             </label>
                             <input class="js_ccFName jsreq" type="text" placeholder="Full name"
-                                name="ccFName" data-bind="value: x_ccFName" id="ccFName">
+                                name="ccFName" id="ccFName">
                         </div>
                         <div class="grid_2">
                         </div>
@@ -107,7 +107,7 @@
                                 name="card_cvv">
                         </div>
                         <div class="card-grid clearfix">
-                            <span class="info-sec"><a href="#" data-bind="click: launchWhatsThis">
+                            <span class="info-sec"><a href="#">
                                 What's this?
                             </a></span>
                         </div>

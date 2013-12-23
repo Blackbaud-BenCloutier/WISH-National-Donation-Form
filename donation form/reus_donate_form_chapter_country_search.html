@@ -1,29 +1,29 @@
 <!-- BEGIN CHAPTER SEARCH -->
-                    <div class="chapter-wrap js_chapterSearch js_donationSpecific grid_6" style="display: none" data-bind="visible: donationDestType() == 'chapter'">
+                    <div class="chapter-wrap js_chapterSearch js_donationSpecific grid_6" style="display: none">
                         <!-- BEGIN CHAPTER SEARCH BOX -->
                         <div class="chapter-search">
-                            <input id="lclName0" name="localChapterDestinationName" class="js_donationDest jsreq" placeholder="Zip code or state" data-bind="attr: {'id' : 'lclName' + $index()}, value: chapterLocation" type="text">
-                            <input value="100-000" name="localChapterDestinationID" data-bind="value: donorIntent" type="hidden">
+                            <input id="lclName0" name="localChapterDestinationName" class="js_donationDest jsreq" placeholder="Zip code or state" type="text">
+                            <input value="100-000" name="localChapterDestinationID" type="hidden">
                             <ul class="search-menu">
                             </ul>
                         </div>
                         <!-- END CHAPTER SEARCH BOX -->
-                        <a rel="0" href="#" class="js-cl-don-btn js-chapter-modal-launcher chapter-list-btn" data-bind="attr: {rel: $index}">
+                        <a rel="0" href="#" class="js-cl-don-btn js-chapter-modal-launcher chapter-list-btn">
                             Chapter list
                         </a>
                     </div>
                     <!-- END CHAPTER SEARCH -->
                     <!-- BEGIN COUNTRY SEARCH -->
-                    <div class="chapter-wrap jsinterntl grid_6" style="display: none" data-bind="visible: donationDestType() == 'international'">
+                    <div class="chapter-wrap jsinterntl grid_6" style="display: none">
                         <!-- BEGIN COUNTRY SEARCH BOX -->
                         <div class="chapter-search">
-                            <input name="countryChapterDestionName" class="js_donationToCountry" placeholder="(Optional) Start typing a country name" data-bind="value: countryLocation" type="text">
-                            <input value="100-000" name="countryChapterDestinationID" data-bind="value: donorIntent" type="hidden">
+                            <input name="countryChapterDestionName" class="js_donationToCountry" placeholder="(Optional) Start typing a country name" type="text">
+                            <input value="100-000" name="countryChapterDestinationID" type="hidden">
                             <ul class="search-menu">
                             </ul>
                         </div>
                         <!-- END COUNTRY SEARCH BOX -->
-                        <a rel="0" href="#" class="country-list-btn" data-bind="attr: {rel: $index}">
+                        <a rel="0" href="#" class="country-list-btn">
                             Country list
                         </a>
                     </div>
