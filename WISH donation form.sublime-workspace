@@ -123,14 +123,22 @@
 	},
 	"file_history":
 	[
-		"/C/Users/v-ben.cloutier/Desktop/projects/ccoon/UFE_ON_Blueprint_2014/ON_reus_responsive_sidebar.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/nar/Page_Wrapper_Admin_custom_ConsProfileAdmin_13_04_17.js",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_satellite_thankyou.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_billing_info.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/html_body.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/head_element.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/bootstrap-typeahead.js",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_socialicons.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_sidebar.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_satellite_thankyou.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_satellite_general.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_right_100.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_metadata.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/ccoon/UFE_ON_Blueprint_2014/ON_reus_responsive_sidebar.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/nar/Page_Wrapper_Admin_custom_ConsProfileAdmin_13_04_17.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/nar/Page_Wrapper_Admin_custom.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/xml/center_info.xml",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_metadata.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/chapters.json",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/csv/chapter_form_donation_different_chapter.csv",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/csv/national_form_donation_national.csv",
@@ -141,7 +149,6 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_chapter_locator.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/global.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/ko-custom.concat.js",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/bootstrap-typeahead.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/wishes.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/knockout-latest.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/chapters.json",
@@ -243,24 +250,18 @@
 		"/C/Users/v-ben.cloutier/Desktop/donation API QA/fullpage_preview.html",
 		"/C/Users/v-ben.cloutier/Desktop/donation API QA/sustaining_fullpage.html",
 		"/C/Users/v-ben.cloutier/Desktop/donation API QA/sustaining_fullpage.css",
-		"/C/Users/v-ben.cloutier/Desktop/donation API QA/sustaining_mobile_preview.html",
-		"/C/Users/v-ben.cloutier/Desktop/donation API QA/tribute_mobile_preview.html",
-		"/C/Users/v-ben.cloutier/Desktop/donation API QA/sustaining_donate.js",
-		"/C/Users/v-ben.cloutier/Desktop/donation API QA/mobile_preview.html",
-		"/C/Users/v-ben.cloutier/Desktop/donation API QA/sustaining_mobile.css",
-		"/C/Users/v-ben.cloutier/Desktop/donation API QA/html5slider.js",
-		"/C/Users/v-ben.cloutier/Desktop/donation API QA/designations_fullpage_preview.html",
-		"/C/Users/v-ben.cloutier/Desktop/donation API QA/designations_twocolumn_preview.html"
+		"/C/Users/v-ben.cloutier/Desktop/donation API QA/sustaining_mobile_preview.html"
 	],
 	"find":
 	{
-		"height": 43.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
 		"height": 102.0,
 		"where_history":
 		[
+			"C:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form",
 			"C:\\Users\\v-ben.cloutier\\Desktop\\projects\\wish\\donation form",
 			"C:\\Users\\v-ben.cloutier\\Desktop\\projects\\wish\\donation form\\assets\\js"
 		]
@@ -270,6 +271,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"addthis",
+			"typeahead",
+			"customSelectMenu",
+			"cookie",
+			"mawsocial",
+			"uniform",
+			"swfobject",
+			"form",
+			"Flash",
+			"swfobject",
+			"all",
+			"opt",
+			"optinnational",
+			"nationalo",
+			"international",
+			"console.log('CID is set to: ' + cid);",
+			"var office",
 			"honor",
 			";jsessionid=4EAE49159F71020697ADCD527D892892.app276a",
 			"cardType",
@@ -380,29 +398,12 @@
 			"noDonationIsInProgress",
 			"setDonationProcessState",
 			"showSecondFormSection",
-			"saveDonation",
-			"donationSelectInProcess",
-			"controls",
-			"donate-btn",
-			"saveAdd",
-			"bug",
-			"productFromAttr",
-			"memName",
-			"fullToAddress",
-			"lastStep",
-			"finishGift",
-			"addCentersCallback",
-			"survey",
-			"1420",
-			"data",
-			"custom",
-			"donationType",
-			"donationType2Label"
+			"saveDonation"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"",
@@ -463,7 +464,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 35.0
+		"height": 30.0
 	},
 	"input":
 	{
@@ -495,7 +496,7 @@
 	"project": "WISH donation form.sublime-project",
 	"replace":
 	{
-		"height": 80.0
+		"height": 56.0
 	},
 	"save_all_on_build": true,
 	"select_file":
