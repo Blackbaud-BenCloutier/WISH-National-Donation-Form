@@ -151,7 +151,7 @@
                 Full Name
               </label>
 
-              <input type="text" style="float: left;" class="hasMname js_fname-pers jsreq" placeholder="First name" id="MemorialFirst_X_v2" name="MemorialFirst_X_v2">
+              <input type="text" style="float: left;" class="hasMname js_fname-pers jsreq" placeholder="First name" id="MemorialFirst_X_v2" name="MemorialFirst_X_v2" data-bind="value: memFirstName">
 <p class="info form-error errorActive" style="display: none;">Oops! First name is required.</p>
               <input type="text" class="mnamefld" placeholder="M.I." maxlength="3" name="MemorialMI_X">
               <input type="text" class="extra js_lname-pers jsreq" placeholder="Last name" name="MemorialLast_X">
@@ -176,7 +176,7 @@
 
               <label for="MemorialName_X" class="inMemoryOf">In memory of</label>
 
-              <input type="text" placeholder="{Honoree Name}" id="MemorialName_X" name="MemorialName_X" maxlength="40">
+              <input type="text" data-bind="value: memAttr" placeholder="{Honoree Name}" id="MemorialName_X" name="MemorialName_X" maxlength="40">
 
               <span class="info ifEmptyDefault">
                 If left empty we will use the name as entered above.

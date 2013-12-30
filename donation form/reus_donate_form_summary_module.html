@@ -1,14 +1,14 @@
             <!-- START DONATION SUMMARY MODULE -->
-            <div class="summary selected clearfix" style="display: none">
+            <div class="summary selected clearfix" style="display: none" data-bind="visible: !isInProcess(), attr: {'data-product-category': productCategoryCode(), 'data-donation-id': donationID()}">
                 <div class="left">
-                    <h6>
+                    <h6 data-bind="text: $root.donationTitles[donationType()], visible: !hasProduct()">
                         Donation type
                     </h6>
-                    <img alt="" src="../assets/images/blank.gif">
-                    <h6>
+                    <img alt="" src="../assets/images/blank.gif" data-bind="visible: hasProduct(), attr: {src: productThumbPath()}">
+                    <h6 data-bind="visible: hasProduct(), text: productTitle()">
                         Product title
                     </h6>
-                    <div>
+                    <div data-bind="visible: hasProduct() && leaveProductBlank() === true">
                         <h6>
                             Send to
                         </h6>
@@ -16,13 +16,13 @@
                             Leave blank and send to me
                         </p>
                     </div>
-                    <div>
+                    <div data-bind="visible: hasProduct() && leaveProductBlank() === false">
                         <!-- From fields -->
                         <h6 class="set2 set3 set4 set5 set6 set7 set8">
                             From
                         </h6>
 
-                        <p class="set2 set3 set4 set5 set6 set7 set8"></p>
+                        <p class="set2 set3 set4 set5 set6 set7 set8" data-bind="text: productFromAttr()"></p>
                         
                         <h6 class="set9">
                             To
@@ -37,13 +37,13 @@
                             In honor of
                         </h6>
 
-                        <p class="set2 set3 set5 set6 set7 set8"></p>
+                        <p class="set2 set3 set5 set6 set7 set8" data-bind="text: memFirstName() + ' ' + memMI() + ' ' + memLastName()"></p>
 
-                        <p class="set2 set3 set5 set6 set7 set8"></p>
+                        <p class="set2 set3 set5 set6 set7 set8" data-bind="visible: memAttr() != '', text: '&ldquo;' + memAttr() + '&rdquo;'"></p>
 
                         <!-- To fields -->
 
-                        <p class="set9"></p>
+                        <p class="set9" data-bind="text: memName()"></p>
 
                         <!-- Send To fields -->
 
@@ -51,41 +51,41 @@
                             Send to
                         </h6>
 
-                        <p class="set1 set2 set3 set4"></p>
+                        <p class="set1 set2 set3 set4" data-bind="html: fullToAddress()"></p>
 
-                        <p class="set5 set6"></p>
+                        <p class="set5 set6" data-bind="text: productEmail()"></p>
 
                         <!-- Personal Message fields  -->
 
-                        <h6 class="set1 set5 set6">
+                        <h6 class="set1 set5 set6" data-bind="visible: productMsgLarge1() || productMsg1() || productMsg2() || productMsg3()">
                             Personalization
                         </h6>
 
-                        <p class="set5 set6"></p>
+                        <p class="set5 set6" data-bind="visible: productMsg1() || productMsgLarge1(), text: productMsg1() + productMsgLarge1()"></p>
 
-                        <p class="set1">
-                            Line 1:<span></span>
+                        <p class="set1" data-bind="visible: productMsg1() || productMsgLarge1()">
+                            Line 1:<span data-bind="text: productMsg1() + productMsgLarge1()"></span>
                         </p>
-                        <p class="set1">
-                            Line 2:<span></span>
+                        <p class="set1" data-bind="visible: productMsg2()">
+                            Line 2:<span data-bind="text: productMsg2()"></span>
                         </p>
-                        <p class="set1">
-                            Line 3:<span></span>
+                        <p class="set1" data-bind="visible: productMsg3()">
+                            Line 3:<span data-bind="text: productMsg3()"></span>
                         </p>
 
                     </div>
-                    <div>
-                        <p>
+                    <div data-bind="visible: donationType() == 2">
+                        <p data-bind="visible: donationDate().needsSameDay">
                             Your first donation will be charged today and then monthly starting on <i class="nextMonth"></i>
                         </p>
-                        <p>
+                        <p data-bind="visible: donationType() == 2">
                             Your first donation will be charged today and then monthly starting on <i class="nextMonth"></i>
                         </p>
                     </div>
                 </div>
                 <div class="controls-container clearfix">
                     <div class="center clearfix">
-                        <span class="currency"><span>
+                        <span class="currency"><span data-bind="text: $root.localizedCurrencySymbol() + prettyDonationAmount()">
                         </span></span>
                     </div>
                     <div class="right-container clearfix">
@@ -93,15 +93,15 @@
                             <h6>
                                 Benefitting
                             </h6>
-                            <p class="chapter">
+                            <p class="chapter" data-bind="text: donationDest">
                             </p>
                         </div>
                         <div class="controls clearfix">
-                            <a class="donate-btn" href="#">
+                            <a class="donate-btn" href="#" data-bind="click: function() {$root.setDonationProcessState($data, true);}, css: { disabled: $root.donationSelectInProcess() }">
                                 Review/Edit
-                            </a><a class="donate-btn" href="#">
+                            </a><a class="donate-btn" href="#" data-bind="click: function(vC, el) { if (! $root.donationSelectInProcess()) {$root.dupeDonation(vC, el);}}, css: { disabled: $root.donationSelectInProcess()}, visible: false">
                                 Duplicate
-                            </a><a class="donate-btn" href="#">
+                            </a><a class="donate-btn" href="#" data-bind="css: { disabled: $root.donationSelectInProcess() }, click:function(vC){ if (!$root.donationSelectInProcess()) { mawf.confirmModal.launch({boxSelector:'#js-modal-confirm', message:'Are you sure you would like to remove this donation?', btnCount: 2, passThruArgs: vC, yes_cb:$root.cancelDonation, no_cb: function(){} }); }}">
                                 Remove
                             </a>
                         </div>

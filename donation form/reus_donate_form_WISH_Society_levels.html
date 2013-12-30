@@ -1,0 +1,49 @@
+<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt1()}">
+    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt1()"></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform js_donationAmount" id="dAmount" data-bind="click: function(donation, e) { donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt1" title="Star of Hope" />
+</a>
+
+<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt2()}" title="Star of Strength">
+    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt2()"></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" data-bind=" click: function(donation, e) {donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt2" />
+</a>
+
+<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt3()}" title="Star of Joy">
+    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt3()"></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" data-bind="click: function(donation, e) {donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt3" />
+</a>
+
+<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt4()}" title="Wish Pacesetter">
+    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt4()"></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" data-bind="click: function(donation, e) {donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt4" />
+</a>
+
+<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt5()}" title="Wish Benefactor">
+    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt5()"></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" data-bind="click: function(donation, e) {donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt5" />
+</a>
+
+<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt5()}" title="Wish Visionary">
+    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt6()"></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" data-bind="click: function(donation, e) {donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt6" />
+</a>
+
+<a href="#" class="ammount-btn" data-bind="css: {selected: donationAmount() == $root.donationAmt5()}" title="Wish Trustee">
+    <span data-bind="text: $root.localizedCurrencySymbol() + $root.donationAmt7()"></span>
+    <input type="radio" name="donationAmount" class="button-cover jsSkipUniform" data-bind="click: function(donation, e) {donationAmount($(e.target).val()); $root.setDonationAmount(donation); }, value: $root.donationAmt7" />
+</a>
+
+<!--  Other Amount -->
+
+<div id="body_2_content_0_maincontent_0_Div2" class="other" data-bind="css: {selected: otherDonationActive()}">
+    <label for="otherDonationAmount"  data-bind="css: {error: x_donationAmountErrorType() === 'odm'}">
+        Other
+    </label>
+    <input name="otherDonationAmount" type="text" data-bind="value: otherDonationUserEntry, valueUpdate: 'keyup', event: {keyup: setOtherDonation}, css: {'input-error': x_donationAmountErrorType() === 'odm'}" />
+    <span data-bind="css: {error: x_donationAmountErrorType() === 'odm'}"><i data-bind="text: $root.localizedCurrencySymbol() + $root.minimumDonation()">
+    </i>
+        <br />
+        
+        minimum
+    </span>
+</div>

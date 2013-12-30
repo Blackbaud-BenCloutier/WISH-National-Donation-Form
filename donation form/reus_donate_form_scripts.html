@@ -1027,10 +1027,9 @@ $(document).ready(function () {
 
     data = data + "&remember_me=true&other_amount=" + totalGift;
 
-    // Opt-ins are already handled with surveys - BDC 12/18/2013
-    // if ($('#optinNational').is(':checked') || $('#optinInternational').hasClass('checked') || $('#optinChapter').is(':checked')) {
-    //   data = data + "&donor.email_opt_in=true";
-    // }
+    if ($('#optinNational').is(':checked') || $('#optinInternational').hasClass('checked') || $('#optinChapter').is(':checked')) {
+      data = data + "&donor.email_opt_in=true";
+    }
 
     var certNum = 1;
     var today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
