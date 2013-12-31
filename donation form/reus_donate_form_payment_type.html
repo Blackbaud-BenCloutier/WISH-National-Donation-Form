@@ -17,12 +17,12 @@
             </div>
             <div class="inset">
                 <div class="credit clearfix">
-                    <!--<div class="left">
+                    <div class="left">
                         <h6>
                             Choose type
                         </h6>
-                    </div>-->
-                    <!--<div class="grid_6 payment-types">
+                    </div>
+                    <div class="grid_6 payment-types">
                         
                                 <a href="#" class="button" data-bind="click: function() { paymentType('creditCard'); }, css: {selected: paymentType() == 'creditCard'}">
                                     Credit Card
@@ -32,7 +32,7 @@
                                     Paypal
                                 </a>
                             
-                    </div>-->
+                    </div>
                 </div>
                 <div class="card-container" data-bind="visible: paymentType() == 'creditCard'">
                     <!--<div class="module-form-labeled clearfix">
@@ -52,7 +52,7 @@
                                 Card number
                             </label>
                             <input class="js_ccNumber jsreq" type="text" placeholder="0000-0000-0000-0000"
-                                name="card_number" id="ccNumber">
+                                name="card_number" data-bind="value: x_ccNumber" id="ccNumber">
                         </div>
                         <div class="card-grid">
                             <img class="visa" src="../assets/images/form-cc-visa.png" alt="" />
@@ -103,8 +103,7 @@
                             <label for="ccSecNumber">
                                 Security code
                             </label>
-                            <input class="js_ccSecNumber jsreq" id="ccSecNumber" type="text" maxlength="4" placeholder="000"
-                                name="card_cvv">
+                            <input class="js_ccSecNumber jsreq" id="ccSecNumber" type="text" maxlength="4" placeholder="000" name="card_cvv" data-bind="value: x_ccSecNumber">
                         </div>
                         <div class="card-grid clearfix">
                             <span class="info-sec"><a href="#" data-bind="click: launchWhatsThis">
