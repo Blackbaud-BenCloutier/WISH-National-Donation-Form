@@ -1,93 +1,61 @@
-                    <!-- BEGIN E-CARD BOX -->
-                    <div data-bind="visible: donationType() != 2">
-                        <div class="ecard-wrap float-right grid_6 clearfix" data-bind="visible: !ecardFinish()">
-                            <div class="info-sec">
-                                Optional
-                            </div>
-                            <a href="#" class="ecard-btn">
-                                Send an honor or memorial gift card
-                            </a>
-                            <p>
-                                For tribute, memorial or celebratory donations, add a card, e-card or printable certificate!
-                            </p>
-                        </div>
-                        
-
-<!-- BEGIN PRODUCT SUMMARY -->
-                        <div data-product-category="" style="display: none;" class="js_prod-summary ecard-wrap-selected clearfix" data-bind="visible: ecardFinish(), attr: {'data-product-category': productCategoryCode}">
-
-<!-- BEGIN UTILITY BUTTONS -->
-                            <div class="util-btn-wrap">
-                                <a href="#" class="js_ecard-edit util-btn ecard-btn">
-                                    Edit
-                                </a><a href="#" class="util-btn" data-bind="click: removeCard">
-                                    Remove
-                                </a>
-                            </div>
-                            <!-- END UTILITY BUTTONS -->                              
-
-<div class="product-thumb">
-                                <h3 data-bind="text: productTitle"></h3>
-                                <img src="" alt="" data-bind="attr: {src: productThumbPath()}">
-                            </div>
-                            <div style="display: none;" class="blurb" data-bind="visible: leaveProductBlank() === true">
-                                <h3>
-                                    Send to
-                                </h3>
-                                <p>
-                                    Leave blank and send to me
-                                </p>
-                            </div>                        
-<div class="blurb" data-bind="visible: leaveProductBlank() === false">
-                                <h3 class="set2 set5 set7">
-                                    In memory of
-                                </h3>
-                                <h3 class="set3 set6 set8">
-                                    In honor of
-                                </h3>
-                                <p class="prodSummary set2 set3 set5 set6 set7 set8" data-bind="text: memFirstName() + ' ' + memMI() + ' ' + memLastName()">  </p>
-                                <p style="display: none;" class="prodSummary set2 set3 set5 set6 set7 set8" data-bind="visible: memAttr() != '', html: prettyMemAttr() ">" "</p>
-                                <h3 class="set1 set2 set3 set4 set5 set6">
-                                    Send to
-                                </h3>
-                                <h3 class="set9">
-                                    To
-                                </h3>
-                                
-                                <p class="prodSummary set9" data-bind="text: memName()"></p>
-
-                                <p class="prodSummary set1 set2 set3 set4" data-bind="html: fullToAddress()">  <br><br>,  <br>US</p>
-
-                                <p class="prodSummary set5 set6" data-bind="text: productEmail()"></p>
-
-                            </div>
-
-<div class="blurb">
-                                <h3 style="display: none;" data-bind="visible: productFromAttr()">
-                                    From
-                                </h3>
-                                <p style="display: none;" class="prodSummary" data-bind="visible: productFromAttr(), text: productFromAttr()"></p>
-
-                                <h3 style="display: none;" class="prodSummary set1 set5 set6" data-bind="visible: productMsgLarge1() || productMsg1() || productMsg2() || productMsg3()">
-                                    Personalization
-                                </h3>
-
-                                <p style="display: none;" class="prodsummary set5 set6" data-bind="visible: productMsg1() || productMsgLarge1(), text: productMsg1() + productMsgLarge1()"></p>
-
-                                <p style="display: none;" class="prodSummary set1" data-bind="visible: productMsg1() || productMsgLarge1()">
-                                    Line 1:<span data-bind="text: productMsg1() + productMsgLarge1()"></span>
-                                </p>
-                                <p style="display: none;" class="prodSummary set1" data-bind="visible: productMsg2()">
-                                    Line 2:<span data-bind="text: productMsg2()"></span>
-                                </p>
-                                <p style="display: none;" class="prodSummary set1" data-bind="visible: productMsg3()">
-                                    Line 3:<span data-bind="text: productMsg3()"></span>
-                                </p>
-
-
-                            </div>
+<!-- BEGIN E-CARD BOX -->
+<div data-bind="visible: donationType() != 2">
+  <div class="ecard-wrap float-right grid_6 clearfix" data-bind="visible: !ecardFinish()">
+    <div class="info-sec">Optional</div>
+    <a href="#" class="ecard-btn">
+      Send an honor or memorial gift card
+    </a>
+    <p>
+      For tribute, memorial or celebratory donations, add a card, e-card or printable certificate!
+    </p>
+  </div>
+  <!-- BEGIN PRODUCT SUMMARY -->
+  <div data-product-category="" class="js_prod-summary ecard-wrap-selected clearfix" data-bind="visible: ecardFinish(), attr: {'data-product-category': productCategoryCode}">
+    <!-- BEGIN UTILITY BUTTONS -->
+    <div class="util-btn-wrap">
+      <a href="#" class="js_ecard-edit util-btn ecard-btn">
+        Edit
+      </a>
+      <a href="#" class="util-btn" data-bind="click: removeCard">
+        Remove
+      </a>
+    </div>
+    <!-- END UTILITY BUTTONS -->
+    <div class="product-thumb">
+      <h3 data-bind="text: productTitle"></h3>
+      <img src="" alt="" data-bind="attr: {src: productThumbPath()}">
+    </div>
+    <div class="blurb" data-bind="visible: leaveProductBlank() === true">
+      <h3>Send to</h3>
+      <p>Leave blank and send to me</p>
+    </div>                        
+    <div class="blurb" data-bind="visible: leaveProductBlank() === false">
+      <h3 class="set2 set5 set7">In memory of</h3>
+      <h3 class="set3 set6 set8">In honor of</h3>
+      <p class="prodSummary set2 set3 set5 set6 set7 set8" data-bind="text: memFirstName() + ' ' + memMI() + ' ' + memLastName()">  </p>
+      <p class="prodSummary set2 set3 set5 set6 set7 set8" data-bind="visible: memAttr() != '', html: prettyMemAttr() ">" "</p>
+      <h3 class="set1 set2 set3 set4 set5 set6">Send to    </h3>
+      <h3 class="set9">To</h3>
+      <p class="prodSummary set9" data-bind="text: memName()"></p>
+      <p class="prodSummary set1 set2 set3 set4" data-bind="html: fullToAddress()">  <br><br>,  <br>US</p>
+      <p class="prodSummary set5 set6" data-bind="text: productEmail()"></p>
+    </div>
+    <div class="blurb">
+      <h3 data-bind="visible: productFromAttr()">From</h3>
+      <p class="prodSummary" data-bind="visible: productFromAttr(), text: productFromAttr()"></p>
+      <h3 class="prodSummary set1 set5 set6" data-bind="visible: productMsgLarge1() || productMsg1() || productMsg2() || productMsg3()">Personalization</h3>
+      <p class="prodsummary set5 set6" data-bind="visible: productMsg1() || productMsgLarge1(), text: productMsg1() + productMsgLarge1()"></p>
+      <p class="prodSummary set1" data-bind="visible: productMsg1() || productMsgLarge1()">
+        Line 1:<span data-bind="text: productMsg1() + productMsgLarge1()"></span>
+      </p>
+      <p class="prodSummary set1" data-bind="visible: productMsg2()">
+        Line 2:<span data-bind="text: productMsg2()"></span>
+      </p>
+      <p class="prodSummary set1" data-bind="visible: productMsg3()">
+        Line 3:<span data-bind="text: productMsg3()"></span>
+      </p>
+    </div>
+  </div>
+  <!-- END PRODUCT SUMMARY -->
 </div>
-                        <!-- END PRODUCT SUMMARY -->
-
-</div>
-                    <!-- END E-CARD BOX -->
+<!-- END E-CARD BOX -->

@@ -10,6 +10,11 @@
 
 <script>
 
+// Global var to track payment type - BDC 1/9/2014
+
+window.isPaypal = false;
+window.paypalRedirectUrl = '';
+
 // Editable metadata fields - BDC 12/11/2013
 
 [[S51:reus_donate_form_metadata]]
@@ -1159,7 +1164,7 @@ $(document).ready(function () {
       totalGift += amnt;
 
       // Add designation info to data
-      data = data + "&designated." + x + ".amount=" + amnt + "&designated." + x + ".id=" + designation + "&s_designeeName" + x + "=" + encodeURIComponent(designee) + "&s_designeeAmt" + x + "=" + amnt + "&s_CID=" + cid;
+      data = data + "&designated." + x + ".amount=" + amnt + "&designated." + x + ".id=" + designation + "&s_designeeName" + x + "=" + encodeURIComponent(designee) + "&s_designeeAmt" + x + "=" + amnt;
       x++;
 
     } // for loop
@@ -1186,9 +1191,11 @@ $(document).ready(function () {
 
     data = data + "&remember_me=true&other_amount=" + totalGift;
 
-    if ($('#optinNational').is(':checked') || $('#optinInternational').hasClass('checked') || $('#optinChapter').is(':checked')) {
-      data = data + "&donor.email_opt_in=true";
-    }
+    // This is handled with surveys - BDC 1/9/2014
+    
+    // if ($('#optinNational').is(':checked') || $('#optinInternational').hasClass('checked') || $('#optinChapter').is(':checked')) {
+    //   data = data + "&donor.email_opt_in=true";
+    // }
 
     var certNum = 1;
     var today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
@@ -1640,43 +1647,7 @@ luminateExtend.init({
 var xmlHttp = new XMLHttpRequest();
 
 function showError(pageError, fieldError) {
-  alert(pageError + " " + fieldError);
-  $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled").bind('click', function (e) {
-    e.preventDefault();
-    $(this).unbind("click").css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
-      e.preventDefault();
-    });
-
-    getDonationInfo();
-
-    luminateExtend.api.request({
-      api: 'donation',
-      form: '#mainform',
-      data: data,
-      requestType: 'POST',
-      callback: function (data) {
-        console.log(data);
-        if (data['donationResponse']['donation']) {
-          finishGift();
-        }
-        if (data['donationResponse']['errors']) {
-          var fieldError = "";
-          if (data['donationResponse']['errors']['fieldError']) {
-            if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
-              $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
-                fieldError = fieldError + arr + " ";
-              });
-            } else {
-              fieldError = data['donationResponse']['errors']['fieldError'];
-            }
-          }
-          showError(data['donationResponse']['errors']['pageError'], fieldError);
-        }
-      }
-    });
-
-  });
-
+  console.log(pageError + " " + fieldError);
 }
 
 var addCentersCallback = function (data) {
@@ -1700,7 +1671,13 @@ function lastStep() {
   });
 
   window.onbeforeunload = function () {};
-  window.location = "https://secure2.convio.net/wish/site/SPageNavigator/donate_thankyou.html";
+
+  if(isPaypal) {
+    window.location = window.paypalRedirectUrl;
+  }
+  else {
+    window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou";
+  }
 }
 
 $('#ccPostal').blur(function(e){
@@ -1776,7 +1753,8 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
   });
 
-  $("a.button-submit").click(function (e) {
+  // Standard donation submit button
+  $("a.button-submit:eq(0)").click(function (e) {
     e.preventDefault();
     $(this).unbind("click").css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
       e.preventDefault();
@@ -1792,6 +1770,46 @@ jQuery(document).ready(function ($) {
       callback: function (data) {
         console.log(data);
         if (data['donationResponse']['donation']) {
+          finishGift();
+        }
+        if (data['donationResponse']['errors']) {
+          var fieldError = "";
+          if (data['donationResponse']['errors']['fieldError']) {
+            if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
+              $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
+                fieldError = fieldError + arr + " ";
+              });
+            } else {
+              fieldError = data['donationResponse']['errors']['fieldError'];
+            }
+          }
+          showError(data['donationResponse']['errors']['pageError'], fieldError);
+        }
+      }
+    });
+  });
+
+  // PayPal button
+  $("a.button-submit:eq(1)").click(function (e) {
+    e.preventDefault();
+    $(this).unbind("click").css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
+      e.preventDefault();
+    });
+
+    var paypalData = data.replace('donate','startDonation') + '&extproc=paypal&finish_success_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou]]&finish_error_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_paypal_error]]';
+
+    getDonationInfo();
+
+    luminateExtend.api.request({
+      api: 'donation',
+      form: '#mainform',
+      data: paypalData,
+      requestType: 'POST',
+      callback: function (data) {
+        console.log(data);
+        if (data['donationResponse']['redirect']) {
+          window.isPaypal = true;
+          window.paypalRedirectUrl = data['donationResponse']['redirect']['url'];
           finishGift();
         }
         if (data['donationResponse']['errors']) {
