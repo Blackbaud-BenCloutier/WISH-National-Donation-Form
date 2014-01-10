@@ -3152,8 +3152,7 @@ is selected. */
   margin-left: 45px;
 }
 #carousel-gallery ul li {
-  margin-right: 50px; 
-  margin-left: -7px;  
+  margin: 0 15px; 
   background: #ffffff;  
   height: 323px;
   width: 250px;
