@@ -118,11 +118,7 @@ $.fn.infiniteCarousel = function () { // this is the card selection carousel
 
 $(document).ready(function () {
 
-  // BDC
-
   $('#saveAdd').hide();
-
-  // BDC
 
   $.jStorage.deleteKey("hideGiftType");
 
@@ -1058,10 +1054,8 @@ $(document).ready(function () {
 
     for (var i in donations) {
       var cid = donations[i].donorIntent();
-      var designation = "";
       var amnt = parseFloat(donations[i].prettyDonationAmount());
       var type = donations[i].donationType();
-      var designee = "";
       var officeID;
 
       if($("input[name='s_sat_skew']").val() === '') {
@@ -1075,24 +1069,6 @@ $(document).ready(function () {
       } else {
         console.log('s_sat_skew should be an hon/mem id');
       } 
-
-      if (cid === "100-000") {
-        designation = "1066";
-        designee = "Make-A-Wish® America";
-        officeID = "100-000";
-      } else if (cid === "500-000") {
-        designation = "1067";
-        designee = "Make-A-Wish® International"
-        officeID = "500-000";
-      } else {
-        $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-          if (arr['office_id'] == cid) {
-            designation = arr['designation_id'];
-            designee = arr['office_name'];
-            officeID = arr['office_id'];
-          }
-        });
-      }
 
       // BDC 12/10/2013
       // --------------
@@ -1172,39 +1148,13 @@ $(document).ready(function () {
       // Add this donation amount to the total
       totalGift += amnt;
 
-      // Add designation info to data
-      data = data + "&designated." + x + ".amount=" + amnt + "&designated." + x + ".id=" + designation + "&s_designeeName" + x + "=" + encodeURIComponent(designee) + "&s_designeeAmt" + x + "=" + amnt;
-      x++;
-
     } // for loop
-
-    if (data.indexOf("designeeName1") == -1) {
-      data = data + "&s_designeeName1=&s_designeeAmt1=";
-    }
-    if (data.indexOf("designeeName2") == -1) {
-      data = data + "&s_designeeName2=&s_designeeAmt2=";
-    }
-    if (data.indexOf("designeeName3") == -1) {
-      data = data + "&s_designeeName3=&s_designeeAmt3=";
-    }
-    if (data.indexOf("designeeName4") == -1) {
-      data = data + "&s_designeeName4=&s_designeeAmt4=";
-    }
-    if (data.indexOf("designeeName5") == -1) {
-      data = data + "&s_designeeName5=&s_designeeAmt5=";
-    }
 
     if (monthly) {
       data = data + "&sustaining.frequency=monthly&sustaining.duration=0";
     }
 
     data = data + "&remember_me=true&other_amount=" + totalGift;
-
-    // This is handled with surveys - BDC 1/9/2014
-    
-    // if ($('#optinNational').is(':checked') || $('#optinInternational').hasClass('checked') || $('#optinChapter').is(':checked')) {
-    //   data = data + "&donor.email_opt_in=true";
-    // }
 
     var certNum = 1;
     var today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
