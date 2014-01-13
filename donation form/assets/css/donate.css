@@ -1886,6 +1886,7 @@
   -o-border-radius: 3px;
   border-radius: 3px;
   background-color: white;
+  height: inherit;
   /* HEADER */
   /* TOP NAV BUTTONS */
   /* SIDE NAV */
