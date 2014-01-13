@@ -1053,7 +1053,7 @@ $(document).ready(function () {
     }
 
     for (var i in donations) {
-      var cid = donations[i].donorIntent();
+      var chid = donations[i].donorIntent();
       var amnt = parseFloat(donations[i].prettyDonationAmount());
       var type = donations[i].donationType();
       var officeID;
@@ -1073,35 +1073,35 @@ $(document).ready(function () {
       // BDC 12/10/2013
       // --------------
 
-      var short_cid = cid.substr(0,3),
-        form_cid = $('.logo a').attr('href').match(/\d+/)[0],
-        donation_form_id = $(center_forms).find('office#' + short_cid + ' + form').attr('id'),
+      var short_chid = chid.substr(0,3),
+        form_chid = $('.logo a').attr('href').match(/\d+/)[0],
+        donation_form_id = $(center_forms).find('office#' + short_chid + ' + form').attr('id'),
         isMonthly = false;
 
       data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
-      data += '&s_cid=' + cid;
+      data += '&s_chid=' + chid;
 
       if($('#monthlyGift.selected').length > 0) {
         isMonthly = true;
       }
 
       $('#foreign_key1').val(metadata_campaign_id);
-      if(cid.substr(4,3) == '000') {
-        $('#foreign_key2').val('UR-' + cid.substr(4,3) + '-01');
+      if(chid.substr(4,3) == '000') {
+        $('#foreign_key2').val('UR-' + chid.substr(4,3) + '-01');
       }
       else {
-        $('#foreign_key2').val('UR-' + cid + '-F');
+        $('#foreign_key2').val('UR-' + chid + '-F');
       }
       $('#foreign_key5').val(metadata_subtype);
 
-      if( form_cid === '100' ) {
-        if( short_cid === '100' ) {
+      if( form_chid === '100' ) {
+        if( short_chid === '100' ) {
           // National form, national donation
           if($('#foreign_key3').val() === ''){
             $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_national_monthly : metadata_national_office_code) );
           }
           if($('#foreign_key4').val() === ''){
-            $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
+            $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_chid);
           }
         }
         else {
@@ -1110,18 +1110,18 @@ $(document).ready(function () {
             $('#foreign_key3').val(metadata_appeal_year + '-82S-' + (isMonthly ? metadata_national_monthly : metadata_national_office_code) );
           }
           if($('#foreign_key4').val() === ''){
-            $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_cid);
+            $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_chid);
           }
         }
       }
       else {
-        if( form_cid === short_cid ) {
+        if( form_chid === short_chid ) {
           // Chapter form, same chapter
           if($('#foreign_key3').val() === ''){
             $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_chapter_monthly : metadata_chapter_office_code) );
           }
           if($('#foreign_key4').val() === ''){
-            $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_cid);
+            $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_chid);
           }
         }
         else {
@@ -1130,7 +1130,7 @@ $(document).ready(function () {
             $('#foreign_key3').val(metadata_appeal_year +'-82S-' + (isMonthly ? metadata_chapter_monthly : metadata_chapter_office_code) );
           }
           if($('#foreign_key4').val() === ''){
-            $('#foreign_key4').val('ON-'+ metadata_chapter_office_code + '-' + form_cid);
+            $('#foreign_key4').val('ON-'+ metadata_chapter_office_code + '-' + form_chid);
           }
         }
       }
@@ -1360,8 +1360,8 @@ chaptersjson = (function () {
   var level5 = getUrlVars()["level5"];
   var level6 = getUrlVars()["level6"];
   var level7 = getUrlVars()["level7"];
-  var cid = getUrlVars()["cid"] || "100-000";
-  var chapter_prefix = cid.substring(0, 3);
+  var chid = getUrlVars()["chid"] || "100-000";
+  var chapter_prefix = chid.substring(0, 3);
 
   if (level1 < 1 || isNaN(level1)) {
     level1 = 30;
@@ -1412,18 +1412,18 @@ chaptersjson = (function () {
     $('.donate-wrap .ammount-btn').css("margin-bottom", "10px");
   }
 
-  if (cid && cid != "100-000") {
+  if (chid && chid != "100-000") {
 
     var orgChapterName = "";
     var orgCenter = "";
 
     $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-      if (arr['office_id'] == cid) {
+      if (arr['office_id'] == chid) {
         orgChapterName = arr['office_name'];
         orgCenter = arr['center_id'];
         mawf.donation_init({
           localizedCurrencySymbol: '$',
-          donorIntentId: cid,
+          donorIntentId: chid,
           donorIntentName: orgChapterName,
           donationType1Label: 'A Single Donation',
           donationType2Label: 'A Monthly Pledge',
@@ -1444,9 +1444,9 @@ chaptersjson = (function () {
           nationalName: 'Make-A-Wish® America',
           internationalID: '500-000',
           internationalName: 'Make-A-Wish® International',
-          purchaserID: cid,
+          purchaserID: chid,
           purchaserName: orgChapterName,
-          sitChapterID: cid,
+          sitChapterID: chid,
           sitChapter: orgChapterName,
           sitCenter: orgCenter
         });
@@ -1486,14 +1486,14 @@ chaptersjson = (function () {
     });
   }
 
-  if (cid && cid != "100-000") {
+  if (chid && chid != "100-000") {
     $('#localOptin').insertBefore('#nationalOptin');
     $('.intouch-container:eq(0)').addClass('selected');
     $('.intouch-container:eq(0) input').prop('checked', true);
-    console.log('CID is set to: ' + cid);
-    $("input[name='s_sat_chapter_id']").val(cid);
+    console.log('chid is set to: ' + chid);
+    $("input[name='s_sat_chapter_id']").val(chid);
   } else {
-    console.log('CID is not set');
+    console.log('chid is not set');
     $("input[name='s_sat_chapter_id']").val("100-000");
   }
 
