@@ -670,7 +670,7 @@ $(document).ready(function () {
     var message = "";
 
 
-  if (card_form === "cert01") {
+  if (card_form === "cert01" || card_form === "cert03") {
     // Add occasion type to hidden input field for Satellite Data
     $("input[name='s_sat_ecert_occasion_type']").val(occasionType);
 
@@ -678,9 +678,13 @@ $(document).ready(function () {
 
     $('#card-form fieldset, .bottomButtons a').hide();
 
-    $('fieldset.cert01, #finishCertificate').show();
-
-    $('#honor_info').html('Would you like a different name printed on the certificate?');
+    if (card_form === "cert01"){
+      $('fieldset.cert01, #finishCertificate').show();
+      $('#honor_info').html('Would you like a different name printed on the certificate?');
+    } else if(card_form === "cert03") {
+      $('fieldset.cert03, #finishCertificate').show();
+      $('#memorial_info').html('Would you like a different name printed on the certificate?');
+    }
 
     $('#from_info').html('Your name or family name will appear on the certificate exactly as you type it here. Limit 40 characters including spaces.');
 
@@ -906,16 +910,22 @@ $(document).ready(function () {
       console.log("numCard=" + numCard);
 
       if (checkFields()) {
+
+        shippingFirstName = $("input[name='MHFirst_X']").val();
+        shippingMI = $("input[name='MHMI_X']").val() || false;
+        shippingLastName = $("input[name='MHLast_X']").val();
         toAddress1 = $("input[name='Address1_X']").val();
         toAddress2 = $("input[name='Address2_X']").val();
         toCity = $("input[name='City_X']").val();
         toState = $("select#State_X option:selected").val();
         toZip = $("input[name='PostalCode_X']").val();
         toCountry = $("select#Country_X option:selected").val();
+
         toFirstName = $("input[name='MemorialFirst_X']").val();
         toMI = $("input[name='MemorialMI_X']").val() || false;
         toLastName = $("input[name='MemorialLast_X']").val();
-        toInHonorOf = $("input[name='MemorialName_X_v3']").val() || false; 
+        toInHonorOf = $("input[name='MemorialName_X_v3']").val() || false;
+
         toFullName = "";
         fromName = $("input[name='LastName_X']").val();
 
@@ -931,7 +941,7 @@ $(document).ready(function () {
         }
 
        // Add the card info to the card list to process later
-        thisCardProduct = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
+        thisCardProduct = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
         cardsList[numCard] = thisCardProduct;
 
         console.log("push card: " + cardsList[numCard][10]);
@@ -971,6 +981,10 @@ $(document).ready(function () {
       console.log("numCard=" + numCard);
 
       if (checkFields()) {
+
+        shippingFirstName = $("input[name='MHFirst_X']").val();
+        shippingMI = $("input[name='MHMI_X']").val() || false;
+        shippingLastName = $("input[name='MHLast_X']").val();
         toAddress1 = $("input[name='Address1_X']").val();
         toAddress2 = $("input[name='Address2_X']").val();
         toCity = $("input[name='City_X']").val();
@@ -996,7 +1010,7 @@ $(document).ready(function () {
         }
 
        // Add the card info to the card list to process later
-        thisCardProduct = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
+        thisCardProduct = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
         cardsList[numCard] = thisCardProduct;
 
         console.log("push card: " + cardsList[numCard][10]);
@@ -1005,7 +1019,7 @@ $(document).ready(function () {
         return;
       }
     }); //click
-  } else if (card_form === "ecard01") {
+  } else if (card_form === "ecard01" || card_form === "ecard02") {
     // Add occasion type to hidden input field for Satellite Data
     $("input[name='s_sat_ecard_occasion_type']").val(occasionType);
 
@@ -1013,9 +1027,13 @@ $(document).ready(function () {
 
     $('#card-form fieldset, .bottomButtons a').hide(); 
 
-    $('fieldset.ecard01, #finisheCard').show();
-
-    $('#honor_info').html('Would you like a different name to appear in the ecard?');
+    if (card_form === "ecard01") {
+      $('fieldset.ecard01, #finisheCard').show();
+      $('#honor_info').html('Would you like a different name to appear in the ecard?');
+    } else if (card_form === "ecard02") {
+      $('fieldset.ecard02, #finisheCard').show();
+      $('#memorial_info').html('Would you like a different name to appear in the ecard?');
+    }    
 
     $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
 
@@ -1244,7 +1262,7 @@ $(document).ready(function () {
 
         data = data + "&product_" + certNum + "_honoree_name=" + ecard_recipient_name + "&product_" + certNum + "_honoree_message=" + encodeURIComponent(ecard_message) + "&product_" + certNum + "_honoree_email=" + encodeURIComponent(ecard_recipient_email) + "&product_url_" + certNum + "=" + encodeURIComponent(honoreeProduct) + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL);
 
-      } else if (cardsList[i][1] == 'cert01') {
+      } else if (cardsList[i][1] == 'cert01' || ardsList[i][1] == 'cert03') {
         var honoreeName = cardsList[i][3];
         var productFromName = cardsList[i][4];
         var honoreeProduct = cardsList[i][5];
@@ -1292,7 +1310,7 @@ $(document).ready(function () {
 
         data = data + "&product_" + certNum + "_honoree_name=" + honoreeName + "&product_" + certNum + "_honoree_address1=" + honoreeAdd1 + "&product_" + certNum + "_honoree_address2=" + honoreeAdd2 + "&product_" + certNum + "_honoree_city=" + honoreeCity + "&product_" + certNum + "_honoree_state=" + honoreeState + "&product_" + certNum + "_honoree_zip=" + honoreeZip + "&product_" + certNum + "_honoree_country=" + honoreeCountry + "&product_url_" + certNum + "=" + bitlyURL + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL) + "&product_" + certNum + "_honoree_message=" + honoreeMessage + "&s_productURL" + certNum + "Name=" + encodeURIComponent(honoreeProductName);
 
-      } else if (cardsList[i][1] == 'card02' || cardsList[i][1] == 'card03' || cardsList[i][1] == 'card04') {
+      } else if (cardsList[i][1] == 'card02') {
         var honoreeName = cardsList[i][3];
         var honoreeAdd1 = cardsList[i][4];
         var honoreeAdd2 = cardsList[i][5];
@@ -1311,6 +1329,30 @@ $(document).ready(function () {
         bitlyURL = get_short_url(prodURL);
 
         data = data + "&product_" + certNum + "_honoree_name=" + honoreeName + "&product_" + certNum + "_honoree_address1=" + honoreeAdd1 + "&product_" + certNum + "_honoree_address2=" + honoreeAdd2 + "&product_" + certNum + "_honoree_city=" + honoreeCity + "&product_" + certNum + "_honoree_state=" + honoreeState + "&product_" + certNum + "_honoree_zip=" + honoreeZip + "&product_" + certNum + "_honoree_country=" + honoreeCountry + "&product_url_" + certNum + "=" + bitlyURL + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL) + "&s_productURL" + certNum + "Name=" + encodeURIComponent(honoreeProductName);
+
+      } else if (cardsList[i][1] == 'card03' || cardsList[i][1] == 'card04') {
+
+        var honoreeName = cardsList[i][3];
+        var honoreeAdd1 = cardsList[i][4];
+        var honoreeAdd2 = cardsList[i][5];
+        var honoreeCity = cardsList[i][6];
+        var honoreeState = cardsList[i][7];
+        var honoreeZip = cardsList[i][8];
+        var honoreeCountry = cardsList[i][9];
+        var productFromName = cardsList[i][10];
+        var honoreeProduct = cardsList[i][11];
+        var honoreeProductName = cardsList[i][12];
+        var occassionType = cardsList[i][13];
+        var prodSkew = cardsList[i][14];
+        var shippingNameFirst = cardsList[i][15];
+        var shippingNameMiddle = cardsList[i][16];
+        var shippingNameLast = cardsList[i][17];
+
+        var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
+
+        bitlyURL = get_short_url(prodURL);
+
+        data = data + "&product_" + certNum + "_honoree_name=" + honoreeName + "&product_" + certNum + "_honoree_address1=" + honoreeAdd1 + "&product_" + certNum + "_honoree_address2=" + honoreeAdd2 + "&product_" + certNum + "_honoree_city=" + honoreeCity + "&product_" + certNum + "_honoree_state=" + honoreeState + "&product_" + certNum + "_honoree_zip=" + honoreeZip + "&product_" + certNum + "_honoree_country=" + honoreeCountry + "&product_url_" + certNum + "=" + bitlyURL + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL) + "&s_productURL" + certNum + "Name=" + encodeURIComponent(honoreeProductName) + "&shipping.name.first=" + shippingNameFirst + "&shipping.name.middle=" + shippingNameMiddle + "&shipping.name.last=" + shippingNameLast;
 
       } else if (cardsList[i][1] == "card-blank") {
         var honoreeProductName = cardsList[i][2];
