@@ -2,7 +2,7 @@
 [[U0:productURL1=""]]
 [[U0:productURL1Name=""]]
 
-<style>.chapter-list-btn, .country-list-btn {color:gray !important;}#card_preview,#card_preview .blurb{display:none;}</style>
+<style>.chapter-list-btn, .country-list-btn {color:gray !important;}#card_preview,#card_preview .blurb{display:none;}.product-thumb img{margin:0 !important;}</style>
 
 <script src="../assets/js/jquery.zoom-min.js"></script>
 <script src="../assets/js/jquery.jswipe.js" type="text/javascript"></script>
@@ -708,6 +708,13 @@ $(document).ready(function () {
           toFullName = toInHonorOf
         }
 
+        // Preview card
+        $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+        $('#card_preview').show();
+        $('#card_create').hide();
+        $('#card_in_honor_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
+        $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+
         // Add the card info to the card list to process later
         cardProperties = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
 
@@ -733,6 +740,12 @@ $(document).ready(function () {
 
       if (checkFields()) {
         toFullName = $("input[name='MemorialFirst_X_v2']").val();
+
+        // Preview card
+        $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+        $('#card_preview').show();
+        $('#card_create').hide();
+        $('#card_wedding_couple_name').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
 
         // Add the card info to the card list to process later
         cardProperties = [donationID, 'cert02', 'certificate', toFullName, productURL, cardName, occasionType, thisSkew];
@@ -792,6 +805,21 @@ $(document).ready(function () {
           toFullName = toFirstName + " " + toLastName;
         }
 
+        // Preview card
+        $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+        $('#card_preview').show();
+        $('#card_create').hide();
+        $('#card_send_to').show().append(
+          '<p>' + decodeURIComponent(toFullName) + '</p>' +
+          '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+          '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+          '<p>' + decodeURIComponent(toCity) + '</p>' +
+          '<p>' + decodeURIComponent(toState) + '</p>' +
+          '<p>' + decodeURIComponent(toZip) + '</p>' +
+          '<p>' + decodeURIComponent(toCountry) + '</p>'
+        );
+        $('#card_personal_message').show().append('<p>' + decodeURIComponent(message) + '</p>');
+
         // Add the card info to the card list to process later
         cardProperties = [donationID, 'card01', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, productURL, message, cardName, msgLine1, msgLine2, msgLine3, occasionType, thisSkew];
 
@@ -848,6 +876,21 @@ $(document).ready(function () {
           toFullName = toFirstName + " " + toLastName;
         }
 
+        // Preview card
+        $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+        $('#card_preview').show();
+        $('#card_create').hide();
+        $('#card_send_to').show().append(
+          '<p>' + decodeURIComponent(toFullName) + '</p>' +
+          '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+          '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+          '<p>' + decodeURIComponent(toCity) + '</p>' +
+          '<p>' + decodeURIComponent(toState) + '</p>' +
+          '<p>' + decodeURIComponent(toZip) + '</p>' +
+          '<p>' + decodeURIComponent(toCountry) + '</p>'
+        );
+        $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+
         // Add the card info to the card list to process later
         cardProperties = [donationID, 'card02', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
         
@@ -898,6 +941,7 @@ $(document).ready(function () {
         toInHonorOf = $("input[name='MemorialName_X_v3']").val() || false;
 
         toFullName = "";
+        shippingFullName = "";
         fromName = $("input[name='LastName_X']").val();
 
         // If the "In honor of" field is blank, create full name from First, Middle, Last
@@ -910,6 +954,27 @@ $(document).ready(function () {
         } else {
           toFullName = toInHonorOf;
         }
+
+        if (shippingMI) {
+          shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
+        } else {
+          shippingFullName = shippingFirstName + "%20" + shippingLastName;
+        }
+
+        // Preview card
+        $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+        $('#card_preview').show();
+        $('#card_create').hide();
+        $('#card_send_to').show().append(
+          '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
+          '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+          '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+          '<p>' + decodeURIComponent(toCity) + '</p>' +
+          '<p>' + decodeURIComponent(toState) + '</p>' +
+          '<p>' + decodeURIComponent(toZip) + '</p>' +
+          '<p>' + decodeURIComponent(toCountry) + '</p>'
+        );
+        $('#card_in_honor_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
 
        // Add the card info to the card list to process later
         cardProperties = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
@@ -959,6 +1024,7 @@ $(document).ready(function () {
         toLastName = $("input[name='MemorialLast_X']").val();
         toInHonorOf = $("input[name='MemorialName_X_v3']").val() || false; 
         toFullName = "";
+        shippingFullName = "";
         fromName = $("input[name='LastName_X']").val();
 
         // If the "In honor of" field is blank, create full name from First, Middle, Last
@@ -971,6 +1037,28 @@ $(document).ready(function () {
         } else {
           toFullName = toInHonorOf;
         }
+
+        if (shippingMI) {
+          shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
+        } else {
+          shippingFullName = shippingFirstName + "%20" + shippingLastName;
+        }
+
+        // Preview card
+        $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+        $('#card_preview').show();
+        $('#card_create').hide();
+        $('#card_send_to').show().append(
+          '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
+          '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+          '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+          '<p>' + decodeURIComponent(toCity) + '</p>' +
+          '<p>' + decodeURIComponent(toState) + '</p>' +
+          '<p>' + decodeURIComponent(toZip) + '</p>' +
+          '<p>' + decodeURIComponent(toCountry) + '</p>'
+        );
+        $('#card_in_memory_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
+        $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
 
        // Add the card info to the card list to process later
         cardProperties = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
@@ -1023,11 +1111,12 @@ $(document).ready(function () {
         }
 
         // Preview card
+        $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
         $('#card_preview').show();
         $('#card_create').hide();
-        $('#card_to').show().append('<p>' + toEmail + '</p>');
-        $('#card_from').show().append('<p>' + fromName + '</p>');
-        $('#card_personal_message').show().append('<p>' + message + '</p>');
+        $('#card_to').show().append('<p>' + decodeURIComponent(toEmail) + '</p>');
+        $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+        $('#card_personal_message').show().append('<p>' + decodeURIComponent(message) + '</p>');
 
         // Add the card info to the card list to process later
         cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
