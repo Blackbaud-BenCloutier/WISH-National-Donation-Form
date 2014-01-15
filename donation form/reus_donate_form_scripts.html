@@ -123,7 +123,7 @@ $(document).ready(function () {
   $.jStorage.deleteKey("hideGiftType");
 
   var donationID = $('.js_donationConfigurator').attr('data-donation-id'), //random number
-  cardsList = [], // empty array
+  cardProperties = [], 
   giftTypeButtons = $("#giftTypes").html(), // single and monthly buttons
   initProducts = $("ul#products").html(); // greyed out preview cards
 
@@ -216,7 +216,6 @@ $(document).ready(function () {
 
   var checkFields = function () {
     var boolean = true;
-    console.log("state: " + $("#State_X option:selected").val());
     $('#step3 .jsreq:visible').each(function () {
       if ($(this).val() == '') {
         $(this).addClass('input-error');
@@ -690,9 +689,6 @@ $(document).ready(function () {
 
     $('#finishCertificate').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
-
       if (checkFields()) {
         toFirstName = $("input[name='MemorialFirst_X_v2']").val();
         toMI = $("input[name='MemorialMI_X']").val() || false;
@@ -713,10 +709,8 @@ $(document).ready(function () {
         }
 
         // Add the card info to the card list to process later
-        thisCertificateProduct = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
-        cardsList[numCard] = thisCertificateProduct;
+        cardProperties[0] = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
 
-        console.log("push certificate: " + cardsList[numCard][4]);
         $.fancybox.close();
         resetProducts();
         return;
@@ -736,18 +730,13 @@ $(document).ready(function () {
 
     $('#finishCertificate').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
 
       if (checkFields()) {
         toFullName = $("input[name='MemorialFirst_X_v2']").val();
 
-
         // Add the card info to the card list to process later
-        thisCertificateProduct = [donationID, 'cert02', 'certificate', toFullName, productURL, cardName, occasionType, thisSkew];
-        cardsList[numCard] = thisCertificateProduct;
+        cardProperties[0] = [donationID, 'cert02', 'certificate', toFullName, productURL, cardName, occasionType, thisSkew];
 
-        console.log("push certificate: " + cardsList[numCard][4]);
         $.fancybox.close();
         resetProducts();
         return;
@@ -767,13 +756,10 @@ $(document).ready(function () {
 
     $('.leaveBlank').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
 
       // Add the card info to the card list to process later
-      thisCardProduct = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-      cardsList[numCard] = thisCardProduct;
-      console.log("push card: " + cardsList[numCard][2]);
+      cardProperties[0] = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+
       $.fancybox.close();
       resetProducts();
       return;
@@ -782,8 +768,6 @@ $(document).ready(function () {
 
     $('#finishCard').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
 
       if (checkFields()) {
         toFirstName = $("input[name='MHFirst_X']").val();
@@ -809,8 +793,7 @@ $(document).ready(function () {
         }
 
         // Add the card info to the card list to process later
-        thisCardProduct = [donationID, 'card01', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, productURL, message, cardName, msgLine1, msgLine2, msgLine3, occasionType, thisSkew];
-        cardsList[numCard] = thisCardProduct;
+        cardProperties[0] = [donationID, 'card01', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, productURL, message, cardName, msgLine1, msgLine2, msgLine3, occasionType, thisSkew];
 
         $.fancybox.close();
         resetProducts();
@@ -831,13 +814,10 @@ $(document).ready(function () {
 
     $('.leaveBlank').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
 
       // Add the card info to the card list to process later
-      thisCardProduct = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-      cardsList[numCard] = thisCardProduct;
-      console.log("push card: " + cardsList[numCard][2]);
+      cardProperties[0] = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+      
       $.fancybox.close();
       resetProducts();
       return;
@@ -846,8 +826,6 @@ $(document).ready(function () {
 
     $('#finishCard').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
 
       if (checkFields()) {
         toFirstName = $("input[name='MHFirst_X']").val();
@@ -871,8 +849,7 @@ $(document).ready(function () {
         }
 
         // Add the card info to the card list to process later
-        thisCardProduct = [donationID, 'card02', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
-        cardsList[numCard] = thisCardProduct;
+        cardProperties[0] = [donationID, 'card02', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
         
         $.fancybox.close();
         resetProducts();
@@ -891,13 +868,10 @@ $(document).ready(function () {
 
     $('.leaveBlank').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
 
       // Add the card info to the card list to process later
-      thisCardProduct = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-      cardsList[numCard] = thisCardProduct;
-      console.log("push card: " + cardsList[numCard][2]);
+      cardProperties[0] = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+      
       $.fancybox.close();
       resetProducts();
       return;
@@ -906,9 +880,6 @@ $(document).ready(function () {
 
     $('#finishCard').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
-
       if (checkFields()) {
 
         shippingFirstName = $("input[name='MHFirst_X']").val();
@@ -941,10 +912,8 @@ $(document).ready(function () {
         }
 
        // Add the card info to the card list to process later
-        thisCardProduct = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
-        cardsList[numCard] = thisCardProduct;
+        cardProperties[0] = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
 
-        console.log("push card: " + cardsList[numCard][10]);
         $.fancybox.close();
         resetProducts();
         return;
@@ -962,13 +931,10 @@ $(document).ready(function () {
 
     $('.leaveBlank').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
-
+      
       // Add the card info to the card list to process later
-      thisCardProduct = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-      cardsList[numCard] = thisCardProduct;
-      console.log("push card: " + cardsList[numCard][2]);
+      cardProperties[0] = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+      
       $.fancybox.close();
       resetProducts();
       return;
@@ -977,9 +943,6 @@ $(document).ready(function () {
 
     $('#finishCard').click(function (e) {
       e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
-
       if (checkFields()) {
 
         shippingFirstName = $("input[name='MHFirst_X']").val();
@@ -1010,10 +973,9 @@ $(document).ready(function () {
         }
 
        // Add the card info to the card list to process later
-        thisCardProduct = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
-        cardsList[numCard] = thisCardProduct;
+        cardProperties[0] = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
 
-        console.log("push card: " + cardsList[numCard][10]);
+        
         $.fancybox.close();
         resetProducts();
         return;
@@ -1038,9 +1000,7 @@ $(document).ready(function () {
     $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
 
     $('#finisheCard').click(function (e) {
-      e.preventDefault();
-      var numCard = cardsList.length;
-      console.log("numCard=" + numCard);
+      e.preventDefault();      
       if (checkFields()) {
         toFirstName = encodeURIComponent($("input[name='MemorialFirst_X_v2']").val());
         toMI = encodeURIComponent($("input[name='MemorialMI_X']").val()) || false;
@@ -1063,10 +1023,8 @@ $(document).ready(function () {
         }
 
         // Add the card info to the card list to process later
-        thisEcardProduct = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
-        cardsList[numCard] = thisEcardProduct;
+        cardProperties[0] = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
 
-        console.log("push ecard: " + cardsList[numCard][7]);
         $.fancybox.close();
         resetProducts();
         return;
@@ -1154,8 +1112,6 @@ $(document).ready(function () {
       } 
 
       // BDC 12/10/2013
-      // --------------
-
       var short_chid = chid.substr(0,3),
         form_chid = $('.logo a').attr('href').match(/\d+/)[0],
         donation_form_id = $(center_forms).find('office#' + short_chid + ' + form').attr('id'),
@@ -1237,148 +1193,128 @@ $(document).ready(function () {
 
     data = data + "&remember_me=true&other_amount=" + totalGift;
 
-    var certNum = 1;
     var today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
     var e = true;
 
-    for (var i in cardsList) {
+    if (cardProperties[0][1] == 'ecard01') {
+      var ecard_first_name = $("input[name='billing.name.first']").val()
+      var ecard_last_name = $("input[name='billing.name.last']").val()
+      var ecard_sender_email = $("input[name='donor.email']").val()
+      var ecard_recipient_name = cardProperties[0][3];
+      var ecard_recipient_email = cardProperties[0][4];
+      var ecard_stationary_id = cardProperties[0][8];
+      var ecard_subject = ecard_first_name + " " + ecard_last_name + " has sent you an e-card";
+      var ecard_message = cardProperties[0][7];
+      var honoreeProduct = cardProperties[0][9];
+      var occassionType = cardProperties[0][11];
+      var prodSkew = cardProperties[0][12];
 
-      if (cardsList[i][1] == 'ecard01') {
-        var ecard_first_name = $("input[name='billing.name.first']").val()
-        var ecard_last_name = $("input[name='billing.name.last']").val()
-        var ecard_sender_email = $("input[name='donor.email']").val()
-        var ecard_recipient_name = cardsList[i][3];
-        var ecard_recipient_email = cardsList[i][4];
-        var ecard_stationary_id = cardsList[i][8];
-        var ecard_subject = ecard_first_name + " " + ecard_last_name + " has sent you an e-card";
-        var ecard_message = cardsList[i][7];
-        var honoreeProduct = cardsList[i][9];
-        var occassionType = cardsList[i][11];
-        var prodSkew = cardsList[i][12];
+      var prodURL = 'https://secure2.convio.net/wish/site/Ecard?ecard_id=1061&ecard_form=true&cons_info_component=t&cons_first_name=' + ecard_first_name + '&cons_last_name=' + ecard_last_name + '&cons_email=' + ecard_sender_email + '&cons_mail_opt_in=t&cons_email_opt_in=on&cons_email_opt_in_requested=true&s_rememberMe=on&sendtoemail=' + ecard_recipient_email + '&stationery_layout_chooser=true&stationery_layout_id=' + ecard_stationary_id + '&subject=' + ecard_subject + '&message=' + ecard_message + '&taf_send=Send+eCard++&denySubmit=&pgwrap=n';
 
-        var prodURL = 'https://secure2.convio.net/wish/site/Ecard?ecard_id=1061&ecard_form=true&cons_info_component=t&cons_first_name=' + ecard_first_name + '&cons_last_name=' + ecard_last_name + '&cons_email=' + ecard_sender_email + '&cons_mail_opt_in=t&cons_email_opt_in=on&cons_email_opt_in_requested=true&s_rememberMe=on&sendtoemail=' + ecard_recipient_email + '&stationery_layout_chooser=true&stationery_layout_id=' + ecard_stationary_id + '&subject=' + ecard_subject + '&message=' + ecard_message + '&taf_send=Send+eCard++&denySubmit=&pgwrap=n';
+      data = data + "&product_1_honoree_name=" + ecard_recipient_name + "&product_1_honoree_message=" + encodeURIComponent(ecard_message) + "&product_1_honoree_email=" + encodeURIComponent(ecard_recipient_email) + "&product_url_1=" + encodeURIComponent(honoreeProduct) + "&s_productURL1=" + encodeURIComponent(prodURL);
 
-        //bitlyURL = get_short_url(prodURL);
+    } else if (cardProperties[0][1] == 'cert01' || ardsList[i][1] == 'cert03') {
+      var honoreeName = cardProperties[0][3];
+      var productFromName = cardProperties[0][4];
+      var honoreeProduct = cardProperties[0][5];
+      var honoreeProductName = cardProperties[0][6];
+      var occassionType = cardProperties[0][7];
+      var prodSkew = cardProperties[0][8];
+      var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
 
-        data = data + "&product_" + certNum + "_honoree_name=" + ecard_recipient_name + "&product_" + certNum + "_honoree_message=" + encodeURIComponent(ecard_message) + "&product_" + certNum + "_honoree_email=" + encodeURIComponent(ecard_recipient_email) + "&product_url_" + certNum + "=" + encodeURIComponent(honoreeProduct) + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL);
+      bitlyURL = get_short_url(prodURL);
 
-      } else if (cardsList[i][1] == 'cert01' || ardsList[i][1] == 'cert03') {
-        var honoreeName = cardsList[i][3];
-        var productFromName = cardsList[i][4];
-        var honoreeProduct = cardsList[i][5];
-        var honoreeProductName = cardsList[i][6];
-        var occassionType = cardsList[i][7];
-        var prodSkew = cardsList[i][8];
-        var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
+      data = data + "&product_1_honoree_name=" + honoreeName + "&product_url_1=" + bitlyURL + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
 
-        bitlyURL = get_short_url(prodURL);
+    } else if (cardProperties[0][1] == 'cert02') {
+      var honoreeName = cardProperties[0][3];
+      var honoreeProduct = cardProperties[0][4];
+      var honoreeProductName = cardProperties[0][5];
+      var occassionType = cardProperties[0][6];
+      var prodSkew = cardProperties[0][7];
+      var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName);
 
-        data = data + "&product_" + certNum + "_honoree_name=" + honoreeName + "&product_url_" + certNum + "=" + bitlyURL + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL) + "&s_productURL" + certNum + "Name=" + encodeURIComponent(honoreeProductName);
+      bitlyURL = get_short_url(prodURL);
 
-      } else if (cardsList[i][1] == 'cert02') {
-        var honoreeName = cardsList[i][3];
-        var honoreeProduct = cardsList[i][4];
-        var honoreeProductName = cardsList[i][5];
-        var occassionType = cardsList[i][6];
-        var prodSkew = cardsList[i][7];
-        var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName);
+      data = data + "&product_1_honoree_name=" + honoreeName + "&product_url_1=" + bitlyURL + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
 
-        bitlyURL = get_short_url(prodURL);
+    } else if (cardProperties[0][1] == 'card01') {
+      var honoreeName = cardProperties[0][3];
+      var honoreeAdd1 = cardProperties[0][4];
+      var honoreeAdd2 = cardProperties[0][5];
+      var honoreeCity = cardProperties[0][6];
+      var honoreeState = cardProperties[0][7];
+      var honoreeZip = cardProperties[0][8];
+      var honoreeCountry = cardProperties[0][9];
+      var honoreeProduct = cardProperties[0][10];
+      var honoreeMessage = cardProperties[0][11];
+      var honoreeProductName = cardProperties[0][12];
+      var prodMsgLine1 = cardProperties[0][13];
+      var prodMsgLine2 = cardProperties[0][14];
+      var prodMsgLine3 = cardProperties[0][15];
+      var occassionType = cardProperties[0][16];
+      var prodSkew = cardProperties[0][17];
 
-        data = data + "&product_" + certNum + "_honoree_name=" + honoreeName + "&product_url_" + certNum + "=" + bitlyURL + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL) + "&s_productURL" + certNum + "Name=" + encodeURIComponent(honoreeProductName);
+      var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&line1=" + encodeURIComponent(prodMsgLine1) + "&line2=" + encodeURIComponent(prodMsgLine2) + "&line3=" + encodeURIComponent(prodMsgLine3);
 
-      } else if (cardsList[i][1] == 'card01') {
-        var honoreeName = cardsList[i][3];
-        var honoreeAdd1 = cardsList[i][4];
-        var honoreeAdd2 = cardsList[i][5];
-        var honoreeCity = cardsList[i][6];
-        var honoreeState = cardsList[i][7];
-        var honoreeZip = cardsList[i][8];
-        var honoreeCountry = cardsList[i][9];
-        var honoreeProduct = cardsList[i][10];
-        var honoreeMessage = cardsList[i][11];
-        var honoreeProductName = cardsList[i][12];
-        var prodMsgLine1 = cardsList[i][13];
-        var prodMsgLine2 = cardsList[i][14];
-        var prodMsgLine3 = cardsList[i][15];
-        var occassionType = cardsList[i][16];
-        var prodSkew = cardsList[i][17];
+      bitlyURL = get_short_url(prodURL);
 
-        var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&line1=" + encodeURIComponent(prodMsgLine1) + "&line2=" + encodeURIComponent(prodMsgLine2) + "&line3=" + encodeURIComponent(prodMsgLine3);
+      data = data + "&product_1_honoree_name=" + honoreeName + "&product_1_honoree_address1=" + honoreeAdd1 + "&product_1_honoree_address2=" + honoreeAdd2 + "&product_1_honoree_city=" + honoreeCity + "&product_1_honoree_state=" + honoreeState + "&product_1_honoree_zip=" + honoreeZip + "&product_1_honoree_country=" + honoreeCountry + "&product_url_1=" + bitlyURL + "&s_productURL1=" + encodeURIComponent(prodURL) + "&product_1_honoree_message=" + honoreeMessage + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
 
-        bitlyURL = get_short_url(prodURL);
+    } else if (cardProperties[0][1] == 'card02') {
+      var honoreeName = cardProperties[0][3];
+      var honoreeAdd1 = cardProperties[0][4];
+      var honoreeAdd2 = cardProperties[0][5];
+      var honoreeCity = cardProperties[0][6];
+      var honoreeState = cardProperties[0][7];
+      var honoreeZip = cardProperties[0][8];
+      var honoreeCountry = cardProperties[0][9];
+      var productFromName = cardProperties[0][10];
+      var honoreeProduct = cardProperties[0][11];
+      var honoreeProductName = cardProperties[0][12];
+      var occassionType = cardProperties[0][13];
+      var prodSkew = cardProperties[0][14];
 
-        data = data + "&product_" + certNum + "_honoree_name=" + honoreeName + "&product_" + certNum + "_honoree_address1=" + honoreeAdd1 + "&product_" + certNum + "_honoree_address2=" + honoreeAdd2 + "&product_" + certNum + "_honoree_city=" + honoreeCity + "&product_" + certNum + "_honoree_state=" + honoreeState + "&product_" + certNum + "_honoree_zip=" + honoreeZip + "&product_" + certNum + "_honoree_country=" + honoreeCountry + "&product_url_" + certNum + "=" + bitlyURL + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL) + "&product_" + certNum + "_honoree_message=" + honoreeMessage + "&s_productURL" + certNum + "Name=" + encodeURIComponent(honoreeProductName);
+      var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
 
-      } else if (cardsList[i][1] == 'card02') {
-        var honoreeName = cardsList[i][3];
-        var honoreeAdd1 = cardsList[i][4];
-        var honoreeAdd2 = cardsList[i][5];
-        var honoreeCity = cardsList[i][6];
-        var honoreeState = cardsList[i][7];
-        var honoreeZip = cardsList[i][8];
-        var honoreeCountry = cardsList[i][9];
-        var productFromName = cardsList[i][10];
-        var honoreeProduct = cardsList[i][11];
-        var honoreeProductName = cardsList[i][12];
-        var occassionType = cardsList[i][13];
-        var prodSkew = cardsList[i][14];
+      bitlyURL = get_short_url(prodURL);
 
-        var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
+      data = data + "&product_1_honoree_name=" + honoreeName + "&product_1_honoree_address1=" + honoreeAdd1 + "&product_1_honoree_address2=" + honoreeAdd2 + "&product_1_honoree_city=" + honoreeCity + "&product_1_honoree_state=" + honoreeState + "&product_1_honoree_zip=" + honoreeZip + "&product_1_honoree_country=" + honoreeCountry + "&product_url_1=" + bitlyURL + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
 
-        bitlyURL = get_short_url(prodURL);
+    } else if (cardProperties[0][1] == 'card03' || cardProperties[0][1] == 'card04') {
 
-        data = data + "&product_" + certNum + "_honoree_name=" + honoreeName + "&product_" + certNum + "_honoree_address1=" + honoreeAdd1 + "&product_" + certNum + "_honoree_address2=" + honoreeAdd2 + "&product_" + certNum + "_honoree_city=" + honoreeCity + "&product_" + certNum + "_honoree_state=" + honoreeState + "&product_" + certNum + "_honoree_zip=" + honoreeZip + "&product_" + certNum + "_honoree_country=" + honoreeCountry + "&product_url_" + certNum + "=" + bitlyURL + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL) + "&s_productURL" + certNum + "Name=" + encodeURIComponent(honoreeProductName);
+      var honoreeName = cardProperties[0][3];
+      var honoreeAdd1 = cardProperties[0][4];
+      var honoreeAdd2 = cardProperties[0][5];
+      var honoreeCity = cardProperties[0][6];
+      var honoreeState = cardProperties[0][7];
+      var honoreeZip = cardProperties[0][8];
+      var honoreeCountry = cardProperties[0][9];
+      var productFromName = cardProperties[0][10];
+      var honoreeProduct = cardProperties[0][11];
+      var honoreeProductName = cardProperties[0][12];
+      var occassionType = cardProperties[0][13];
+      var prodSkew = cardProperties[0][14];
+      var shippingNameFirst = cardProperties[0][15];
+      var shippingNameMiddle = cardProperties[0][16];
+      var shippingNameLast = cardProperties[0][17];
 
-      } else if (cardsList[i][1] == 'card03' || cardsList[i][1] == 'card04') {
+      var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
 
-        var honoreeName = cardsList[i][3];
-        var honoreeAdd1 = cardsList[i][4];
-        var honoreeAdd2 = cardsList[i][5];
-        var honoreeCity = cardsList[i][6];
-        var honoreeState = cardsList[i][7];
-        var honoreeZip = cardsList[i][8];
-        var honoreeCountry = cardsList[i][9];
-        var productFromName = cardsList[i][10];
-        var honoreeProduct = cardsList[i][11];
-        var honoreeProductName = cardsList[i][12];
-        var occassionType = cardsList[i][13];
-        var prodSkew = cardsList[i][14];
-        var shippingNameFirst = cardsList[i][15];
-        var shippingNameMiddle = cardsList[i][16];
-        var shippingNameLast = cardsList[i][17];
+      bitlyURL = get_short_url(prodURL);
 
-        var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
+      data = data + "&product_1_honoree_name=" + honoreeName + "&product_1_honoree_address1=" + honoreeAdd1 + "&product_1_honoree_address2=" + honoreeAdd2 + "&product_1_honoree_city=" + honoreeCity + "&product_1_honoree_state=" + honoreeState + "&product_1_honoree_zip=" + honoreeZip + "&product_1_honoree_country=" + honoreeCountry + "&product_url_1=" + bitlyURL + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName) + "&shipping.name.first=" + shippingNameFirst + "&shipping.name.middle=" + shippingNameMiddle + "&shipping.name.last=" + shippingNameLast;
 
-        bitlyURL = get_short_url(prodURL);
+    } else if (cardProperties[0][1] == "card-blank") {
+      var honoreeProductName = cardProperties[0][2];
+      var occassionType = cardProperties[0][3];
+      var prodSkew = cardProperties[0][4];
+      data = data + "&product_url_1=blank&s_productURL1=blank&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
 
-        data = data + "&product_" + certNum + "_honoree_name=" + honoreeName + "&product_" + certNum + "_honoree_address1=" + honoreeAdd1 + "&product_" + certNum + "_honoree_address2=" + honoreeAdd2 + "&product_" + certNum + "_honoree_city=" + honoreeCity + "&product_" + certNum + "_honoree_state=" + honoreeState + "&product_" + certNum + "_honoree_zip=" + honoreeZip + "&product_" + certNum + "_honoree_country=" + honoreeCountry + "&product_url_" + certNum + "=" + bitlyURL + "&s_productURL" + certNum + "=" + encodeURIComponent(prodURL) + "&s_productURL" + certNum + "Name=" + encodeURIComponent(honoreeProductName) + "&shipping.name.first=" + shippingNameFirst + "&shipping.name.middle=" + shippingNameMiddle + "&shipping.name.last=" + shippingNameLast;
-
-      } else if (cardsList[i][1] == "card-blank") {
-        var honoreeProductName = cardsList[i][2];
-        var occassionType = cardsList[i][3];
-        var prodSkew = cardsList[i][4];
-        data = data + "&product_url_" + certNum + "=blank&s_productURL" + certNum + "=blank&s_productURL" + certNum + "Name=" + encodeURIComponent(honoreeProductName);
-
-      }
-
-      certNum++;
     }
 
     if (data.indexOf("product_url_1") == -1) {
       data = data + "&product_url_1=none&s_productURL1=none&s_productURL1Name=none";
-    }
-    if (data.indexOf("product_url_2") == -1) {
-      data = data + "&product_url_2=none&s_productURL2=none&s_productURL2Name=none";
-    }
-    if (data.indexOf("product_url_3") == -1) {
-      data = data + "&product_url_3=none&s_productURL2=none&s_productURL2Name=none";
-    }
-    if (data.indexOf("product_url_4") == -1) {
-      data = data + "&product_url_4=none&s_productURL4=none&s_productURL4Name=none";
-    }
-    if (data.indexOf("product_url_5") == -1) {
-      data = data + "&product_url_5=none&s_productURL5=none&s_productURL5Name=none";
     }
 
     console.log("Data: " + data);
@@ -1655,7 +1591,6 @@ chaptersjson = (function () {
         }
       }
     };
-
   $(document).on('keyup', '.js_donationDest,.js_genericChapLoc,.js_donationToCountry', function (e) {
     searchForChapters($(this).val());
   });
