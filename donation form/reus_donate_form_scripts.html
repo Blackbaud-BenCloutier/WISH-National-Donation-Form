@@ -1625,56 +1625,39 @@ chaptersjson = (function () {
     $(this).append(getNextMonth());
   });
 
-  var thisChapter = '';
-
-  $(document).on('keyup', '.js_donationDest', function (e) {
-    var thisZip = $(this).val();
-
-    if (thisZip.length < 5 || thisZip.length > 5) {
+  var thisChapter = '',
+    searchForChapters = function(search_value){
       $('ul.search-menu').html('');
-    } else {
-      $.getJSON('../assets/js/zip-codes.json', function (data) {
-        $(data['chapter']).each(function (index, arr) {
-          if (arr['zip_code'] == thisZip) {
-            thisChapter = arr['chapter_id'];
-            $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-              if (arr['office_id'] == thisChapter) {
-                $('ul.search-menu').html('<li><a href="#" data-office-id="' + thisChapter + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                window.formFundID = arr['fund_id'];
-                return;
-              }
-            });
-          }
+      if(parseInt(search_value)) {
+        $.getJSON('../assets/js/zip-codes.json', function (data) {
+          $(data['chapter']).each(function (index, arr) {
+            if (arr['zip_code'] == search_value) {
+              thisChapter = arr['chapter_id'];
+              $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+                if (arr['office_id'] == thisChapter) {
+                  $('ul.search-menu').html('<li><a href="#" data-office-id="' + thisChapter + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                  window.formFundID = arr['fund_id'];
+                  return;
+                }
+              });
+            }
+          });
         });
+      } else {
+        if (search_value.length > 2) {
+          $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+            var office_name_regex = new RegExp(search_value,'i'),
+              thisChapter = arr['chapter_id'];
+            if(office_name_regex.test(arr['office_name'])) {
+              $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + thisChapter + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+            }
+          });
+        }
+      }
+    };
 
-      });
-
-    }
-  });
-
-  $(document).on('keyup', '.js_genericChapLoc', function (e) {
-    var thisZip = $(this).val();
-
-    if (thisZip.length < 5 || thisZip.length > 5) {
-      $('ul.search-menu').html('');
-    } else {
-      $.getJSON('../assets/js/zip-codes.json', function (data) {
-        $(data['chapter']).each(function (index, arr) {
-          if (arr['zip_code'] == thisZip) {
-            thisChapter = arr['chapter_id'];
-            $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-              if (arr['office_id'] == thisChapter) {
-                $('ul.search-menu').html('<li><a href="#" data-office-id="' + thisChapter + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                window.formFundID = arr['fund_id'];
-                return;
-              }
-            });
-          }
-        });
-
-      });
-
-    }
+  $(document).on('keyup', '.js_donationDest,.js_genericChapLoc,.js_donationToCountry', function (e) {
+    searchForChapters($(this).val());
   });
 
   $('a.state-btn').click(function (e) {
