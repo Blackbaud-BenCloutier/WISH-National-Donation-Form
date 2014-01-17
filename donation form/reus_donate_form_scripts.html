@@ -485,7 +485,7 @@ $(document).ready(function () {
       }
     });
 
-    $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img src="' + card_image2 + '" height="410" width="410"></span>');
+    $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img src="' + card_image2 + '" width="410"></span>');
 
     $('#productImageContainer').zoom();
 
@@ -521,7 +521,7 @@ $(document).ready(function () {
     $("img.card-thumb").click(function (e) {
       e.preventDefault();
       var whichThumb = $(this).attr("src");
-      $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img src="' + whichThumb + '" height="410" width="410" /></span>');
+      $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img src="' + whichThumb + '" width="410" /></span>');
       $('#productImageContainer').zoom();
     });
 
