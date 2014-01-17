@@ -1499,7 +1499,7 @@ chaptersjson = (function () {
   var level5 = getUrlVars()["level5"];
   var level6 = getUrlVars()["level6"];
   var level7 = getUrlVars()["level7"];
-  var chid = getUrlVars()["chid"] || "100-000";
+  var chid = '[[S80:chid]]';
   var chapter_prefix = chid.substring(0, 3);
 
   if (level1 < 1 || isNaN(level1)) {

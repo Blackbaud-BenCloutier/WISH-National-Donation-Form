@@ -17,7 +17,7 @@
     <label for="otherDonationAmount"  data-bind="css: {error: x_donationAmountErrorType() === 'odm'}">
         Other
     </label>
-    <input name="otherDonationAmount" type="text" data-bind="value: otherDonationUserEntry, valueUpdate: 'keyup', event: {keyup: setOtherDonation}, css: {'input-error': x_donationAmountErrorType() === 'odm'}" />
+    <input name="otherDonationAmount" type="text" pattern="\d+\.*\d*" data-bind="value: otherDonationUserEntry, valueUpdate: 'keyup', event: {keyup: setOtherDonation}, css: {'input-error': x_donationAmountErrorType() === 'odm'}" />
     <span data-bind="css: {error: x_donationAmountErrorType() === 'odm'}"><i data-bind="text: $root.localizedCurrencySymbol() + $root.minimumDonation()">
     </i>
         <br />

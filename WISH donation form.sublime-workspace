@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"cardIm",
+				"cardImage1"
+			],
+			[
+				"shipp",
+				"shippingFullName"
+			],
+			[
+				"card",
+				"card_to"
+			],
+			[
+				"msg",
+				"msgLine2"
+			],
+			[
+				"to",
+				"toMI"
+			],
+			[
 				"sear",
 				"search_value"
 			],
@@ -123,6 +143,32 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "donation form/reus_donate_form.html",
+			"settings":
+			{
+				"buffer_size": 23260,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 202 files for \"otherdonationamount\"\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\reus_donate_form_default_levels.html:\n   15  \n   16  <div id=\"body_2_content_0_maincontent_0_Div2\" class=\"other\" data-bind=\"css: {selected: otherDonationActive()}\">\n   17:     <label for=\"otherDonationAmount\"  data-bind=\"css: {error: x_donationAmountErrorType() === 'odm'}\">\n   18          Other\n   19      </label>\n   20:     <input name=\"otherDonationAmount\" type=\"text\" data-bind=\"value: otherDonationUserEntry, valueUpdate: 'keyup', event: {keyup: setOtherDonation}, css: {'input-error': x_donationAmountErrorType() === 'odm'}\" />\n   21      <span data-bind=\"css: {error: x_donationAmountErrorType() === 'odm'}\"><i data-bind=\"text: $root.localizedCurrencySymbol() + $root.minimumDonation()\">\n   22      </i>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\reus_donate_form_WISH_Society_levels.html:\n   37  \n   38  <div id=\"body_2_content_0_maincontent_0_Div2\" class=\"other\" data-bind=\"css: {selected: otherDonationActive()}\">\n   39:     <label for=\"otherDonationAmount\"  data-bind=\"css: {error: x_donationAmountErrorType() === 'odm'}\">\n   40          Other\n   41      </label>\n   42:     <input name=\"otherDonationAmount\" type=\"text\" data-bind=\"value: otherDonationUserEntry, valueUpdate: 'keyup', event: {keyup: setOtherDonation}, css: {'input-error': x_donationAmountErrorType() === 'odm'}\" />\n   43      <span data-bind=\"css: {error: x_donationAmountErrorType() === 'odm'}\"><i data-bind=\"text: $root.localizedCurrencySymbol() + $root.minimumDonation()\">\n   44      </i>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\assets\\js\\ko-custom.concat.js:\n  828  \n  829          for (i = 0, l = d.length; i < l; i++) {\n  830:             total += d[i].donationType() == 2 ? +d[i].donationAmount() + d[i].otherDonationAmount() : 0;\n  831:             total += d[i].donationType() != 2 ? +d[i].donationAmount() + d[i].otherDonationAmount() : 0;\n  832          }\n  833  \n  ...\n  864          for (i = 0, l = d.length; i < l; i++) {\n  865              if (d[i].donationType() == 2 && d[i].monthlyStartType() == 'date1') {\n  866:                 total += +d[i].donationAmount() + d[i].otherDonationAmount();\n  867              }\n  868          }\n  ...\n  878          for (i = 0, l = d.length; i < l; i++) {\n  879              if (d[i].donationType() == 2 && d[i].monthlyStartType() == 'date2') {\n  880:                 total += +d[i].donationAmount() + d[i].otherDonationAmount();\n  881              }\n  882          }\n  ...\n 1087          donation.otherDonationUserEntry('');\n 1088          donation.otherDonationActive(false);\n 1089:         donation.otherDonationAmount(0);\n 1090          \n 1091          donation.isValid();\n ....\n 1108          viewContext.x_donationAmountError(true);\n 1109          viewContext.x_donationAmountErrorType('odm');\n 1110:         viewContext.otherDonationAmount(0);\n 1111          viewContext.donationAmount(0);\n 1112      };\n ....\n 1665          otherDonationActive: false,\n 1666          otherDonationUserEntry: '',\n 1667:         otherDonationAmount: 0,\n 1668  \n 1669          monthlyStartType: 'date1',\n ....\n 1761  // Returns the *active* donation amount\n 1762      self.transactionAmount = ko.computed(function() {\n 1763:         return self.otherDonationActive() ? self.otherDonationAmount() : self.donationAmount();\n 1764      });\n 1765      self.transactionAmount.functionType = 'computed';\n ....\n 1775  \n 1776  //      } else if ( self.setOtherDonation ) {\n 1777: //          self.otherDonationAmount(0);\n 1778  //      }\n 1779  //     }).extend({ throttle: 500 });\n ....\n 1861      self.isValid = function () {\n 1862                                                                                      // Other Donation Amount errors\n 1863:         if ( self.otherDonationActive() === true && ( self.otherDonationAmount() < mawf.CartView.minimumDonation() ) ) {\n 1864              self.x_donationAmountErrorType('odm');\n 1865              self.x_donationAmountError(true);\n ....\n 1883  // Takes donation context\n 1884  // Fired by computed function otherDonationUserEntryMonitor()\n 1885: // Uses the user entered value in the odm input, cleans input, sets the otherDonationAmount() var with variable, set donationAmount() to 0\n 1886      self.setOtherDonation = function () {\n 1887          var odm = mawf.getDollarInt( self.otherDonationUserEntry() );           // CLEAN - removes allowed characters \"$,\" and test for validity\n ....\n 1892          if ( odm === '' ) {                                                     // CURRENCY SYMBOL - is only value in field\n 1893              mawf.CartView.clearOtherDonationError(self);                        // Clear possible error state\n 1894:             self.otherDonationAmount(0);                                        // Clear any static value\n 1895  \n 1896          } else if ( odm === false && odm >= mawf.CartView.minimumDonation() ) { // BAD VALUE - has trash\n ....\n 1898  \n 1899          }  else  {                                                              // GOOD VALUE\n 1900:             self.otherDonationAmount(odm);\n 1901              self.isValid();                                                     // Trigger re-evaluation (messy)\n 1902          }\n ....\n 1926      self.prettyDonationAmount = ko.computed(function() {\n 1927  if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyDonationAmount fired'); }\n 1928:         var workingAmount = self.donationAmount() ? self.donationAmount() : self.otherDonationAmount();\n 1929          return mawf.prettyMoney(workingAmount);\n 1930      });\n ....\n 1990  \n 1991              delete state.donations[i].otherDonationActive;\n 1992:             delete state.donations[i].otherDonationAmount;\n 1993              delete state.donations[i].otherDonationUserEntry;\n 1994              delete state.donations[i].donationDestType;\n\n19 matches across 3 files\n",
+			"settings":
+			{
+				"buffer_size": 6050,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "donation form/reus_donate_form_default_levels.html",
+			"settings":
+			{
+				"buffer_size": 2003,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -152,6 +198,14 @@
 	"file_history":
 	[
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/donate_thankyou.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_head_chapter_conditionals.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_payment_type.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_learn_more.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_select.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/products.json",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_config.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/chapters.json",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/ko-custom.concat.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/zip-codes.json",
@@ -159,7 +213,6 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_ar_nav.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_socialicons.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_nav.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_config.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_config_test.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/iim/populate_autoresponders.iim",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/csv/wish_chid_list.csv",
@@ -177,7 +230,6 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/standard_donation_thank_you.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/standard_donation_thank_you_plaintext.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/html_body.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_head_chapter_conditionals.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_footer_links.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_ar_connect.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_ar_links.html",
@@ -256,17 +308,12 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_satellite_general.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_satellite_thankyou.html",
 		"/C/Users/v-ben.cloutier/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/products.json",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/donate_thankyou.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/csv/MAWA Funds.csv",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/global.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_metadata.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/donate_paypal_error.html",
 		"/C/Users/v-ben.cloutier/Desktop/personal/donation API QA/sustaining_donate.js",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_select.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/custom-select-menu.jquery.js",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_payment_type.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_search.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_right_500.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_right_085.html",
@@ -277,8 +324,7 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_sidebar.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_levels.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_intro",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_intro.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_whats_this.html"
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_intro.html"
 	],
 	"find":
 	{
@@ -300,6 +346,90 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"otherdonationamount",
+			"cons_email",
+			"opt",
+			"my donation(s)",
+			"other",
+			"yes",
+			"yes!",
+			"check if your company",
+			"check if my company",
+			"refer-a-child",
+			"ammount-btn",
+			"my donation amount",
+			"$75",
+			"75",
+			"\\n",
+			"f",
+			"f\\d\\d\\d",
+			"<office id=\"(.*)\" />",
+			"card number",
+			"selectCard",
+			"magnify",
+			"honorname",
+			"pdf",
+			"cancel-btn",
+			"getdonation",
+			"luminate",
+			"decodeURI",
+			"product-thumb",
+			"preview card",
+			"showstep3",
+			"finishcard",
+			"finishcertifi",
+			"finishecard",
+			"finishcertificate",
+			"ecard-btn",
+			"finishecard",
+			"ecard01",
+			"card01",
+			"ecardfinish",
+			"finishecard",
+			"card-blank",
+			"leaveblank",
+			"card04",
+			"card02",
+			"cert01",
+			"finishecard",
+			"card01",
+			"cert01",
+			"card_form",
+			"ecard02",
+			"ecard01",
+			"cardProperties",
+			"$.fancybox.close();",
+			"finish",
+			"reset",
+			"finish",
+			"cardProperties[0]",
+			"finish",
+			"resetpr",
+			"MemorialFirst_X_v2",
+			"state:",
+			"\" + 1 + \"",
+			"certNum",
+			"cardProperties[i]",
+			"finishcertificate",
+			"var numCard = cardProperties.length;",
+			"console.log(\"numCard=\" + numCard);",
+			"console\\.log\\(\\\"push card.*\\);",
+			"cardProperties[numCard]",
+			"cardproperties",
+			"cardpro",
+			"cardsList",
+			"cardslist",
+			"finishCer",
+			"resetProducts",
+			"cardsList",
+			"thisCertificateProduct",
+			"MemorialFirst_X_v2",
+			"finish",
+			"cert01",
+			"finish",
+			"checkfields",
+			"skew",
+			"finish",
 			"console\\.log.*;\\n",
 			"console.log",
 			"finishCertificate",
@@ -343,91 +473,7 @@
 			"\\s*cid\\s*",
 			"cid",
 			"cid=",
-			"[[S80:cid]]",
-			"[[S80:cid_short]]",
-			"cid",
-			"sustained_monthly_amount",
-			"total to be",
-			"jStorage",
-			"jstorage",
-			"monthly",
-			"designee",
-			"cardsList",
-			"designee",
-			"designation",
-			"1066",
-			"gfbenefit_1",
-			"designee_id",
-			"1037",
-			"e-card",
-			"Birthday",
-			"bdc",
-			"chaptersjson",
-			"Greater Pennsylvania & Southern West Virginia",
-			"Greater Pennsylvania & Southern West Virginia, Inc.",
-			"Make-A-Wish® Greater Pennsylvania & Southern West Virginia",
-			"Make-A-Wish® Greater Pennsylvania & Southern West Virginia, Inc.",
-			"003",
-			"zip-codes",
-			"chapter_id",
-			"chapter_",
-			"_cid",
-			"for",
-			"s_genericChapLoc",
-			"js_donationdest",
-			"document.domain",
-			"donation.svc",
-			"location.protocol",
-			"sitesearchurl",
-			"mawf.locator",
-			"chapterlocator",
-			"search-menu",
-			"localchapter",
-			"chapterlocator",
-			"searchchapter",
-			"card-detail",
-			"a donation has",
-			"5\" x",
-			"5\"",
-			"size:",
-			"a donation",
-			"[[S80:cid]]",
-			"optin",
-			"laststep",
-			"addCentersCallbackLast",
-			"laststep",
-			"finishgift",
-			"showerror",
-			"alert",
-			"s_designee",
-			"cid",
-			"s80:cid",
-			"s_cid",
-			"data +=",
-			"valid",
-			"finishgift",
-			"method",
-			"dat",
-			"a.button-submit",
-			"showError",
-			"showerror",
-			"luminate",
-			"donation",
-			"method",
-			"cid",
-			"blurb",
-			"select-btn",
-			"product1category",
-			"ecard-btn",
-			"ecardfinish",
-			"    ",
-			"mail a",
-			"data-option-value",
-			"data-option",
-			"father's",
-			"updatemenu",
-			"data-option-value",
-			"updateMenu"
+			"[[S80:cid]]"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -435,6 +481,16 @@
 		"regex": true,
 		"replace_history":
 		[
+			"x",
+			"",
+			"f$1",
+			"decodeURIComponent",
+			"cardProperties",
+			"1",
+			"cardProperties[0]",
+			"",
+			"cardProperties[0]",
+			"cardProperties",
 			"",
 			"chid_short={{!COL1}}",
 			"",
@@ -500,8 +556,188 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "donation form/reus_donate_form.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 23260,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9723,
+								9728
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4181.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6050,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										325,
+										344
+									],
+									[
+										477,
+										496
+									],
+									[
+										1133,
+										1152
+									],
+									[
+										1285,
+										1304
+									],
+									[
+										1927,
+										1946
+									],
+									[
+										2039,
+										2058
+									],
+									[
+										2303,
+										2322
+									],
+									[
+										2576,
+										2595
+									],
+									[
+										2771,
+										2790
+									],
+									[
+										2996,
+										3015
+									],
+									[
+										3187,
+										3206
+									],
+									[
+										3431,
+										3450
+									],
+									[
+										3645,
+										3664
+									],
+									[
+										3965,
+										3984
+									],
+									[
+										4325,
+										4344
+									],
+									[
+										4871,
+										4890
+									],
+									[
+										5219,
+										5238
+									],
+									[
+										5652,
+										5671
+									],
+									[
+										5870,
+										5889
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "donation form/reus_donate_form_default_levels.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2003,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								2003
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 209.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
