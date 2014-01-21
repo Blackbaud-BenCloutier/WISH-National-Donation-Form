@@ -3191,10 +3191,6 @@ padding:0;
 }
 
 #carousel-gallery ul li div.hover-bar{
-display:none;
-}
-
-#carousel-gallery ul li:hover div.hover-bar{
 display: block;
 width:170px;
 height:38px;

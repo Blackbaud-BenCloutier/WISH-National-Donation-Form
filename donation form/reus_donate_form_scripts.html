@@ -406,7 +406,7 @@ $(document).ready(function () {
   });
 
   var addNewTag = function () {
-    $('li img.new-item').after('<span><img src="http://site.wish.org/assets/images/new-tag.png" /></span>');
+    $('li img.new-item').after('<span><img src="https://secure2.convio.net/wish/assets/images/new-tag.png" /></span>');
     $('ul#products > li').hover(function () {
       $(this).after('');
     });
@@ -490,7 +490,7 @@ $(document).ready(function () {
 
     function launchZoom(cardURL) {
 
-      $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img id="zoom_preview" src="' + cardURL + '" alt="" /></span>')
+      $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img id="zoom_preview" style="display: none;" src="' + cardURL + '" alt="" /></span>')
 
       $('#zoom_preview').load(function(){
           var productHeight = $(this).height();
@@ -501,7 +501,8 @@ $(document).ready(function () {
             $(this).addClass('portrait');
           } else if (productHeight < productWidth) {
             $(this).addClass('landscape');
-          }        
+          }
+          $(this).attr('style', '');   
         });
 
       $('#productImageContainer').zoom();
