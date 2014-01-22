@@ -3682,9 +3682,6 @@ padding: 3px;
   cursor: default;
 }
 
-a.cancel-btn, a.help-btn {color: gray !important;}
-a.cancel-btn:hover, a.help-btn:hover{ color: #787878 !important;}
-a.cancel-btn.selected,a.help-btn.selected {color: #3283b6 !important;} 
 
 #cardCount {
     color: #3283B6;
