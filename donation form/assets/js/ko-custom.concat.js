@@ -1858,12 +1858,22 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed donatio
 
 // Donation amount validity evaluator
 // 
-    self.isValid = function () {
-                                                                                    // Other Donation Amount errors
-        if ( self.otherDonationActive() === true && ( self.otherDonationAmount() < mawf.CartView.minimumDonation() ) ) {
-            self.x_donationAmountErrorType('odm');
-            self.x_donationAmountError(true);
-            return false;
+    self.isValid = function () {        
+
+        if ( self.otherDonationActive() === true) {
+            
+            if ( self.otherDonationAmount() < mawf.CartView.minimumDonation() ) {
+                self.x_donationAmountErrorType('odm');
+                self.x_donationAmountError(true);
+                return false;
+            }
+            if ( self.otherDonationAmount() === false && self.otherDonationAmount() >= mawf.CartView.minimumDonation() ) { // BAD VALUE - has trash
+                //mawf.CartView.setOtherDonationError(self);
+                self.x_donationAmountErrorType('odm');
+                self.x_donationAmountError(true);
+                return false;
+            }
+ 
         }
                                                                                     
         if (self.otherDonationActive() === false && +self.donationAmount() <= 0) {  // Button amount errors
@@ -1888,17 +1898,12 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed donatio
         //console.warn('setotherDonation triggered at :' + odm );
 
         self.otherDonationActive(true);
+        mawf.CartView.clearOtherDonationError(self);                        // Clear possible error state
 
         if ( odm === '' ) {                                                     // CURRENCY SYMBOL - is only value in field
-            mawf.CartView.clearOtherDonationError(self);                        // Clear possible error state
             self.otherDonationAmount(0);                                        // Clear any static value
-
-        } else if ( odm === false && odm >= mawf.CartView.minimumDonation() ) { // BAD VALUE - has trash
-            mawf.CartView.setOtherDonationError(self);
-
-        }  else  {                                                              // GOOD VALUE
+        } else {                                                              // GOOD VALUE
             self.otherDonationAmount(odm);
-            self.isValid();                                                     // Trigger re-evaluation (messy)
         }
 
         self.donationAmount(0);                                                 // ALWAYS CLEAR STATIC BUTTONS - Always make sure hard code buttons are not active
