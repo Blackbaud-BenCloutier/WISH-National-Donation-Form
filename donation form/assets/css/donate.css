@@ -3145,7 +3145,6 @@ is selected. */
   width: 950px;
   margin: 25px auto 0;
   padding:0;
-  background: #ffffff;
   overflow: hidden !important;
 }   
 #carousel-gallery .wrapper {
@@ -3240,7 +3239,7 @@ float:left;
 }
 #carousel-gallery .back {
   background: url('https://secure2.convio.net/wish/assets/images/arrow-right.png') no-repeat center #ffffff;
-  right: 10px;
+  right: 20px;
 }
 #carousel-gallery .forward:hover {
   background: url('https://secure2.convio.net/wish/assets/images/arrow-left.png') no-repeat center #e9f3f9;

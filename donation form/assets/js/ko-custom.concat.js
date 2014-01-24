@@ -270,9 +270,8 @@ if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log(mawf.cartName+' dele
 
         $.fancybox({
             href: '#js-prod-personalizer',
-            autoSize: false,
+            autoSize: true,
             width: '960px',
-            height: '596px',
             scrolling: 'no',
             padding: 0,
             modal: true,

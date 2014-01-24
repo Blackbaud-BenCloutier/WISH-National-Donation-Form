@@ -215,33 +215,59 @@ $(document).ready(function () {
   })();
 
   var checkFields = function () {
-    var boolean = true;
-    $('#step3 .jsreq:visible').each(function () {
-      if ($(this).val() == '') {
-        $(this).addClass('input-error');
-        $(this).next("p").show();
-        $(this).prev("label").addClass("label-error");
-        $(".bldr-wrap #card-form .mnamefld").prev("fieldset").css({
-          "position": "relative"
-        });
-        $(".bldr-wrap #card-form .mnamefld").css({
-          "left": "300px",
-          "margin-left": "12px",
-          "position": "absolute",
-          "top": "12px"
-        });
-        boolean = false;
 
-        if ($("#State_X").hasClass("input-error")) {
-          $("#uniform-State_X span").addClass("input-error");
-          $("#uniform-State_X").next("p").show();
-          $("#uniform-State_X").prev("label").addClass("label-error");
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+    flag = true;
+
+    function validateFail(currentElement) {
+      currentElement.addClass('input-error');
+      currentElement.next("p").show();
+      currentElement.prev("label").addClass("label-error");
+      $(".bldr-wrap #card-form .mnamefld").prev("fieldset").css({
+        "position": "relative;"
+      });
+      $(".bldr-wrap #card-form .mnamefld").css({
+        "left": "300px",
+        "margin-left": "12px",
+        "position": "absolute",
+        "top": "12px"
+      });
+      if ($("#State_X").hasClass("input-error")) {
+        $("#uniform-State_X span").addClass("input-error");
+        $("#uniform-State_X").next("p").show();
+        $("#uniform-State_X").prev("label").addClass("label-error");
+      }
+      flag = false;
+    }
+
+    function validatePass(currentElement) {
+      currentElement.removeClass('input-error');
+      currentElement.next("p").hide();
+      currentElement.prev("label").removeClass("label-error");
+      /*$(".bldr-wrap #card-form .mnamefld").css({
+
+      });*/
+      if ($("#State_X").hasClass("input-error")) {
+        $("#uniform-State_X span").removeClass("input-error");
+        $("#uniform-State_X").next("p").hide();
+        $("#uniform-State_X").prev("label").removeClass("label-error");
+      }
+    }
+
+    $('#step3 .jsreq:visible').each(function () {
+      if ($(this).hasClass('js_email')){
+        if(emailRegex.test($(this).val())) {
+          validatePass($(this));
+        } else {
+          validateFail($(this));
         }
+      } else if ($(this).val() == '') {
+        validateFail($(this));
       } else {
-        $(this).removeClass('input-error');
+        validatePass($(this));
       }
     });
-    return boolean;
+    return flag;
   }
 
   // Get available occasions and add to first drop down list
