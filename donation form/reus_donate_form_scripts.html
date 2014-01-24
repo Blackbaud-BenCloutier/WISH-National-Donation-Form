@@ -419,7 +419,11 @@ $(document).ready(function () {
 
       var card_id = $(this).attr('data-cardid');
 
-      selectCard(card_id);
+      if (card_id.substring(0, 2) == 'EC') {
+        selectEcard(card_id);
+      } else {
+        selectCard(card_id);
+      }
 
     }
   });
@@ -451,22 +455,18 @@ $(document).ready(function () {
 
   // When a card is selected, load the description page
 
+  function selectEcard(cardID) {
+    $(productsjson['product']).each(function (index, arr) {
+      if (arr['card_id'] == cardID) {
+        ecard_id = arr['ecard_id'] || false;
+        product_url = arr['product_url'] || false;
+        return false;
+      }
+    });
+    window.open(product_url, "ecard");
+  }
+
   function selectCard(cardID) {
-
-    if (cardID.substring(0, 2) == 'EC') {
-
-      $(productsjson['product']).each(function (index, arr) {
-        if (arr['card_id'] == cardID) {
-          ecard_id = arr['ecard_id'] || false;
-          product_url = arr['product_url'] || false;
-          return false;
-        }
-      });
-      //window.open(product_url, "ecard");
-
-    } else {
-      
-    }
 
     $(productsjson['product']).each(function (index, arr) {
       if (arr['card_id'] == cardID) {
@@ -485,12 +485,12 @@ $(document).ready(function () {
       }
     });
 
-    launchZoom(card_image2); // not ecards
+    launchZoom(card_image2);
 
 
     function launchZoom(cardURL) {
 
-      $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img id="zoom_preview" style="display: none;" src="' + cardURL + '" alt="" /></span>');
+      $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img id="zoom_preview" style="display: none;" src="' + cardURL + '" alt="" /></span>')
 
       $('#zoom_preview').load(function(){
           var productHeight = $(this).height();
