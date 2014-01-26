@@ -1244,6 +1244,7 @@ $(document).ready(function () {
         form_chid = $('.logo a').attr('href').match(/\d+/)[0],
         donation_form_id = $(center_forms).find('office#' + short_chid + ' + form').attr('id'),
         isMonthly = false;
+      console.log('BDC: '+chid+' '+short_chid);
 
       data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
       data += '&s_chid=' + chid;
