@@ -1242,9 +1242,8 @@ $(document).ready(function () {
       // BDC 12/10/2013
       var short_chid = chid.substr(0,3),
         form_chid = $('.logo a').attr('href').match(/\d+/)[0],
-        donation_form_id = $(center_forms).find('office#' + short_chid + ' + form').attr('id'),
+        donation_form_id = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid + ' + form').attr('id')) : ('1563')),
         isMonthly = false;
-      console.log('BDC: '+chid+' '+short_chid);
 
       data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
       data += '&s_chid=' + chid;
