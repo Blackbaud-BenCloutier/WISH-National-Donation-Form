@@ -73,16 +73,8 @@
                         <div class="top clearfix">
                             <!-- BEGIN LEFT -->
                             <div class="left">
-                                
-                                        <!--<a href="#" class="month-btn" data-bind="click: function(){monthlyStartType('date1');}, text: $root.startDate1Pretty, css: {selected: monthlyStartType() == 'date1'}">
-                                        </a>
-                                    
-                                        <a href="#" class="month-btn" data-bind="click: function(){monthlyStartType('date2');}, text: $root.startDate2Pretty, css: {selected: monthlyStartType() == 'date2'}">
-                                        </a>-->
-                                    
                                 <p data-bind="visible: donationType() == 2">
-                                    Your first donation will be charged today and then monthly starting on <i class="nextMonth"></i>. 
-
+                                    Your first donation will be charged today and then monthly starting on <i class="nextMonth"></i>.
                                 </p>
                             </div>
                             <!-- END LEFT -->
@@ -338,10 +330,6 @@
                         <div class="module-form-labeled grid_6 clearfix">
                             <div class="input-wrap clearfix">
                                 <label>
-                                    <!--<div class="checker" id="uniform-undefined">
-                                        <span class="" data-bind="click: function(){ updateNational() ? updateNational(false):updateNational(true)}, css: { checked: updateNational()}">
-                                        </span>
-                                    </div>--> <!-- Removed pending acceptance of a native input -->
                                     <input id="optinNational" type="checkbox" name="sitNational" data-bind="checked: updateNational" />
                                     Yes! I want to subscribe to receive email communications featuring wish stories, news and ways to help from Make-A-Wish<sup>®</sup> America.
                                 </label>
@@ -355,36 +343,9 @@
                         <div class="module-form-labeled grid_6 clearfix">
                             <div class="input-wrap clearfix">
                                 <label>
-                                    <!--<div class="checker" id="uniform-undefined">
-                                        <span class="" data-bind="click: function(){ updateLocal() ? updateLocal(false):updateLocal(true)}, css: { checked: updateLocal()}">
-                                        </span>
-                                    </div>--> <!-- Removed pending acceptance of native input -->
                                     <input id="optinChapter" type="checkbox" name="sitNational" data-bind="checked: false" />
                                     Yes! I want to receive email updates from my local chapter.
                                 </label>
-                            </div>
-                        </div>
-                        <div class="info-sec clearfix">
-                            Optional
-                        </div>
-                        <div style="display: none;" id="body_2_content_0_maincontent_0_Div3" class="module-form-labeled grid_6 clearfix">
-                            <div class="input-chapter-wrap js_chapterSearch clearfix">
-                                <h3>
-                                    Local chapter
-                                </h3>
-                                <!-- BEGIN CHAPTER SEARCH BOX -->
-                                <div class="chapter-search">
-                                    <input type="hidden" class="js-cl-id" name="sitChapterDestinationID" data-bind="value: sitChapterID" />   
-                               
-                                    <input type="text" class="js_genericChapLoc jsreq" placeholder="Zip code or state"
-                                        name="sitChapter" data-bind="value: sitChapter">
-                                    <ul class="search-menu">
-                                    </ul>
-                                </div>
-                                <!-- END CHAPTER SEARCH BOX -->
-                                <a href="#" class="js-cl-btn js-chapter-modal-launcher button">
-                                    Chapter list
-                                </a>
                             </div>
                         </div>
                     </div>

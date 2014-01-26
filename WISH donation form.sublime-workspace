@@ -144,28 +144,10 @@
 	"buffers":
 	[
 		{
-			"file": "donation form/reus_donate_form.html",
+			"file": "donation form/reus_donate_form_scripts.html",
 			"settings":
 			{
-				"buffer_size": 23260,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 202 files for \"otherdonationamount\"\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\reus_donate_form_default_levels.html:\n   15  \n   16  <div id=\"body_2_content_0_maincontent_0_Div2\" class=\"other\" data-bind=\"css: {selected: otherDonationActive()}\">\n   17:     <label for=\"otherDonationAmount\"  data-bind=\"css: {error: x_donationAmountErrorType() === 'odm'}\">\n   18          Other\n   19      </label>\n   20:     <input name=\"otherDonationAmount\" type=\"text\" data-bind=\"value: otherDonationUserEntry, valueUpdate: 'keyup', event: {keyup: setOtherDonation}, css: {'input-error': x_donationAmountErrorType() === 'odm'}\" />\n   21      <span data-bind=\"css: {error: x_donationAmountErrorType() === 'odm'}\"><i data-bind=\"text: $root.localizedCurrencySymbol() + $root.minimumDonation()\">\n   22      </i>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\reus_donate_form_WISH_Society_levels.html:\n   37  \n   38  <div id=\"body_2_content_0_maincontent_0_Div2\" class=\"other\" data-bind=\"css: {selected: otherDonationActive()}\">\n   39:     <label for=\"otherDonationAmount\"  data-bind=\"css: {error: x_donationAmountErrorType() === 'odm'}\">\n   40          Other\n   41      </label>\n   42:     <input name=\"otherDonationAmount\" type=\"text\" data-bind=\"value: otherDonationUserEntry, valueUpdate: 'keyup', event: {keyup: setOtherDonation}, css: {'input-error': x_donationAmountErrorType() === 'odm'}\" />\n   43      <span data-bind=\"css: {error: x_donationAmountErrorType() === 'odm'}\"><i data-bind=\"text: $root.localizedCurrencySymbol() + $root.minimumDonation()\">\n   44      </i>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\assets\\js\\ko-custom.concat.js:\n  828  \n  829          for (i = 0, l = d.length; i < l; i++) {\n  830:             total += d[i].donationType() == 2 ? +d[i].donationAmount() + d[i].otherDonationAmount() : 0;\n  831:             total += d[i].donationType() != 2 ? +d[i].donationAmount() + d[i].otherDonationAmount() : 0;\n  832          }\n  833  \n  ...\n  864          for (i = 0, l = d.length; i < l; i++) {\n  865              if (d[i].donationType() == 2 && d[i].monthlyStartType() == 'date1') {\n  866:                 total += +d[i].donationAmount() + d[i].otherDonationAmount();\n  867              }\n  868          }\n  ...\n  878          for (i = 0, l = d.length; i < l; i++) {\n  879              if (d[i].donationType() == 2 && d[i].monthlyStartType() == 'date2') {\n  880:                 total += +d[i].donationAmount() + d[i].otherDonationAmount();\n  881              }\n  882          }\n  ...\n 1087          donation.otherDonationUserEntry('');\n 1088          donation.otherDonationActive(false);\n 1089:         donation.otherDonationAmount(0);\n 1090          \n 1091          donation.isValid();\n ....\n 1108          viewContext.x_donationAmountError(true);\n 1109          viewContext.x_donationAmountErrorType('odm');\n 1110:         viewContext.otherDonationAmount(0);\n 1111          viewContext.donationAmount(0);\n 1112      };\n ....\n 1665          otherDonationActive: false,\n 1666          otherDonationUserEntry: '',\n 1667:         otherDonationAmount: 0,\n 1668  \n 1669          monthlyStartType: 'date1',\n ....\n 1761  // Returns the *active* donation amount\n 1762      self.transactionAmount = ko.computed(function() {\n 1763:         return self.otherDonationActive() ? self.otherDonationAmount() : self.donationAmount();\n 1764      });\n 1765      self.transactionAmount.functionType = 'computed';\n ....\n 1775  \n 1776  //      } else if ( self.setOtherDonation ) {\n 1777: //          self.otherDonationAmount(0);\n 1778  //      }\n 1779  //     }).extend({ throttle: 500 });\n ....\n 1861      self.isValid = function () {\n 1862                                                                                      // Other Donation Amount errors\n 1863:         if ( self.otherDonationActive() === true && ( self.otherDonationAmount() < mawf.CartView.minimumDonation() ) ) {\n 1864              self.x_donationAmountErrorType('odm');\n 1865              self.x_donationAmountError(true);\n ....\n 1883  // Takes donation context\n 1884  // Fired by computed function otherDonationUserEntryMonitor()\n 1885: // Uses the user entered value in the odm input, cleans input, sets the otherDonationAmount() var with variable, set donationAmount() to 0\n 1886      self.setOtherDonation = function () {\n 1887          var odm = mawf.getDollarInt( self.otherDonationUserEntry() );           // CLEAN - removes allowed characters \"$,\" and test for validity\n ....\n 1892          if ( odm === '' ) {                                                     // CURRENCY SYMBOL - is only value in field\n 1893              mawf.CartView.clearOtherDonationError(self);                        // Clear possible error state\n 1894:             self.otherDonationAmount(0);                                        // Clear any static value\n 1895  \n 1896          } else if ( odm === false && odm >= mawf.CartView.minimumDonation() ) { // BAD VALUE - has trash\n ....\n 1898  \n 1899          }  else  {                                                              // GOOD VALUE\n 1900:             self.otherDonationAmount(odm);\n 1901              self.isValid();                                                     // Trigger re-evaluation (messy)\n 1902          }\n ....\n 1926      self.prettyDonationAmount = ko.computed(function() {\n 1927  if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyDonationAmount fired'); }\n 1928:         var workingAmount = self.donationAmount() ? self.donationAmount() : self.otherDonationAmount();\n 1929          return mawf.prettyMoney(workingAmount);\n 1930      });\n ....\n 1990  \n 1991              delete state.donations[i].otherDonationActive;\n 1992:             delete state.donations[i].otherDonationAmount;\n 1993              delete state.donations[i].otherDonationUserEntry;\n 1994              delete state.donations[i].donationDestType;\n\n19 matches across 3 files\n",
-			"settings":
-			{
-				"buffer_size": 6050,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "donation form/reus_donate_form_default_levels.html",
-			"settings":
-			{
-				"buffer_size": 2003,
+				"buffer_size": 79004,
 				"line_ending": "Windows"
 			}
 		}
@@ -197,9 +179,12 @@
 	},
 	"file_history":
 	[
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_prehead.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_nav.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_default_levels.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/donate_thankyou.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_head_chapter_conditionals.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_payment_type.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_learn_more.html",
@@ -212,7 +197,6 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_ar_single_promo.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_ar_nav.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_socialicons.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_nav.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_config_test.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/iim/populate_autoresponders.iim",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/csv/wish_chid_list.csv",
@@ -300,7 +284,6 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_085.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_100.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_500.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_prehead.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_socialbar.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_copyright.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/center_info.csv",
@@ -323,12 +306,11 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_meta_center_id.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_sidebar.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_levels.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_intro",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_intro.html"
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_WISH_Society_intro"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
@@ -346,6 +328,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"wishes",
+			"fraud",
+			"ecard",
 			"otherdonationamount",
 			"cons_email",
 			"opt",
@@ -470,15 +455,12 @@
 			"\\(*\\s*cid\\s*\\)*",
 			"\\s*cid\\s*",
 			"\\s*[c][i][d]\\s*",
-			"\\s*cid\\s*",
-			"cid",
-			"cid=",
-			"[[S80:cid]]"
+			"\\s*cid\\s*"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"x",
@@ -556,183 +538,34 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "donation form/reus_donate_form.html",
+					"file": "donation form/reus_donate_form_scripts.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 23260,
+						"buffer_size": 79004,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9723,
-								9728
+								66555,
+								66567
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4181.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6050,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										325,
-										344
-									],
-									[
-										477,
-										496
-									],
-									[
-										1133,
-										1152
-									],
-									[
-										1285,
-										1304
-									],
-									[
-										1927,
-										1946
-									],
-									[
-										2039,
-										2058
-									],
-									[
-										2303,
-										2322
-									],
-									[
-										2576,
-										2595
-									],
-									[
-										2771,
-										2790
-									],
-									[
-										2996,
-										3015
-									],
-									[
-										3187,
-										3206
-									],
-									[
-										3431,
-										3450
-									],
-									[
-										3645,
-										3664
-									],
-									[
-										3965,
-										3984
-									],
-									[
-										4325,
-										4344
-									],
-									[
-										4871,
-										4890
-									],
-									[
-										5219,
-										5238
-									],
-									[
-										5652,
-										5671
-									],
-									[
-										5870,
-										5889
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "donation form/reus_donate_form_default_levels.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2003,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								2003
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 209.0,
+						"translation.y": 40382.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
