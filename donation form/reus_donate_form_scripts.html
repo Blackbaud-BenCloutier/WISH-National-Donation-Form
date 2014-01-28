@@ -1784,6 +1784,9 @@ luminateExtend.init({
 var xmlHttp = new XMLHttpRequest();
 
 function showError(pageError, fieldError) {
+
+  alert(pageError + " " + fieldError);
+  $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
   console.log(pageError + " " + fieldError);
 }
 
@@ -1893,7 +1896,7 @@ jQuery(document).ready(function ($) {
   // Standard donation submit button
   $("a.button-submit:eq(0)").click(function (e) {
     e.preventDefault();
-    $(this).unbind("click").css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
+    $(this).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
       e.preventDefault();
     });
 
@@ -1929,7 +1932,7 @@ jQuery(document).ready(function ($) {
   // PayPal button
   $("a.button-submit:eq(1)").click(function (e) {
     e.preventDefault();
-    $(this).unbind("click").css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
+    $(this).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
       e.preventDefault();
     });
 
