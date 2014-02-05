@@ -1243,10 +1243,11 @@ $(document).ready(function () {
       var short_chid = chid.substr(0,3),
         form_chid = $('.logo a').attr('href').match(/\d+/)[0],
         donation_form_id = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid + ' + form').attr('id')) : ('1563')),
-        isMonthly = false;
+        isMonthly = false,
+        formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish International'));
 
       data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
-      data += '&s_chid=' + chid;
+      data += '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee);
 
       if($('#monthlyGift.selected').length > 0) {
         isMonthly = true;
@@ -1690,7 +1691,7 @@ chaptersjson = (function () {
   });
 
   var searchForChapters = function(search_value, local_or_international){
-    $('ul.search-menu').html('');
+    $('ul.search-menu').html('<li><a>Matching Result Not Found!</a></li>');
     if(parseInt(search_value)) {
       $.getJSON('../assets/js/zip-codes.json', function (data) {
         $(data['chapter']).each(function (index, arr) {
@@ -1821,7 +1822,6 @@ function lastStep() {
 }
 
 $('#ccPostal').blur(function(e){
-  console.log("zip code blur 006");
   var id_from_billing_zip;  
 
   $(zip_array['chapter']).each(function (index, arr) {

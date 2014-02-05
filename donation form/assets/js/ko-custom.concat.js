@@ -262,11 +262,12 @@ if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log(mawf.cartName+' dele
             mawf.CartView.productMasterState('personalizing');
             mawf.CartView.productEditState('editing');
             mawf.CartView.syncRoot('personalizer', 'in');               // Sync donation personalizer data to pers. form
-            
         } else {
             mawf.CartView.productMasterState('picking');
         }
         
+        $('.product-thumb').html('');
+        $('#card_preview .blurb p').remove();
 
         $.fancybox({
             href: '#js-prod-personalizer',
