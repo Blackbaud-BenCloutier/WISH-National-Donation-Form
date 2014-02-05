@@ -1254,7 +1254,7 @@ $(document).ready(function () {
 
       $('#foreign_key1').val(metadata_campaign_id);
       if(chid.substr(4,3) == '000') {
-        $('#foreign_key2').val('UR-' + chid.substr(4,3) + '-01');
+        $('#foreign_key2').val('UR-' + chid.substr(0,3) + '-01');
       }
       else {
         $('#foreign_key2').val('UR-' + chid + '-F');
