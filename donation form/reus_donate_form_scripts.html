@@ -1244,7 +1244,9 @@ $(document).ready(function () {
         form_chid = $('.logo a').attr('href').match(/\d+/)[0],
         donation_form_id = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid + ' + form').attr('id')) : ('1563')),
         isMonthly = false,
-        formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish International'));
+        formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish® International'));
+
+      console.log(short_chid);
 
       data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
       data += '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee);
@@ -1691,7 +1693,7 @@ chaptersjson = (function () {
   });
 
   var searchForChapters = function(search_value, local_or_international){
-    $('ul.search-menu').html('<li><a>Matching Result Not Found!</a></li>');
+    $('ul.search-menu').html('<li id="no_valid_region"><a>Matching Result Not Found!</a></li>');
     if(parseInt(search_value)) {
       $.getJSON('../assets/js/zip-codes.json', function (data) {
         $(data['chapter']).each(function (index, arr) {
@@ -1727,12 +1729,14 @@ chaptersjson = (function () {
           if(local_or_international == 'local'){
             if(parseInt(chapter_id.substr(0,3)) < 500) {
               if(office_name_regex.test(arr['office_name'])) {
+                $('#no_valid_region').remove();
                 $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
               }
             }
           } else {
             if(parseInt(chapter_id.substr(0,3)) >= 500) {
               if(office_name_regex.test(arr['office_name'])) {
+                $('#no_valid_region').remove();
                 $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
               }
             }

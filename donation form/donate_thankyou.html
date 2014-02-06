@@ -12,7 +12,6 @@
 </h3>
 <p>Your support is so important in helping us move ever closer to granting the wish of every eligible child. Your gift will help bring hope to wish kids, repair and strengthen families, and bring communities closer. Thank you for joining us in changing lives forever!</p>
 
-<p id="customvariable1">[[S80:customvariable1]]</p>
 [[?[[S80:productURL1]]::ecard::<img src="[[S80:productURL1]]" style="display:none" />::]]
 
 
@@ -38,50 +37,46 @@
 </div>
 <!--End donation summary-->
 <div class="donation-list-wrapper">
-  
-[[?x[[S80:formDesignee]]x::xx::::
-<div class="donation-wrapper" data-product-category="pr-do">
-  <div class="donation collapsed clearfix">
-    <div class="left-container clearfix">
-      <div class="left">
-        <div>
-          <h6>
-            General Donation
-          </h6>
-          <p id="body_1_content_0_maincontent_0_rProducts_ctl00_0_P1_0" class="small ">
-            Thank you! <br>
-            <a href="http://[[S80:website_url]]/ways-to-help/giving/matching-gifts">
-              Check if your company will match this gift &gt;
-            </a>
-          </p>
-          <!-- <p class="set1 set2 set5 set4 set7 set9"> -->
-          <p class="set1 set2 set5 set4 set9"></p>
-          <p class="set6"></p>
-          <p class="set6">Leave blank and send to me</p>
-          
-          <p class="set4 set5"></p>
-          <p class="set7 set8 set9"></p>
-          <p class="set7 set8 set9">Leave blank and send to me</p>
+  <div class="donation-wrapper" data-product-category="pr-do">
+    <div class="donation collapsed clearfix">
+      <div class="left-container clearfix">
+        <div class="left">
+          <div>
+            <h6>
+              General Donation
+            </h6>
+            <p id="body_1_content_0_maincontent_0_rProducts_ctl00_0_P1_0" class="small ">
+              Thank you! <br>
+              <a href="http://[[S80:website_url]]/ways-to-help/giving/matching-gifts">
+                Check if your company will match this gift &gt;
+              </a>
+            </p>
+            <!-- <p class="set1 set2 set5 set4 set7 set9"> -->
+            <p class="set1 set2 set5 set4 set9"></p>
+            <p class="set6"></p>
+            <p class="set6">Leave blank and send to me</p>
+            
+            <p class="set4 set5"></p>
+            <p class="set7 set8 set9"></p>
+            <p class="set7 set8 set9">Leave blank and send to me</p>
+          </div>
+        </div>
+        <div class="center clearfix">
+          <span class="currency" style="margin-top: 0">
+            [[S120:dc:giftAmount]]
+          </span>
         </div>
       </div>
-      <div class="center clearfix">
-        <span class="currency" style="margin-top: 0">
-          [[S120:dc:giftAmount]]
-        </span>
+      <div class="right clearfix">
+        <h6>
+          Benefitting 
+        </h6>
+        <p class="chapter">
+          [[?x[[S80:formDesignee]]x::xx::Make-A-Wish® America::[[S80:formDesignee]]]]
+        </p>
       </div>
     </div>
-    <div class="right clearfix">
-      <h6>
-        Benefitting 
-      </h6>
-      <p class="chapter">
-        [[S80:formDesignee]]
-      </p>
-    </div>
   </div>
-</div>
-]]
-    
 </div>
 <div class="donation clearfix">
   [[?xxnullx::[[S120:dc:recurringNextPaymentDate]]::::
@@ -110,4 +105,17 @@
   For federal income tax purposes, this page will serve to confirm that no goods or services were provided to you for this donation. Please retain this page for your records.
 </p>
 
-[[S51:reus_donate_thankyou_scripts]]
+<script>
+(function($){
+    $('#body_1_h1PageTitle').text('Thank You');
+
+    var monthlyAmount = $('.donation .left h4 span');
+
+    if(monthlyAmount.text() == ''){
+        $('.donation .left h4').text('');
+    }
+})(jQuery);
+</script>
+<style>
+    .button-blue {color: #FFFFFF !important;}
+</style>
