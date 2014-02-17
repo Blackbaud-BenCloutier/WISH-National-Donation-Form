@@ -1,0 +1,34 @@
+650: will have to discuss with wish
+
+614: invalid
+657: 2 hours
+
+636: 8 hours (this bug is a HUGE problem and may require redesign)
+647: 1 hour
+648: 1 hour
+653: 5 hours
+658: ? (same as 636)
+
+431: 4 hours
+503: Reply to Karen
+504: Reply to Karen
+509: 4 hours
+535: Can't fix. For some reason autoresponders are not properly updating.
+545: 1 hour
+602: 2 hours
+634: Reply to Karen
+639: 2 hours
+644: 3 hours
+646: 3 hours
+649: 3 hours
+651: 8 hours
+652: 1 hour
+655: Reply to Karen
+660: Reply to Taylor
+661: 1 hour
+664: 4 hours
+666: 2 hours
+
+643: 1 hour
+654: 2 hours
+656: 2 hours

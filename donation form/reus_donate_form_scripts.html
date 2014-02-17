@@ -36,9 +36,6 @@ center_forms = (function () {
       xml = data;
     }
   });
-
-  console.log(xml);
-
   return xml;
 })();
 
@@ -284,8 +281,6 @@ $(document).ready(function () {
   }
 
   function launchCard(id) {
-    console.log("Card ID: " + id);
-
     $.fancybox({
       href: '#js-prod-personalizer',
       autoSize: false,
@@ -426,7 +421,6 @@ $(document).ready(function () {
   });
 
   $(".option-two li>span").live("click", function () {
-    console.log("click: " + $(this).parent().attr("data-option-value"));
     var cardType = $(this).parent().attr("data-option-value");
     optionTwo(cardType);
   });
@@ -1192,7 +1186,6 @@ $(document).ready(function () {
 
   getDonationInfo = function () {
     var donations = mawf.CartView.donations();
-    console.log("Donations: " + donations.toString());
     var monthly = false;
     var totalGift = 0.00;
     var x = 1;
@@ -1214,7 +1207,6 @@ $(document).ready(function () {
         },
         success: function (response) {
           returnURL = response['data']['url'];
-          console.log(returnURL);
         }
       });
 
@@ -1232,12 +1224,8 @@ $(document).ready(function () {
           $("input[name='s_sat_skew']").val('DO02-01');
         } else if(type === 2) {
           $("input[name='s_sat_skew']").val('MG05-01');
-        } else {
-          console.log('error: s_sat_skew is blank but was not set');
         }
-      } else {
-        console.log('s_sat_skew should be an hon/mem id');
-      } 
+      }
 
       // BDC 12/10/2013
       var short_chid = chid.substr(0,3),
@@ -1245,8 +1233,6 @@ $(document).ready(function () {
         donation_form_id = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid + ' + form').attr('id')) : ('1563')),
         isMonthly = false,
         formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish® International'));
-
-      console.log(short_chid);
 
       data = data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id);
       data += '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee);
@@ -1447,8 +1433,6 @@ $(document).ready(function () {
     if (data.indexOf("product_url_1") == -1) {
       data = data + "&product_url_1=none&s_productURL1=none&s_productURL1Name=none";
     }
-
-    console.log("Data: " + data);
   } // getDonationInfo()
 
 });
@@ -1503,11 +1487,6 @@ chaptersjson = (function () {
   $('a.checkDonations').click(function (e) {
     var donations = mawf.CartView.donations()
     e.preventDefault();
-    console.log(donations.length + ' donations.');
-    for (var i in donations) {
-      console.log(donations[i]);
-      console.log(donations[i].donationID());
-    }
     getDonationInfo();
   });
 
@@ -1664,14 +1643,12 @@ chaptersjson = (function () {
     $('#localOptin').insertBefore('#nationalOptin');
     $('.intouch-container:eq(0)').addClass('selected');
     $('.intouch-container:eq(0) input').prop('checked', true);
-    console.log('chid is set to: ' + chid);
     $("input[name='s_sat_chapter_id']").val(chid);
   } else {
-    console.log('chid is not set');
     $("input[name='s_sat_chapter_id']").val("100-000");
   }
 
-  data = 'method=donate&form_id=1420';
+  data = 'method=donate&form_id=1420&validate=true';
 
   $('.sendCards').click(function (e) {
     e.preventDefault();
@@ -1792,21 +1769,15 @@ function showError(pageError, fieldError) {
 
   alert(pageError + " " + fieldError);
   $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
-  console.log(pageError + " " + fieldError);
 }
 
-var addCentersCallback = function (data) {
-  console.log("Add Centers Callback: " + data);
-
-};
+var addCentersCallback = function (data) {};
 
 var addCentersCallbackLast = function (data) {
-  console.log("Add Centers Callback Last: " + data);
   lastStep();
 };
 
 function lastStep() {
-  console.log("last step");
   $.removeCookie("cart");
   $.jStorage.flush();
   localStorage.clear();
@@ -1839,7 +1810,6 @@ $('#ccPostal').blur(function(e){
 });
 
 function finishGift() {
-  console.log("finish gift");
   var survey_ids = [];
 
   if ($('#optinNational').is(':checked')) {
@@ -1858,10 +1828,8 @@ function finishGift() {
 
   if (survey_ids.length > 0) {
     for (var i = 0; i < survey_ids.length; i++) {
-      console.log(i + ", " + survey_ids.length);
 
       if ((navigator.userAgent.match(/MSIE 9/i))) {
-        console.log("ie9");
         xmlHttp.abort();
       }
 
@@ -1906,29 +1874,44 @@ jQuery(document).ready(function ($) {
 
     getDonationInfo();
 
+    // Set level_id
     luminateExtend.api.request({
       api: 'donation',
-      form: '#mainform',
-      data: data,
+      data: 'method=getDonationFormInfo&form_id=' +
+        /form_id=(\d{4,5})/.exec(data)[1],
       requestType: 'POST',
-      callback: function (data) {
-        console.log(data);
-        if (data['donationResponse']['donation']) {
-          finishGift();
+      callback: function (dfdata) {
+        if(dfdata.errorResponse) {
+          data += '&level_id=2031';
+        } else {
+          data += '&level_id=' + dfdata.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
+          console.log(data);
         }
-        if (data['donationResponse']['errors']) {
-          var fieldError = "";
-          if (data['donationResponse']['errors']['fieldError']) {
-            if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
-              $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
-                fieldError = fieldError + arr + " ";
-              });
-            } else {
-              fieldError = data['donationResponse']['errors']['fieldError'];
+        luminateExtend.api.request({
+          api: 'donation',
+          form: '#mainform',
+          data: data,
+          requestType: 'POST',
+          callback: function (data) {
+            console.log(data);
+            if (data['donationResponse']['donation']) {
+              finishGift();
+            }
+            if (data['donationResponse']['errors']) {
+              var fieldError = "";
+              if (data['donationResponse']['errors']['fieldError']) {
+                if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
+                  $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
+                    fieldError = fieldError + arr + " ";
+                  });
+                } else {
+                  fieldError = data['donationResponse']['errors']['fieldError'];
+                }
+              }
+              showError(data['donationResponse']['errors']['pageError'], fieldError);
             }
           }
-          showError(data['donationResponse']['errors']['pageError'], fieldError);
-        }
+        });
       }
     });
   });
@@ -1944,31 +1927,46 @@ jQuery(document).ready(function ($) {
 
     getDonationInfo();
 
+    // Set level_id
     luminateExtend.api.request({
       api: 'donation',
-      form: '#mainform',
-      data: paypalData,
+      data: 'method=getDonationFormInfo&form_id=' +
+        /form_id=(\d{4,5})/.exec(data)[1],
       requestType: 'POST',
-      callback: function (data) {
-        console.log(data);
-        if (data['donationResponse']['redirect']) {
-          window.isPaypal = true;
-          window.paypalRedirectUrl = data['donationResponse']['redirect']['url'];
-          finishGift();
+      callback: function (dfdata) {
+        if(dfdata.errorResponse) {
+          data += '&level_id=2031';
+        } else {
+          data += '&level_id=' + dfdata.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
+          console.log(data);
         }
-        if (data['donationResponse']['errors']) {
-          var fieldError = "";
-          if (data['donationResponse']['errors']['fieldError']) {
-            if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
-              $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
-                fieldError = fieldError + arr + " ";
-              });
-            } else {
-              fieldError = data['donationResponse']['errors']['fieldError'];
+        luminateExtend.api.request({
+          api: 'donation',
+          form: '#mainform',
+          data: paypalData,
+          requestType: 'POST',
+          callback: function (data) {
+            console.log(data);
+            if (data['donationResponse']['redirect']) {
+              window.isPaypal = true;
+              window.paypalRedirectUrl = data['donationResponse']['redirect']['url'];
+              finishGift();
+            }
+            if (data['donationResponse']['errors']) {
+              var fieldError = "";
+              if (data['donationResponse']['errors']['fieldError']) {
+                if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
+                  $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
+                    fieldError = fieldError + arr + " ";
+                  });
+                } else {
+                  fieldError = data['donationResponse']['errors']['fieldError'];
+                }
+              }
+              showError(data['donationResponse']['errors']['pageError'], fieldError);
             }
           }
-          showError(data['donationResponse']['errors']['pageError'], fieldError);
-        }
+        });
       }
     });
   });
