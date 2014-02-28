@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"url",
+				"urlVariableArray"
+			],
+			[
 				"cardIm",
 				"cardImage1"
 			],
@@ -143,32 +147,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "donation form/reus_donate_form_scripts.html",
-			"settings":
-			{
-				"buffer_size": 80864,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "CONS_MATCH_MULTIPLE_PRIMARY_EMAILS = TRUE/FALSE\nDetermines whether email history should be searched when looking for constituent matches.\n\nCONS_UPDATE_WITH_BILLING_DATA = TRUE/FALSE\nDetermines donation form behavior and how constituent data is updated from the billing data. When set to FALSE, the physical address entered by a constituent while making a transaction will not update the constituent's profile unless there is no data in those fields. In this case, the system uses the donor name and billing address to update the profile. When this option is set to TRUE and the constituent is logged in, they can update their information (but not their email address) from the billing fields.\n\nCONS_UPDATE_WITH_BILLING_DATA_NOT_LOGGED_IN = TRUE/FALSE\nDetermines donation form behavior and how constituent data is updated from the billing data. When set to FALSE, the physical address entered by a constituent while making a transaction will not update the constituent's profile unless there is no data in those fields. In that case, the system uses the donor name and billing address to update the profile. When set to TRUE, the system uses the email address to find a matching record and then uses the billing address to update the name and address in the constituent profile.\n\nDON_USE_NAME_MATCH_STRATEGY = TRUE/FALSE\nSet to TRUE to use a constituent matching strategy that places a higher importance on name rather than email. If enabled, this matching strategy applies only to donations to TeamRaiser participants and Donation2 campaigns.\n\nDON_DIFFERENTIATE_CONS_ON_DONOR_INFO = TRUE/FALSE\nIf set to TRUE, COM will be able recognize if a donation was made by different constituent than the one logged in, and attribute the donation to the appropriate record.\n\nCONS_AUTOREG_NOTIFY_EXISTING_USER = TRUE/FALSE\nEntering \"TRUE\" or \"FALSE\" for this site option determines whether an automatically registered contact will be sent login reminder email or not. The default value is TRUE.\n\nCONS_AUTOREG_NOTIFY_NEW_USER = TRUE/FALSE\nEntering \"TRUE\" or \"FALSE\" for this site option determines whether an automatically registered contact will be sent an email notification in this regard.",
-			"settings":
-			{
-				"buffer_size": 2179,
-				"line_ending": "Windows",
-				"name": "CONS_MATCH_MULTIPLE_PRIMARY_EMAILS = TRUE/FALSE"
-			}
-		},
-		{
-			"contents": "Edwin 181",
-			"settings":
-			{
-				"buffer_size": 9,
-				"line_ending": "Windows",
-				"name": "Edwin 181"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -197,7 +175,15 @@
 	},
 	"file_history":
 	[
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/config.js",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_global_vars_product_selector.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_process_donation.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_get_donation_info.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_plugins.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_metadata.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/css/donate.css",
+		"/C/Users/v-ben.cloutier/Desktop/genes's shitty poetry.txt",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/bug list.txt",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/xml/center_info.xml",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_ar_monthly_promo.html",
@@ -213,7 +199,6 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_thankyou_scripts.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_chapter_country_search.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/products.json",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_metadata.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_select.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/ko-custom.concat.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_config.html",
@@ -317,14 +302,7 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_079.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_080.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_081.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_083.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_084.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_085.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_100.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_socialbar.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_copyright.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/center_info.csv",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts_test.html"
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_083.html"
 	],
 	"find":
 	{
@@ -346,6 +324,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"paypalRedirectUrl",
+			"isPaypal",
+			"metadata",
+			"script>",
+			"metadata_campaign_id",
+			"donate.css",
+			"selectCard",
+			"checkfields",
+			"launchCard",
+			"Birthday",
 			"DocServer/GiftForm.pdf?docID=141",
 			".pdf",
 			"pdf",
@@ -463,17 +451,7 @@
 			"check if my company",
 			"refer-a-child",
 			"ammount-btn",
-			"my donation amount",
-			"$75",
-			"75",
-			"\\n",
-			"f",
-			"f\\d\\d\\d",
-			"<office id=\"(.*)\" />",
-			"card number",
-			"selectCard",
-			"magnify",
-			"honorname"
+			"my donation amount"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -568,95 +546,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "donation form/reus_donate_form_scripts.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 80864,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								297,
-								297
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2179,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1762,
-								1762
-							]
-						],
-						"settings":
-						{
-							"auto_name": "CONS_MATCH_MULTIPLE_PRIMARY_EMAILS = TRUE/FALSE",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9,
-								9
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Edwin 181",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
