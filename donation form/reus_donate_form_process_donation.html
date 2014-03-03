@@ -1,79 +1,81 @@
 <script>
-luminateExtend.init({
-  apiKey: 'mu3fefod',
-  path: {
-    nonsecure: 'http://site.wish.org/site/',
-    secure: 'https://secure2.convio.net/wish/site/'
-  }
-});
-var xmlHttp = new XMLHttpRequest(),
-  showError = function(pageError, fieldError) {
-    alert(pageError + " " + fieldError);
-    $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
-  },
-  lastStep = function() {
-    $.removeCookie("cart");
-    $.jStorage.flush();
-    localStorage.clear();
-    savedSession = {}
-    $("#mainform input").each(function () {
-      $(this).val("");
-    });
-    window.onbeforeunload = function () {};
-    if(isPaypal) {
-      window.location = paypalRedirectUrl;
-    }
-    else {
-      window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou";
-    }
-  },
-  finishGift = function() {
-    var survey_ids = [];
-    if ($('#optinNational').is(':checked')) {
-      survey_ids.push("1604");
-    }
-    if ($('#optinInternational').hasClass('checked')) {
-      survey_ids.push("1625");
-    }
-    if ($('#optinChapter').is(':checked')) {
-      $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-        if (arr['office_id'] == $('#chapter_id').val()) {
-          survey_ids.push(arr['surveyID']);
-        }
-      });
-    }
-    if (survey_ids.length > 0) {
-      for (var i = 0; i < survey_ids.length; i++) {
-        if ((navigator.userAgent.match(/MSIE 9/i))) {
-          xmlHttp.abort();
-        }
-        if (i + 1 == survey_ids.length) {
-          data = "method=submitSurvey&cons_email=" + encodeURIComponent($("#eAdd").val()) + "&cons_email_opt_in=true&survey_id=" + survey_ids[i];
-          luminateExtend.api.request({
-            api: 'survey',
-            data: data,
-            callback: lastStep,
-            requiresAuth: true,
-            requestType: 'POST',
-            useHTTPS: true
-          });
-        } else {
-          data = "method=submitSurvey&cons_email=" + encodeURIComponent($("#eAdd").val()) + "&cons_email_opt_in=true&survey_id=" + survey_ids[i];
-          luminateExtend.api.request({
-            api: 'survey',
-            data: data,
-            requiresAuth: true,
-            requestType: 'POST',
-            useHTTPS: true
-          });
-        }
-      }
-    } else {
-      lastStep();
-    }
-  };
-
 jQuery(document).ready(function ($) {
+  var isPaypal = false,
+    paypalRedirectUrl = '', 
+    xmlHttp = new XMLHttpRequest(),
+    zip_array = (function(){$.getJSON('../assets/js/zip-codes.json', function (data) {return data});})(),
+    showError = function(pageError, fieldError) {
+      alert(pageError + " " + fieldError);
+      $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
+    },
+    lastStep = function() {
+      $.removeCookie("cart");
+      $.jStorage.flush();
+      localStorage.clear();
+      savedSession = {}
+      $("#mainform input").each(function () {
+        $(this).val("");
+      });
+      window.onbeforeunload = function () {};
+      if(isPaypal) {
+        window.location = paypalRedirectUrl;
+      }
+      else {
+        window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou";
+      }
+    },
+    finishGift = function() {
+      var survey_ids = [];
+      if ($('#optinNational').is(':checked')) {
+        survey_ids.push("1604");
+      }
+      if ($('#optinInternational').hasClass('checked')) {
+        survey_ids.push("1625");
+      }
+      if ($('#optinChapter').is(':checked')) {
+        $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+          if (arr['office_id'] == $('#chapter_id').val()) {
+            survey_ids.push(arr['surveyID']);
+          }
+        });
+      }
+      if (survey_ids.length > 0) {
+        for (var i = 0; i < survey_ids.length; i++) {
+          if ((navigator.userAgent.match(/MSIE 9/i))) {
+            xmlHttp.abort();
+          }
+          if (i + 1 == survey_ids.length) {
+            donation_data = "method=submitSurvey&cons_email=" + encodeURIComponent($("#eAdd").val()) + "&cons_email_opt_in=true&survey_id=" + survey_ids[i];
+            luminateExtend.api.request({
+              api: 'survey',
+              data: data,
+              callback: lastStep,
+              requiresAuth: true,
+              requestType: 'POST',
+              useHTTPS: true
+            });
+          } else {
+            donation_data = "method=submitSurvey&cons_email=" + encodeURIComponent($("#eAdd").val()) + "&cons_email_opt_in=true&survey_id=" + survey_ids[i];
+            luminateExtend.api.request({
+              api: 'survey',
+              data: donation_data,
+              requiresAuth: true,
+              requestType: 'POST',
+              useHTTPS: true
+            });
+          }
+        }
+      } else {
+        lastStep();
+      }
+    };
+  luminateExtend.init({
+    apiKey: 'mu3fefod',
+    path: {
+      nonsecure: 'http://site.wish.org/site/',
+      secure: 'https://secure2.convio.net/wish/site/'
+    }
+  });
   $('#ccPostal').blur(function(e){
     var id_from_billing_zip;  
     $(zip_array['chapter']).each(function (index, arr) {
@@ -101,18 +103,16 @@ jQuery(document).ready(function ($) {
       requestType: 'POST',
       callback: function (dfdata) {
         if(dfdata.errorResponse) {
-          data += '&level_id=2031';
+          donation_data += '&level_id=2031';
         } else {
-          data += '&level_id=' + dfdata.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
-          console.log(data);
+          donation_data += '&level_id=' + dfdata.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
         }
         luminateExtend.api.request({
           api: 'donation',
           form: '#mainform',
-          data: data,
+          data: donation_data,
           requestType: 'POST',
           callback: function (data) {
-            console.log(data);
             if (data['donationResponse']['donation']) {
               finishGift();
             }
@@ -140,20 +140,19 @@ jQuery(document).ready(function ($) {
     $(this).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
       e.preventDefault();
     });
-    var paypalData = data.replace('donate','startDonation') + '&extproc=paypal&finish_success_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou]]&finish_error_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_paypal_error]]';
+    var paypalData = donation_data.replace('donate','startDonation') + '&extproc=paypal&finish_success_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou]]&finish_error_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_paypal_error]]';
     getDonationInfo();
     // Set level_id
     luminateExtend.api.request({
       api: 'donation',
       data: 'method=getDonationFormInfo&form_id=' +
-        /form_id=(\d{4,5})/.exec(data)[1],
+        /form_id=(\d{4,5})/.exec(donation_data)[1],
       requestType: 'POST',
-      callback: function (dfdata) {
-        if(dfdata.errorResponse) {
-          data += '&level_id=2031';
+      callback: function (data) {
+        if(data.errorResponse) {
+          donation_data += '&level_id=2031';
         } else {
-          data += '&level_id=' + dfdata.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
-          console.log(data);
+          donation_data += '&level_id=' + data.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
         }
         luminateExtend.api.request({
           api: 'donation',
@@ -161,7 +160,6 @@ jQuery(document).ready(function ($) {
           data: paypalData,
           requestType: 'POST',
           callback: function (data) {
-            console.log(data);
             if (data['donationResponse']['redirect']) {
               isPaypal = true;
               paypalRedirectUrl = data['donationResponse']['redirect']['url'];

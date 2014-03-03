@@ -1,6 +1,7 @@
 <script>
 (function ($) {
-  var data = 'method=donate&form_id=1420&validate=true',
+  var donation_data = 'method=donate&form_id=1420&validate=true',
+    numLevels = $('.ammount-btn').length,
     urlVariableArray = (function(){var vars={},parts=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(m,key,value){vars[key]=value;});return vars;})(),
     level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (30) : (Math.floor(urlVariableArray['level1']))),
     level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (50) : (Math.floor(urlVariableArray['level2']))),
@@ -75,17 +76,42 @@
   $('.nextMonth').each(function () {
     $(this).append(getNextMonth());
   });
-  for (var index in urlVariableArray) {
-    if (index.substring(0, 2) == "s_") {
-      data = data + "&" + index + "=" + urlVariableArray[index];
+  $('a.state-btn').click(function (e) {
+    e.preventDefault();
+    var state = $(this).text();
+    var stateResults = [];
+    var $chapterResults = $('.js-chapter-results ul');
+    $chapterResults.html('');
+    $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+      if (arr['state_province'] == state) {
+        stateResults.push([arr['office_id'], arr['office_name']])
+      }
+    }); //each loop
+    for (var i = 0; i < stateResults.length; i++) {
+      var stateResult = stateResults[i]
+      $chapterResults.append('<li><a class="chapter-btn" data-office-id="' + stateResult[0] + '" href="#" >' + stateResult[1] + '</a></li>');
     }
-  }
+  });
   $('a.checkDonations').click(function (e) {
     var donations = mawf.CartView.donations()
     e.preventDefault();
     getDonationInfo();
   });
-  numLevels = $('.ammount-btn').length;
+  $('.sendCards').click(function (e) {
+    e.preventDefault();
+    sendCards();
+  });
+  $(document).on('keyup', '.js_donationDest', function (e) {
+    searchForChapters($(this).val(), 'local');
+  });
+  $(document).on('keyup', '.js_donationToCountry', function (e) {
+    searchForChapters($(this).val(), 'international');
+  });
+  for (var index in urlVariableArray) {
+    if (index.substring(0, 2) == "s_") {
+      donation_data = donation_data + "&" + index + "=" + urlVariableArray[index];
+    }
+  }
   if (numLevels > 3) {
     $('.donate-wrap .other').css("float", "left");
     $('.donate-wrap .ammount-btn').css("margin-bottom", "10px");
@@ -168,31 +194,5 @@
   } else {
     $("input[name='s_sat_chapter_id']").val("100-000");
   }
-  $('.sendCards').click(function (e) {
-    e.preventDefault();
-    sendCards();
-  });
-  $(document).on('keyup', '.js_donationDest', function (e) {
-    searchForChapters($(this).val(), 'local');
-  });
-  $(document).on('keyup', '.js_donationToCountry', function (e) {
-    searchForChapters($(this).val(), 'international');
-  });
-  $('a.state-btn').click(function (e) {
-    e.preventDefault();
-    var state = $(this).text();
-    var stateResults = [];
-    var $chapterResults = $('.js-chapter-results ul');
-    $chapterResults.html('');
-    $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-      if (arr['state_province'] == state) {
-        stateResults.push([arr['office_id'], arr['office_name']])
-      }
-    }); //each loop
-    for (var i = 0; i < stateResults.length; i++) {
-      var stateResult = stateResults[i]
-      $chapterResults.append('<li><a class="chapter-btn" data-office-id="' + stateResult[0] + '" href="#" >' + stateResult[1] + '</a></li>');
-    }
-  });
 })(jQuery);
 </script>
