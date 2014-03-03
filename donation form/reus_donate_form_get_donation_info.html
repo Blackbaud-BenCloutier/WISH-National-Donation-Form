@@ -1,6 +1,7 @@
 <script>
 (function ($) {
-  var urlVariableArray = (function(){var vars={},parts=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(m,key,value){vars[key]=value;});return vars;})(),
+  var data = 'method=donate&form_id=1420&validate=true',
+    urlVariableArray = (function(){var vars={},parts=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(m,key,value){vars[key]=value;});return vars;})(),
     level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (30) : (Math.floor(urlVariableArray['level1']))),
     level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (50) : (Math.floor(urlVariableArray['level2']))),
     level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3']))),
@@ -9,7 +10,71 @@
     level6 = (((urlVariableArray['level6'] < 1 || isNaN(urlVariableArray['level6']))) ? (500) : (Math.floor(urlVariableArray['level6']))),
     level7 = (((urlVariableArray['level7'] < 1 || isNaN(urlVariableArray['level7']))) ? (1000) : (Math.floor(urlVariableArray['level7'])));
     chid = '[[S80:chid]]',
-    chapter_prefix = chid.substring(0, 3);
+    chapter_prefix = chid.substring(0, 3),
+    getNextMonth = function() {
+      var dayOfMonth = Date.today().toString('d');
+      if (dayOfMonth == '29' || dayOfMonth == '30' || dayOfMonth == '31') {
+        return Date.today().moveToFirstDayOfMonth().addMonths(2).toString('M/d/yyyy');
+      } else {
+        return Date.today().next().month().toString('M/d/yyyy');
+      }
+    },
+    searchForChapters = function(search_value, local_or_international){
+      $('ul.search-menu').html('<li id="no_valid_region"><a>Matching Result Not Found!</a></li>');
+      if(parseInt(search_value)) {
+        $.getJSON('../assets/js/zip-codes.json', function (data) {
+          $(data['chapter']).each(function (index, arr) {
+            var chapter_id = arr['chapter_id'];
+            if (arr['zip_code'] == search_value) {
+              $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+                if(local_or_international == 'local'){
+                  if(parseInt(chapter_id.substr(0,3)) < 500) {
+                    if (arr['office_id'] == chapter_id) {
+                      $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                      window.formFundID = arr['fund_id'];
+                      return;
+                    }
+                  }
+                } else {
+                  if(parseInt(chapter_id.substr(0,3)) >= 500) {
+                    if (arr['office_id'] == chapter_id) {
+                      $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                      window.formFundID = arr['fund_id'];
+                      return;
+                    }
+                  }
+                }
+              });
+            }
+          });
+        });
+      } else {
+        if (search_value.length > 2) {
+          $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+            var office_name_regex = new RegExp(search_value,'i'),
+            chapter_id = arr['office_id'];
+            if(local_or_international == 'local'){
+              if(parseInt(chapter_id.substr(0,3)) < 500) {
+                if(office_name_regex.test(arr['office_name'])) {
+                  $('#no_valid_region').remove();
+                  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                }
+              }
+            } else {
+              if(parseInt(chapter_id.substr(0,3)) >= 500) {
+                if(office_name_regex.test(arr['office_name'])) {
+                  $('#no_valid_region').remove();
+                  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                }
+              }
+            }
+          });
+        }
+      }
+    };
+  $('.nextMonth').each(function () {
+    $(this).append(getNextMonth());
+  });
   for (var index in urlVariableArray) {
     if (index.substring(0, 2) == "s_") {
       data = data + "&" + index + "=" + urlVariableArray[index];
@@ -103,75 +168,10 @@
   } else {
     $("input[name='s_sat_chapter_id']").val("100-000");
   }
-  data = 'method=donate&form_id=1420&validate=true';
   $('.sendCards').click(function (e) {
     e.preventDefault();
     sendCards();
   });
-  function getNextMonth() {
-    var dayOfMonth = Date.today().toString('d');
-    if (dayOfMonth == '29' || dayOfMonth == '30' || dayOfMonth == '31') {
-      return Date.today().moveToFirstDayOfMonth().addMonths(2).toString('M/d/yyyy');
-    } else {
-      return Date.today().next().month().toString('M/d/yyyy');
-    }
-  }
-  $('.nextMonth').each(function () {
-    $(this).append(getNextMonth());
-  });
-  var searchForChapters = function(search_value, local_or_international){
-    $('ul.search-menu').html('<li id="no_valid_region"><a>Matching Result Not Found!</a></li>');
-    if(parseInt(search_value)) {
-      $.getJSON('../assets/js/zip-codes.json', function (data) {
-        $(data['chapter']).each(function (index, arr) {
-          var chapter_id = arr['chapter_id'];
-          if (arr['zip_code'] == search_value) {
-            $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-              if(local_or_international == 'local'){
-                if(parseInt(chapter_id.substr(0,3)) < 500) {
-                  if (arr['office_id'] == chapter_id) {
-                    $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                    window.formFundID = arr['fund_id'];
-                    return;
-                  }
-                }
-              } else {
-                if(parseInt(chapter_id.substr(0,3)) >= 500) {
-                  if (arr['office_id'] == chapter_id) {
-                    $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                    window.formFundID = arr['fund_id'];
-                    return;
-                  }
-                }
-              }
-            });
-          }
-        });
-      });
-    } else {
-      if (search_value.length > 2) {
-        $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-          var office_name_regex = new RegExp(search_value,'i'),
-          chapter_id = arr['office_id'];
-          if(local_or_international == 'local'){
-            if(parseInt(chapter_id.substr(0,3)) < 500) {
-              if(office_name_regex.test(arr['office_name'])) {
-                $('#no_valid_region').remove();
-                $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-              }
-            }
-          } else {
-            if(parseInt(chapter_id.substr(0,3)) >= 500) {
-              if(office_name_regex.test(arr['office_name'])) {
-                $('#no_valid_region').remove();
-                $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-              }
-            }
-          }
-        });
-      }
-    }
-  };
   $(document).on('keyup', '.js_donationDest', function (e) {
     searchForChapters($(this).val(), 'local');
   });

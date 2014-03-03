@@ -147,6 +147,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "donation form/reus_donate_form_process_donation.html",
+			"settings":
+			{
+				"buffer_size": 6683,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -175,11 +183,13 @@
 	},
 	"file_history":
 	[
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/config.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_global_vars_product_selector.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_get_donation_info.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/donate.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/config.js",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_process_donation.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_get_donation_info.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_plugins.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_metadata.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/css/donate.css",
@@ -191,7 +201,6 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/Current/mda/new/lockup/lockup_custom_scrolling_list.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_footer_links.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_head_chapter_conditionals.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_payment_type.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/donate_thankyou.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_nav.html",
@@ -301,12 +310,11 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_077.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_079.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_080.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_081.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_083.html"
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_081.html"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -324,6 +332,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"alt=''",
+			"urlVariableArray",
+			"get_short_url",
+			"escapeall",
+			"\"\"",
+			"showStep1",
 			"paypalRedirectUrl",
 			"isPaypal",
 			"metadata",
@@ -445,13 +459,7 @@
 			"opt",
 			"my donation(s)",
 			"other",
-			"yes",
-			"yes!",
-			"check if your company",
-			"check if my company",
-			"refer-a-child",
-			"ammount-btn",
-			"my donation amount"
+			"yes"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -459,6 +467,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"''",
 			"®",
 			"",
 			"&reg;",
@@ -546,14 +555,45 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "donation form/reus_donate_form_process_donation.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6683,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								407,
+								407
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 31.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -589,7 +629,7 @@
 	"project": "WISH donation form.sublime-project",
 	"replace":
 	{
-		"height": 58.0
+		"height": 66.0
 	},
 	"save_all_on_build": true,
 	"select_file":
