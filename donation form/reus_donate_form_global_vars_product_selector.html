@@ -101,6 +101,16 @@ $(document).ready(function () {
       $('#step2').show();
       $('#step3').hide();
     },
+    selectEcard = function(cardID) {
+      $(productsjson['product']).each(function (index, arr) {
+        if (arr['card_id'] == cardID) {
+          ecard_id = arr['ecard_id'] || false;
+          product_url = arr['product_url'] || false;
+          return false;
+        }
+      });
+      window.open(product_url, "ecard",'height=670,width=737,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
+    },
     validateFail = function(currentElement) {
       currentElement.addClass('input-error');
       currentElement.next("p").show();
@@ -125,8 +135,6 @@ $(document).ready(function () {
       currentElement.removeClass('input-error');
       currentElement.next("p").hide();
       currentElement.prev("label").removeClass("label-error");
-      /*$(".bldr-wrap #card-form .mnamefld").css({
-      });*/
       if ($("#State_X").hasClass("input-error")) {
         $("#uniform-State_X span").removeClass("input-error");
         $("#uniform-State_X").next("p").hide();
@@ -172,71 +180,6 @@ $(document).ready(function () {
       });
       selectCard(id);
     },
-    optionTwo = function(thisCardType) {
-      var occasionType = $('#selectOccasion input[type=hidden]').val();
-      var products = [];
-      var cardCount = 0;
-      $(productsjson['product']).each(function (index, arr) {
-        if (arr['card_type'] == thisCardType && arr['occasion_type'] == occasionType) {
-          if (arr['is_new'].toLowerCase() == "true") {
-            products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '" class="new-item"></li>');
-          } else {
-            products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '"></li>');
-          }
-          cardCount++
-        }
-      });
-      $("ul#products").remove();
-      $("a.arrow").remove();
-      if (cardCount > 3) {
-        $('#carousel-gallery .wrapper').append('<ul id="products">' + products + products + '</ul>');
-      } else {
-        $('#carousel-gallery .wrapper').append('<ul id="products">' + products + '</ul>');
-      }
-      $('.infiniteCarousel').infiniteCarousel();
-      if (cardCount < 3) {
-        $("a.arrow").unbind("click").css({
-          'opacity': '.2',
-          'cursor': 'none'
-        });
-        $("a.arrow").click(function (e) {
-          e.preventDefault();
-        });
-      }
-      if (cardCount == 1) {
-        $('#cardCount').text(cardCount + '  Card');
-      } else {
-        $('#cardCount').text(cardCount + '  Cards');
-      }
-      $('div.select-area-3').removeClass("disabled");
-      $('div#carousel-gallery').removeClass("disabled");
-    },
-    selectEcard = function(cardID) {
-      $(productsjson['product']).each(function (index, arr) {
-        if (arr['card_id'] == cardID) {
-          ecard_id = arr['ecard_id'] || false;
-          product_url = arr['product_url'] || false;
-          return false;
-        }
-      });
-      window.open(product_url, "ecard",'height=670,width=737,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
-    },
-    launchZoom = function(cardURL) {
-      $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img id="zoom_preview" style="display: none;" src="' + cardURL + '" alt="" /></span>')
-      $('#zoom_preview').load(function(){
-          var productHeight = $(this).height();
-          var productWidth = $(this).width();
-          if (productHeight == productWidth) {
-            $(this).addClass('square');
-          } else if (productHeight > productWidth) {
-            $(this).addClass('portrait');
-          } else if (productHeight < productWidth) {
-            $(this).addClass('landscape');
-          }
-          $(this).attr('style', '');   
-        });
-      $('#productImageContainer').zoom();
-    },
     selectCard = function(cardID) {
       $(productsjson['product']).each(function (index, arr) {
         if (arr['card_id'] == cardID) {
@@ -271,8 +214,7 @@ $(document).ready(function () {
       }
       $("img.card-thumb").click(function (e) {
         e.preventDefault();
-        var whichThumb = $(this).attr("src");
-        launchZoom(whichThumb);
+        launchZoom($(this).attr("src"));
       });
       showStep2();
       $('.lightbox-rightside').on('click', 'a.cont-btn', function (e) {
@@ -282,6 +224,60 @@ $(document).ready(function () {
         }
       });
       return;
+    },
+    launchZoom = function(cardURL) {
+      $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img id="zoom_preview" style="display: none;" src="' + cardURL + '" alt="" /></span>')
+      $('#zoom_preview').load(function(){
+          var productHeight = $(this).height();
+          var productWidth = $(this).width();
+          if (productHeight == productWidth) {
+            $(this).addClass('square');
+          } else if (productHeight > productWidth) {
+            $(this).addClass('portrait');
+          } else if (productHeight < productWidth) {
+            $(this).addClass('landscape');
+          }
+          $(this).attr('style', '');   
+        });
+      $('#productImageContainer').zoom();
+    },
+    optionTwo = function(thisCardType) {
+      var products = [],
+        cardCount = 0;
+      $(productsjson['product']).each(function (index, arr) {
+        if (arr['card_type'] == thisCardType && arr['occasion_type'] == $('#selectOccasion input[type=hidden]')) {
+          if (arr['is_new'].toLowerCase() == "true") {
+            products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '" class="new-item"></li>');
+          } else {
+            products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '"></li>');
+          }
+          cardCount++;
+        }
+      });
+      $("ul#products").remove();
+      $("a.arrow").remove();
+      if (cardCount > 3) {
+        $('#carousel-gallery .wrapper').append('<ul id="products">' + products + products + '</ul>');
+      } else {
+        $('#carousel-gallery .wrapper').append('<ul id="products">' + products + '</ul>');
+      }
+      $('.infiniteCarousel').infiniteCarousel();
+      if (cardCount < 3) {
+        $("a.arrow").unbind("click").css({
+          'opacity': '.2',
+          'cursor': 'none'
+        });
+        $("a.arrow").click(function (e) {
+          e.preventDefault();
+        });
+      }
+      if (cardCount == 1) {
+        $('#cardCount').text(cardCount + '  Card');
+      } else {
+        $('#cardCount').text(cardCount + '  Cards');
+      }
+      $('div.select-area-3').removeClass("disabled");
+      $('div#carousel-gallery').removeClass("disabled");
     },
     customizeCard = function(cardID) {
       $(productsjson['product']).each(function (index, arr) {
@@ -366,7 +362,7 @@ $(document).ready(function () {
       cardThumbnail = '';
       productURL = '';
       skew = '';
-    },
+    };
     showStep3 = function (ecardID, cardName, cardType, cardForm, occasionType, cardImage1, cardImage2, cardImage3, cardThumbnail, productURL, thisSkew)
     {
       $('#step1, #step2, .top-actions .back-btn').hide();
@@ -911,20 +907,13 @@ $(document).ready(function () {
       }
     };
 
-  $.jStorage.deleteKey('hideGiftType');
   $('.infiniteCarousel').infiniteCarousel();
-  $('select.event-select').customSelectMenu();
-  $('select.type-select').customSelectMenu();
-  $('.option-one li:first').remove();
-  $('.option-two li:first').remove();
-  if ($("select.event-select option").val() == '') {
-    $('.select-area-2').addClass('disabled');
-    $('.select-area-3').addClass('disabled');
-    $('#carousel-gallery').addClass("disabled");
-    $('.option-two ul').css({
-      opacity: 0
-    });
-  }
+  $('select.event-select,select.type-select').customSelectMenu();
+  $('.option-one li:first,.option-two li:first').remove();
+  $('.back-btn').click(function (e) {
+    e.preventDefault();
+    showStep1();
+  });
   for (var index in urlVariableArray) {
     if (index == 'card_type') {
       launchCard(urlVariableArray[index]);
@@ -1015,14 +1004,6 @@ $(document).ready(function () {
     $.fancybox.close();
     resetProducts();
     $("input[name='s_sat_skew']").val('');
-  });
-  $('.top-actions .back-btn').click(function (e) {
-    e.preventDefault();
-    showStep1();
-  });
-  $('.middle-actions .back-btn').click(function (e) {
-    e.preventDefault();
-    showStep1();
   });
 });
 </script>
