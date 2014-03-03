@@ -1,31 +1,22 @@
 <script>
 jQuery(document).ready(function ($) {
+  luminateExtend.init({
+    apiKey: 'mu3fefod',
+    path: {
+      nonsecure: 'http://site.wish.org/site/',
+      secure: 'https://secure2.convio.net/wish/site/'
+    }
+  });
   var isPaypal = false,
-    paypalRedirectUrl = '', 
-    xmlHttp = new XMLHttpRequest(),
+    paypalRedirectUrl = '',
     zip_array = (function(){$.getJSON('../assets/js/zip-codes.json', function (data) {return data});})(),
     showError = function(pageError, fieldError) {
       alert(pageError + " " + fieldError);
       $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
     },
-    lastStep = function() {
-      $.removeCookie("cart");
-      $.jStorage.flush();
-      localStorage.clear();
-      savedSession = {}
-      $("#mainform input").each(function () {
-        $(this).val("");
-      });
-      window.onbeforeunload = function () {};
-      if(isPaypal) {
-        window.location = paypalRedirectUrl;
-      }
-      else {
-        window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou";
-      }
-    },
     finishGift = function() {
-      var survey_ids = [];
+      var survey_ids = [],
+        survey_data = '';
       if ($('#optinNational').is(':checked')) {
         survey_ids.push("1604");
       }
@@ -39,43 +30,70 @@ jQuery(document).ready(function ($) {
           }
         });
       }
-      if (survey_ids.length > 0) {
-        for (var i = 0; i < survey_ids.length; i++) {
-          if ((navigator.userAgent.match(/MSIE 9/i))) {
-            xmlHttp.abort();
-          }
-          if (i + 1 == survey_ids.length) {
-            donation_data = "method=submitSurvey&cons_email=" + encodeURIComponent($("#eAdd").val()) + "&cons_email_opt_in=true&survey_id=" + survey_ids[i];
-            luminateExtend.api.request({
-              api: 'survey',
-              data: data,
-              callback: lastStep,
-              requiresAuth: true,
-              requestType: 'POST',
-              useHTTPS: true
-            });
-          } else {
-            donation_data = "method=submitSurvey&cons_email=" + encodeURIComponent($("#eAdd").val()) + "&cons_email_opt_in=true&survey_id=" + survey_ids[i];
-            luminateExtend.api.request({
-              api: 'survey',
-              data: donation_data,
-              requiresAuth: true,
-              requestType: 'POST',
-              useHTTPS: true
-            });
-          }
-        }
-      } else {
-        lastStep();
+      for (var i = 0; i < survey_ids.length; i++) {
+        luminateExtend.api.request({
+          api: 'survey',
+          data: 'method=submitSurvey&cons_email=' + encodeURIComponent($("#eAdd").val()) + '&cons_email_opt_in=true&survey_id=' + survey_ids[i],
+          requiresAuth: true,
+          requestType: 'POST',
+          useHTTPS: true
+        });
       }
+      $.removeCookie("cart");
+      $.jStorage.flush();
+      localStorage.clear();
+      savedSession = {};
+      $('#mainform input').each(function(){$(this).val('');});
+      window.onbeforeunload = function(){};
+      if(isPaypal) {window.location = paypalRedirectUrl;}
+      else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou";}
+    },
+    submitDonation = function(button_element, form_data){
+      getDonationInfo();
+      $(button_element).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true);
+      luminateExtend.api.request({
+        api: 'donation',
+        data: 'method=getDonationFormInfo&form_id=' +
+          /form_id=(\d{4,5})/.exec(data)[1],
+        requestType: 'POST',
+        callback: function (data) {
+          if(data.errorResponse) {
+            form_data += '&level_id=2031';
+          } else {
+            form_data += '&level_id=' + data.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
+          }
+          luminateExtend.api.request({
+            api: 'donation',
+            form: '#mainform',
+            data: form_data,
+            requestType: 'POST',
+            callback: function (data) {
+              if (data['donationResponse']['redirect']) {
+                isPaypal = true;
+                paypalRedirectUrl = data['donationResponse']['redirect']['url'];
+                finishGift();
+              }
+              if (data['donationResponse']['donation']) {
+                finishGift();
+              }
+              if (data['donationResponse']['errors']) {
+                var fieldError = '';
+                if (data['donationResponse']['errors']['fieldError']) {
+                  if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
+                    $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
+                      fieldError = fieldError + arr + " ";
+                    });
+                  } else {
+                    fieldError = data['donationResponse']['errors']['fieldError'];
+                  }
+                }
+                showError(data['donationResponse']['errors']['pageError'], fieldError);
+              }
+            }
+          });
+        }
+      });
     };
-  luminateExtend.init({
-    apiKey: 'mu3fefod',
-    path: {
-      nonsecure: 'http://site.wish.org/site/',
-      secure: 'https://secure2.convio.net/wish/site/'
-    }
-  });
   $('#ccPostal').blur(function(e){
     var id_from_billing_zip;  
     $(zip_array['chapter']).each(function (index, arr) {
@@ -91,97 +109,12 @@ jQuery(document).ready(function ($) {
   // Standard donation submit button
   $("a.button-submit:eq(0)").click(function (e) {
     e.preventDefault();
-    $(this).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
-      e.preventDefault();
-    });
-    getDonationInfo();
-    // Set level_id
-    luminateExtend.api.request({
-      api: 'donation',
-      data: 'method=getDonationFormInfo&form_id=' +
-        /form_id=(\d{4,5})/.exec(data)[1],
-      requestType: 'POST',
-      callback: function (dfdata) {
-        if(dfdata.errorResponse) {
-          donation_data += '&level_id=2031';
-        } else {
-          donation_data += '&level_id=' + dfdata.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
-        }
-        luminateExtend.api.request({
-          api: 'donation',
-          form: '#mainform',
-          data: donation_data,
-          requestType: 'POST',
-          callback: function (data) {
-            if (data['donationResponse']['donation']) {
-              finishGift();
-            }
-            if (data['donationResponse']['errors']) {
-              var fieldError = "";
-              if (data['donationResponse']['errors']['fieldError']) {
-                if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
-                  $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
-                    fieldError = fieldError + arr + " ";
-                  });
-                } else {
-                  fieldError = data['donationResponse']['errors']['fieldError'];
-                }
-              }
-              showError(data['donationResponse']['errors']['pageError'], fieldError);
-            }
-          }
-        });
-      }
-    });
+    submitDonation($(this), donation_data);
   });
   // PayPal button
   $("a.button-submit:eq(1)").click(function (e) {
     e.preventDefault();
-    $(this).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true).click(function (e) {
-      e.preventDefault();
-    });
-    var paypalData = donation_data.replace('donate','startDonation') + '&extproc=paypal&finish_success_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou]]&finish_error_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_paypal_error]]';
-    getDonationInfo();
-    // Set level_id
-    luminateExtend.api.request({
-      api: 'donation',
-      data: 'method=getDonationFormInfo&form_id=' +
-        /form_id=(\d{4,5})/.exec(donation_data)[1],
-      requestType: 'POST',
-      callback: function (data) {
-        if(data.errorResponse) {
-          donation_data += '&level_id=2031';
-        } else {
-          donation_data += '&level_id=' + data.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
-        }
-        luminateExtend.api.request({
-          api: 'donation',
-          form: '#mainform',
-          data: paypalData,
-          requestType: 'POST',
-          callback: function (data) {
-            if (data['donationResponse']['redirect']) {
-              isPaypal = true;
-              paypalRedirectUrl = data['donationResponse']['redirect']['url'];
-              finishGift();
-            }
-            if (data['donationResponse']['errors']) {
-              var fieldError = "";
-              if (data['donationResponse']['errors']['fieldError']) {
-                if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
-                  $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
-                    fieldError = fieldError + arr + " ";
-                  });
-                } else {
-                  fieldError = data['donationResponse']['errors']['fieldError'];
-                }
-              }
-              showError(data['donationResponse']['errors']['pageError'], fieldError);
-            }
-          }
-        });
-      }
-    });
+    submitDonation($(this), donation_data.replace('donate','startDonation') + '&extproc=paypal&finish_success_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou]]&finish_error_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_paypal_error]]');
   });
 });
 </script>

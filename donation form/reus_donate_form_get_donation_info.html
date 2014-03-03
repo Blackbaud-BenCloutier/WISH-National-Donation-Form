@@ -1,15 +1,9 @@
 <script>
 (function ($) {
   var donation_data = 'method=donate&form_id=1420&validate=true',
-    numLevels = $('.ammount-btn').length,
-    urlVariableArray = (function(){var vars={},parts=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(m,key,value){vars[key]=value;});return vars;})(),
     level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (30) : (Math.floor(urlVariableArray['level1']))),
     level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (50) : (Math.floor(urlVariableArray['level2']))),
-    level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3']))),
-    level4 = (((urlVariableArray['level4'] < 1 || isNaN(urlVariableArray['level4']))) ? (150) : (Math.floor(urlVariableArray['level4']))),
-    level5 = (((urlVariableArray['level5'] < 1 || isNaN(urlVariableArray['level5']))) ? (250) : (Math.floor(urlVariableArray['level5']))),
-    level6 = (((urlVariableArray['level6'] < 1 || isNaN(urlVariableArray['level6']))) ? (500) : (Math.floor(urlVariableArray['level6']))),
-    level7 = (((urlVariableArray['level7'] < 1 || isNaN(urlVariableArray['level7']))) ? (1000) : (Math.floor(urlVariableArray['level7'])));
+    level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3'])));
     chid = '[[S80:chid]]',
     chapter_prefix = chid.substring(0, 3),
     getNextMonth = function() {
@@ -92,15 +86,6 @@
       $chapterResults.append('<li><a class="chapter-btn" data-office-id="' + stateResult[0] + '" href="#" >' + stateResult[1] + '</a></li>');
     }
   });
-  $('a.checkDonations').click(function (e) {
-    var donations = mawf.CartView.donations()
-    e.preventDefault();
-    getDonationInfo();
-  });
-  $('.sendCards').click(function (e) {
-    e.preventDefault();
-    sendCards();
-  });
   $(document).on('keyup', '.js_donationDest', function (e) {
     searchForChapters($(this).val(), 'local');
   });
@@ -111,10 +96,6 @@
     if (index.substring(0, 2) == "s_") {
       donation_data = donation_data + "&" + index + "=" + urlVariableArray[index];
     }
-  }
-  if (numLevels > 3) {
-    $('.donate-wrap .other').css("float", "left");
-    $('.donate-wrap .ammount-btn').css("margin-bottom", "10px");
   }
   if (chid && chid != "100-000") {
     var orgChapterName = "";
@@ -133,10 +114,6 @@
           donationAmt1: level1,
           donationAmt2: level2,
           donationAmt3: level3,
-          donationAmt4: level4,
-          donationAmt5: level5,
-          donationAmt6: level6,
-          donationAmt7: level7,
           startDate1: 5,
           startDate2: 20,
           clearFormMessage: 'Clearing the form will remove all your entered information. Are you sure you wish to proceed?',
@@ -166,10 +143,6 @@
       donationAmt1: level1,
       donationAmt2: level2,
       donationAmt3: level3,
-      donationAmt4: level4,
-      donationAmt5: level5,
-      donationAmt6: level6,
-      donationAmt7: level7,
       startDate1: 5,
       startDate2: 20,
       clearFormMessage: 'Clearing the form will remove all your entered information. Are you sure you wish to proceed?',
