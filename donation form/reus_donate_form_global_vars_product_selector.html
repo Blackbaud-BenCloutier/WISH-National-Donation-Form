@@ -85,32 +85,6 @@ $(document).ready(function () {
     skew = '',
     giftTypeButtons = $("#giftTypes").html(),
     initProducts = $("ul#products").html(),
-    showStep1 = function () {
-      $('.top-actions .back-btn').hide();
-      $('.top-actions .cancel-btn').show();
-      $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
-      $('#step1').show();
-      $('#step2').hide();
-      $('#step3').hide();
-    },
-    showStep2 = function () {
-      $('.top-actions .back-btn').show();
-      $('.top-actions .cancel-btn').hide();
-      $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
-      $('#step1').hide();
-      $('#step2').show();
-      $('#step3').hide();
-    },
-    selectEcard = function(cardID) {
-      $(productsjson['product']).each(function (index, arr) {
-        if (arr['card_id'] == cardID) {
-          ecard_id = arr['ecard_id'] || false;
-          product_url = arr['product_url'] || false;
-          return false;
-        }
-      });
-      window.open(product_url, "ecard",'height=670,width=737,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
-    },
     validateFail = function(currentElement) {
       currentElement.addClass('input-error');
       currentElement.next("p").show();
@@ -216,7 +190,12 @@ $(document).ready(function () {
         e.preventDefault();
         launchZoom($(this).attr("src"));
       });
-      showStep2();
+      $('.top-actions .back-btn').show();
+      $('.top-actions .cancel-btn').hide();
+      $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
+      $('#step1').hide();
+      $('#step2').show();
+      $('#step3').hide();
       $('.lightbox-rightside').on('click', 'a.cont-btn', function (e) {
         if (!$(this).parents().hasClass('disabled')) {
           e.preventDefault();
@@ -240,44 +219,6 @@ $(document).ready(function () {
           $(this).attr('style', '');   
         });
       $('#productImageContainer').zoom();
-    },
-    optionTwo = function(thisCardType) {
-      var products = [],
-        cardCount = 0;
-      $(productsjson['product']).each(function (index, arr) {
-        if (arr['card_type'] == thisCardType && arr['occasion_type'] == $('#selectOccasion input[type=hidden]')) {
-          if (arr['is_new'].toLowerCase() == "true") {
-            products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '" class="new-item"></li>');
-          } else {
-            products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '"></li>');
-          }
-          cardCount++;
-        }
-      });
-      $("ul#products").remove();
-      $("a.arrow").remove();
-      if (cardCount > 3) {
-        $('#carousel-gallery .wrapper').append('<ul id="products">' + products + products + '</ul>');
-      } else {
-        $('#carousel-gallery .wrapper').append('<ul id="products">' + products + '</ul>');
-      }
-      $('.infiniteCarousel').infiniteCarousel();
-      if (cardCount < 3) {
-        $("a.arrow").unbind("click").css({
-          'opacity': '.2',
-          'cursor': 'none'
-        });
-        $("a.arrow").click(function (e) {
-          e.preventDefault();
-        });
-      }
-      if (cardCount == 1) {
-        $('#cardCount').text(cardCount + '  Card');
-      } else {
-        $('#cardCount').text(cardCount + '  Cards');
-      }
-      $('div.select-area-3').removeClass("disabled");
-      $('div#carousel-gallery').removeClass("disabled");
     },
     customizeCard = function(cardID) {
       $(productsjson['product']).each(function (index, arr) {
@@ -894,15 +835,7 @@ $(document).ready(function () {
   $('.infiniteCarousel').infiniteCarousel();
   $('select.event-select,select.type-select').customSelectMenu();
   $('.option-one li:first,.option-two li:first').remove();
-  $('.back-btn').click(function (e) {
-    e.preventDefault();
-    showStep1();
-  });
-  for (var index in urlVariableArray) {
-    if (index == 'card_type') {
-      launchCard(urlVariableArray[index]);
-    }
-  }
+  $('#carousel-gallery,.select-area-2,.select-area-3').addClass('disabled');
   $(productsjson['product']).each(function (index, arr) {
     if ($.inArray(arr['occasion_type'], occasionTypes) == -1) {
       occasionTypes.push(arr['occasion_type']);
@@ -912,29 +845,34 @@ $(document).ready(function () {
     $('.event-select').append('<option value="' + occasionTypes[i] + '">' + occasionTypes[i] + '</option>')
     $('#selectOccasion ul').append('<li data-option-value="' + occasionTypes[i] + '">' + occasionTypes[i] + '</li>')
   }
+  for (var index in urlVariableArray) {
+    if (index == 'card_type') {
+      launchCard(urlVariableArray[index]);
+    }
+  }
   $(".option-one").on('click', 'li', function (e) {
     e.preventDefault();
-    var thisEcardProduct = [];
-    var thisCertificateProduct = [];
-    var thisCardProduct = [];
+    var thisEcardProduct = [],
+      thisCertificateProduct = [],
+      thisCardProduct = [],
+      thisOccasion = $(this).text(),
+      availableTypes = [],
+      optionHTML = '',
+      listHTML = '',
+      certificateMsg = "Create a printable certificate.",
+      cardMsg = "We\'ll mail a card on your behalf.",
+      ecardMsg = "Send an e-card.";
     $('#finishCertificate, #finishCard, #finisheCard').unbind("click");
     if (!$("#carousel-gallery").hasClass("disabled")) {
       $("ul#products").remove();
       $("a.arrow").remove();
       $("h4#cardCount").text('');
     }
-    var thisOccasion = $(this).text();
-    var availableTypes = [];
     $(productsjson['product']).each(function (index, arr) {
       if (arr['occasion_type'] == thisOccasion && $.inArray(arr['card_type'], availableTypes) == -1) {
         availableTypes.push(arr['card_type']);
       }
     });
-    var optionHTML = '';
-    var listHTML = '';
-    var certificateMsg = "Create a printable certificate.";
-    var cardMsg = "We\'ll mail a card on your behalf.";
-    var ecardMsg = "Send an e-card.";
     for (i in availableTypes) {
       optionHTML += '<option value="' + availableTypes[i] + '">' + availableTypes[i] + '</option>';
       listHTML += '<li data-option-value="' + availableTypes[i] + '">' + availableTypes[i] + '<br /><span>';
@@ -959,19 +897,56 @@ $(document).ready(function () {
   });
   $(".option-two").on('click', 'li', function (e) {
     e.preventDefault();
-    var cardType = $('#selectCardType input[type=hidden]').val();
-    optionTwo(cardType);
-  });
-  $(".option-two li>span").live("click", function () {
-    var cardType = $(this).parent().attr("data-option-value");
-    optionTwo(cardType);
+    var products = [],
+      cardCount = 0;
+    $(productsjson['product']).each(function (index, arr) {
+      if (arr['card_type'] == $('#selectCardType li.selected').attr('data-option-value') && arr['occasion_type'] == $('#selectOccasion input[type=hidden]').val()) {
+        if (arr['is_new'].toLowerCase() == "true") {
+          products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '" class="new-item"></li>');
+        } else {
+          products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '"></li>');
+        }
+        cardCount++;
+      }
+    });
+    $("ul#products").remove();
+    $("a.arrow").remove();
+    if (cardCount > 3) {
+      $('#carousel-gallery .wrapper').append('<ul id="products">' + products + products + '</ul>');
+    } else {
+      $('#carousel-gallery .wrapper').append('<ul id="products">' + products + '</ul>');
+    }
+    $('.infiniteCarousel').infiniteCarousel();
+    if (cardCount < 3) {
+      $("a.arrow").unbind("click").css({
+        'opacity': '.2',
+        'cursor': 'none'
+      });
+      $("a.arrow").click(function (e) {
+        e.preventDefault();
+      });
+    }
+    if (cardCount == 1) {
+      $('#cardCount').text(cardCount + '  Card');
+    } else {
+      $('#cardCount').text(cardCount + '  Cards');
+    }
+    $('div.select-area-3').removeClass("disabled");
+    $('div#carousel-gallery').removeClass("disabled");
   });
   $('.wrapper').on('click', 'a.magnify', function (e) {
     if (!$(this).parents().hasClass('disabled')) {
       e.preventDefault();
       var card_id = $(this).attr('data-cardid');
       if (card_id.substring(0, 2) == 'EC') {
-        selectEcard(card_id);
+        $(productsjson['product']).each(function (index, arr) {
+        if (arr['card_id'] == card_id) {
+          ecard_id = arr['ecard_id'] || false;
+          product_url = arr['product_url'] || false;
+          return false;
+        }
+      });
+      window.open(product_url, "ecard",'height=670,width=737,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
       } else {
         selectCard(card_id);
       }
@@ -980,14 +955,22 @@ $(document).ready(function () {
   $('.wrapper').on('click', 'a.select-card', function (e) {
     if (!$(this).parents().hasClass('disabled')) {
       e.preventDefault();
-      var card_id = $(this).attr('data-cardid');
-      customizeCard(card_id);
+      customizeCard($(this).attr('data-cardid'));
     }
   });
   $('.cancel-btn').click(function () {
     $.fancybox.close();
     resetProducts();
     $("input[name='s_sat_skew']").val('');
+  });
+  $('.back-btn').click(function (e) {
+    e.preventDefault();
+    $('.top-actions .back-btn').hide();
+    $('.top-actions .cancel-btn').show();
+    $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
+    $('#step1').show();
+    $('#step2').hide();
+    $('#step3').hide();
   });
 });
 </script>
