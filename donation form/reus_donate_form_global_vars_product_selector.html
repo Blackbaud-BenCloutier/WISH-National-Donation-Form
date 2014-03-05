@@ -12,7 +12,8 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
   center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/xml/center_info.xml','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
   chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.convio.net/wish/assets/js/chapters.json','dataType':'json','success':function(data){json=data;}});return json;})(),
   productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
-  get_short_url = function(e){var t="";$.ajax({async:false,url:"https://api-ssl.bitly.com/v3/shorten?format=json",dataType:"json",data:{format:"json",apiKey:"R_50a44d5e5edc4dacaccb0841183fd8ce",login:"wishamerica",longUrl:e},success:function(e){t=e["data"]["url"]}});return t};
+  get_short_url = function(e){var t="";$.ajax({async:false,url:"https://api-ssl.bitly.com/v3/shorten?format=json",dataType:"json",data:{format:"json",apiKey:"R_50a44d5e5edc4dacaccb0841183fd8ce",login:"wishamerica",longUrl:e},success:function(e){t=e["data"]["url"]}});return t},
+  editButton;
 
 $.fn.infiniteCarousel = function () {
   function repeat(str, num) {
@@ -99,39 +100,39 @@ $(document).ready(function () {
         "top": "12px"
       });
       if ($("#product_2_honoree_message").hasClass("input-error")) {
-        $("#uniform-State_X span").addClass("input-error");
-        $("#uniform-State_X").next("p").show();
-        $("#uniform-State_X").prev("label").addClass("label-error");
+        $("#uniform-product_2_honoree_message span").addClass("input-error");
+        $("#uniform-product_2_honoree_message").next("p").show();
+        $("#uniform-product_2_honoree_message").prev("label").addClass("label-error");
       }
-      flag = false;
     },
     validatePass = function(currentElement) {
       currentElement.removeClass('input-error');
       currentElement.next("p").hide();
       currentElement.prev("label").removeClass("label-error");
       if ($("#product_2_honoree_message").hasClass("input-error")) {
-        $("#uniform-State_X span").removeClass("input-error");
-        $("#uniform-State_X").next("p").hide();
-        $("#uniform-State_X").prev("label").removeClass("label-error");
+        $("#uniform-product_2_honoree_message span").removeClass("input-error");
+        $("#uniform-product_2_honoree_message").next("p").hide();
+        $("#uniform-product_2_honoree_message").prev("label").removeClass("label-error");
       }
     },
     checkFields = function () {
-      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-      flag = true;
+      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       $('#step3 .jsreq:visible').each(function () {
         if ($(this).hasClass('js_email')){
           if(emailRegex.test($(this).val())) {
             validatePass($(this));
           } else {
             validateFail($(this));
+            return false;
           }
         } else if ($(this).val() == '') {
           validateFail($(this));
+          return false;
         } else {
           validatePass($(this));
         }
       });
-      return flag;
+      return true;
     },
     launchCard = function(id) {
       $.fancybox({
@@ -249,9 +250,9 @@ $(document).ready(function () {
         $(this).next("p").hide();
         $(this).prev("label").removeClass("label-error");
       });
-      $("#uniform-State_X span").removeClass("input-error");
-      $("#uniform-State_X").next("p").hide();
-      $("#uniform-State_X").prev("label").removeClass("label-error");
+      $("#uniform-product_2_honoree_message span").removeClass("input-error");
+      $("#uniform-product_2_honoree_message").next("p").hide();
+      $("#uniform-product_2_honoree_message").prev("label").removeClass("label-error");
       $(".bldr-wrap #card-form .mnamefld").css({
         "left": "0px",
         "margin-left": "12px",
@@ -352,16 +353,17 @@ $(document).ready(function () {
                 toFullName = toFirstName + " " + toLastName
               }
             } else {
-              toFullName = toInHonorOf
+              toFullName = toInHonorOf;
             }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
-            $('#card_in_honor_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
-            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+            $('#card_in_honor_of').show();
+            $('#card_in_honor_of .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
+            $('#card_from').show();
+            $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
             cardProperties = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
             $.fancybox.close();
-            resetProducts();
           }
         });
       } else if (card_form === "cert02") {
@@ -370,13 +372,13 @@ $(document).ready(function () {
           e.preventDefault();
           if (checkFields()) {
             toFullName = $("input[name='product_1_honoree_address1']").val();
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
-            $('#card_wedding_couple_name').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
+            $('#card_wedding_couple_name').show();
+            $('#card_wedding_couple_name .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
             cardProperties = [donationID, 'cert02', 'certificate', toFullName, productURL, cardName, occasionType, thisSkew];
             $.fancybox.close();
-            resetProducts();
           }
         });
       } else if (card_form === "card01") {
@@ -385,7 +387,6 @@ $(document).ready(function () {
           e.preventDefault();
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
           $.fancybox.close();
-          resetProducts();
         }); //click
         $('#finishCard').click(function (e) {
           e.preventDefault();
@@ -409,10 +410,11 @@ $(document).ready(function () {
             } else {
               toFullName = toFirstName + " " + toLastName;
             }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
-            $('#card_send_to').show().append(
+            $('#card_send_to').show();
+            $('#card_send_to .blurbtext').html(
               '<p>' + decodeURIComponent(toFullName) + '</p>' +
               '<p>' + decodeURIComponent(toAddress1) + '</p>' +
               '<p>' + decodeURIComponent(toAddress2) + '</p>' +
@@ -421,10 +423,10 @@ $(document).ready(function () {
               '<p>' + decodeURIComponent(toZip) + '</p>' +
               '<p>' + decodeURIComponent(toCountry) + '</p>'
             );
-            $('#card_personal_message').show().append('<p>' + decodeURIComponent(message) + '</p>');
+            $('#card_personal_message').show();
+            $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
             cardProperties = [donationID, 'card01', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, productURL, message, cardName, msgLine1, msgLine2, msgLine3, occasionType, thisSkew];
             $.fancybox.close();
-            resetProducts();
           }
         });
       } else if (card_form === "card02") {
@@ -434,7 +436,6 @@ $(document).ready(function () {
           e.preventDefault();
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
           $.fancybox.close();
-          resetProducts();
         });
         $('#finishCard').click(function (e) {
           e.preventDefault();
@@ -455,10 +456,11 @@ $(document).ready(function () {
             } else {
               toFullName = toFirstName + " " + toLastName;
             }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
-            $('#card_send_to').show().append(
+            $('#card_send_to').show();
+            $('#card_send_to blurbtext').html(
               '<p>' + decodeURIComponent(toFullName) + '</p>' +
               '<p>' + decodeURIComponent(toAddress1) + '</p>' +
               '<p>' + decodeURIComponent(toAddress2) + '</p>' +
@@ -467,10 +469,10 @@ $(document).ready(function () {
               '<p>' + decodeURIComponent(toZip) + '</p>' +
               '<p>' + decodeURIComponent(toCountry) + '</p>'
             );
-            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+            $('#card_from').show();
+            $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
             cardProperties = [donationID, 'card02', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
             $.fancybox.close();
-            resetProducts();
           }
         });
       } else if (card_form === "card03") {
@@ -479,7 +481,6 @@ $(document).ready(function () {
           e.preventDefault();
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
           $.fancybox.close();
-          resetProducts();
         });
         $('#finishCard').click(function (e) {
           e.preventDefault();
@@ -514,10 +515,11 @@ $(document).ready(function () {
             } else {
               shippingFullName = shippingFirstName + "%20" + shippingLastName;
             }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
-            $('#card_send_to').show().append(
+            $('#card_send_to').show();
+            $('#card_send_to .blurbtext').html(
               '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
               '<p>' + decodeURIComponent(toAddress1) + '</p>' +
               '<p>' + decodeURIComponent(toAddress2) + '</p>' +
@@ -526,10 +528,10 @@ $(document).ready(function () {
               '<p>' + decodeURIComponent(toZip) + '</p>' +
               '<p>' + decodeURIComponent(toCountry) + '</p>'
             );
-            $('#card_in_honor_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
+            $('#card_in_honor_of').show();
+            $('#card_in_honor_of .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
             cardProperties = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
             $.fancybox.close();
-            resetProducts();
           }
         });
       } else if (card_form === "card04") {
@@ -538,7 +540,6 @@ $(document).ready(function () {
           e.preventDefault();
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
           $.fancybox.close();
-          resetProducts();
         });
         $('#finishCard').click(function (e) {
           e.preventDefault();
@@ -573,10 +574,11 @@ $(document).ready(function () {
             } else {
               shippingFullName = shippingFirstName + "%20" + shippingLastName;
             }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
-            $('#card_send_to').show().append(
+            $('#card_send_to').show();
+            $('#card_send_to .blurbtext').html(
               '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
               '<p>' + decodeURIComponent(toAddress1) + '</p>' +
               '<p>' + decodeURIComponent(toAddress2) + '</p>' +
@@ -585,11 +587,12 @@ $(document).ready(function () {
               '<p>' + decodeURIComponent(toZip) + '</p>' +
               '<p>' + decodeURIComponent(toCountry) + '</p>'
             );
-            $('#card_in_memory_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
-            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+            $('#card_in_memory_of').show();
+            $('#card_in_memory_of .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
+            $('#card_from').show();
+            $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
             cardProperties = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
             $.fancybox.close();
-            resetProducts();
           }
         });
       } else if (card_form === "ecard01" || card_form === "ecard02") {
@@ -621,15 +624,17 @@ $(document).ready(function () {
             } else {
               toFullName = toInHonorOf
             }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
-            $('#card_to').show().append('<p>' + decodeURIComponent(toEmail) + '</p>');
-            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
-            $('#card_personal_message').show().append('<p>' + decodeURIComponent(message) + '</p>');
+            $('#card_to').show();
+            $('#card_to .blurbtext').html('<p>' + decodeURIComponent(toEmail) + '</p>');
+            $('#card_from').show();
+            $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
+            $('#card_personal_message').show();
+            $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
             cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
             $.fancybox.close();
-            resetProducts();
           }
         });
       }
@@ -767,6 +772,10 @@ $(document).ready(function () {
       }
     };
 
+  editButton = function(card_id){
+    launchCard(card_id);
+    $('.lightbox-rightside a.cont-btn').click();
+  };
   $('.infiniteCarousel').infiniteCarousel();
   $('select.event-select,select.type-select').customSelectMenu();
   $('.option-one li:first,.option-two li:first').remove();
@@ -897,15 +906,39 @@ $(document).ready(function () {
     $.fancybox.close();
     resetProducts();
     $("input[name='s_sat_skew']").val('');
+    $('#card_create').show();
+    $('#card_preview').hide();
   });
   $('.back-btn').click(function (e) {
     e.preventDefault();
+    resetProducts();
     $('.top-actions .back-btn').hide();
     $('.top-actions .cancel-btn').show();
     $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
     $('#step1').show();
     $('#step2').hide();
     $('#step3').hide();
+  });
+  $('.ecard-btn').click(function (e) {
+    e.preventDefault();
+    mawf.CartView.productMasterState('picking');
+    $('.product-thumb').html('');
+    $('#card_preview .blurb p').remove();
+    $.fancybox({
+      href: '#js-prod-personalizer',
+      autoSize: true,
+      width: '960px',
+      scrolling: 'no',
+      padding: 0,
+      modal: true,
+      closeBtn : false,
+      margin: [5,5,5,5]
+    });
+    resetProducts();
+  });
+  $('#edit_ecard').click(function (e){
+    e.preventDefault();
+    editButton(ecard_id);
   });
 });
 </script>
