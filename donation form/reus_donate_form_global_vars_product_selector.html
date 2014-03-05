@@ -304,7 +304,349 @@ $(document).ready(function () {
       productURL = '';
       skew = '';
     },
-    setMetadata = function(){
+    showStep3 = function (ecardID, cardName, cardType, cardForm, occasionType, cardImage1, cardImage2, cardImage3, cardThumbnail, productURL, thisSkew)
+    {
+      $('#step1, #step2, .top-actions .back-btn').hide();
+      $('#step3, .top-actions .cancel-btn').show();
+      $('#step3 #productTitle').text(cardName);
+      $('.cardThumbnail').attr('src', cardThumbnail);
+      var toFirstName = '';
+      var toMI = '';
+      var toLastName = '';
+      var toInHonorOf = '';
+      var toEmail = '';
+      var toFullName = '';
+      var fromName = '';
+      var toAddress1 = '';
+      var toAddress2 = '';
+      var toCity = '';
+      var toState = '';
+      var toZip = '';
+      var toCountry = '';
+      var message = '';
+      $("input[name='s_sat_ecert_occasion_type']").val(occasionType);
+      $('#js-prod-personalizer h1').text('Customize ' + cardType);
+      $('#card-form fieldset, .bottomButtons a').hide();
+      if (card_form === "cert01" || card_form === "cert03") {      
+        if (card_form === "cert01"){
+          $('fieldset.cert01, #finishCertificate').show();
+          $('#honor_info').html('Would you like a different name printed on the certificate?');
+        } else if(card_form === "cert03") {
+          $('fieldset.cert03, #finishCertificate').show();
+          $('#memorial_info').html('Would you like a different name printed on the certificate?');
+        }
+        $('#from_info').html('Your name or family name will appear on the certificate exactly as you type it here. Limit 40 characters including spaces.');
+        $('#finishCertificate').click(function (e) {
+          e.preventDefault();
+          if (checkFields()) {
+            toFirstName = $("input[name='MemorialFirst_X_v2']").val();
+            toMI = $("input[name='MemorialMI_X']").val() || false;
+            toLastName = $("input[name='MemorialLast_X']").val();
+            toInHonorOf = $("input[name='MemorialName_X']").val() || false;
+            toFullName = '';
+            fromName = $("input[name='LastName_X']").val();
+            if (!toInHonorOf) {
+              if (toMI) {
+                toFullName = toFirstName + " " + toMI + " " + toLastName;
+              } else {
+                toFullName = toFirstName + " " + toLastName
+              }
+            } else {
+              toFullName = toInHonorOf
+            }
+            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('#card_preview').show();
+            $('#card_create').hide();
+            $('#card_in_honor_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
+            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+            cardProperties = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
+            $.fancybox.close();
+            resetProducts();
+          }
+        });
+      } else if (card_form === "cert02") {
+        $('fieldset.cert02, #finishCertificate').show(); 
+        $('#finishCertificate').click(function (e) {
+          e.preventDefault();
+          if (checkFields()) {
+            toFullName = $("input[name='MemorialFirst_X_v2']").val();
+            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('#card_preview').show();
+            $('#card_create').hide();
+            $('#card_wedding_couple_name').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
+            cardProperties = [donationID, 'cert02', 'certificate', toFullName, productURL, cardName, occasionType, thisSkew];
+            $.fancybox.close();
+            resetProducts();
+          }
+        });
+      } else if (card_form === "card01") {
+        $('fieldset.card01, #finishCard, .leaveBlank').show();
+        $('.leaveBlank').click(function (e) {
+          e.preventDefault();
+          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+          $.fancybox.close();
+          resetProducts();
+        }); //click
+        $('#finishCard').click(function (e) {
+          e.preventDefault();
+          if (checkFields()) {
+            toFirstName = $("input[name='MHFirst_X']").val();
+            toMI = $("input[name='MHMI_X']").val() || false;
+            toLastName = $("input[name='MHLast_X']").val();
+            toFullName = '';
+            toAddress1 = $("input[name='Address1_X']").val();
+            toAddress2 = $("input[name='Address2_X']").val();
+            toCity = $("input[name='City_X']").val();
+            toState = $("select#State_X option:selected").val();
+            toZip = $("input[name='PostalCode_X']").val();
+            toCountry = $("select#Country_X option:selected").val();
+            message = $("input[name='Custom10_X']").val() + " " + $("input[name='Custom11_X']").val() + " " + $("input[name='Custom12_X']").val();
+            var msgLine1 = $("input[name='Custom10_X']").val();
+            var msgLine2 = $("input[name='Custom11_X']").val();
+            var msgLine3 = $("input[name='Custom12_X']").val();
+            if (toMI) {
+              toFullName = toFirstName + " " + toMI + " " + toLastName;
+            } else {
+              toFullName = toFirstName + " " + toLastName;
+            }
+            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('#card_preview').show();
+            $('#card_create').hide();
+            $('#card_send_to').show().append(
+              '<p>' + decodeURIComponent(toFullName) + '</p>' +
+              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+              '<p>' + decodeURIComponent(toCity) + '</p>' +
+              '<p>' + decodeURIComponent(toState) + '</p>' +
+              '<p>' + decodeURIComponent(toZip) + '</p>' +
+              '<p>' + decodeURIComponent(toCountry) + '</p>'
+            );
+            $('#card_personal_message').show().append('<p>' + decodeURIComponent(message) + '</p>');
+            cardProperties = [donationID, 'card01', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, productURL, message, cardName, msgLine1, msgLine2, msgLine3, occasionType, thisSkew];
+            $.fancybox.close();
+            resetProducts();
+          }
+        });
+      } else if (card_form === "card02") {
+        $('.card02, #finishCard, .leaveBlank').show();
+        $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
+        $('.leaveBlank').click(function (e) {
+          e.preventDefault();
+          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+          $.fancybox.close();
+          resetProducts();
+        });
+        $('#finishCard').click(function (e) {
+          e.preventDefault();
+          if (checkFields()) {
+            toFirstName = $("input[name='MHFirst_X']").val();
+            toMI = $("input[name='MHMI_X']").val() || false;
+            toLastName = $("input[name='MHLast_X']").val();
+            toFullName = '';
+            toAddress1 = $("input[name='Address1_X']").val();
+            toAddress2 = $("input[name='Address2_X']").val();
+            toCity = $("input[name='City_X']").val();
+            toState = $("select#State_X option:selected").val();
+            toZip = $("input[name='PostalCode_X']").val();
+            toCountry = $("select#Country_X option:selected").val();
+            fromName = $("input[name='LastName_X']").val();
+            if (toMI) {
+              toFullName = toFirstName + " " + toMI + " " + toLastName;
+            } else {
+              toFullName = toFirstName + " " + toLastName;
+            }
+            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('#card_preview').show();
+            $('#card_create').hide();
+            $('#card_send_to').show().append(
+              '<p>' + decodeURIComponent(toFullName) + '</p>' +
+              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+              '<p>' + decodeURIComponent(toCity) + '</p>' +
+              '<p>' + decodeURIComponent(toState) + '</p>' +
+              '<p>' + decodeURIComponent(toZip) + '</p>' +
+              '<p>' + decodeURIComponent(toCountry) + '</p>'
+            );
+            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+            cardProperties = [donationID, 'card02', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
+            $.fancybox.close();
+            resetProducts();
+          }
+        });
+      } else if (card_form === "card03") {
+        $('fieldset.card03, #finishCard, .leaveBlank').show();
+        $('.leaveBlank').click(function (e) {
+          e.preventDefault();
+          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+          $.fancybox.close();
+          resetProducts();
+        });
+        $('#finishCard').click(function (e) {
+          e.preventDefault();
+          if (checkFields()) {
+            shippingFirstName = $("input[name='MHFirst_X']").val();
+            shippingMI = $("input[name='MHMI_X']").val() || false;
+            shippingLastName = $("input[name='MHLast_X']").val();
+            toAddress1 = $("input[name='Address1_X']").val();
+            toAddress2 = $("input[name='Address2_X']").val();
+            toCity = $("input[name='City_X']").val();
+            toState = $("select#State_X option:selected").val();
+            toZip = $("input[name='PostalCode_X']").val();
+            toCountry = $("select#Country_X option:selected").val();
+            toFirstName = $("input[name='MemorialFirst_X']").val();
+            toMI = $("input[name='MemorialMI_X']").val() || false;
+            toLastName = $("input[name='MemorialLast_X']").val();
+            toInHonorOf = $("input[name='MemorialName_X_v3']").val() || false;
+            toFullName = '';
+            shippingFullName = '';
+            fromName = $("input[name='LastName_X']").val();
+            if (!toInHonorOf) {
+              if (toMI) {
+                toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
+              } else {
+                toFullName = toFirstName + "%20" + toLastName;
+              }
+            } else {
+              toFullName = toInHonorOf;
+            }
+            if (shippingMI) {
+              shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
+            } else {
+              shippingFullName = shippingFirstName + "%20" + shippingLastName;
+            }
+            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('#card_preview').show();
+            $('#card_create').hide();
+            $('#card_send_to').show().append(
+              '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
+              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+              '<p>' + decodeURIComponent(toCity) + '</p>' +
+              '<p>' + decodeURIComponent(toState) + '</p>' +
+              '<p>' + decodeURIComponent(toZip) + '</p>' +
+              '<p>' + decodeURIComponent(toCountry) + '</p>'
+            );
+            $('#card_in_honor_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
+            cardProperties = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
+            $.fancybox.close();
+            resetProducts();
+          }
+        });
+      } else if (card_form === "card04") {
+        $('fieldset.card04, #finishCard, .leaveBlank').show();
+        $('.leaveBlank').click(function (e) {
+          e.preventDefault();
+          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+          $.fancybox.close();
+          resetProducts();
+        });
+        $('#finishCard').click(function (e) {
+          e.preventDefault();
+          if (checkFields()) {
+            shippingFirstName = $("input[name='MHFirst_X']").val();
+            shippingMI = $("input[name='MHMI_X']").val() || false;
+            shippingLastName = $("input[name='MHLast_X']").val();
+            toAddress1 = $("input[name='Address1_X']").val();
+            toAddress2 = $("input[name='Address2_X']").val();
+            toCity = $("input[name='City_X']").val();
+            toState = $("select#State_X option:selected").val();
+            toZip = $("input[name='PostalCode_X']").val();
+            toCountry = $("select#Country_X option:selected").val();
+            toFirstName = $("input[name='MemorialFirst_X']").val();
+            toMI = $("input[name='MemorialMI_X']").val() || false;
+            toLastName = $("input[name='MemorialLast_X']").val();
+            toInHonorOf = $("input[name='MemorialName_X_v3']").val() || false; 
+            toFullName = '';
+            shippingFullName = '';
+            fromName = $("input[name='LastName_X']").val();
+            if (!toInHonorOf) {
+              if (toMI) {
+                toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
+              } else {
+                toFullName = toFirstName + "%20" + toLastName;
+              }
+            } else {
+              toFullName = toInHonorOf;
+            }
+            if (shippingMI) {
+              shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
+            } else {
+              shippingFullName = shippingFirstName + "%20" + shippingLastName;
+            }
+            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('#card_preview').show();
+            $('#card_create').hide();
+            $('#card_send_to').show().append(
+              '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
+              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+              '<p>' + decodeURIComponent(toCity) + '</p>' +
+              '<p>' + decodeURIComponent(toState) + '</p>' +
+              '<p>' + decodeURIComponent(toZip) + '</p>' +
+              '<p>' + decodeURIComponent(toCountry) + '</p>'
+            );
+            $('#card_in_memory_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
+            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+            cardProperties = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
+            $.fancybox.close();
+            resetProducts();
+          }
+        });
+      } else if (card_form === "ecard01" || card_form === "ecard02") {
+        if (card_form === "ecard01") {
+          $('fieldset.ecard01, #finisheCard').show();
+          $('#honor_info').html('Would you like a different name to appear in the ecard?');
+        } else if (card_form === "ecard02") {
+          $('fieldset.ecard02, #finisheCard').show();
+          $('#memorial_info').html('Would you like a different name to appear in the ecard?');
+        }    
+        $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
+        $('#finisheCard').click(function (e) {
+          e.preventDefault();      
+          if (checkFields()) {
+            toFirstName = encodeURIComponent($("input[name='MemorialFirst_X_v2']").val());
+            toMI = encodeURIComponent($("input[name='MemorialMI_X']").val()) || false;
+            toLastName = encodeURIComponent($("input[name='MemorialLast_X']").val());
+            toInHonorOf = encodeURIComponent($("input[name='MemorialName_X']").val()) || false;
+            toEmail = encodeURIComponent($("input[name='MHEMail_X']").val());
+            toFullName = '';
+            fromName = encodeURIComponent($("input[name='LastName_X']").val());
+            message = encodeURIComponent($("textarea[name='Comments_X']").val());
+            if (!toInHonorOf) {
+              if (toMI) {
+                toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
+              } else {
+                toFullName = toFirstName + "%20" + toLastName
+              }
+            } else {
+              toFullName = toInHonorOf
+            }
+            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+            $('#card_preview').show();
+            $('#card_create').hide();
+            $('#card_to').show().append('<p>' + decodeURIComponent(toEmail) + '</p>');
+            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
+            $('#card_personal_message').show().append('<p>' + decodeURIComponent(message) + '</p>');
+            cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
+            $.fancybox.close();
+            resetProducts();
+          }
+        });
+      }
+    },
+    getDonationInfo = function () {
+      var donation = mawf.CartView.donations()[0],
+        bitlyURL = '',
+        chid = donation.donorIntent(),
+        isMonthly = (donation.donationType() == 2),
+        officeID = null,
+        short_chid = chid.substr(0,3),
+        form_chid = $('.logo a').attr('href').match(/\d+/)[0],
+        donation_form_id = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid + ' + form').attr('id')) : ('1563')),
+        formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish® International')),
+        today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
+
+      donation_data = donation_data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id) + '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee) + '&remember_me=true&other_amount=' + (0.00 + parseFloat(donation.prettyDonationAmount())) + (isMonthly?'&sustaining.frequency=monthly&sustaining.duration=0':'');
       if($("input[name='s_sat_skew']").val() === '') {
         if(!isMonthly){
           $("input[name='s_sat_skew']").val('DO02-01');
@@ -357,383 +699,6 @@ $(document).ready(function () {
         }
       }
       $('#source').val($('#foreign_key2').val() + ',' + $('#foreign_key3').val() + ',' + $('#foreign_key4').val());
-    },
-    showStep3 = function (ecardID, cardName, cardType, cardForm, occasionType, cardImage1, cardImage2, cardImage3, cardThumbnail, productURL, thisSkew)
-    {
-      $('#step1, #step2, .top-actions .back-btn').hide();
-      $('#step3, .top-actions .cancel-btn').show();
-      $('#step3 #productTitle').text(cardName);
-      $('.cardThumbnail').attr('src', cardThumbnail);
-      var toFirstName = '';
-      var toMI = '';
-      var toLastName = '';
-      var toInHonorOf = '';
-      var toEmail = '';
-      var toFullName = '';
-      var fromName = '';
-      var toAddress1 = '';
-      var toAddress2 = '';
-      var toCity = '';
-      var toState = '';
-      var toZip = '';
-      var toCountry = '';
-      var message = '';
-      if (card_form === "cert01" || card_form === "cert03") {
-        $("input[name='s_sat_ecert_occasion_type']").val(occasionType);
-        $('#js-prod-personalizer h1').text('Customize Certificate');
-        $('#card-form fieldset, .bottomButtons a').hide();
-        if (card_form === "cert01"){
-          $('fieldset.cert01, #finishCertificate').show();
-          $('#honor_info').html('Would you like a different name printed on the certificate?');
-        } else if(card_form === "cert03") {
-          $('fieldset.cert03, #finishCertificate').show();
-          $('#memorial_info').html('Would you like a different name printed on the certificate?');
-        }
-        $('#from_info').html('Your name or family name will appear on the certificate exactly as you type it here. Limit 40 characters including spaces.');
-        $('#finishCertificate').click(function (e) {
-          e.preventDefault();
-          if (checkFields()) {
-            toFirstName = $("input[name='MemorialFirst_X_v2']").val();
-            toMI = $("input[name='MemorialMI_X']").val() || false;
-            toLastName = $("input[name='MemorialLast_X']").val();
-            toInHonorOf = $("input[name='MemorialName_X']").val() || false;
-            toFullName = '';
-            fromName = $("input[name='LastName_X']").val();
-            if (!toInHonorOf) {
-              if (toMI) {
-                toFullName = toFirstName + " " + toMI + " " + toLastName;
-              } else {
-                toFullName = toFirstName + " " + toLastName
-              }
-            } else {
-              toFullName = toInHonorOf
-            }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_in_honor_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
-            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
-            cardProperties = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
-            $.fancybox.close();
-            resetProducts();
-            return;
-          }
-          return;
-        });
-      } else if (card_form === "cert02") {
-        $("input[name='s_sat_ecert_occasion_type']").val(occasionType);
-        $('#js-prod-personalizer h1').text('Customize Certificate');
-        $('#card-form fieldset, .bottomButtons a').hide(); 
-        $('fieldset.cert02, #finishCertificate').show(); 
-        $('#finishCertificate').click(function (e) {
-          e.preventDefault();
-          if (checkFields()) {
-            toFullName = $("input[name='MemorialFirst_X_v2']").val();
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_wedding_couple_name').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
-            cardProperties = [donationID, 'cert02', 'certificate', toFullName, productURL, cardName, occasionType, thisSkew];
-            $.fancybox.close();
-            resetProducts();
-            return;
-          }
-          return;
-        });
-      } else if (card_form === "card01") {
-        $("input[name='s_sat_card_occasion_type']").val(occasionType);
-        $('#js-prod-personalizer h1').text('Customize Card');
-        $('#card-form fieldset, .bottomButtons a').hide();
-        $('fieldset.card01, #finishCard, .leaveBlank').show();
-        $('.leaveBlank').click(function (e) {
-          e.preventDefault();
-          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close();
-          resetProducts();
-          return;
-        }); //click
-        $('#finishCard').click(function (e) {
-          e.preventDefault();
-          if (checkFields()) {
-            toFirstName = $("input[name='MHFirst_X']").val();
-            toMI = $("input[name='MHMI_X']").val() || false;
-            toLastName = $("input[name='MHLast_X']").val();
-            toFullName = '';
-            toAddress1 = $("input[name='Address1_X']").val();
-            toAddress2 = $("input[name='Address2_X']").val();
-            toCity = $("input[name='City_X']").val();
-            toState = $("select#State_X option:selected").val();
-            toZip = $("input[name='PostalCode_X']").val();
-            toCountry = $("select#Country_X option:selected").val();
-            message = $("input[name='Custom10_X']").val() + " " + $("input[name='Custom11_X']").val() + " " + $("input[name='Custom12_X']").val();
-            var msgLine1 = $("input[name='Custom10_X']").val();
-            var msgLine2 = $("input[name='Custom11_X']").val();
-            var msgLine3 = $("input[name='Custom12_X']").val();
-            if (toMI) {
-              toFullName = toFirstName + " " + toMI + " " + toLastName;
-            } else {
-              toFullName = toFirstName + " " + toLastName;
-            }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_send_to').show().append(
-              '<p>' + decodeURIComponent(toFullName) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
-              '<p>' + decodeURIComponent(toCity) + '</p>' +
-              '<p>' + decodeURIComponent(toState) + '</p>' +
-              '<p>' + decodeURIComponent(toZip) + '</p>' +
-              '<p>' + decodeURIComponent(toCountry) + '</p>'
-            );
-            $('#card_personal_message').show().append('<p>' + decodeURIComponent(message) + '</p>');
-            cardProperties = [donationID, 'card01', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, productURL, message, cardName, msgLine1, msgLine2, msgLine3, occasionType, thisSkew];
-            $.fancybox.close();
-            resetProducts();
-            return;
-          }
-        });
-      } else if (card_form === "card02") {
-        $("input[name='s_sat_card_occasion_type']").val(occasionType);
-        $('#js-prod-personalizer h1').text('Customize Card');
-        $('#card-form fieldset, .bottomButtons a').hide();
-        $('.card02, #finishCard, .leaveBlank').show();
-        $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
-        $('.leaveBlank').click(function (e) {
-          e.preventDefault();
-          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close();
-          resetProducts();
-          return;
-        });
-        $('#finishCard').click(function (e) {
-          e.preventDefault();
-          if (checkFields()) {
-            toFirstName = $("input[name='MHFirst_X']").val();
-            toMI = $("input[name='MHMI_X']").val() || false;
-            toLastName = $("input[name='MHLast_X']").val();
-            toFullName = '';
-            toAddress1 = $("input[name='Address1_X']").val();
-            toAddress2 = $("input[name='Address2_X']").val();
-            toCity = $("input[name='City_X']").val();
-            toState = $("select#State_X option:selected").val();
-            toZip = $("input[name='PostalCode_X']").val();
-            toCountry = $("select#Country_X option:selected").val();
-            fromName = $("input[name='LastName_X']").val();
-            if (toMI) {
-              toFullName = toFirstName + " " + toMI + " " + toLastName;
-            } else {
-              toFullName = toFirstName + " " + toLastName;
-            }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_send_to').show().append(
-              '<p>' + decodeURIComponent(toFullName) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
-              '<p>' + decodeURIComponent(toCity) + '</p>' +
-              '<p>' + decodeURIComponent(toState) + '</p>' +
-              '<p>' + decodeURIComponent(toZip) + '</p>' +
-              '<p>' + decodeURIComponent(toCountry) + '</p>'
-            );
-            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
-            cardProperties = [donationID, 'card02', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
-            $.fancybox.close();
-            resetProducts();
-            return;
-          }
-        });
-      } else if (card_form === "card03") {
-        $("input[name='s_sat_card_occasion_type']").val(occasionType);
-        $('#js-prod-personalizer h1').text('Customize Card');
-        $('#card-form fieldset, .bottomButtons a').hide(); 
-        $('fieldset.card03, #finishCard, .leaveBlank').show();
-        $('.leaveBlank').click(function (e) {
-          e.preventDefault();
-          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close();
-          resetProducts();
-          return;
-        });
-        $('#finishCard').click(function (e) {
-          e.preventDefault();
-          if (checkFields()) {
-            shippingFirstName = $("input[name='MHFirst_X']").val();
-            shippingMI = $("input[name='MHMI_X']").val() || false;
-            shippingLastName = $("input[name='MHLast_X']").val();
-            toAddress1 = $("input[name='Address1_X']").val();
-            toAddress2 = $("input[name='Address2_X']").val();
-            toCity = $("input[name='City_X']").val();
-            toState = $("select#State_X option:selected").val();
-            toZip = $("input[name='PostalCode_X']").val();
-            toCountry = $("select#Country_X option:selected").val();
-            toFirstName = $("input[name='MemorialFirst_X']").val();
-            toMI = $("input[name='MemorialMI_X']").val() || false;
-            toLastName = $("input[name='MemorialLast_X']").val();
-            toInHonorOf = $("input[name='MemorialName_X_v3']").val() || false;
-            toFullName = '';
-            shippingFullName = '';
-            fromName = $("input[name='LastName_X']").val();
-            if (!toInHonorOf) {
-              if (toMI) {
-                toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
-              } else {
-                toFullName = toFirstName + "%20" + toLastName;
-              }
-            } else {
-              toFullName = toInHonorOf;
-            }
-            if (shippingMI) {
-              shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
-            } else {
-              shippingFullName = shippingFirstName + "%20" + shippingLastName;
-            }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_send_to').show().append(
-              '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
-              '<p>' + decodeURIComponent(toCity) + '</p>' +
-              '<p>' + decodeURIComponent(toState) + '</p>' +
-              '<p>' + decodeURIComponent(toZip) + '</p>' +
-              '<p>' + decodeURIComponent(toCountry) + '</p>'
-            );
-            $('#card_in_honor_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
-            cardProperties = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
-            $.fancybox.close();
-            resetProducts();
-            return;
-          }
-        });
-      } else if (card_form === "card04") {
-        $("input[name='s_sat_card_occasion_type']").val(occasionType);
-        $('#js-prod-personalizer h1').text('Customize Card');
-        $('#card-form fieldset, .bottomButtons a').hide(); 
-        $('fieldset.card04, #finishCard, .leaveBlank').show();
-        $('.leaveBlank').click(function (e) {
-          e.preventDefault();
-          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close();
-          resetProducts();
-          return;
-        });
-        $('#finishCard').click(function (e) {
-          e.preventDefault();
-          if (checkFields()) {
-            shippingFirstName = $("input[name='MHFirst_X']").val();
-            shippingMI = $("input[name='MHMI_X']").val() || false;
-            shippingLastName = $("input[name='MHLast_X']").val();
-            toAddress1 = $("input[name='Address1_X']").val();
-            toAddress2 = $("input[name='Address2_X']").val();
-            toCity = $("input[name='City_X']").val();
-            toState = $("select#State_X option:selected").val();
-            toZip = $("input[name='PostalCode_X']").val();
-            toCountry = $("select#Country_X option:selected").val();
-            toFirstName = $("input[name='MemorialFirst_X']").val();
-            toMI = $("input[name='MemorialMI_X']").val() || false;
-            toLastName = $("input[name='MemorialLast_X']").val();
-            toInHonorOf = $("input[name='MemorialName_X_v3']").val() || false; 
-            toFullName = '';
-            shippingFullName = '';
-            fromName = $("input[name='LastName_X']").val();
-            if (!toInHonorOf) {
-              if (toMI) {
-                toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
-              } else {
-                toFullName = toFirstName + "%20" + toLastName;
-              }
-            } else {
-              toFullName = toInHonorOf;
-            }
-            if (shippingMI) {
-              shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
-            } else {
-              shippingFullName = shippingFirstName + "%20" + shippingLastName;
-            }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_send_to').show().append(
-              '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
-              '<p>' + decodeURIComponent(toCity) + '</p>' +
-              '<p>' + decodeURIComponent(toState) + '</p>' +
-              '<p>' + decodeURIComponent(toZip) + '</p>' +
-              '<p>' + decodeURIComponent(toCountry) + '</p>'
-            );
-            $('#card_in_memory_of').show().append('<p>' + decodeURIComponent(toFullName) + '</p>');
-            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
-            cardProperties = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
-            $.fancybox.close();
-            resetProducts();
-            return;
-          }
-        });
-      } else if (card_form === "ecard01" || card_form === "ecard02") {
-        $("input[name='s_sat_ecard_occasion_type']").val(occasionType);
-        $('#js-prod-personalizer h1').text('Customize E-Card');
-        $('#card-form fieldset, .bottomButtons a').hide(); 
-        if (card_form === "ecard01") {
-          $('fieldset.ecard01, #finisheCard').show();
-          $('#honor_info').html('Would you like a different name to appear in the ecard?');
-        } else if (card_form === "ecard02") {
-          $('fieldset.ecard02, #finisheCard').show();
-          $('#memorial_info').html('Would you like a different name to appear in the ecard?');
-        }    
-        $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
-        $('#finisheCard').click(function (e) {
-          e.preventDefault();      
-          if (checkFields()) {
-            toFirstName = encodeURIComponent($("input[name='MemorialFirst_X_v2']").val());
-            toMI = encodeURIComponent($("input[name='MemorialMI_X']").val()) || false;
-            toLastName = encodeURIComponent($("input[name='MemorialLast_X']").val());
-            toInHonorOf = encodeURIComponent($("input[name='MemorialName_X']").val()) || false;
-            toEmail = encodeURIComponent($("input[name='MHEMail_X']").val());
-            toFullName = '';
-            fromName = encodeURIComponent($("input[name='LastName_X']").val());
-            message = encodeURIComponent($("textarea[name='Comments_X']").val());
-            if (!toInHonorOf) {
-              if (toMI) {
-                toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
-              } else {
-                toFullName = toFirstName + "%20" + toLastName
-              }
-            } else {
-              toFullName = toInHonorOf
-            }
-            $('.product-thumb').append('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_to').show().append('<p>' + decodeURIComponent(toEmail) + '</p>');
-            $('#card_from').show().append('<p>' + decodeURIComponent(fromName) + '</p>');
-            $('#card_personal_message').show().append('<p>' + decodeURIComponent(message) + '</p>');
-            cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
-            $.fancybox.close();
-            resetProducts();
-            return;
-          }
-        });
-      }
-      return;
-    },
-    getDonationInfo = function () {
-      var donation = mawf.CartView.donations()[0],
-        bitlyURL = '',
-        chid = donation.donorIntent(),
-        isMonthly = (donation.donationType() == 2),
-        officeID = null,
-        short_chid = chid.substr(0,3),
-        form_chid = $('.logo a').attr('href').match(/\d+/)[0],
-        donation_form_id = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid + ' + form').attr('id')) : ('1563')),
-        formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish® International')),
-        today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
-
-      donation_data = donation_data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id) + '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee) + '&remember_me=true&other_amount=' + (0.00 + parseFloat(donation.prettyDonationAmount())) + (isMonthly?'&sustaining.frequency=monthly&sustaining.duration=0':'');
-      setMetadata();
       if (cardProperties[1] == 'ecard01') {
         var ecard_first_name = $("input[name='billing.name.first']").val()
         var ecard_last_name = $("input[name='billing.name.last']").val()

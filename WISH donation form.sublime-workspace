@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"survey",
+				"survey_ids"
+			],
+			[
+				"submit",
+				"submitDonation"
+			],
+			[
 				"url",
 				"urlVariableArray"
 			],
@@ -100,16 +108,8 @@
 				"submitSurveyThenTeamRaiser"
 			],
 			[
-				"submit",
-				"submitTimer"
-			],
-			[
 				"team",
 				"teamraiserSubmitted"
-			],
-			[
-				"survey",
-				"surveySubmitted"
 			],
 			[
 				"submitT",
@@ -148,11 +148,28 @@
 	"buffers":
 	[
 		{
-			"file": "donation form/reus_donate_form_process_donation.html",
+			"file": "donation form/reus_donate_form_global_vars_product_selector.html",
 			"settings":
 			{
-				"buffer_size": 6683,
+				"buffer_size": 46899,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "donation form/reus_donate_form_product_config.html",
+			"settings":
+			{
+				"buffer_size": 32247,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "800-799-7233 abuse hotline",
+			"settings":
+			{
+				"buffer_size": 26,
+				"line_ending": "Windows",
+				"name": "800-799-7233 abuse hotline"
 			}
 		}
 	],
@@ -183,18 +200,26 @@
 	},
 	"file_history":
 	[
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_global_vars_product_selector.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_card_CR05_05.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/products.json",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_select.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/csv/wish_chid_list.csv",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/head_element.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/bug list.txt",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_config.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/ko-custom.concat.js",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/css/donate.css",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_chapter_locator.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_process_donation.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_get_donation_info.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_plugins.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_global_vars_product_selector.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/donate.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/config.js",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_process_donation.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_plugins.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_metadata.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/css/donate.css",
 		"/C/Users/v-ben.cloutier/Desktop/genes's shitty poetry.txt",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/bug list.txt",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/xml/center_info.xml",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_ar_monthly_promo.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_footer.html",
@@ -207,10 +232,6 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/chapters.json",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_thankyou_scripts.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_chapter_country_search.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/products.json",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_select.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/ko-custom.concat.js",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_config.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_card_MC08_01.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_card_TCB08_01.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_card_CR06_06.html",
@@ -228,7 +249,6 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_500.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_ar_nav.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_ar_top.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/csv/wish_chid_list.csv",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/zip-codes.json",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_prehead.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_default_levels.html",
@@ -307,10 +327,7 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_070.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_071.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_073.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_077.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_079.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_080.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_081.html"
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_077.html"
 	],
 	"find":
 	{
@@ -332,6 +349,89 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"01",
+			"card01",
+			"launchzoom",
+			"setmet",
+			"card_to",
+			"blurb",
+			"setmetadata",
+			"showStep3",
+			"customizeCard",
+			"js_ecard-edit",
+			"edit",
+			"selectecard",
+			"selectcard",
+			"optionTwo",
+			"optiontwo",
+			"optionTwo",
+			"showStep",
+			"showstep2",
+			"showstep1",
+			"ecard-btn",
+			"cardProperties",
+			"source",
+			"amnt",
+			"type =",
+			"type ==",
+			"type",
+			"monthly",
+			"donation",
+			"x",
+			"donations[i]",
+			"monthly",
+			"launchzoom",
+			"cont-btn",
+			"customizecard",
+			"customiaecard",
+			"customiza",
+			"select-card",
+			"customizecard",
+			"occasiontype",
+			"optiontwo",
+			"launchzoom",
+			"selectecard",
+			"wrapper",
+			"selectecard",
+			"option-two",
+			"select-area-",
+			"select-area-2",
+			"$('.select-area-2')",
+			"cancel-btn",
+			"back-btn",
+			"selectOccasion",
+			"back-btn",
+			"selectoccasion",
+			"option-one",
+			"new-tag",
+			"newtag",
+			"new-tag",
+			"urlvariablearray",
+			"level4",
+			".ammount-btn",
+			"level1",
+			"urlvariablearray",
+			"state-btn",
+			"checkdonations",
+			"sendcards",
+			"getnextmonth",
+			"fielderror",
+			"finishgift",
+			"laststep",
+			"lastStep",
+			"laststep",
+			"finishgift",
+			"xmlhttp",
+			"laststep",
+			"ispaypal",
+			"data",
+			"chaptersjson",
+			"center_forms",
+			"get_short_url",
+			"zip_array",
+			"ispaypal",
+			"showerror",
+			"addCentersCallback",
 			"alt=''",
 			"urlVariableArray",
 			"get_short_url",
@@ -376,90 +476,7 @@
 			"&reg;",
 			"center_forms",
 			"060",
-			"®",
-			"Make-A-Wish",
-			"formdesignee",
-			"customvariable",
-			"make-a-wish",
-			"fraud",
-			"id=\"source\"",
-			"zip code or state",
-			"start typing",
-			"today",
-			"productURL",
-			"producturl",
-			"matching",
-			"search-menu",
-			"data",
-			"lastStep",
-			"finishGift",
-			"luminate",
-			"donate",
-			"resetProducts",
-			"step3",
-			"fancybox",
-			"edit",
-			"js_ecard-edit",
-			"js_ecard",
-			"wedding",
-			"window.cardProperties",
-			"window.",
-			"cardproperties",
-			"js_ecard-edit",
-			"a donation in memory of",
-			"cardDescription",
-			"id=\"container\"",
-			"a donation",
-			"a donation in memory",
-			"mc02-01",
-			"chapter_id",
-			"survey",
-			"optin",
-			"opt.*?in",
-			"opt",
-			"designeeName1",
-			"product_1_",
-			"honoree",
-			"product_honoree",
-			"foreign_key3",
-			"metadata_appeal_year",
-			"foreign_key2",
-			"honoree",
-			"gc13",
-			"make another donation",
-			"total to be charged to card monthly",
-			"total to be charged monthly",
-			"center_forms",
-			"bdc",
-			"form_id",
-			"js_ecard-edit",
-			"card_preview",
-			"http://twitter.com/home\\?status=.*?\"",
-			"http://twitter.com/home?status=",
-			"%20",
-			" ",
-			"wish.org%2Fhelp%2Fdonate",
-			"wish.org/help/donate",
-			"twitter",
-			"share the power",
-			"<img<SP>src=\"http://site.wish.org/assets/images/ar/h_grad.gif\"<SP>height=\"240\"<SP>width=\"21\"<SP>style=\"display:block;border:0;\"<SP>/>",
-			"21",
-			"width",
-			"Make<SP>a<SP>Wish&reg;",
-			"make",
-			"chaptersjson",
-			"arr['chapter_id']",
-			"!--",
-			"genericchaploc",
-			"wishes",
-			"fraud",
-			"ecard",
-			"otherdonationamount",
-			"cons_email",
-			"opt",
-			"my donation(s)",
-			"other",
-			"yes"
+			"®"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -467,6 +484,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"donations[0]",
 			"''",
 			"®",
 			"",
@@ -555,24 +573,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "donation form/reus_donate_form_process_donation.html",
+					"file": "donation form/reus_donate_form_global_vars_product_selector.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6683,
+						"buffer_size": 46899,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								407,
-								407
+								16172,
+								16172
 							]
 						],
 						"settings":
@@ -580,6 +598,63 @@
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1560.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "donation form/reus_donate_form_product_config.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 32247,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7835,
+								7837
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2737.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 26,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26,
+								26
+							]
+						],
+						"settings":
+						{
+							"auto_name": "800-799-7233 abuse hotline",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
