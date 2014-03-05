@@ -49,50 +49,54 @@ jQuery(document).ready(function ($) {
       else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou";}
     },
     submitDonation = function(button_element, form_data){
-      getDonationInfo();
-      $(button_element).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true);
-      luminateExtend.api.request({
-        api: 'donation',
-        data: 'method=getDonationFormInfo&form_id=' +
-          /form_id=(\d{4,5})/.exec(data)[1],
-        requestType: 'POST',
-        callback: function (data) {
-          if(data.errorResponse) {
-            form_data += '&level_id=2031';
-          } else {
-            form_data += '&level_id=' + data.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
-          }
-          luminateExtend.api.request({
-            api: 'donation',
-            form: '#mainform',
-            data: form_data,
-            requestType: 'POST',
-            callback: function (data) {
-              if (data['donationResponse']['redirect']) {
-                isPaypal = true;
-                paypalRedirectUrl = data['donationResponse']['redirect']['url'];
-                finishGift();
-              }
-              if (data['donationResponse']['donation']) {
-                finishGift();
-              }
-              if (data['donationResponse']['errors']) {
-                var fieldError = '';
-                if (data['donationResponse']['errors']['fieldError']) {
-                  if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
-                    $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
-                      fieldError = fieldError + arr + " ";
-                    });
-                  } else {
-                    fieldError = data['donationResponse']['errors']['fieldError'];
-                  }
-                }
-                showError(data['donationResponse']['errors']['pageError'], fieldError);
-              }
+      if($('.input-error').length > 0){
+        $('.input-error:eq(0)').focus().blur();
+      } else {
+        getDonationInfo();
+        $(button_element).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true);
+        luminateExtend.api.request({
+          api: 'donation',
+          data: 'method=getDonationFormInfo&form_id=' +
+            /form_id=(\d{4,5})/.exec(data)[1],
+          requestType: 'POST',
+          callback: function (data) {
+            if(data.errorResponse) {
+              form_data += '&level_id=2031';
+            } else {
+              form_data += '&level_id=' + data.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
             }
-          });
-        }
-      });
+            luminateExtend.api.request({
+              api: 'donation',
+              form: '#mainform',
+              data: form_data,
+              requestType: 'POST',
+              callback: function (data) {
+                if (data['donationResponse']['redirect']) {
+                  isPaypal = true;
+                  paypalRedirectUrl = data['donationResponse']['redirect']['url'];
+                  finishGift();
+                }
+                if (data['donationResponse']['donation']) {
+                  finishGift();
+                }
+                if (data['donationResponse']['errors']) {
+                  var fieldError = '';
+                  if (data['donationResponse']['errors']['fieldError']) {
+                    if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
+                      $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
+                        fieldError = fieldError + arr + " ";
+                      });
+                    } else {
+                      fieldError = data['donationResponse']['errors']['fieldError'];
+                    }
+                  }
+                  showError(data['donationResponse']['errors']['pageError'], fieldError);
+                }
+              }
+            });
+          }
+        });
+      }
     };
   $('#ccPostal').blur(function(e){
     var id_from_billing_zip;  

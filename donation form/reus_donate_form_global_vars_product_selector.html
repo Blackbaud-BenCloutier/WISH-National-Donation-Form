@@ -13,7 +13,8 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
   chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.convio.net/wish/assets/js/chapters.json','dataType':'json','success':function(data){json=data;}});return json;})(),
   productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
   get_short_url = function(e){var t="";$.ajax({async:false,url:"https://api-ssl.bitly.com/v3/shorten?format=json",dataType:"json",data:{format:"json",apiKey:"R_50a44d5e5edc4dacaccb0841183fd8ce",login:"wishamerica",longUrl:e},success:function(e){t=e["data"]["url"]}});return t},
-  editButton;
+  editButton,
+  donation_data = 'method=donate&form_id=1420&validate=true';
 
 $.fn.infiniteCarousel = function () {
   function repeat(str, num) {

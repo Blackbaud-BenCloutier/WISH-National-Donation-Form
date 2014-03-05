@@ -1,7 +1,6 @@
 <script>
 (function ($) {
-  var donation_data = 'method=donate&form_id=1420&validate=true',
-    level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (30) : (Math.floor(urlVariableArray['level1']))),
+  var level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (30) : (Math.floor(urlVariableArray['level1']))),
     level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (50) : (Math.floor(urlVariableArray['level2']))),
     level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3'])));
     chid = '[[S80:chid]]',
