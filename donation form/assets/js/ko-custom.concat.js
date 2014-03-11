@@ -256,7 +256,8 @@ if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log(mawf.cartName+' dele
 // PRODUCT BROWSER LAUNCH BUTTONs
 //
 // TOOD - abstract the callback  and move to helpers
-/*    $(".jsFormSection").eq(0).on('click', '.ecard-btn', function (e) {
+    $(".jsFormSection").eq(0).on('click', '.ecard-btn', function (e) {
+// console.log('ecard click');
         if ( $(e.target).is('.js_ecard-edit') ) {
             mawf.CartView.productMasterState('personalizing');
             mawf.CartView.productEditState('editing');
@@ -287,7 +288,7 @@ if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log(mawf.cartName+' dele
         });
         return false;
     });
-BDC 3/5/14 THIS HAS BEEN MOVED TO reus_donate_form_scripts */
+
 
 // PRODUCT BROWSER BUTTONS - CATEGORY, PREVIEW/SELECT, SELECT
 //

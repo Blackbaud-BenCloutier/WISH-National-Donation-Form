@@ -25,8 +25,8 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
 
   // Get Donation Info
 
-  var level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (30) : (Math.floor(urlVariableArray['level1']))),
-    level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (50) : (Math.floor(urlVariableArray['level2']))),
+  var level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (50) : (Math.floor(urlVariableArray['level1']))),
+    level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (75) : (Math.floor(urlVariableArray['level2']))),
     level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3'])));
     chid = '[[S80:chid]]',
     chapter_prefix = chid.substring(0, 3),
@@ -90,7 +90,8 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
           });
         }
       }
-    };
+    },
+
   $('.nextMonth').each(function () {
     $(this).append(getNextMonth());
   });
@@ -121,16 +122,17 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
       donation_data = donation_data + "&" + index + "=" + urlVariableArray[index];
     }
   }
-  if (chid && chid != "100-000") {
+  if ((chid && chid != "100-000") || ('[[S334:designation]]' != '')) {
     var orgChapterName = "";
     var orgCenter = "";
+    var chapterID = ('[[S334:designation]]' != '')?'[[S334:designation]]':chid;
     $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-      if (arr['office_id'] == chid) {
+      if (arr['office_id'] == chapterID) {
         orgChapterName = arr['office_name'];
         orgCenter = arr['center_id'];
         mawf.donation_init({
           localizedCurrencySymbol: '$',
-          donorIntentId: chid,
+          donorIntentId: chapterID,
           donorIntentName: orgChapterName,
           donationType1Label: 'A Single Donation',
           donationType2Label: 'A Monthly Pledge',
@@ -147,15 +149,19 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
           nationalName: 'Make-A-Wish® America',
           internationalID: '500-000',
           internationalName: 'Make-A-Wish® International',
-          purchaserID: chid,
+          purchaserID: chapterID,
           purchaserName: orgChapterName,
-          sitChapterID: chid,
+          sitChapterID: chapterID,
           sitChapter: orgChapterName,
           sitCenter: orgCenter
         });
         return false;
       }
     });
+    $('#localOptin').insertBefore('#nationalOptin');
+    $('.intouch-container:eq(0)').addClass('selected');
+    $('.intouch-container:eq(0) input').prop('checked', true);
+    $("input[name='s_sat_chapter_id']").val(chapterID);
   } else {
     mawf.donation_init({
       localizedCurrencySymbol: '$',
@@ -182,16 +188,8 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
       sitChapter: 'Make-A-Wish® America',
       sitCenter: '1001'
     });
-  }
-  if (chid && chid != "100-000") {
-    $('#localOptin').insertBefore('#nationalOptin');
-    $('.intouch-container:eq(0)').addClass('selected');
-    $('.intouch-container:eq(0) input').prop('checked', true);
-    $("input[name='s_sat_chapter_id']").val(chid);
-  } else {
     $("input[name='s_sat_chapter_id']").val("100-000");
   }
-
   // Get Donation Info
 
 })(jQuery);
@@ -281,6 +279,7 @@ $(document).ready(function () {
     skew = '',
     giftTypeButtons = $("#giftTypes").html(),
     initProducts = $("ul#products").html(),
+    product_id = '',
     validateFail = function(currentElement) {
       currentElement.addClass('input-error');
       currentElement.next("p").show();
@@ -436,7 +435,7 @@ $(document).ready(function () {
           return false;
         }
       });
-      showStep3(ecard_id, card_name, card_type, card_form, occasion_type, card_image1, card_image2, card_image3, card_thumbnail, product_url, skew);
+      showStep3(ecard_id, card_name, card_type, card_form, occasion_type, card_image1, card_image2, card_image3, card_thumbnail, product_url, skew, cardID);
       return;
     },
     resetProducts = function() {
@@ -499,8 +498,9 @@ $(document).ready(function () {
       cardThumbnail = '';
       productURL = '';
       skew = '';
+      product_id = '';
     },
-    showStep3 = function (ecardID, cardName, cardType, cardForm, occasionType, cardImage1, cardImage2, cardImage3, cardThumbnail, productURL, thisSkew)
+    showStep3 = function (ecardID, cardName, cardType, cardForm, occasionType, cardImage1, cardImage2, cardImage3, cardThumbnail, productURL, thisSkew, cardID)
     {
       $('#step1, #step2, .top-actions .back-btn').hide();
       $('#step3, .top-actions .cancel-btn').show();
@@ -523,7 +523,8 @@ $(document).ready(function () {
       $("input[name='s_sat_ecert_occasion_type']").val(occasionType);
       $('#js-prod-personalizer h1').text('Customize ' + cardType);
       $('#card-form fieldset, .bottomButtons a').hide();
-      if (card_form === "cert01" || card_form === "cert03") {      
+      $('#card_send_to,#card_personal_message,#card_to,#card_from,#card_in_honor_of,#card_in_memory_of,#card_wedding_couple_name').hide();
+      if (card_form === "cert01" || card_form === "cert03") {     
         if (card_form === "cert01"){
           $('fieldset.cert01, #finishCertificate').show();
           $('#honor_info').html('Would you like a different name printed on the certificate?');
@@ -534,6 +535,7 @@ $(document).ready(function () {
         $('#from_info').html('Your name or family name will appear on the certificate exactly as you type it here. Limit 40 characters including spaces.');
         $('#finishCertificate').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
           if (checkFields()) {
             toFirstName = $("input[name='product_1_honoree_address1']").val();
             toMI = $("input[name='product_1_honoree_address2']").val() || false;
@@ -565,6 +567,7 @@ $(document).ready(function () {
         $('fieldset.cert02, #finishCertificate').show(); 
         $('#finishCertificate').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
           if (checkFields()) {
             toFullName = $("input[name='product_1_honoree_address1']").val();
             $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
@@ -580,11 +583,18 @@ $(document).ready(function () {
         $('fieldset.card01, #finishCard, .leaveBlank').show();
         $('.leaveBlank').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
+          $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+          $('#card_preview').show();
+          $('#card_create').hide();
+          $('#card_send_to').show();
+          $('#card_send_to .blurbtext').html('Leave blank and send to me.');
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
           $.fancybox.close();
         }); //click
         $('#finishCard').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
           if (checkFields()) {
             toFirstName = $("input[name='product_1_honoree_zip']").val();
             toMI = $("input[name='product_2_honoree_address1']").val() || false;
@@ -629,11 +639,18 @@ $(document).ready(function () {
         $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
         $('.leaveBlank').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
+          $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+          $('#card_preview').show();
+          $('#card_create').hide();
+          $('#card_send_to').show();
+          $('#card_send_to .blurbtext').html('Leave blank and send to me.');
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
           $.fancybox.close();
         });
         $('#finishCard').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
           if (checkFields()) {
             toFirstName = $("input[name='product_1_honoree_zip']").val();
             toMI = $("input[name='product_2_honoree_address1']").val() || false;
@@ -674,11 +691,18 @@ $(document).ready(function () {
         $('fieldset.card03, #finishCard, .leaveBlank').show();
         $('.leaveBlank').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
+          $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+          $('#card_preview').show();
+          $('#card_create').hide();
+          $('#card_send_to').show();
+          $('#card_send_to .blurbtext').html('Leave blank and send to me.');
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
           $.fancybox.close();
         });
         $('#finishCard').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
           if (checkFields()) {
             shippingFirstName = $("input[name='product_1_honoree_zip']").val();
             shippingMI = $("input[name='product_2_honoree_address1']").val() || false;
@@ -689,10 +713,10 @@ $(document).ready(function () {
             toState = $("select#product_2_honoree_message option:selected").val();
             toZip = $("input[name='product_2_honoree_name']").val();
             toCountry = $("select#product_2_honoree_state option:selected").val();
-            toFirstName = $("input[name='MemorialFirst_X']").val();
+            toFirstName = $("input[name='product_3_honoree_city']").val();
             toMI = $("input[name='product_1_honoree_address2']").val() || false;
             toLastName = $("input[name='product_1_honoree_city']").val();
-            toInHonorOf = $("input[name='product_1_honoree_country_v3']").val() || false;
+            toInHonorOf = $("input[name='product_3_honoree_message']").val() || false;
             toFullName = '';
             shippingFullName = '';
             fromName = $("input[name='product_1_honoree_email']").val();
@@ -733,11 +757,18 @@ $(document).ready(function () {
         $('fieldset.card04, #finishCard, .leaveBlank').show();
         $('.leaveBlank').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
+          $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+          $('#card_preview').show();
+          $('#card_create').hide();
+          $('#card_send_to').show();
+          $('#card_send_to .blurbtext').html('Leave blank and send to me.');
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
           $.fancybox.close();
         });
         $('#finishCard').click(function (e) {
           e.preventDefault();
+          product_id = cardID;
           if (checkFields()) {
             shippingFirstName = $("input[name='product_1_honoree_zip']").val();
             shippingMI = $("input[name='product_2_honoree_address1']").val() || false;
@@ -748,10 +779,10 @@ $(document).ready(function () {
             toState = $("select#product_2_honoree_message option:selected").val();
             toZip = $("input[name='product_2_honoree_name']").val();
             toCountry = $("select#product_2_honoree_state option:selected").val();
-            toFirstName = $("input[name='MemorialFirst_X']").val();
+            toFirstName = $("input[name='product_3_honoree_city']").val();
             toMI = $("input[name='product_1_honoree_address2']").val() || false;
             toLastName = $("input[name='product_1_honoree_city']").val();
-            toInHonorOf = $("input[name='product_1_honoree_country_v3']").val() || false; 
+            toInHonorOf = $("input[name='product_3_honoree_message']").val() || false; 
             toFullName = '';
             shippingFullName = '';
             fromName = $("input[name='product_1_honoree_email']").val();
@@ -800,7 +831,8 @@ $(document).ready(function () {
         }    
         $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
         $('#finisheCard').click(function (e) {
-          e.preventDefault();      
+          e.preventDefault();
+          product_id = cardID;   
           if (checkFields()) {
             toFirstName = encodeURIComponent($("input[name='product_1_honoree_address1']").val());
             toMI = encodeURIComponent($("input[name='product_1_honoree_address2']").val()) || false;
@@ -905,7 +937,7 @@ $(document).ready(function () {
         $('#foreign_key5').val(metadata_subtype);
       }
       $('#source').val($('#foreign_key2').val() + ',' + $('#foreign_key3').val() + ',' + $('#foreign_key4').val());
-      $('#product_id').val(ecard_id);
+      $('#product_id').val(product_id);
       if (cardProperties[1] == 'ecard01') {
         var ecard_first_name = $("input[name='billing.name.first']").val();
         var ecard_last_name = $("input[name='billing.name.last']").val();
@@ -994,6 +1026,12 @@ $(document).ready(function () {
     if (index == 'card_type') {
       launchCard(urlVariableArray[index]);
     }
+  }
+  if (chid !== '100-000') {
+    $('#optinChapter').closest('span').addClass('checked');
+    $('#optinChapter').attr('checked','checked');
+    $('#optinChapter').closest('.intouch-container').addClass('selected');
+    console.log('not 100');
   }
   $(".option-one").on('click', 'li', function (e) {
     e.preventDefault();
@@ -1154,25 +1192,17 @@ $(document).ready(function () {
       $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
     },
     finishGift = function() {
-      var survey_ids = [],
-        survey_data = '';
-      if ($('#optinNational').is(':checked')) {
-        survey_ids.push("1604");
-      }
-      if ($('#optinInternational').hasClass('checked')) {
-        survey_ids.push("1625");
-      }
-      if ($('#optinChapter').is(':checked')) {
-        $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-          if (arr['office_id'] == $('#chapter_id').val()) {
-            survey_ids.push(arr['surveyID']);
-          }
-        });
-      }
+      var survey_ids = ['1604','1625'],
+        bools = [($('#optinNational').is(':checked')?true:false),($('#optinInternational').is(':checked')?true:false),($('#optinChapter').is(':checked')?true:false)];
+      $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+        if (arr['office_id'] == $('#chapter_id').val()) {
+          survey_ids.push(arr['surveyID']);
+        }
+      });
       for (var i = 0; i < survey_ids.length; i++) {
         luminateExtend.api.request({
           api: 'survey',
-          data: 'method=submitSurvey&cons_email=' + encodeURIComponent($("#eAdd").val()) + '&cons_email_opt_in=true&survey_id=' + survey_ids[i],
+          data: 'method=submitSurvey&cons_email=' + encodeURIComponent($("#eAdd").val()) + '&cons_email_opt_in=' + bools[i] + '&survey_id=' + survey_ids[i],
           requiresAuth: true,
           requestType: 'POST',
           useHTTPS: true
