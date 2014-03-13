@@ -765,7 +765,7 @@ $(document).ready(function () {
           product_id = cardID;
           if (checkFields()) {
             shippingFirstName = $("input[name='product_1_honoree_zip']").val();
-            shippingMI = $("input[name='product_2_honoree_address1']").val() || false;
+            shippingMI = $("input[name='product_2_honoree_address1']").val();
             shippingLastName = $("input[name='product_2_honoree_address2']").val();
             toAddress1 = $("input[name='product_2_honoree_city']").val();
             toAddress2 = $("input[name='product_2_honoree_country']").val();
@@ -774,14 +774,14 @@ $(document).ready(function () {
             toZip = $("input[name='product_2_honoree_name']").val();
             toCountry = $("select#product_2_honoree_state option:selected").val();
             toFirstName = $("input[name='product_3_honoree_city']").val();
-            toMI = $("input[name='product_1_honoree_address2']").val() || false;
-            toLastName = $("input[name='product_1_honoree_city']").val();
-            toInHonorOf = $("input[name='product_3_honoree_message']").val() || false; 
+            toMI = $("input[name='product_3_honoree_country']").val();
+            toLastName = $("input[name='product_3_honoree_email']").val();
+            toInHonorOf = $("input[name='product_3_honoree_message']").val(); 
             toFullName = '';
             shippingFullName = '';
             fromName = $("input[name='product_1_honoree_email']").val();
-            if (!toInHonorOf) {
-              if (toMI) {
+            if (toInHonorOf === '') {
+              if (toMI !== '') {
                 toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
               } else {
                 toFullName = toFirstName + "%20" + toLastName;
