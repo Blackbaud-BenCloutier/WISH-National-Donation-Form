@@ -1,0 +1,70 @@
+<style type="text/css">
+h2, #card-text, #flashContent {padding:20px;text-align:center; width:526px; margin:0 auto;}
+#card-text {width:446px;}
+
+</style>
+<h2>Get Well Soon</h2>
+<!-- begin flash content -->
+
+    <div id="flashContent">
+      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="486" height="286" id="getwell_08_06" align="middle">
+        <param name="movie" value="../assets/ecards/getwell_08_06.swf" />
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#000000" />
+        <param name="play" value="true" />
+        <param name="loop" value="false" />
+        <param name="wmode" value="window" />
+        <param name="scale" value="showall" />
+        <param name="menu" value="true" />
+        <param name="devicefont" value="false" />
+        <param name="salign" value="" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <!--[if !IE]>-->
+        <object type="application/x-shockwave-flash" data="../assets/ecards/getwell_08_06.swf" width="486" height="286">
+          <param name="movie" value="../assets/ecards/getwell_08_06.swf" />
+          <param name="quality" value="high" />
+          <param name="bgcolor" value="#000000" />
+          <param name="play" value="true" />
+          <param name="loop" value="false" />
+          <param name="wmode" value="window" />
+          <param name="scale" value="showall" />
+          <param name="menu" value="true" />
+          <param name="devicefont" value="false" />
+          <param name="salign" value="" />
+          <param name="allowScriptAccess" value="sameDomain" />
+        <!--<![endif]-->
+          <a href="http://www.adobe.com/go/getflash">
+            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+          </a>
+        <!--[if !IE]>-->
+        </object>
+        <!--<![endif]-->
+      </object>
+            
+            <div id="card-text">
+
+
+<p align="center"><img src="https://secure2.convio.net/wish/images/content/pagebuilder/logov3.gif" height="87" width="190" alt="Make a Wish America"  /></p>
+
+<p>The Make-A-Wish Foundation grants the wishes of children with life-threatening medical conditions to enrich the human experience with hope, strength, and joy. It is the largest wish-granting charity in the world. With the help of generous donors and tens of thousands of volunteers, the Make-A-Wish Foundation has granted wishes to precious children since 1980. For more information on how you can share the power of a wish&reg;, visit us at <a href="http://www.wish.org" target="_blank">www.wish.org</a>.</p>
+</div>
+    </div>
+<script type="application/javascript">
+
+var current = new Date("[[S20]]");
+console.log (current);
+var currshort = current.getTime();
+console.log (currshort);
+
+var timestamp = new Date("[[T5:[[S334:timestamp]]]]");
+console.log (timestamp);
+var tsshort = timestamp.getTime();
+console.log (tsshort);
+var diff = currshort - tsshort;
+console.log (diff);
+ if (diff > 864000000)
+  {
+    $('div#flashContent').replaceWith("<p>We're sorry, this greeting card has expired.</p>");
+  };
+  
+</script>
