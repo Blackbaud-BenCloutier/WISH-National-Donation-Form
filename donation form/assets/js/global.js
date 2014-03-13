@@ -888,6 +888,7 @@ mawf.locator.prototype.modalListener = function (e) {
         // if target has no data - query and set data
         self.modalSelectCountry(self.$target);
         $.fancybox.close();
+        console.log(self.$target);
     }
     // if STATE BUTTON - query service, cb fill results container
     else if (self.$target.is('.state-btn')) {
