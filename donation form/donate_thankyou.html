@@ -100,7 +100,6 @@
 [[?xx::x[[S120:dc:custom:custom_string42]]x::::
 <div id="card_preview" class="donation clearfix"></div>
 ]]
-
 <p>
 [[?[[S80:productURL1]]::pdf=CR::<br /><a style="text-decoration:none;color:#006bb6;font-weight:bold;" href="[[S80:productURL1]]" target="_blank"><span>Download [[S80:productURL1Name]]&nbsp;<img width="12" height="10" style="display:inline;border:0;" src="http://site.wish.org/assets/images/ar/arw.gif"></span></a>::]]
 </p>
@@ -149,9 +148,9 @@ $.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/asse
         
       );
       str += '<div style="height:234px;" class="product-thumb left">' +
-          '<img src="' + card_image + '">' +
+          '<img height="234" src="' + card_image + '">' +
         '</div>' +
-        '<div class="left">';
+        '<div style="float:left;">';
       if(send_to_first_name != '' ||
         send_to_middle_initial != '' ||
         send_to_last_name != '' ||
@@ -274,6 +273,6 @@ if($('.donation .left h4 span').text() == ''){
 
 <style>
     .button-blue {color: #FFFFFF !important;}
-    #card_preview,.blurb{display: block !important;}
+    #card_preview,.blurb{display: block !important;margin:12px!important;}
     .blurb {margin: 0 12px 12px 12px;}
 </style>

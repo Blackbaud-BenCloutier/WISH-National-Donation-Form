@@ -1,6 +1,9 @@
 [[S51:reus_donate_form_plugins]]
 [[U0:productURL1='']]
 [[U0:productURL1Name='']]
+<style>
+.bldr-wrap #card-form fieldset {float:right!important;margin:22px!important;}
+</style>
 <script>
 
 // Global Vars
@@ -304,23 +307,17 @@ $(document).ready(function () {
       }
     },
     checkFields = function () {
-      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        ret = true;
       $('#step3 .jsreq:visible').each(function () {
         if ($(this).hasClass('js_email')){
-          if(emailRegex.test($(this).val())) {
-            validatePass($(this));
-          } else {
-            validateFail($(this));
-            return false;
-          }
-        } else if ($(this).val() == '') {
-          validateFail($(this));
-          return false;
-        } else {
-          validatePass($(this));
+          if (emailRegex.test($(this).val())) { validatePass($(this)); }
+          else { validateFail($(this)); ret = false; }
         }
+        else if ($(this).val() == '') { validateFail($(this)); ret = false; }
+        else { validatePass($(this)); }
       });
-      return true;
+      return ret;
     },
     launchCard = function(id) {
       $.fancybox({
@@ -518,52 +515,82 @@ $(document).ready(function () {
       $('#js-prod-personalizer h1').text('Customize ' + cardType);
       $('#card-form fieldset, .bottomButtons a').hide();
       $('#card_send_to,#card_personal_message,#card_to,#card_from,#card_in_honor_of,#card_in_memory_of,#card_wedding_couple_name').hide();
-      if (card_form === "cert01" || card_form === "cert03") {     
+      if (card_form === "cert01" || card_form === "cert03") {
+        $('#from_info').html('Your name or family name will appear on the certificate exactly as you type it here. Limit 40 characters including spaces.'); 
         if (card_form === "cert01"){
           $('fieldset.cert01, #finishCertificate').show();
           $('#honor_info').html('Would you like a different name printed on the certificate?');
+          $('#finishCertificate').click(function (e) {
+            e.preventDefault();
+            product_id = cardID;
+            if (checkFields()) {
+              toFirstName = $("input[name='product_1_honoree_address1']").val();
+              toMI = $("input[name='product_1_honoree_address2']").val() || false;
+              toLastName = $("input[name='product_1_honoree_city']").val();
+              toInHonorOf = $("input[name='product_1_honoree_country']").val() || false;
+              toFullName = '';
+              fromName = $("input[name='product_1_honoree_email']").val();
+              if (!toInHonorOf) {
+                if (toMI) {
+                  toFullName = toFirstName + " " + toMI + " " + toLastName;
+                } else {
+                  toFullName = toFirstName + " " + toLastName
+                }
+              } else {
+                toFullName = toInHonorOf;
+              }
+              $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+              $('#card_preview').show();
+              $('#card_create').hide();
+              $('#card_in_honor_of').show();
+              $('#card_in_honor_of .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
+              $('#card_from').show();
+              $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
+              cardProperties = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
+              $.fancybox.close();
+            }
+          });
         } else if(card_form === "cert03") {
           $('fieldset.cert03, #finishCertificate').show();
           $('#memorial_info').html('Would you like a different name printed on the certificate?');
-        }
-        $('#from_info').html('Your name or family name will appear on the certificate exactly as you type it here. Limit 40 characters including spaces.');
-        $('#finishCertificate').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          if (checkFields()) {
-            toFirstName = $("input[name='product_1_honoree_address1']").val();
-            toMI = $("input[name='product_1_honoree_address2']").val() || false;
-            toLastName = $("input[name='product_1_honoree_city']").val();
-            toInHonorOf = $("input[name='product_1_honoree_country']").val() || false;
-            toFullName = '';
-            fromName = $("input[name='product_1_honoree_email']").val();
-            if (!toInHonorOf) {
-              if (toMI) {
-                toFullName = toFirstName + " " + toMI + " " + toLastName;
+          $('#finishCertificate').click(function (e) {
+            e.preventDefault();
+            product_id = cardID;
+            if (checkFields()) {
+              toFirstName = $("input[name='product_3_honoree_city']").val();
+              toMI = $("input[name='product_3_honoree_country']").val() || false;
+              toLastName = $("input[name='product_3_honoree_email']").val();
+              toInHonorOf = $("input[name='product_3_honoree_message']").val() || false;
+              toFullName = '';
+              fromName = $("input[name='product_1_honoree_email']").val();
+              if (!toInHonorOf) {
+                if (toMI) {
+                  toFullName = toFirstName + " " + toMI + " " + toLastName;
+                } else {
+                  toFullName = toFirstName + " " + toLastName
+                }
               } else {
-                toFullName = toFirstName + " " + toLastName
+                toFullName = toInHonorOf;
               }
-            } else {
-              toFullName = toInHonorOf;
+              $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+              $('#card_preview').show();
+              $('#card_create').hide();
+              $('#card_in_memory_of').show();
+              $('#card_in_memory_of .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
+              $('#card_from').show();
+              $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
+              cardProperties = [donationID, 'cert03', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
+              $.fancybox.close();
             }
-            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_in_honor_of').show();
-            $('#card_in_honor_of .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
-            $('#card_from').show();
-            $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
-            cardProperties = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew];
-            $.fancybox.close();
-          }
-        });
+          });
+        }
       } else if (card_form === "cert02") {
         $('fieldset.cert02, #finishCertificate').show(); 
         $('#finishCertificate').click(function (e) {
           e.preventDefault();
           product_id = cardID;
           if (checkFields()) {
-            toFullName = $("input[name='product_1_honoree_address1']").val();
+            toFullName = $("input[name='product_1_honoree_message']").val();
             $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
@@ -1049,19 +1076,26 @@ $(document).ready(function () {
     finishGift = function() {
       var survey_ids = ['1604','1625'],
         bools = [($('#optinNational').is(':checked')?true:false),($('#optinInternational').is(':checked')?true:false),($('#optinChapter').is(':checked')?true:false)];
-      $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-        if (arr['office_id'] == $('#chapter_id').val()) {
-          survey_ids.push(arr['surveyID']);
+      $(zip_array['chapter']).each(function (index, arr) {
+        if (arr['zip_code'] == $('#ccPostal').val()) {
+          $('#chapter_id').val(arr['chapter_id']);
+          $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+            if ($('#chapter_id').val() == arr['office_id']) {
+              survey_ids.push(arr['surveyID']);
+            }
+          });
         }
       });
       for (var i = 0; i < survey_ids.length; i++) {
-        luminateExtend.api.request({
-          api: 'survey',
-          data: 'method=submitSurvey&cons_email=' + encodeURIComponent($("#eAdd").val()) + '&cons_email_opt_in=' + bools[i] + '&survey_id=' + survey_ids[i],
-          requiresAuth: true,
-          requestType: 'POST',
-          useHTTPS: true
-        });
+        if(bools[i]){
+          luminateExtend.api.request({
+            api: 'survey',
+            data: 'method=submitSurvey&cons_email=' + encodeURIComponent($("#eAdd").val()) + '&cons_email_opt_in=true&survey_id=' + survey_ids[i],
+            requiresAuth: true,
+            requestType: 'POST',
+            useHTTPS: true
+          });
+        }
       }
       $.removeCookie("cart");
       $.jStorage.flush();
@@ -1258,15 +1292,6 @@ $(document).ready(function () {
         });
       }
     };
-  $('#ccPostal').blur(function(e){
-    var id_from_billing_zip;  
-    $(zip_array['chapter']).each(function (index, arr) {
-      if (arr['zip_code'] == $('#ccPostal').val()) {
-        id_from_billing_zip = arr['chapter_id'];
-        $('#chapter_id').val(id_from_billing_zip);
-      } 
-    });  
-  });
   $("a.action-btn, a.btn-modal").click(function (e) {
     e.preventDefault();
   });
