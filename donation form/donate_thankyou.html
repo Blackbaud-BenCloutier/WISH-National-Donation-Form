@@ -1,5 +1,3 @@
-
-
 <!--Start e-Dialog ConversionTrack Code -->
 <script type="text/javascript">
   var s, f, c = document.cookie; s = c.indexOf("ed100006504"); if (s == -1) { s = c.indexOf("eds100006504") };
@@ -97,7 +95,7 @@
   </div>
 </div>
 
-[[?xx::x[[S120:dc:custom:custom_string42]]x::::
+[[?xx::x[[S120:dc:custom:custom_string98]]x::::
 <div id="card_preview" class="donation clearfix"></div>
 ]]
 <p>
@@ -111,37 +109,38 @@
 
 <script>(function($){$(function(){
 
-[[?xx::x[[S120:dc:custom:custom_string42]]x::::
-var honoree_first_name = '[[S120:dc:custom:custom_string25]]',
-  honoree_middle_initial = '[[S120:dc:custom:custom_string26]]',
-  honoree_last_name = '[[S120:dc:custom:custom_string27]]',
-  honoree_full_name = '[[S120:dc:custom:custom_string30]]',
-  from_name = '[[S120:dc:custom:custom_string32]]',
-  wedding_couple_name = '[[S120:dc:custom:custom_string31]]',
-  to_email_address = '[[S120:dc:custom:custom_string24]]',
-  personal_message = '[[S120:dc:custom:custom_string28]]',
-  send_to_first_name = '[[S120:dc:custom:custom_string47]]',
-  send_to_middle_initial = '[[S120:dc:custom:custom_string34]]',
-  send_to_last_name = '[[S120:dc:custom:custom_string35]]',
-  send_to_street_address1 = '[[S120:dc:custom:custom_string36]]',
-  send_to_street_address2 = '[[S120:dc:custom:custom_string37]]',
-  send_to_city = '[[S120:dc:custom:custom_string38]]',
-  send_to_state = '[[S120:dc:custom:custom_string39]]',
-  send_to_postal_code = '[[S120:dc:custom:custom_string33]]',
-  send_to_country = '[[S120:dc:custom:custom_string40]]',
-  personal_message_line_1 = '[[S120:dc:custom:custom_string41]]',
-  personal_message_line_2 = '[[S120:dc:custom:custom_string43]]',
-  personal_message_line_3 = '[[S120:dc:custom:custom_string44]]',
-  memoree_first_name = '[[S120:dc:custom:custom_string45]]',
-  memoree_middle_initial = '[[S120:dc:custom:custom_string48]]',
-  memoree_last_name = '[[S120:dc:custom:custom_string50]]',
-  memoree_full_name = '[[S120:dc:custom:custom_string49]]',
-  card_id = '[[S120:dc:custom:custom_string42]]',
+[[?xx::x[[S120:dc:custom:custom_string98]]x::::
+var honoree_first_name = '[[S120:dc:custom:custom_string74]]',
+  honoree_middle_initial = '[[S120:dc:custom:custom_string75]]',
+  honoree_last_name = '[[S120:dc:custom:custom_string76]]',
+  honoree_full_name = '[[S120:dc:custom:custom_string77]]',
+  from_name = '[[S120:dc:custom:custom_string78]]',
+  wedding_couple_name = '[[S120:dc:custom:custom_string79]]',
+  to_email_address = '[[S120:dc:custom:custom_string80]]',
+  personal_message = '[[S120:dc:custom:custom_string81]]',
+  send_to_first_name = '[[S120:dc:custom:custom_string82]]',
+  send_to_middle_initial = '[[S120:dc:custom:custom_string83]]',
+  send_to_last_name = '[[S120:dc:custom:custom_string84]]',
+  send_to_street_address1 = '[[S120:dc:custom:custom_string85]]',
+  send_to_street_address2 = '[[S120:dc:custom:custom_string86]]',
+  send_to_city = '[[S120:dc:custom:custom_string87]]',
+  send_to_state = '[[S120:dc:custom:custom_string88]]',
+  send_to_postal_code = '[[S120:dc:custom:custom_string89]]',
+  send_to_country = '[[S120:dc:custom:custom_string90]]',
+  personal_message_line_1 = '[[S120:dc:custom:custom_string91]]',
+  personal_message_line_2 = '[[S120:dc:custom:custom_string92]]',
+  personal_message_line_3 = '[[S120:dc:custom:custom_string93]]',
+  memoree_first_name = '[[S120:dc:custom:custom_string94]]',
+  memoree_middle_initial = '[[S120:dc:custom:custom_string95]]',
+  memoree_last_name = '[[S120:dc:custom:custom_string96]]',
+  memoree_full_name = '[[S120:dc:custom:custom_string97]]',
+  card_id = '[[S120:dc:custom:custom_string98]]',
   card_image = '';
 
 $.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(productsjson){
   $(productsjson['product']).each(function (index,arr){
     if(arr['card_id']==card_id){
+console.log("test");
       var str = '';
       card_image=arr['card_image1'];
       $('#card_preview').show().append(
