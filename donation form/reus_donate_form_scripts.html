@@ -1159,21 +1159,11 @@ $(document).ready(function () {
           }
         }
         else {
-          if( form_chid === short_chid ) {
-            if($('#foreign_key3').val() === ''){
-              $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_chapter_monthly : metadata_chapter_office_code) );
-            }
-            if($('#foreign_key4').val() === ''){
-              $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_chid);
-            }
+          if($('#foreign_key3').val() === ''){
+            $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_chapter_monthly : metadata_chapter_office_code) );
           }
-          else {
-            if($('#foreign_key3').val() === ''){
-              $('#foreign_key3').val(metadata_appeal_year +'-82S-' + (isMonthly ? metadata_chapter_monthly : metadata_chapter_office_code) );
-            }
-            if($('#foreign_key4').val() === ''){
-              $('#foreign_key4').val('ON-'+ metadata_chapter_office_code + '-' + form_chid);
-            }
+          if($('#foreign_key4').val() === ''){
+            $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_chid);
           }
         }
         if($('#foreign_key5').val()=='') {
