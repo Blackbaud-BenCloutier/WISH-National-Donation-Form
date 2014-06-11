@@ -1193,8 +1193,8 @@ $(document).ready(function () {
           //var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
 
           // new treatment for secure PDF links for certificates
-          var baseCertURL = "http://HOST.wish.org/";
-          var pdfSalt = "8kekiG77eN";
+          var baseCertURL = "http://certificates.wish.org/pdf";
+          var pdfSalt = "L89adkhoQ";
           var certProductID = cardProperties[9];
           var timeStamp = Date.today().toString('ddMMyyyy');
           var stringToHash = certProductID + honoreeName + productFromName + timeStamp + pdfSalt;
@@ -1213,8 +1213,8 @@ $(document).ready(function () {
           //var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName);
 
           // new treatment for secure PDF links for certificates
-          var baseCertURL = "http://HOST.wish.org/";
-          var pdfSalt = "8kekiG77eN";
+          var baseCertURL = "http://certificates.wish.org/pdf";
+          var pdfSalt = "L89adkhoQ";
           var certProductID = cardProperties[8];
           var timeStamp = Date.today().toString('ddMMyyyy');
           var stringToHash = certProductID + honoreeName + timeStamp + pdfSalt;
