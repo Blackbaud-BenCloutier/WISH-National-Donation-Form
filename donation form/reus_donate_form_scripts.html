@@ -940,7 +940,7 @@ $(document).ready(function () {
     });
     for (i in availableTypes) {
       optionHTML += '<option value="' + availableTypes[i] + '">' + availableTypes[i] + '</option>';
-      listHTML += '<li data-option-value="' + availableTypes[i] + '">' + availableTypes[i] + '<br /><span>';
+      listHTML += '<li data-option-value="' + availableTypes[i] + '">' + availableTypes[i] + '<br /><span data-option-value="' + availableTypes[i] + '">';
       if (availableTypes[i] == "Certificate") {
         listHTML += certificateMsg;
       }
@@ -961,7 +961,9 @@ $(document).ready(function () {
     });
   });
   $(".option-two").on('click', 'li', function (e) {
+console.log($(this).get(0).tagName);
     e.preventDefault();
+console.log("derp");
     var products = [],
       cardCount = 0;
     $(productsjson['product']).each(function (index, arr) {
@@ -1011,7 +1013,8 @@ $(document).ready(function () {
           return false;
         }
       });
-      window.open(product_url, "ecard",'height=670,width=737,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
+      //window.open(product_url, "ecard",'height=670,width=737,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
+      window.open(product_url, "ecard",'height=900,width=1100,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
       } else {
         selectCard(card_id);
       }
