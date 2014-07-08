@@ -965,9 +965,8 @@ $(document).ready(function () {
     });
   });
   $(".option-two").on('click', 'li', function (e) {
-console.log($(this).get(0).tagName);
+    //console.log($(this).get(0).tagName);
     e.preventDefault();
-console.log("derp");
     var products = [],
       cardCount = 0;
     $(productsjson['product']).each(function (index, arr) {
