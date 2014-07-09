@@ -436,7 +436,7 @@ $(document).ready(function () {
       showStep3(ecard_id, card_name, card_type, card_form, occasion_type, card_image1, card_image2, card_image3, card_thumbnail, product_url, skew, cardID);
       return;
     },
-    resetProducts = function() {
+    resetProducts = function(previousStep) {
       $('#step3 .jsreq').each(function () {
         $(this).removeClass('input-error');
         $(this).next("p").hide();
@@ -451,20 +451,24 @@ $(document).ready(function () {
         "position": "relative",
         "top": "0px"
       });
-      $(".option-one li.selected").removeClass("selected");
-      $(".option-two li.selected").removeClass("selected");
-      $(".option-one label").removeClass("selection-made").text("Select Occasion");
-      $(".option-two label").removeClass("selection-made").text("Select Card Type");
-      $(".option-one input").attr("value", "Select Occasion");
-      $(".option-two input").attr("value", "Select Card Type");
-      $('#cardCount').text('');
-      $('.select-area-2').addClass('disabled');
-      $('.select-area-3').addClass("disabled");
-      $('#carousel-gallery').addClass("disabled");
-      $('.option-two ul').css({
-        opacity: 0
-      });
-      $('#carousel-gallery .wrapper').html('<ul id="products">' + initProducts + "</ul>");
+
+      if(typeof previousStep == "undefined" || typeof previousStep == "false"){
+        $(".option-one li.selected").removeClass("selected");
+        $(".option-two li.selected").removeClass("selected");
+        $(".option-one label").removeClass("selection-made").text("Select Occasion");
+        $(".option-two label").removeClass("selection-made").text("Select Card Type");
+        $(".option-one input").attr("value", "Select Occasion");
+        $(".option-two input").attr("value", "Select Card Type");
+        $('#cardCount').text('');
+        $('.select-area-2').addClass('disabled');
+        $('.select-area-3').addClass("disabled");
+        $('#carousel-gallery').addClass("disabled");
+        $('.option-two ul').css({
+          opacity: 0
+        });
+        $('#carousel-gallery .wrapper').html('<ul id="products">' + initProducts + "</ul>");
+      }
+
       products = '';
       $("#step3 input").val('');
       $("#step3 textarea").val('');
@@ -968,9 +972,8 @@ $(document).ready(function () {
     });
   });
   $(".option-two").on('click', 'li', function (e) {
-console.log($(this).get(0).tagName);
+    //console.log($(this).get(0).tagName);
     e.preventDefault();
-console.log("derp");
     var products = [],
       cardCount = 0;
     $(productsjson['product']).each(function (index, arr) {
@@ -1042,7 +1045,7 @@ console.log("derp");
   });
   $('.back-btn').click(function (e) {
     e.preventDefault();
-    resetProducts();
+    resetProducts(true);
     $('.top-actions .back-btn').hide();
     $('.top-actions .cancel-btn').show();
     $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
