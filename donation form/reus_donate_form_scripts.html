@@ -30,7 +30,14 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
   var level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (50) : (Math.floor(urlVariableArray['level1']))),
     level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (75) : (Math.floor(urlVariableArray['level2']))),
     level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3'])));
-    chid = '[[S80:chid]]',
+
+    // for ad hoc form types SPEB and SPEMB, we need to lock the chapter as national
+    if (  (urlVariableArray['form_type'] == "SPEB") || (urlVariableArray['form_type'] == "SPEMB")  ) {
+      chid = "100-000";
+    } else {
+      chid = '[[S80:chid]]';
+    }
+    
     chapter_prefix = chid.substring(0, 3),
     getNextMonth = function() {
       var dayOfMonth = Date.today().toString('d');

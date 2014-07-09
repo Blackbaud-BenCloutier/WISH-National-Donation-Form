@@ -45,67 +45,194 @@ function RedirectToGlobalSearch(sUrlPrefix) {
 <!-- END HEADER -->
 
 
-  
 
+[[?
 
-<!-- BEGIN PAGE TITLE -->
-<div class="row_12 page-title clearfix">
+  [[?x[[S80:form_type]]x::xSPEAx::T::]]
+  [[?x[[S80:form_type]]x::xSPEBx::T::]]
+  [[?x[[S80:form_type]]x::xSPECx::T::]]
+  [[?x[[S80:form_type]]x::xSPEMAx::T::]]
+  [[?x[[S80:form_type]]x::xSPEMBx::T::]]
+  [[?x[[S80:form_type]]x::xSPEMCx::T::]]
 
-  <div class="row_9">
-    <div class="grid_9">
+  ::
 
-      
-      <!-- END QUATNAV -->
-      
-      <h1 id="body_1_h1PageTitle" class="">[[?[[S4]]::9::DONATE::]][[S24]]</h1>
-          </div>
-  </div>  
+  T
+
+  ::
+
+  <!-- OPTIONAL AD-HOC FORM MASTHEAD -->
+  [[E51:reus_donate_wrpr_adhoc_masthead_[[S80:form_type]][[S80:form_instance]]]]
+  <!-- END OPTIONAL AD-HOC FORM MASTHEAD -->
+
+  ::
+
+  <!-- BEGIN API FORM PAGE TITLE -->
+  <div class="row_12 page-title clearfix">
+
+    <div class="row_9">
+      <div class="grid_9">
+
         
-  <div class="row_3">
-    <div class="grid_3">
-      <!-- BEGIN SOCIAL ICONS -->
-            
-
-<!-- AddThis Button BEGIN -->
-[[S51:reus_donate_wrpr_socialicons]]
-<!-- AddThis Button END -->
-
-      <!-- END SOCIAL ICONS -->
-    </div>          
-  </div>  
+        <!-- END QUATNAV -->
+        
+        <h1 id="body_1_h1PageTitle" class="">[[?[[S4]]::9::DONATE::]][[S24]]</h1>
+            </div>
+    </div>  
+          
+    <div class="row_3">
+      <div class="grid_3">
+        <!-- BEGIN SOCIAL ICONS -->
               
-</div>
-<!-- END PAGE TITLE -->
+        <!-- AddThis Button BEGIN -->
+        [[S51:reus_donate_wrpr_socialicons]]
+        <!-- AddThis Button END -->
+
+        <!-- END SOCIAL ICONS -->
+      </div>          
+    </div>  
+                
+  </div>
+  <!-- END API FORM PAGE TITLE -->
+
+]]
+
 
 <!-- BEGIN CONTENT WRAP -->
 <div id="body_2_divContentWrapper" class="content donateform">
   
 <!-- BEGIN CONTENT ROW -->
 <div id="body_2_content_0_divContentRowWrapper" class="row_12 bordered-content-shift clearfix">
+
   <!-- BEGIN MAIN CONTENT -->
-<div id="body_2_content_0_divMainContentWrapper" class="row_8 clearfix">
-<div id="body_2_content_0_divMainContentContainer" class="">
-[[S63:3]]
-</div>
-</div>
 
 
-  <!-- END MAIN CONTENT -->
-  <!-- BEGIN RIGHT SIDEBAR -->
-  <div id="body_2_content_0_divRightRailWrapper" class="row_4">
-    <div class="grid_4">
-      
-    [[?xxxx::xx[[S334:campaign]]xx::
-    <!-- There's no campaign variable  -->
-    [[E51:reus_donate_wrpr_right_[[S80:chid_short]]]]
+  <!-- BEGIN LEFT SIDEBAR -->
+  [[?
+
+    [[?x[[S80:form_type]]x::xSPEAx::T::]]
+    [[?x[[S80:form_type]]x::xSPEBx::T::]]
+    [[?x[[S80:form_type]]x::xSPECx::T::]]
+    [[?x[[S80:form_type]]x::xSPEMAx::T::]]
+    [[?x[[S80:form_type]]x::xSPEMBx::T::]]
+    [[?x[[S80:form_type]]x::xSPEMCx::T::]]
+
     ::
-    <!-- There is a campaign variable -->
-    [[E51:reus_donate_form_[[S334:campaign]]_sidebar]]
+
+    T
+
+    ::
+
+    <!-- VALID AD-HOC FORM TYPE -->
+    [[?
+
+      xTRUEx
+
+      ::
+
+      x[[E151:reus_donate_wrpr_adhoc_left_[[S80:form_type]][[S80:form_instance]]]]x
+
+      ::
+
+      <!-- VALID AD-HOC LEFT RAIL FOUND -->
+      <div id="body_2_content_0_divLeftRailWrapper" class="row_3">
+        <div class="grid_3">
+          [[E51:reus_donate_wrpr_adhoc_left_[[S80:form_type]][[S80:form_instance]]]]
+        </div>
+      </div>
+
+      ::
+
+      <!-- NO VALID AD-HOC LEFT RAIL FOUND...INSERT NOTHING -->
+
     ]]
 
+    ::
+
+    <!-- NOT AN AD-HOC FORM TYPE...INSERT NOTHING -->
+
+  ]]
+  <!-- END LEFT SIDEBAR -->
+  
+
+  <!-- BEGIN FORM MAIN CONTAINER -->
+  [[?
+
+    [[?x[[S80:form_type]]x::xSPEAx::T::]]
+    [[?x[[S80:form_type]]x::xSPEBx::T::]]
+    [[?x[[S80:form_type]]x::xSPECx::T::]]
+    [[?x[[S80:form_type]]x::xSPEMAx::T::]]
+    [[?x[[S80:form_type]]x::xSPEMBx::T::]]
+    [[?x[[S80:form_type]]x::xSPEMCx::T::]]
+
+    ::
+
+    T
+
+    ::
+
+    <!-- VALID AD-HOC FORM TYPE -->
+    <div id="body_2_content_0_divMainContentWrapper" class="row_6 clearfix">
+
+    ::
+
+    <!-- NOT AN AD-HOC FORM TYPE -->
+    <div id="body_2_content_0_divMainContentWrapper" class="row_8 clearfix">
+
+  ]]
+
+
+    <div id="body_2_content_0_divMainContentContainer" class="">
+      [[S63:3]]
     </div>
   </div>
+  <!-- END FORM MAIN CONTAINER -->
+
+
+  <!-- BEGIN RIGHT SIDEBAR -->
+  [[?
+
+    [[?x[[S80:form_type]]x::xSPEAx::T::]]
+    [[?x[[S80:form_type]]x::xSPEBx::T::]]
+    [[?x[[S80:form_type]]x::xSPECx::T::]]
+    [[?x[[S80:form_type]]x::xSPEMAx::T::]]
+    [[?x[[S80:form_type]]x::xSPEMBx::T::]]
+    [[?x[[S80:form_type]]x::xSPEMCx::T::]]
+
+    ::
+
+    T
+
+    ::
+
+    <!-- VALID AD-HOC FORM TYPE -->
+    <div id="body_2_content_0_divRightRailWrapper" class="row_3">
+      <div class="grid_3">
+        [[E51:reus_donate_wrpr_adhoc_right_[[S80:form_type]][[S80:form_instance]]]]
+      </div>
+    </div>
+    
+    ::
+
+    <!-- NOT AN AD-HOC FORM TYPE -->
+    <div id="body_2_content_0_divRightRailWrapper" class="row_4">
+      <div class="grid_4">
+
+        [[?xxxx::xx[[S334:campaign]]xx::
+        <!-- There's no campaign variable  -->
+        [[E51:reus_donate_wrpr_right_[[S80:chid_short]]]]
+        ::
+        <!-- There is a campaign variable -->
+        [[E51:reus_donate_form_[[S334:campaign]]_sidebar]]
+        ]]
+
+      </div>
+    </div>
+    
+  ]]
   <!-- END RIGHT SIDEBAR -->
+
+
 </div>
 <!-- END CONTENT ROW -->
 
@@ -116,7 +243,31 @@ function RedirectToGlobalSearch(sUrlPrefix) {
 
 <!-- END GRAY SHADOW CONTENT WRAP -->
 
-  
+<!-- OPTIONAL FOOTER BANNER FOR AD-HOC FORMS  -->
+[[?
+
+  [[?x[[S80:form_type]]x::xSPEAx::T::]]
+  [[?x[[S80:form_type]]x::xSPEBx::T::]]
+  [[?x[[S80:form_type]]x::xSPECx::T::]]
+  [[?x[[S80:form_type]]x::xSPEMAx::T::]]
+  [[?x[[S80:form_type]]x::xSPEMBx::T::]]
+  [[?x[[S80:form_type]]x::xSPEMCx::T::]]
+
+  ::
+
+  T
+
+  ::
+
+  <!-- FOOTER BANNER FOR VALID AD-HOC FORM TYPE -->
+  [[E51:reus_donate_wrpr_adhoc_footer_banner[[S80:form_type]][[S80:form_instance]]]]
+  <!-- END AD-HOC FORM FOOTER BANNER -->
+
+  ::
+
+  <!-- NOT AC-HOC FORM SO NOT INSERTING FOOTER BANNER -->
+
+]]
   
 
 <!-- BEGIN FOOTER -->

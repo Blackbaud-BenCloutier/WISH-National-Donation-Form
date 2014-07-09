@@ -107,12 +107,20 @@ if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log(mawf.cartName+' dele
             }
         }
 
-        if ( $.querystring.donationType ) {                     // Get donation recurrence type from query string
+
+        if ( $.querystring.form_type ) {                     // Get ad hoc form type from query string
+            formTypeParam = $.querystring.form_type;
+            if (  (formTypeParam == "SPEMA") || (formTypeParam == "SPEMB") || (formTypeParam == "SPEMC")  ) {
+                mawf.donationData.donationType = 2;           
+            }
+        } else if ( $.querystring.donationType ) {                     // Get donation recurrence type from query string
             dtParam = parseInt($.querystring.donationType, 10);
             if ( isNaN(dtParam) === false ) {
                 mawf.donationData.donationType = dtParam;           
             }
         }
+
+
     }
 
 // EXTEND MODEL WITH SERVERDEFAULTS

@@ -46,7 +46,7 @@
             <!-- BEGIN INSET -->
             <div class="js_donationConfigurator donationConfig inset" data-bind="visible: isInProcess(), attr: {'data-donation-id': donationID()}">
                 <!-- BEGIN FIELDSET -->
-                <fieldset>
+                <fieldset class="recurrence">
                     <div class="clearfix">
                         <label for="dType">
                             My donation is
@@ -93,7 +93,7 @@
                 </fieldset>
                 <!-- END FIELDSET -->
                 <!-- BEGIN FIELDSET -->
-                <fieldset>
+                <fieldset class="amount">
                     <div class="clearfix">
                         <label for="dAmount" data-bind="css: {error: x_donationAmountErrorType() === 'buttons' || x_donationAmountErrorType() === 'odm'}">
                             My donation amount
@@ -118,7 +118,7 @@
                 </fieldset>
                 <!-- END FIELDSET -->
                 <!-- BEGIN FIELDSET -->
-                <fieldset>
+                <fieldset class="intent">
                     <label for="dDest">
                         Direct my donation to
                     </label>

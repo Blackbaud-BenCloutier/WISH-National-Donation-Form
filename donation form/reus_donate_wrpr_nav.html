@@ -1,29 +1,77 @@
-<ul class="main-nav main-nav-left">
-  <li><a href="http://[[S80:website_url]]/wishes" title='Wishes'>Wishes</a></li>
-  <li><a href="http://[[S80:website_url]]/about-us" title='About Us'>About Us</a></li>
-  [[?[[S80:chid]]::100-000::
-    <li class="chapter-search">
-    <a id="header_0_content_1_hLocalChapters" title="Local Chapters" href="https://[[S80:website_url]]/local-chapters">Local Chapters</a>
-    <a class="chapter-search-trigger" href="#"></a>
-    <div class="chapter-searchbox">
-      <input id="tChapterTextSearch" class="text-input jsWireTarget" target="jsFilterChapterLocatorSearchButton" type="text" placeholder="Zip code or state"/>
-      <input class="submit jsFilterChapterLocatorSearchButton" type="button" value="" onclick="return RedirectToChapterSearch('https://wish.org/local-chapters?keyword=')"/>
-    </div>
-    </li>
+[[?
+
+  [[?x[[S80:form_type]]x::xSPEAx::T::]]
+  [[?x[[S80:form_type]]x::xSPEBx::T::]]
+  [[?x[[S80:form_type]]x::xSPECx::T::]]
+  [[?x[[S80:form_type]]x::xSPEMAx::T::]]
+  [[?x[[S80:form_type]]x::xSPEMBx::T::]]
+  [[?x[[S80:form_type]]x::xSPEMCx::T::]]
+
   ::
-    <li>
-    <a title="News & Events" href="http://[[S80:website_url]]/news-and-events"> News & Events</a>
-    </li>
+
+  T
+
+  ::
+
+  [[?x[[S80:form_chrome]]x::xfalsex
+
+    ::
+
+    <!-- CHROMELESS AD-HOC FORM SO SUPRESSING HEADER -->
+
+    ::
+
+    <!-- VALID AD-HOC FORM TYPE -->
+
+      <!-- Ad hoc return link -->
+      <div id="returnLink">
+        <a href="http://[[S80:website_url]]/">MAIN MAKE-A-WISH SITE</a>
+      </div>
+
+      <!-- Ad hoc logo -->
+      <div class="logo america">
+        <a href="http://[[S80:website_url]]/">
+          [[?[[S80:chid]]::017-002::<img src="../assets/images/logos/MAW_017-002.gif" alt="[[S80:chapter_name]]" width="245" height="92"/>::<img src="../assets/images/logos/MAW_[[E130:"[[S80:chid]]" 0 3 substring]].gif" alt="[[S80:chapter_name]]" width="245" height="92"/>]]
+        </a>
+      </div>
+
   ]]
-</ul>
-<div class="logo america">
-  <a href="http://[[S80:website_url]]/">
-  [[?[[S80:chid]]::017-002::<img src="../assets/images/logos/MAW_017-002.gif" alt="[[S80:chapter_name]]" width="245" height="92"/>::<img src="../assets/images/logos/MAW_[[E130:"[[S80:chid]]" 0 3 substring]].gif" alt="[[S80:chapter_name]]" width="245" height="92"/>]] </a>
-</div>
-<!-- END LOGO -->
-<!-- BEGIN MAIN NAV RIGHT -->
-<ul class="main-nav main-nav-right">
-  <li><a href="http://[[S80:website_url]]/refer-a-child" title='Refer a Child'>Refer a Child</a></li>
-  <li><a href="http://[[S80:website_url]]/ways-to-help" title='Ways To Help'>Ways To Help</a></li>
-  <li class="donate"><a href="https://secure2.convio.net/wish/site/SPageServer?pagename=donate" title='Donate'>Donate</a></li>
-</ul>
+
+      
+
+  ::
+
+  <!-- NOT AN AD-HOC FORM TYPE -->
+
+  <!-- API navigation -->
+  <ul class="main-nav main-nav-left">
+    <li><a href="http://[[S80:website_url]]/wishes" title='Wishes'>Wishes</a></li>
+    <li><a href="http://[[S80:website_url]]/about-us" title='About Us'>About Us</a></li>
+    [[?[[S80:chid]]::100-000::
+      <li class="chapter-search">
+      <a id="header_0_content_1_hLocalChapters" title="Local Chapters" href="https://[[S80:website_url]]/local-chapters">Local Chapters</a>
+      <a class="chapter-search-trigger" href="#"></a>
+      <div class="chapter-searchbox">
+        <input id="tChapterTextSearch" class="text-input jsWireTarget" target="jsFilterChapterLocatorSearchButton" type="text" placeholder="Zip code or state"/>
+        <input class="submit jsFilterChapterLocatorSearchButton" type="button" value="" onclick="return RedirectToChapterSearch('https://wish.org/local-chapters?keyword=')"/>
+      </div>
+      </li>
+    ::
+      <li>
+      <a title="News & Events" href="http://[[S80:website_url]]/news-and-events"> News & Events</a>
+      </li>
+    ]]
+  </ul>
+  <div class="logo america">
+    <a href="http://[[S80:website_url]]/">
+    [[?[[S80:chid]]::017-002::<img src="../assets/images/logos/MAW_017-002.gif" alt="[[S80:chapter_name]]" width="245" height="92"/>::<img src="../assets/images/logos/MAW_[[E130:"[[S80:chid]]" 0 3 substring]].gif" alt="[[S80:chapter_name]]" width="245" height="92"/>]] </a>
+  </div>
+  <!-- END LOGO -->
+  <!-- BEGIN MAIN NAV RIGHT -->
+  <ul class="main-nav main-nav-right">
+    <li><a href="http://[[S80:website_url]]/refer-a-child" title='Refer a Child'>Refer a Child</a></li>
+    <li><a href="http://[[S80:website_url]]/ways-to-help" title='Ways To Help'>Ways To Help</a></li>
+    <li class="donate"><a href="https://secure2.convio.net/wish/site/SPageServer?pagename=donate" title='Donate'>Donate</a></li>
+  </ul>
+
+]]
