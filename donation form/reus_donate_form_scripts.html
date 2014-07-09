@@ -59,7 +59,7 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
                   if(parseInt(chapter_id.substr(0,3)) < 500) {
                     if (arr['office_id'] == chapter_id) {
                       $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                      window.formFundID = arr['fund_id'];
+                      //window.formFundID = arr['fund_id'];
                       return;
                     }
                   }
@@ -67,7 +67,7 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
                   if(parseInt(chapter_id.substr(0,3)) >= 500) {
                     if (arr['office_id'] == chapter_id) {
                       $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                      window.formFundID = arr['fund_id'];
+                      //window.formFundID = arr['fund_id'];
                       return;
                     }
                   }
@@ -100,6 +100,49 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
         }
       }
     },
+
+    // function to programmatically set the donor intent based on chapter lookup using billing zip entered by donor
+    setChapterByZip = function(postal_code){
+
+      // we initially assume we won't find a match so set the chapter as national
+      var chapter_id = "100-000";
+
+      if(parseInt(postal_code)) {
+
+        // load up the zip code file
+        $.getJSON('../assets/js/zip-codes.json', function (data) {
+
+          // iterate over each chapter in the file
+          $(data['chapter']).each(function (index, arr) {
+
+            // if we've found a match by zip code...
+            if (arr['zip_code'] == postal_code) {
+
+              // set the chapter_id to be returned below
+              chapter_id = arr['chapter_id'];
+
+              // stop iterating
+              return false;
+
+            }
+
+          });
+
+          // set donor intent using the chapter id
+          mawf.CartView.donations()[0].donorIntent(chapter_id);
+
+        });
+      } else {
+
+        // billing zip was non-integer so just set donor intent to national
+
+        mawf.CartView.donations()[0].donorIntent(chapter_id);
+
+      }
+
+      
+    },
+
 
   $('.nextMonth').each(function () {
     $(this).append(getNextMonth());
@@ -1319,6 +1362,19 @@ $(document).ready(function () {
         });
       }
     };
+
+  // bind a handler to billing zip field to look up chapter for certain ad-hoc form types
+  $('input#ccPostal').blur(function() {
+
+    // if form type is ad hoc "C" type, then determine donor intent from billing zip 
+    if (  (urlVariableArray['form_type'] == "SPEC") || (urlVariableArray['form_type'] == "SPEMC")  ) {
+
+      setChapterByZip($('input#ccPostal').val());
+
+    }
+
+  });
+
   $("a.action-btn, a.btn-modal").click(function (e) {
     e.preventDefault();
   });
