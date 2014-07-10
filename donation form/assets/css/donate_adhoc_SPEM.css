@@ -1,2 +1,5 @@
 div#giftTypes { display: none; }
-.donate-wrap div.monthly-wrap { margin-top: -22px; }
+.donate-wrap div.monthly-wrap { margin-left: 0; }
+.donate-wrap .monthly-wrap .left { width: 65%; }
+.summary .controls-container .center { padding-top: 40px; }
+.summary .controls-container .controls { background-color: #f0f0f0; min-height: 95px; }

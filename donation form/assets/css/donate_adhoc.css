@@ -1,1 +1,33 @@
+div.nav-logo { padding-top: 20px; }
+div.nav-logo div#returnLink { position: absolute; top: 55px; }
+div.nav-logo div#returnLink a {
+	background: url("../images/returnArrow.png") no-repeat scroll left center transparent;
+    color: #006bb7;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 0 0 21px;
+}
+div.nav-logo div.logo { float: none; margin: 0 auto; }
+.donate-wrap .ammount-btn { margin-right: 8px; }
 div#card_create, div#card_preview { display: none; }
+.donate-lead-in { width: 504px; }
+.monthly-wrap.clearfix.grid_6 { width: auto; }
+.donationConfig .grid_6 { margin-left: 0; }
+fieldset.amount > div > div.float-right, fieldset.intent > div.float-right { margin-top: 6px; width: auto; }
+fieldset.amount > div > div.float-right { float: left; }
+fieldset.intent > div.float-right { clear: both; float: none; }
+.donate-wrap label { width: auto; float: none; }
+.donate-wrap .dest-btn { width: 32%; }
+.summary .left { width: 25%; }
+div.left + div.controls-container { width: 70%; }
+.summary .controls-container .center { width: 20%; }
+.summary .controls-container .right-container { width: 78%; }
+#body_2_content_0_divLeftRailWrapper { float: left; }
+#body_2_content_0_divLeftRailWrapper > div { margin-left: 0; }
+.bordered-content-shift { left: 0; }
+#body_2_content_0_divRightRailWrapper > div { margin-right: 0; float: right; }
+div.chapter-wrap.grid_6 { width: 465px; }
+.chapter-wrap div.chapter-search { width: 65%; }
+.donate-wrap .inset { padding-top: 0; }
+.donate-wrap fieldset.recurrence { padding-top: 10px!important; }
