@@ -17,8 +17,8 @@ div#card_create, div#card_preview { display: none; }
 fieldset.amount > div > div.float-right, fieldset.intent > div.float-right { margin-top: 6px; width: auto; }
 fieldset.amount > div > div.float-right { float: left; }
 fieldset.intent > div.float-right { clear: both; float: none; }
-.donate-wrap label { width: auto; float: none; }
-.donate-wrap .dest-btn { width: 32%; }
+.donate-wrap .dest-btn:first-child { margin: 7px 0 0 0; }
+.donate-wrap .dest-btn { width: 32%; margin-top: 7px; }
 .summary .left { width: 25%; }
 div.left + div.controls-container { width: 70%; }
 .summary .controls-container .center { width: 20%; }
@@ -31,3 +31,48 @@ div.chapter-wrap.grid_6 { width: 465px; }
 .chapter-wrap div.chapter-search { width: 65%; }
 .donate-wrap .inset { padding-top: 0; }
 .donate-wrap fieldset.recurrence { padding-top: 10px!important; }
+.summary .controls-container .controls { padding-bottom: 22px; background-color: #f0f0f0; margin-left: 152px; }
+
+div.selector { width: 271px; }
+div.selector span { width: 245px; }
+.donate-wrap label { width: 105px; }
+.userForm .fnamefld { width: 216px; margin-left: 0; margin-right: 7px; }
+.userForm .mnamefld { margin-right: 0; }
+.form-wrap input, .form-wrap2 input, .form-wrap .comment-form-wrap textarea, .comment-form-wrap .form-wrap textarea, .form-wrap2 .comment-form-wrap textarea, .comment-form-wrap .form-wrap2 textarea, .form-wrap .message-wrap textarea, .message-wrap .form-wrap textarea, .form-wrap2 .message-wrap textarea, .message-wrap .form-wrap2 textarea, .form-wrap select, .form-wrap2 select, .form-wrap textarea, .form-wrap2 textarea {
+	width: 265px;
+}
+.form-wrap .module-form-combo .row_2, .form-wrap2 .module-form-combo .row_2 { width: 106px; }
+.form-wrap .module-form-combo .row_4, .form-wrap2 .module-form-combo .row_4 { width: 279px; }
+.form-wrap .info, .form-wrap2 .info { width: 276px; }
+div.form-wrap div.module-form-combo { padding-top: 10px; }
+div.form-wrap div.module-form-combo div.grid_6, div.form-wrap div.module-form-labeled div.grid_6 { width: 400px; }
+div.form-wrap div.module-form-combo div.grid_2, div.form-wrap div.module-form-labeled div.grid_2 { width: 60px; }
+
+div.intouch-box div#nationalOptin label, .donate-wrap .intouch-box .module-form-labeled { width: 370px; }
+div#uniform-optinNational { margin-bottom: 30px; }
+.form-wrap .selector select, .form-wrap2 .selector select { width: 285px; }
+div.formtop div.row_4 { width: 250px; }
+fieldset.recurrence > div > label[for="dType"] { width: 200px; }
+div.formtop div.row_2 { width: 119px; }
+div.form-wrap div.inset > div:first-of-type, div.donate-wrap div.inset > div:first-of-type { padding-top: 10px; }
+.form-wrap .selector, .form-wrap2 .selector { margin-right: 0; }
+.module-form-labeled div.selector, .module-form-labeled2 div.selector { float: left; }
+
+.form-wrap .credit .payment-types, .form-wrap2 .credit .payment-types { width: 360px; }
+div.card-container div.module-form-labeled div.grid_6 { width: 443px; }
+div.card-container input[type="text"] { width: 331px; }
+.card-grid { margin-left: 109px; }
+
+.module-form-labeled2 .button-submit { min-width: 205px; }
+.module-form-labeled2 .button-cancel-link { margin: 14px 12px 10px; width: 205px; }
+
+fieldset.amount > div > label, fieldset.intent > label { width: 150px; }
+div.donate-wrap div.summary div.controls-container .center { padding-top: 12px; }
+div.card-container div div.grid_6 label { width: 90px; }
+.donate-wrap .expire-grid { padding-left: 0; width: 343px; }
+.form-wrap .module-form-labeled .halfwidth div.selector { width: 161px; }
+.form-wrap .module-form-labeled .halfwidth div.selector:first-child { margin-right: 4px; }
+.donate-wrap label[for="ccExpMonth"] { padding-right: 10px; }
+div.expire-grid div[id^="uniform-cc"] { width: 161px; }
+.form-wrap div.grid_6 div.expire-grid div[id^="uniform-cc"] span { width: 135px; }
+div.expire-grid div#uniform-ccExpYear > span { padding-right: 26px; }
