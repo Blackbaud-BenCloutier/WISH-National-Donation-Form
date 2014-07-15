@@ -8,14 +8,9 @@
 
 // Global Vars
 
+[[S51:reus_donate_form_metadata]]
+
 var urlVariableArray = (function(){var vars={};var parts=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value){vars[key]=value;});return vars;})(),
-  metadata_campaign_id = 'MNOO14',
-  metadata_national_office_code = 'NOLP',
-  metadata_chapter_office_code = 'CHLP',
-  metadata_subtype = 'DEV - Multimedia Online',
-  metadata_appeal_year = '14ON',
-  metadata_national_monthly = 'NOMT',
-  metadata_chapter_monthly = 'CHMT',
   center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/xml/center_info.xml','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
   chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.convio.net/wish/assets/js/chapters.json','dataType':'json','success':function(data){json=data;}});return json;})(),
   productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
