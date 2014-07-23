@@ -54,6 +54,7 @@
     "surveyID": "1644",
     "office_name": "Make-A-Wish® North Texas, Northeast Regional Office",
     "state_province": "TX",
+	"p2p_states":["Texas"],
     "postal_code": "75701"
   },
   {
@@ -63,6 +64,7 @@
     "surveyID": "1644",
     "office_name": "Make-A-Wish® North Texas, Southwest Regional Office",
     "state_province": "TX",
+	"p2p_states":["Texas"],
     "postal_code": "76107"
   },
   {
@@ -72,6 +74,7 @@
     "surveyID": "1644",
     "office_name": "Make-A-Wish® North Texas, Midland Office",
     "state_province": "TX",
+	"p2p_states":["Texas"],
     "postal_code": "79701"
   },
   {
@@ -81,6 +84,7 @@
     "surveyID": "1644",
     "office_name": "Make-A-Wish® North Texas, El Paso Regional Office",
     "state_province": "TX",
+	"p2p_states":["Texas"],
     "postal_code": "79913"
   },
   {
@@ -90,6 +94,7 @@
     "surveyID": "1644",
     "office_name": "Make-A-Wish® North Texas, Texas Plains Regional Office",
     "state_province": "TX",
+	"p2p_states":["Texas"],
     "postal_code": "79101"
   },
   {
@@ -111,6 +116,7 @@
     "surveyID": "1650",
     "office_name": "Make-A-Wish® Orange County & the Inland Empire, Riverside Office",
     "state_province": "CA",
+	"p2p_states":["California"],
     "postal_code": "92501"
   },
   {
@@ -132,6 +138,7 @@
     "surveyID": "1618",
     "office_name": "Make-A-Wish® Greater Pennsylvania & Southern WV, Charleston Office",
     "state_province": "WV",
+	"p2p_states":["Pennsylvania"],
     "postal_code": "25301"
   },
   {
@@ -165,6 +172,7 @@
     "surveyID": "1630",
     "office_name": "Make-A-Wish® Metro New York and Western New York, Buffalo Regional Office",
     "state_province": "NY",
+	"p2p_states":["New York"],
     "postal_code": "14226"
   },
   {
@@ -174,6 +182,7 @@
     "surveyID": "1630",
     "office_name": "Make-A-Wish® Metro New York and Western New York, Rochester Regional Office",
     "state_province": "NY",
+	"p2p_states":["New York"],
     "postal_code": "14618"
   },
   {
@@ -195,6 +204,7 @@
     "surveyID": "1648",
     "office_name": "Make-A-Wish® Ohio, Kentucky & Indiana, Northeast Ohio Region",
     "state_province": "OH",
+	"p2p_states":["Ohio"],
     "postal_code": "44131"
   },
   {
@@ -204,6 +214,7 @@
     "surveyID": "1648",
     "office_name": "Make-A-Wish® Ohio, Kentucky & Indiana, Central Ohio Region",
     "state_province": "OH",
+	"p2p_states":["Ohio"],
     "postal_code": "43235"
   },
   {
@@ -213,6 +224,7 @@
     "surveyID": "1648",
     "office_name": "Make-A-Wish® Ohio, Kentucky & Indiana, Southern Ohio Region",
     "state_province": "OH",
+	"p2p_states":["Ohio"],
     "postal_code": "45242"
   },
   {
@@ -222,6 +234,7 @@
     "surveyID": "1648",
     "office_name": "Make-A-Wish® Ohio, Kentucky & Indiana, Kentucky & Southern Indiana Region",
     "state_province": "KY",
+	"p2p_states":["Kentucky"],
     "postal_code": "40222"
   },
   {
@@ -231,6 +244,7 @@
     "surveyID": "1648",
     "office_name": "Make-A-Wish® Ohio, Kentucky & Indiana, Indiana Region",
     "state_province": "IN",
+	"p2p_states":["Ohio", "Indiana"],
     "postal_code": "46278"
   },
   {
@@ -240,6 +254,7 @@
     "surveyID": "1648",
     "office_name": "Make-A-Wish® Ohio, Kentucky & Indiana, Northwest Ohio Region",
     "state_province": "OH",
+	"p2p_states":["Ohio"],
     "postal_code": "43604"
   },
   {
@@ -261,6 +276,7 @@
     "surveyID": "1646",
     "office_name": "Make-A-Wish® Northeastern California and Northern Nevada, Northern Nevada Office",
     "state_province": "NV",
+	"p2p_states":["Nevada"],
     "postal_code": "89502"
   },
   {
@@ -318,6 +334,7 @@
     "surveyID": "1632",
     "office_name": "Make-A-Wish® Mid-Atlantic, Inc., Baltimore Field Office",
     "state_province": "MD",
+	"p2p_states":["Maryland"],
     "postal_code": "21093"
   },
   {
@@ -327,6 +344,7 @@
     "surveyID": "1632",
     "office_name": "Make-A-Wish® Mid-Atlantic, Inc., Delaware Field Office",
     "state_province": "DE",
+	"p2p_states":["Delaware"],
     "postal_code": "19810"
   },
   {
@@ -348,6 +366,7 @@
     "surveyID": "1658",
     "office_name": "Make-A-Wish® Southern Florida, West Coast Field Office",
     "state_province": "FL",
+	"p2p_states":["Florida"],
     "postal_code": "34134"
   },
   {
@@ -379,6 +398,7 @@
     "surveyID": "1639",
     "office_name": "Make-A-Wish® Nebraska, Lincoln Office",
     "state_province": "NE",
+	"p2p_states":["Nebraska"],
     "postal_code": "68507"
   },
   {
@@ -388,6 +408,7 @@
     "surveyID": "1639",
     "office_name": "Make-A-Wish® Nebraska, Kearney Office",
     "state_province": "NE",
+	"p2p_states":["Nebraska"],
     "postal_code": "68847"
   },
   {
@@ -409,6 +430,7 @@
     "surveyID": "1631",
     "office_name": "Make-A-Wish® Michigan, Grand Rapids Office",
     "state_province": "MI",
+	"p2p_states":["Michigan"],
     "postal_code": "49503"
   },
   {
@@ -418,6 +440,7 @@
     "surveyID": "1631",
     "office_name": "Make-A-Wish® Michigan, Detroit Office",
     "state_province": "MI",
+	"p2p_states":["Michigan"],
     "postal_code": "48201"
   },
   {
@@ -463,6 +486,7 @@
     "surveyID": "1657",
     "office_name": "Make-A-Wish® South Dakota",
     "state_province": "SD",
+	"p2p_states":["South Dakota"],
     "postal_code": "57701"
   },
   {
@@ -496,6 +520,7 @@
     "surveyID": "1665",
     "office_name": "Make-A-Wish® Wisconsin, Northeastern Office",
     "state_province": "WI",
+	"p2p_states":["Wisconsin"],
     "postal_code": "54911"
   },
   {
@@ -505,6 +530,7 @@
     "surveyID": "1665",
     "office_name": "Make-A-Wish® Wisconsin, Madison Regional Office",
     "state_province": "WI",
+	"p2p_states":["Wisconsin"],
     "postal_code": "53703"
   },
   {
@@ -574,6 +600,7 @@
     "surveyID": "1661",
     "office_name": "Make-A-Wish® Texas Gulf Coast & Louisiana, Louisiana Office",
     "state_province": "LA",
+	"p2p_states":["Louisiana"],
     "postal_code": "70002"
   },
   {
@@ -595,6 +622,7 @@
     "surveyID": "1636",
     "office_name": "Make-A-Wish® Mississippi, Southern Region - Gulfport",
     "state_province": "MS",
+	"p2p_states":["Mississippi"],
     "postal_code": "39506"
   },
   {
@@ -700,6 +728,7 @@
     "surveyID": "1603",
     "office_name": "Make-A-Wish® Alaska & Washington, Eastern Washington Office",
     "state_province": "WA",
+	"p2p_states":["Washington"],
     "postal_code": "99202"
   },
   {
@@ -709,6 +738,7 @@
     "surveyID": "1603",
     "office_name": "Make-A-Wish® Alaska & Washington, Alaska Office",
     "state_province": "AK",
+	"p2p_states":["Alaska"],
     "postal_code": "99518"
   },
   {
@@ -913,6 +943,7 @@
     "surveyID": "1629",
     "office_name": "Make-A-Wish® Massachusetts and Rhode Island, Providence Office",
     "state_province": "RI",
+	"p2p_states":["Massachusetts"],
     "postal_code": "02915"
   },
   {
@@ -994,6 +1025,7 @@
     "surveyID": "1637",
     "office_name": "Make-A-Wish® Missouri, Southwest Missouri Regional Office",
     "state_province": "MO",
+	"p2p_states":["Missouri"],
     "postal_code": "65807"
   },
   {
@@ -1003,6 +1035,7 @@
     "surveyID": "1637",
     "office_name": "Make-A-Wish® Missouri, Kansas City Regional Office",
     "state_province": "KS",
+	"p2p_states":["Kansas", "Missouri"],
     "postal_code": "66212"
   },
   {
@@ -1012,6 +1045,7 @@
     "surveyID": "1637",
     "office_name": "Make-A-Wish® Missouri, St. Louis Regional Office ",
     "state_province": "MO",
+	"p2p_states":["Missouri"],
     "postal_code": "63017"
   },
   {
@@ -1057,6 +1091,7 @@
     "surveyID": "1608",
     "office_name": "Make-A-Wish® Central and Northern Florida, Suncoast Regional Office",
     "state_province": "FL",
+	"p2p_states":["Florida"],
     "postal_code": "33606"
   },
   {
@@ -1066,6 +1101,7 @@
     "surveyID": "1608",
     "office_name": "Make-A-Wish® Central and Northern Florida, Suncoast - Sarasota Regional Office",
     "state_province": "FL",
+	"p2p_states":["Florida"],
     "postal_code": "34239"
   },
   {
