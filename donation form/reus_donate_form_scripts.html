@@ -24,7 +24,11 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
 
   var level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (50) : (Math.floor(urlVariableArray['level1']))),
     level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (75) : (Math.floor(urlVariableArray['level2']))),
-    level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3'])));
+    level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3']))),
+    level4 = (((urlVariableArray['level4'] < 1 || isNaN(urlVariableArray['level4']))) ? (250) : (Math.floor(urlVariableArray['level4']))),
+    level5 = (((urlVariableArray['level5'] < 1 || isNaN(urlVariableArray['level5']))) ? (500) : (Math.floor(urlVariableArray['level5']))),
+    level6 = (((urlVariableArray['level6'] < 1 || isNaN(urlVariableArray['level6']))) ? (1000) : (Math.floor(urlVariableArray['level6']))),
+    level7 = (((urlVariableArray['level7'] < 1 || isNaN(urlVariableArray['level7']))) ? (5000) : (Math.floor(urlVariableArray['level7'])));
 
     // for ad hoc form types SPEB and SPEMB, we need to lock the chapter as national
     if (  (urlVariableArray['form_type'] == "SPEB") || (urlVariableArray['form_type'] == "SPEMB")  ) {
@@ -73,19 +77,21 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
         });
       } else {
         if (search_value.length > 2) {
+    console.log("test");
           $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
             var office_name_regex = new RegExp(search_value,'i'),
             chapter_id = arr['office_id'];
             if(local_or_international == 'local'){
               if(parseInt(chapter_id.substr(0,3)) < 500) {
-                if(office_name_regex.test(arr['office_name'])) {
+        console.log(office_name_regex);
+                if(office_name_regex.test(arr['p2p_states'])) {
                   $('#no_valid_region').remove();
                   $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
                 }
               }
             } else {
               if(parseInt(chapter_id.substr(0,3)) >= 500) {
-                if(office_name_regex.test(arr['office_name'])) {
+                if(office_name_regex.test(arr['p2p_states'])) {
                   $('#no_valid_region').remove();
                   $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
                 }
@@ -182,6 +188,10 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
           donationAmt1: level1,
           donationAmt2: level2,
           donationAmt3: level3,
+          donationAmt4: level4,
+          donationAmt5: level5,
+          donationAmt6: level6,
+          donationAmt7: level7,
           startDate1: 5,
           startDate2: 20,
           clearFormMessage: 'Clearing the form will remove all your entered information. Are you sure you wish to proceed?',
@@ -215,6 +225,10 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
       donationAmt1: level1,
       donationAmt2: level2,
       donationAmt3: level3,
+      donationAmt4: level4,
+      donationAmt5: level5,
+      donationAmt6: level6,
+      donationAmt7: level7,
       startDate1: 5,
       startDate2: 20,
       clearFormMessage: 'Clearing the form will remove all your entered information. Are you sure you wish to proceed?',
