@@ -1155,7 +1155,7 @@ $(document).ready(function () {
       $('#mainform input').each(function(){$(this).val('');});
       window.onbeforeunload = function(){};
       if(isPaypal) {window.location = paypalRedirectUrl;}
-      else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou";}
+      else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=" + [[S80:chid]];}
     },
     submitDonation = function(button_element, donation_data){
       if($('.input-error').length > 0){
