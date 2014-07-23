@@ -14,7 +14,8 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
   center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/xml/center_info.xml','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
   chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.convio.net/wish/assets/js/chapters.json','dataType':'json','success':function(data){json=data;}});return json;})(),
   productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
-  get_short_url = function(e){var t="";$.ajax({async:false,url:"https://api-ssl.bitly.com/v3/shorten?format=json",dataType:"json",data:{format:"json",apiKey:"R_50a44d5e5edc4dacaccb0841183fd8ce",login:"wishamerica",longUrl:e},success:function(e){t=e["data"]["url"]}});return t};
+  get_short_url = function(e){var t="";$.ajax({async:false,url:"https://api-ssl.bitly.com/v3/shorten?format=json",dataType:"json",data:{format:"json",apiKey:"R_50a44d5e5edc4dacaccb0841183fd8ce",login:"wishamerica",longUrl:e},success:function(e){t=e["data"]["url"]}});return t},
+  form_chid = '[[S80:chid]]'.substr(0,3);
 
 // Global Vars
 
@@ -1167,7 +1168,7 @@ $(document).ready(function () {
       $('#mainform input').each(function(){$(this).val('');});
       window.onbeforeunload = function(){};
       if(isPaypal) {window.location = paypalRedirectUrl;}
-      else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=" + [[S80:chid]];}
+      else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=" + form_chid;}
     },
     submitDonation = function(button_element, donation_data){
       if($('.input-error').length > 0){
@@ -1179,7 +1180,6 @@ $(document).ready(function () {
           isMonthly = (donation.donationType() == 2),
           officeID = null,
           short_chid = chid.substr(0,3),
-          form_chid = '[[S80:chid]]'.substr(0,3),
           donation_form_id = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid + ' + form').attr('id')) : ('1563')),
           formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish® International')),
           today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
@@ -1393,7 +1393,7 @@ $(document).ready(function () {
   // PayPal button
   $("a.button-submit:eq(1)").click(function (e) {
     e.preventDefault();
-    submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou]]&finish_error_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_paypal_error]]');
+    submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=' + encodeURIComponent('https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=' + form_chid) + '&finish_error_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_paypal_error]]');
   });
 
   // Process Donation
