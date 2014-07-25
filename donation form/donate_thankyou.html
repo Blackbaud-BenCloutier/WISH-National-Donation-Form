@@ -259,7 +259,8 @@ console.log("test");
           '</div>' +
         '</div>';
       }
-	  str += '<p style="margin-top:10px;"><a href="' + arr['product_url'] + '" target="_blank">Click here to view your' + arr['occasion_type'] + ' card</a></p>';
+	  var bitlyURL = "[[S80:bitlyURL]]";
+	  str += '<p style="margin-top:10px;"><a href="' + (bitlyURL == '') ? arr['product_url'] : bitlyURL; + '" target="_blank">Click here to view your' + arr['occasion_type'] + ' card</a></p>';
       str += '</div><div class="clearfix"></div>';
       $('#card_preview').html(str);
     }
