@@ -59,14 +59,14 @@
             <p class="set4 set5"></p>
             <p class="set7 set8 set9"></p>
             <p class="set7 set8 set9">Leave blank and send to me</p>
-			
-			
-			[[?xx::x[[S120:dc:custom:custom_string98]]x::::
-			<div id="card_preview" class="donation clearfix" style="margin:0!important;border:0;box-shadow:none;"></div>
-			]]
-			<p>
-			[[?[[S80:productURL1]]::pdf/?p=CR::<br /><a style="text-decoration:none;color:#006bb6;font-weight:bold;" href="[[S80:productURL1]]" target="_blank"><span>Download [[S80:productURL1Name]]&nbsp;<img width="12" height="10" style="display:inline;border:0;" src="http://site.wish.org/assets/images/ar/arw.gif"></span></a>::]]
-			</p>
+      
+      
+      [[?xx::x[[S120:dc:custom:custom_string98]]x::::
+      <div id="card_preview" class="donation clearfix" style="margin:0!important;border:0;box-shadow:none;"></div>
+      ]]
+      <p>
+      [[?[[S80:productURL1]]::pdf/?p=CR::<br /><a style="text-decoration:none;color:#006bb6;font-weight:bold;" href="[[S80:productURL1]]" target="_blank"><span>Download [[S80:productURL1Name]]&nbsp;<img width="12" height="10" style="display:inline;border:0;" src="http://site.wish.org/assets/images/ar/arw.gif"></span></a>::]]
+      </p>
 
 
           </div>
@@ -259,8 +259,8 @@ console.log("test");
           '</div>' +
         '</div>';
       }
-	  var bitlyURL = "[[S80:bitlyURL]]";
-	  str += '<p style="margin-top:10px;"><a href="' + (bitlyURL == '') ? arr['product_url'] : bitlyURL; + '" target="_blank">Click here to view your' + arr['occasion_type'] + ' card</a></p>';
+    var bitlyURL = "[[S80:productURL1]]";
+    str += '<p style="margin-top:10px;"><a href="' + (bitlyURL == '') ? arr['product_url'] : bitlyURL; + '" target="_blank">Click here to view your' + arr['occasion_type'] + ' card</a></p>';
       str += '</div><div class="clearfix"></div>';
       $('#card_preview').html(str);
     }
@@ -279,6 +279,6 @@ if($('.donation .left h4 span').text() == ''){
     .button-blue {color: #FFFFFF !important;}
     #card_preview{display: block !important;margin:12px!important;box-shadow:none;}
     .blurb {display: block !important;margin: 0;}
-	#card_preview .blurb{float:none!important;}
-	.blurb h3 {margin: 0;}
+  #card_preview .blurb{float:none!important;}
+  .blurb h3 {margin: 0;}
 </style>
