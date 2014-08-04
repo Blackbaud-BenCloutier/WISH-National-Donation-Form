@@ -15,7 +15,27 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
   chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.convio.net/wish/assets/js/chapters.json','dataType':'json','success':function(data){json=data;}});return json;})(),
   productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
   get_short_url = function(e){var t="";$.ajax({async:false,url:"https://api-ssl.bitly.com/v3/shorten?format=json",dataType:"json",data:{format:"json",apiKey:"R_50a44d5e5edc4dacaccb0841183fd8ce",login:"wishamerica",longUrl:e},success:function(e){t=e["data"]["url"]}});return t},
-  form_chid = '[[S80:chid]]'.substr(0,3);
+  form_chid = '[[S80:chid]]'.substr(0,3),
+  setUserInfoCookie = function(){
+    userInfoCookie = {
+      'billing.name.title':$('select[name="billing.name.title"]').val(),
+      'billing.name.first':$('input[name="billing.name.first"]').val(),
+      'billing.name.middle':$('input[name="billing.name.middle"]').val(),
+      'billing.name.last':$('input[name="billing.name.last"]').val(),
+      'donor.email':$('input[name="donor.email"]').val(),
+      'donor.phone':$('input[name="donor.phone"]').val(),
+      'billing.address.street1':$('input[name="billing.address.street1"]').val(),
+      'billing.address.street2':$('input[name="billing.address.street2"]').val(),
+      'billing.address.city':$('input[name="billing.address.city"]').val(),
+      'billing.address.state':$('select[name="billing.address.state"]').val(),
+      'billing.address.zip':$('input[name="billing.address.zip"]').val()
+    };
+
+    // Set Cookies For User Info
+      $.cookie.json = true;
+      $.cookie('userinfo', userInfoCookie, { expires: 1 });
+    // End Set Cookies For User Info
+  };
 
 // Global Vars
 
@@ -37,7 +57,20 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
     } else {
       chid = '[[S80:chid]]';
     }
-    
+
+    // Fill out user info
+    $('select[name="billing.name.title"]').val(JSON.parse($.cookie('userinfo'))['billing.name.title']);
+    $('input[name="billing.name.first"]').val(JSON.parse($.cookie('userinfo'))['billing.name.first']);
+    $('input[name="billing.name.middle"]').val(JSON.parse($.cookie('userinfo'))['billing.name.middle']);
+    $('input[name="billing.name.last"]').val(JSON.parse($.cookie('userinfo'))['billing.name.last']);
+    $('input[name="donor.email"]').val(JSON.parse($.cookie('userinfo'))['donor.email']);
+    $('input[name="donor.phone"]').val(JSON.parse($.cookie('userinfo'))['donor.phone']);
+    $('input[name="billing.address.street1"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street1']);
+    $('input[name="billing.address.street2"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street2']);
+    $('input[name="billing.address.city"]').val(JSON.parse($.cookie('userinfo'))['billing.address.city']);
+    $('select[name="billing.address.state"]').val(JSON.parse($.cookie('userinfo'))['billing.address.state']);
+    $('input[name="billing.address.zip"]').val(JSON.parse($.cookie('userinfo'))['billing.address.zip']);
+
     chapter_prefix = chid.substring(0, 3),
     getNextMonth = function() {
       var dayOfMonth = Date.today().toString('d');
@@ -1184,6 +1217,7 @@ $(document).ready(function () {
           formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish® International')),
           today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
 
+        setUserInfoCookie();
         donation_data = donation_data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id) + '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee) + '&remember_me=true&other_amount=' + (0.00 + parseFloat(donation.prettyDonationAmount())) + (isMonthly?'&sustaining.frequency=monthly&sustaining.duration=0':'');
         if($("input[name='s_sat_skew']").val() === '') {
           if(!isMonthly){

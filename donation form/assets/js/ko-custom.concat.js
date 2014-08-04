@@ -452,6 +452,7 @@ if ( mawf.bug && mawf.bug.logStepFocusing ) {  console.log('addFocus error; Step
                 return msg;
             }
             
+            setUserInfoCookie();
         };
 
     }
