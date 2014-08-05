@@ -59,17 +59,19 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
     }
 
     // Fill out user info
-    $('select[name="billing.name.title"]').val(JSON.parse($.cookie('userinfo'))['billing.name.title']);
-    $('input[name="billing.name.first"]').val(JSON.parse($.cookie('userinfo'))['billing.name.first']);
-    $('input[name="billing.name.middle"]').val(JSON.parse($.cookie('userinfo'))['billing.name.middle']);
-    $('input[name="billing.name.last"]').val(JSON.parse($.cookie('userinfo'))['billing.name.last']);
-    $('input[name="donor.email"]').val(JSON.parse($.cookie('userinfo'))['donor.email']);
-    $('input[name="donor.phone"]').val(JSON.parse($.cookie('userinfo'))['donor.phone']);
-    $('input[name="billing.address.street1"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street1']);
-    $('input[name="billing.address.street2"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street2']);
-    $('input[name="billing.address.city"]').val(JSON.parse($.cookie('userinfo'))['billing.address.city']);
-    $('select[name="billing.address.state"]').val(JSON.parse($.cookie('userinfo'))['billing.address.state']);
-    $('input[name="billing.address.zip"]').val(JSON.parse($.cookie('userinfo'))['billing.address.zip']);
+    if($.cookie('userinfo')) {
+      $('select[name="billing.name.title"]').val(JSON.parse($.cookie('userinfo'))['billing.name.title']);
+      $('input[name="billing.name.first"]').val(JSON.parse($.cookie('userinfo'))['billing.name.first']);
+      $('input[name="billing.name.middle"]').val(JSON.parse($.cookie('userinfo'))['billing.name.middle']);
+      $('input[name="billing.name.last"]').val(JSON.parse($.cookie('userinfo'))['billing.name.last']);
+      $('input[name="donor.email"]').val(JSON.parse($.cookie('userinfo'))['donor.email']);
+      $('input[name="donor.phone"]').val(JSON.parse($.cookie('userinfo'))['donor.phone']);
+      $('input[name="billing.address.street1"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street1']);
+      $('input[name="billing.address.street2"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street2']);
+      $('input[name="billing.address.city"]').val(JSON.parse($.cookie('userinfo'))['billing.address.city']);
+      $('select[name="billing.address.state"]').val(JSON.parse($.cookie('userinfo'))['billing.address.state']);
+      $('input[name="billing.address.zip"]').val(JSON.parse($.cookie('userinfo'))['billing.address.zip']);
+    }
 
     chapter_prefix = chid.substring(0, 3),
     getNextMonth = function() {
