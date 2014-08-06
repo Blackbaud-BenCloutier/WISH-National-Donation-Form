@@ -7,20 +7,20 @@
 ::
 TT
 ::
-<!-- AC HOC FORM SO NO PREHEADER -->
+  <!-- AC HOC FORM SO NO PREHEADER -->
 ::
-<!-- BEGIN PREHEADER -->
-<div class="preheader">
-[[S51:reus_donate_wrpr_prehead]]
-    
+  <!-- BEGIN PREHEADER -->
+  <div class="preheader">
+  [[S51:reus_donate_wrpr_prehead]]
+      
 
-    <!-- BEGIN SEARCH BOX -->
-    <div class="searchbox">
-        [[S51:reus_donate_wrpr_search]]
-    </div>
-    <!-- END SEARCH BOX -->
-</div>
-<!-- END PREHEADER -->
+      <!-- BEGIN SEARCH BOX -->
+      <div class="searchbox">
+          [[S51:reus_donate_wrpr_search]]
+      </div>
+      <!-- END SEARCH BOX -->
+  </div>
+  <!-- END PREHEADER -->
 ]]
 
 
@@ -61,11 +61,14 @@ function RedirectToGlobalSearch(sUrlPrefix) {
 ::
 TT
 ::
-<!-- OPTIONAL AD-HOC FORM MASTHEAD -->
-[[E51:reus_donate_wrpr_adhoc_masthead_[[S80:form_type]][[S80:form_instance]]]]
-<!-- END OPTIONAL AD-HOC FORM MASTHEAD -->
+  <!-- OPTIONAL AD-HOC FORM MASTHEAD -->
+  [[?x[[S334:pagename]]x::xdonate_thankyoux::
+    [[E51:reus_thankyou_adhoc_masthead_[[S80:form_type]][[S80:form_instance]]]]
+  ::
+    [[E51:reus_donate_wrpr_adhoc_masthead_[[S80:form_type]][[S80:form_instance]]]]
+  ]]
+  <!-- END OPTIONAL AD-HOC FORM MASTHEAD -->
 ::
-
   <!-- BEGIN API FORM PAGE TITLE -->
   <div class="row_12 page-title clearfix">
 
@@ -105,37 +108,40 @@ TT
   <!-- BEGIN MAIN CONTENT -->
 
 
-  <!-- BEGIN LEFT SIDEBAR -->
+<!-- BEGIN LEFT SIDEBAR -->
 [[?
 [[?x[[S80:form_type]]x::xSPEAx::T::]][[?x[[S80:form_type]]x::xSPEBx::T::]][[?x[[S80:form_type]]x::xSPECx::T::]][[?x[[S80:form_type]]x::xSPEMAx::T::]][[?x[[S80:form_type]]x::xSPEMBx::T::]][[?x[[S80:form_type]]x::xSPEMCx::T::]][[?[[S80:form_instance]]::_::T::]]
 ::
 TT
 ::
-<!-- VALID AD-HOC FORM TYPE -->
-[[?
-xTRUEx
-::
-x[[E151:reus_donate_wrpr_adhoc_left_[[S80:form_type]][[S80:form_instance]]]]x
-::
-     <!-- VALID AD-HOC LEFT RAIL FOUND -->
+  <!-- VALID AD-HOC FORM TYPE -->
+  [[?x[[S334:pagename]]x::xdonate_thankyoux::
+    [[?xTRUEx::x[[E151:reus_thankyou_adhoc_left_[[S80:form_type]][[S80:form_instance]]]]x::
+      <!-- VALID AD-HOC LEFT RAIL FOUND -->
+      <div id="body_2_content_0_divLeftRailWrapper" class="row_3">
+        <div class="grid_3">
+          [[E51:reus_thankyou_adhoc_left_[[S80:form_type]][[S80:form_instance]]]]
+        </div>
+      </div>
+    ::
+      <!-- NO VALID AD-HOC LEFT RAIL FOUND...INSERT NOTHING -->
+    ]]
+  ::
+    [[?xTRUEx::x[[E151:reus_donate_wrpr_adhoc_left_[[S80:form_type]][[S80:form_instance]]]]x::
+      <!-- VALID AD-HOC LEFT RAIL FOUND -->
       <div id="body_2_content_0_divLeftRailWrapper" class="row_3">
         <div class="grid_3">
           [[E51:reus_donate_wrpr_adhoc_left_[[S80:form_type]][[S80:form_instance]]]]
         </div>
       </div>
-
-      ::
-
-      <!-- NO VALID AD-HOC LEFT RAIL FOUND...INSERT NOTHING -->
-
-    ]]
-
     ::
-
-    <!-- NOT AN AD-HOC FORM TYPE...INSERT NOTHING -->
-
+      <!-- NO VALID AD-HOC LEFT RAIL FOUND...INSERT NOTHING -->
+    ]]
   ]]
-  <!-- END LEFT SIDEBAR -->
+::
+  <!-- NOT AN AD-HOC FORM TYPE...INSERT NOTHING -->
+]]
+<!-- END LEFT SIDEBAR -->
   
 
   <!-- BEGIN FORM MAIN CONTAINER -->
@@ -169,33 +175,31 @@ TT
 ::
 TT
 ::
-
-    <!-- VALID AD-HOC FORM TYPE -->
-    <div id="body_2_content_0_divRightRailWrapper" class="row_3">
-      <div class="grid_3">
+  <!-- VALID AD-HOC FORM TYPE -->
+  <div id="body_2_content_0_divRightRailWrapper" class="row_3">
+    <div class="grid_3">
+      [[?x[[S334:pagename]]x::xdonate_thankyoux::
+        [[E51:reus_thankyou_adhoc_right_[[S80:form_type]][[S80:form_instance]]]]
+      ::
         [[E51:reus_donate_wrpr_adhoc_right_[[S80:form_type]][[S80:form_instance]]]]
-      </div>
+      ]]
     </div>
-    
-    ::
-
-    <!-- NOT AN AD-HOC FORM TYPE -->
-    <div id="body_2_content_0_divRightRailWrapper" class="row_4">
-      <div class="grid_4">
-
-        [[?xxxx::xx[[S334:campaign]]xx::
-        <!-- There's no campaign variable  -->
-        [[E51:reus_donate_wrpr_right_[[S80:chid_short]]]]
-        ::
-        <!-- There is a campaign variable -->
-        [[E51:reus_donate_form_[[S334:campaign]]_sidebar]]
-        ]]
-
-      </div>
+  </div>
+::
+  <!-- NOT AN AD-HOC FORM TYPE -->
+  <div id="body_2_content_0_divRightRailWrapper" class="row_4">
+    <div class="grid_4">
+      [[?xxxx::xx[[S334:campaign]]xx::
+      <!-- There's no campaign variable  -->
+      [[E51:reus_donate_wrpr_right_[[S80:chid_short]]]]
+      ::
+      <!-- There is a campaign variable -->
+      [[E51:reus_donate_form_[[S334:campaign]]_sidebar]]
+      ]]
     </div>
-    
-  ]]
-  <!-- END RIGHT SIDEBAR -->
+  </div>
+]]
+<!-- END RIGHT SIDEBAR -->
 
 
 </div>
@@ -214,15 +218,15 @@ TT
 ::
 TT
 ::
-
   <!-- FOOTER BANNER FOR VALID AD-HOC FORM TYPE -->
-  [[E51:reus_donate_wrpr_adhoc_footer_banner_[[S80:form_type]][[S80:form_instance]]]]
-  <!-- END AD-HOC FORM FOOTER BANNER -->
-
+  [[?x[[S334:pagename]]x::xdonate_thankyoux::
+    [[E51:reus_thankyou_adhoc_footer_banner_[[S80:form_type]][[S80:form_instance]]]]
   ::
-
+    [[E51:reus_donate_wrpr_adhoc_footer_banner_[[S80:form_type]][[S80:form_instance]]]]
+  ]]
+  <!-- END AD-HOC FORM FOOTER BANNER -->
+::
   <!-- NOT AC-HOC FORM SO NOT INSERTING FOOTER BANNER -->
-
 ]]
   
 
