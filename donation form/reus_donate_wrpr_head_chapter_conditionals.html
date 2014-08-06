@@ -1,5 +1,5 @@
 [[?[[?[[S8]]::/admin/::T::]]::T::
-  <!-- Admin Page or Thank You page -->
+  <!-- Admin Page -->
 ::
   [[?x[[S334:chid]]x::xx::[[U0:chid=100-000]]::]]
   [[?x[[S80:chid]]x::xx::
@@ -26,13 +26,16 @@
   ]]
   [[U0:chid_short=[[E130:[[S80:chid]] 0 3 substring]]]]
   [[E51:reus_donate_wrpr_meta_session_[[S80:chid_short]]]]
+  [[?x[[S334:pagename]]x::xdonate_thankyoux:
+    <!-- No need to reset session variables on thank you page -->
+  ::
+    <!-- set session var for form type -->
+    [[?x[[S334:form_type]]x::xx::[[U0:form_type=API]]::[[U0:form_type=[[S334:form_type]]]]]]
 
-  <!-- set session var for form type -->
-  [[?x[[S334:form_type]]x::xx::[[U0:form_type=API]]::[[U0:form_type=[[S334:form_type]]]]]]
+    <!-- set session var for form instance -->
+    [[?x[[S334:form_instance]]x::xx::[[U0:form_instance=API]]::[[U0:form_instance=[[S334:form_instance]]]]]]
 
-  <!-- set session var for form instance -->
-  [[?x[[S334:form_instance]]x::xx::[[U0:form_instance=API]]::[[U0:form_instance=[[S334:form_instance]]]]]]
-
-  <!-- set session var for form ad hoc form chrome -->
-  [[?x[[S334:form_chrome]]x::xx::[[U0:form_chrome=true]]::[[U0:form_chrome=[[S334:form_chrome]]]]]]
+    <!-- set session var for form ad hoc form chrome -->
+    [[?x[[S334:form_chrome]]x::xx::[[U0:form_chrome=true]]::[[U0:form_chrome=[[S334:form_chrome]]]]]]
+  ]]
 ]]
