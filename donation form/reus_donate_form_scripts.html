@@ -1174,7 +1174,9 @@ $(document).ready(function () {
     },
     finishGift = function() {
       var survey_ids = ['1604','1625'],
-        bools = [($('#optinNational').is(':checked')?true:false),($('#optinInternational').is(':checked')?true:false),($('#optinChapter').is(':checked')?true:false)];
+        bools = [($('#optinNational').is(':checked')?true:false),
+          ($('#optinInternational').hasClass('checked')?true:false),
+          ($('#optinChapter').is(':checked')?true:false)];
       $(zip_array['chapter']).each(function (index, arr) {
         if (arr['zip_code'] == $('#ccPostal').val()) {
           $('#chapter_id').val(arr['chapter_id']);
