@@ -1404,6 +1404,12 @@ $(document).ready(function () {
           donation_data += "&product_url_1=none&s_productURL1=none&s_productURL1Name=none";
         }
         $(button_element).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true);
+		//debugging
+		console.log("debugging starts");
+		console.log(donation_data);
+		console.log(prodURL);
+		return;
+		//debugging
         luminateExtend.api.request({
           api: 'donation',
           data: 'method=getDonationFormInfo&form_id=' +
