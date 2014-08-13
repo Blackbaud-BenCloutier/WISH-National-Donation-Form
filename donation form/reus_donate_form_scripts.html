@@ -1109,7 +1109,6 @@ $(document).ready(function () {
           return false;
         }
       });
-      //window.open(product_url, "ecard",'height=670,width=737,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
       window.open(product_url, "ecard",'height=900,width=1100,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
       } else {
         selectCard(card_id);
@@ -1177,6 +1176,7 @@ $(document).ready(function () {
         bools = [($('#optinNational').is(':checked')?true:false),
           ($('#optinInternational').hasClass('checked')?true:false),
           ($('#optinChapter').is(':checked')?true:false)];
+
       $(zip_array['chapter']).each(function (index, arr) {
         if (arr['zip_code'] == $('#ccPostal').val()) {
           $('#chapter_id').val(arr['chapter_id']);
@@ -1187,6 +1187,7 @@ $(document).ready(function () {
           });
         }
       });
+
       for (var i = 0; i < survey_ids.length; i++) {
         if(bools[i]){
           luminateExtend.api.request({
@@ -1196,8 +1197,21 @@ $(document).ready(function () {
             requestType: 'POST',
             useHTTPS: true
           });
+        } else {
+          $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+            if (survey_ids[i] == arr['surveyID']) {
+              luminateExtend.api.request({
+                api: 'cons',
+                data: 'method=update&remove_center_opt_in_ids=' + arr['center_id'] + '&primary_email=' + encodeURIComponent($("#eAdd").val()),
+                requiresAuth: true,
+                requestType: 'POST',
+                useHTTPS: true
+              });
+            }
+          });
         }
       }
+
       $.removeCookie("cart");
       $.jStorage.flush();
       localStorage.clear();
