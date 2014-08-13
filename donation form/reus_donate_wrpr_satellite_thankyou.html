@@ -1,86 +1,66 @@
 <script type='text/javascript'>
 
 var _mawData = {
+  "donate": {
+    "company": null,
+    "currencyCode": null,
+    "locale": {
+      "city":"[[S120:dc:donorCity]]",
+      "country":"[[S120:dc:donorCountry]]",
+      "state":"[[S120:dc:donorState]]",
+      "zip":"[[S120:dc:donorZip]]"
+    },
+    "paymentType":"[[S120:dc:creditCardType]]",
+    "donation": [
+    
+    {
+      "amount": {
+        "single": [[?[[S80:sat_skew]]::MG05-01::null::"[[S80:designeeAmt1]]"]],
+        "pledge": [[?[[S80:sat_skew]]::MG05-01::"[[S80:designeeAmt1]]"::null]]
+      },
 
-"GENERAL DONATION": {
-"donation":{
-  "amount":{
-    "single":[[?[[S80:sat_skew]]::MG05-01::null::"[[S80:designeeAmt1]]"]],
-    "pledge":[[?[[S80:sat_skew]]::MG05-01::"[[S80:designeeAmt1]]"::null]]
-  },
-  "behalf":{
-    "card": [[?xxnullx::x[[S80:sat_card_occasion_type]]x:: null :: "[[S80:sat_card_occasion_type]]" ]],
-	"eCard": [[?xxnullx::x[[S80:sat_ecard_occasion_type]]x:: null :: "[[S80:sat_ecard_occasion_type]]" ]],
-	"eCert": [[?xxnullx::x[[S80:sat_ecert_occasion_type]]x:: null :: "[[S80:sat_ecert_occasion_type]]" ]] 
-  },
-	"destination": "[[S80:chid]]",
-	"donationChapter": "[[S80:sat_chapter_id]]",
-	"skew": "[[S80:sat_skew]]"
-}},
+      "behalf": {
+        "card": [[?xxnullx::x[[S80:sat_card_occasion_type]]x:: null :: "[[S80:sat_card_occasion_type]]" ]],
+        "eCard": [[?xxnullx::x[[S80:sat_ecard_occasion_type]]x:: null :: "[[S80:sat_ecard_occasion_type]]" ]],
+        "eCert": [[?xxnullx::x[[S80:sat_ecert_occasion_type]]x:: null :: "[[S80:sat_ecert_occasion_type]]" ]]  
+      },
 
-"MONTHLY PLEDGE": {
-"donation":{
-  "amount":{
-    "single":[[?[[S80:sat_skew]]::MG05-01::null::"[[S80:designeeAmt1]]"]],
-    "pledge":[[?[[S80:sat_skew]]::MG05-01::"[[S80:designeeAmt1]]"::null]]
-  },
-  "behalf":{
-    "card": [[?xxnullx::x[[S80:sat_card_occasion_type]]x:: null :: "[[S80:sat_card_occasion_type]]" ]],
-	"eCard": [[?xxnullx::x[[S80:sat_ecard_occasion_type]]x:: null :: "[[S80:sat_ecard_occasion_type]]" ]],
-	"eCert": [[?xxnullx::x[[S80:sat_ecert_occasion_type]]x:: null :: "[[S80:sat_ecert_occasion_type]]" ]] 
-  },
-	"destination": "[[S80:chid]]",
-	"donationChapter": "[[S80:sat_chapter_id]]",
-	"skew": "[[S80:sat_skew]]"
-}},
+      "destination": "[[S80:chid]]",
+      "donationChapter": "[[S80:sat_chapter_id]]",
+      "skew": "[[S80:sat_skew]]"
+    },
 
-"HONOR/MEMORIAL DONATION (Gift Card)": {
-"donation":{
-  "amount":{
-    "single":[[?[[S80:sat_skew]]::MG05-01::null::"[[S80:designeeAmt1]]"]],
-    "pledge":[[?[[S80:sat_skew]]::MG05-01::"[[S80:designeeAmt1]]"::null]]
+  
+    ],
+    "transactionId": "[[S120:dc:transactionID]]",
+    "totalTransactionValue": "[[S120:dc:giftAmount]]".slice(1)
   },
-  "behalf":{
-    "card": [[?xxnullx::x[[S80:sat_card_occasion_type]]x:: null :: "[[S80:sat_card_occasion_type]]" ]],
-	"eCard": [[?xxnullx::x[[S80:sat_ecard_occasion_type]]x:: null :: "[[S80:sat_ecard_occasion_type]]" ]],
-	"eCert": [[?xxnullx::x[[S80:sat_ecert_occasion_type]]x:: null :: "[[S80:sat_ecert_occasion_type]]" ]] 
+  "form": {
+    "fID": "Donate",
+    "errorField": null
   },
-	"destination": "[[S80:chid]]",
-	"donationChapter": "[[S80:sat_chapter_id]]",
-	"skew": "[[S80:sat_skew]]"
-}},
+  "intSearch": {
+    "term": null,
+    "results": null
+  },
+  "language": "en",
+  "login": {
+    "loggedIn": false,
+    "userName": null,
+    "donor": null
+  },
+  "pageCat": {
+    "primary": "Ways To Help",
+    "secondary": "Giving",
+    "tertiary": "Donate",
+    "hierarchy": "Ways To Help:Giving:Donate:Thank You",
+    "pageId": "Thank You"
+  },
+  "siteId": "[[S80:sat_chapter_id]]",
+  "ThirdPartyId": "Convio",
+  "IsMobile": false
+} 
 
-"HONOR/MEMORIAL DONATION (Certificate)": {
-"donation":{
-  "amount":{
-    "single":[[?[[S80:sat_skew]]::MG05-01::null::"[[S80:designeeAmt1]]"]],
-    "pledge":[[?[[S80:sat_skew]]::MG05-01::"[[S80:designeeAmt1]]"::null]]
-  },
-  "behalf":{
-    "card": [[?xxnullx::x[[S80:sat_card_occasion_type]]x:: null :: "[[S80:sat_card_occasion_type]]" ]],
-	"eCard": [[?xxnullx::x[[S80:sat_ecard_occasion_type]]x:: null :: "[[S80:sat_ecard_occasion_type]]" ]],
-	"eCert": [[?xxnullx::x[[S80:sat_ecert_occasion_type]]x:: null :: "[[S80:sat_ecert_occasion_type]]" ]] 
-  },
-	"destination": "[[S80:chid]]",
-	"donationChapter": "[[S80:sat_chapter_id]]",
-	"skew": "[[S80:sat_skew]]"
-}},
-
-"HONOR/MEMORIAL DONATION (eCard)": {
-"donation":{
-  "amount":{
-    "single":[[?[[S80:sat_skew]]::MG05-01::null::"[[S80:designeeAmt1]]"]],
-    "pledge":[[?[[S80:sat_skew]]::MG05-01::"[[S80:designeeAmt1]]"::null]]
-  },
-  "behalf":{
-    "card": [[?xxnullx::x[[S80:sat_card_occasion_type]]x:: null :: "[[S80:sat_card_occasion_type]]" ]],
-	"eCard": [[?xxnullx::x[[S80:sat_ecard_occasion_type]]x:: null :: "[[S80:sat_ecard_occasion_type]]" ]],
-	"eCert": [[?xxnullx::x[[S80:sat_ecert_occasion_type]]x:: null :: "[[S80:sat_ecert_occasion_type]]" ]] 
-  },
-	"destination": "[[S80:chid]]",
-	"donationChapter": "[[S80:sat_chapter_id]]",
-	"skew": "[[S80:sat_skew]]"
-}}
-};
 console.log(_mawData);
 </script>
+
