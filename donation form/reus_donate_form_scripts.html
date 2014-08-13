@@ -359,15 +359,12 @@ $(document).ready(function () {
       // Footer Links
       if(arr['facebook_acct'].length > 0){
         $('#footer_0_footermiddle_0_aFacebook').attr('href',arr['facebook_acct']);
-        $('#facebook_url').val(arr['facebook_acct']);
       }
       if(arr['twitter_acct'].length > 0) {
         $('#footer_0_footermiddle_0_aTwitter').attr('href',arr['twitter_acct']);
-        $('#twitter_url').val(arr['twitter_acct']);
       }
       if(arr['youtube_url'].length > 0) {
         $('#footer_0_footermiddle_0_aYouTube').attr('href',arr['youtube_url']);
-        $('#youtube_url').val(arr['youtube_url']);
       }
       // CEO Info
       if(arr['receipt_signature_name'].length > 0){
@@ -375,15 +372,6 @@ $(document).ready(function () {
       }
       if(arr['receipt_signature_title'].length > 0){
         $('#s_ceo_title').val(arr['receipt_signature_title']);
-      }
-      // Web Links
-      if(arr['website_url'].length > 0) {
-        $('a').each(function (index) {
-          $('a:eq(' + index + ')').href($('a:eq(' + index + ')').href().replace(
-            '[[S80:website_url]]',arr['website_url']
-          ));
-        });
-        $('#s_website_url').val(arr['website_url']);
       }
     }
   });
