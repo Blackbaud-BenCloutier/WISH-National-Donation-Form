@@ -1,6 +1,9 @@
 [[S51:reus_donate_form_plugins]]
 [[U0:productURL1='']]
 [[U0:productURL1Name='']]
+
+
+
 <style>
 .bldr-wrap #card-form fieldset {float:right!important;margin:22px!important;}
 </style>
@@ -13,6 +16,7 @@
 var urlVariableArray = (function(){var vars={};var parts=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value){vars[key]=value;});return vars;})(),
   center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/xml/center_info.xml','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
   chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.convio.net/wish/assets/js/chapters.json','dataType':'json','success':function(data){json=data;}});return json;})(),
+  chapters_addljson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.convio.net/wish/assets/js/chapters_addl.json','dataType':'json','success':function(data){json=data;}});return json;})(),
   productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://secure2.convio.net/wish/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
   get_short_url = function(e){var t="";$.ajax({async:false,url:"https://api-ssl.bitly.com/v3/shorten?format=json",dataType:"json",data:{format:"json",apiKey:"R_50a44d5e5edc4dacaccb0841183fd8ce",login:"wishamerica",longUrl:e},success:function(e){t=e["data"]["url"]}});return t},
   form_chid = '[[S80:chid]]'.substr(0,3),
@@ -348,6 +352,29 @@ $(document).ready(function () {
   };
 
   // Initialization
+
+  // Sync JSON info
+  $(chapters_addljson['allChaptersAddl']['chapter']).each(function (index, arr) {
+    if(form_chid == arr['office_id'].substr(0,3)) {
+      // Footer Links
+      if(arr['facebook_acct'].length > 0){
+        $('#footer_0_footermiddle_0_aFacebook').attr('href',arr['facebook_acct']);
+      }
+      if(arr['twitter_acct'].length > 0) {
+        $('#footer_0_footermiddle_0_aTwitter').attr('href',arr['twitter_acct']);
+      }
+      if(arr['youtube_url'].length > 0) {
+        $('#footer_0_footermiddle_0_aYouTube').attr('href',arr['youtube_url']);
+      }
+      // CEO Info
+      if(arr['receipt_signature_name'].length > 0){
+        $('#s_ceo_name').val(arr['receipt_signature_name']);
+      }
+      if(arr['receipt_signature_title'].length > 0){
+        $('#s_ceo_title').val(arr['receipt_signature_title']);
+      }
+    }
+  });
 
   // Product Selection
 
