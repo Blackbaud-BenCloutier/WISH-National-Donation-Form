@@ -98,7 +98,6 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
                   if(parseInt(chapter_id.substr(0,3)) < 500) {
                     if (arr['office_id'] == chapter_id) {
                       $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                      //window.formFundID = arr['fund_id'];
                       return;
                     }
                   }
@@ -106,7 +105,6 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
                   if(parseInt(chapter_id.substr(0,3)) >= 500) {
                     if (arr['office_id'] == chapter_id) {
                       $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                      //window.formFundID = arr['fund_id'];
                       return;
                     }
                   }
@@ -134,6 +132,13 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
                   $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
                 }
               }
+            }
+          });
+        } else if (search_value.length == 2) {
+          $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+            if(search_value.toLowerCase() == arr['state_province'].toLowerCase()) {
+              $('#no_valid_region').remove();
+              $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
             }
           });
         }
