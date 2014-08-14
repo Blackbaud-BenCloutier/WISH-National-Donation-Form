@@ -1210,56 +1210,6 @@ $(document).ready(function () {
       alert(pageError + " " + fieldError);
       $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
     },
-    finishGift = function() {
-      var survey_ids = ['1604','1625'],
-        bools = [($('#optinNational').is(':checked')?true:false),
-          ($('#optinInternational').hasClass('checked')?true:false),
-          ($('#optinChapter').is(':checked')?true:false)];
-
-      $(zip_array['chapter']).each(function (index, arr) {
-        if (arr['zip_code'] == $('#ccPostal').val()) {
-          $('#chapter_id').val(arr['chapter_id']);
-          $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-            if ($('#chapter_id').val() == arr['office_id']) {
-              survey_ids.push(arr['surveyID']);
-            }
-          });
-        }
-      });
-
-      for (var i = 0; i < survey_ids.length; i++) {
-        if(bools[i]){
-          luminateExtend.api.request({
-            api: 'survey',
-            data: 'method=submitSurvey&cons_email=' + encodeURIComponent($("#eAdd").val()) + '&cons_email_opt_in=true&survey_id=' + survey_ids[i],
-            requiresAuth: true,
-            requestType: 'POST',
-            useHTTPS: true
-          });
-        } else {
-          $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-            if (survey_ids[i] == arr['surveyID']) {
-              luminateExtend.api.request({
-                api: 'cons',
-                data: 'method=update&remove_center_opt_in_ids=' + arr['center_id'] + '&primary_email=' + encodeURIComponent($("#eAdd").val()),
-                requiresAuth: true,
-                requestType: 'POST',
-                useHTTPS: true
-              });
-            }
-          });
-        }
-      }
-
-      $.removeCookie("cart");
-      $.jStorage.flush();
-      localStorage.clear();
-      savedSession = {};
-      $('#mainform input').each(function(){$(this).val('');});
-      window.onbeforeunload = function(){};
-      if(isPaypal) {window.location = paypalRedirectUrl;}
-      else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=" + form_chid;}
-    },
     submitDonation = function(button_element, donation_data){
       if($('.input-error').length > 0){
         $('.input-error:eq(0)').focus().blur();
@@ -1439,6 +1389,60 @@ $(document).ready(function () {
               data: donation_data,
               requestType: 'POST',
               callback: function (data) {
+                var finishGift = function() {
+                  var center_ids = ['1001','1101'],
+                    bools = [($('#optinNational').is(':checked')?true:false),
+                      ($('#optinInternational').hasClass('checked')?true:false),
+                      ($('#optinChapter').is(':checked')?true:false)],
+                    center_remove = '',
+                    center_add = '';
+
+                  // Set 3rd center ID
+                  $(zip_array['chapter']).each(function (index, arr) {
+                    if (arr['zip_code'] == $('#ccPostal').val()) {
+                      $('#chapter_id').val(arr['chapter_id']);
+                      $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+                        if ($('#chapter_id').val() == arr['office_id']) {
+                          center_ids.push(arr['center_id']);
+                        }
+                      });
+                    }
+                  });
+
+                  for(var i = 0; i < center_ids.length; i++) {
+                    if (bools[i]) {
+                      if (center_add.length > 0) {
+                        center_add += ',';
+                      }
+                      center_add += center_ids[i];
+                    } else {
+                      if (center_remove.length > 0) {
+                        center_remove += ',';
+                      }
+                      center_remove += center_ids[i];
+                    }
+                  }
+
+                  // Opt-ins
+                  luminateExtend.api.request({
+                    api: 'cons',
+                    data: 'method=update&add_center_opt_in_ids=' + center_add + '&remove_center_opt_in_ids=' + center_remove + '&primary_email=' + encodeURIComponent($("#eAdd").val()),
+                    requiresAuth: true,
+                    requestType: 'POST',
+                    useHTTPS: true,
+                    callback: function() {
+                      $.removeCookie("cart");
+                      $.jStorage.flush();
+                      localStorage.clear();
+                      savedSession = {};
+                      $('#mainform input').each(function(){$(this).val('');});
+                      window.onbeforeunload = function(){};
+                      if(isPaypal) {window.location = paypalRedirectUrl;}
+                      else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=" + form_chid;}
+                    }
+                  });
+                };
+
                 if (data['donationResponse']['redirect']) {
                   isPaypal = true;
                   paypalRedirectUrl = data['donationResponse']['redirect']['url'];
