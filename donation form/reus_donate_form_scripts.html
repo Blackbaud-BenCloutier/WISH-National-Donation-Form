@@ -383,11 +383,11 @@ $(document).ready(function () {
       }
       // Web Links
       if(arr['website_url'].length > 0) {
-        $('a').each(function (index) {
-          $('a:eq(' + index + ')').href($('a:eq(' + index + ')').href().replace(
-            '[[S80:website_url]]',arr['website_url']
-          ));
-        });
+        // $('a').each(function (index) {
+        //   $('a:eq(' + index + ')').href($('a:eq(' + index + ')').href().replace(
+        //     '[[S80:website_url]]',arr['website_url']
+        //   ));
+        // });
         $('#s_website_url').val(arr['website_url']);
       }
     }
