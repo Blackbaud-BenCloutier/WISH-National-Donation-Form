@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"cetner",
+				"center_add"
+			],
+			[
+				"center",
+				"center_add"
+			],
+			[
+				"cen",
+				"center_add"
+			],
+			[
+				"chapters_addl",
+				"chapters_addljson"
+			],
+			[
 				"user",
 				"userInfoCookie"
 			],
@@ -220,37 +236,19 @@
 	"buffers":
 	[
 		{
-			"contents": "378, 5\n429, 2 (fixed)\n653, 4\n657, 5\n670, 2 (emailed joseph)\n780, 5\n786, 5\n921, 4\n925, 5\n928, 5\n929, 5\n932, 2 (working with gene)\n938, 2 (fixed)\n942, 3\n945, 3 (sent back to gene)\n947, 2 (fixed)\n948, 3\n949, 3 (fixed)\n952, 5",
+			"file": "/C/Users/v-ben.cloutier/Desktop/bug list.txt",
 			"settings":
 			{
-				"buffer_size": 221,
+				"buffer_size": 498,
 				"line_ending": "Windows",
-				"name": "378, 5"
+				"name": "378, 5 (deep link to occasion)"
 			}
 		},
 		{
-			"file": "donation form/reus_donate_form_scripts.html",
+			"file": "donation form/reus_donate_ar_sustaining_subsequent_plaintext.html",
 			"settings":
 			{
-				"buffer_size": 68386,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 124 files for \"honoree\"\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\donate_thankyou.html:\n  114  \n  115  [[?xx::x[[S120:dc:custom:custom_string98]]x::::\n  116: var honoree_first_name = '[[S120:dc:custom:custom_string74]]',\n  117:   honoree_middle_initial = '[[S120:dc:custom:custom_string75]]',\n  118:   honoree_last_name = '[[S120:dc:custom:custom_string76]]',\n  119:   honoree_full_name = '[[S120:dc:custom:custom_string77]]',\n  120    from_name = '[[S120:dc:custom:custom_string78]]',\n  121    wedding_couple_name = '[[S120:dc:custom:custom_string79]]',\n  ...\n  210          '</div>';\n  211        }\n  212:       if(honoree_first_name != '' ||\n  213:         honoree_middle_initial != '' ||\n  214:         honoree_last_name != '' ||\n  215:         honoree_full_name != '' \n  216        ){\n  217:         if(honoree_full_name != ''){\n  218            str += '<div class=\"blurb\">' +\n  219              '<h3>In Honor Of</h3>' +\n  220              '<div class=\"blurbtext\">' +\n  221:               '<p>' + honoree_full_name + '</p>' +\n  222              '</div>' +\n  223            '</div>';\n  ...\n  226              '<h3>In Honor Of</h3>' +\n  227              '<div class=\"blurbtext\">' +\n  228:               '<p>' + honoree_first_name + ' ' + honoree_middle_initial + ' ' + honoree_last_name + '</p>' +\n  229              '</div>' +\n  230            '</div>';\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\reus_donate_form_product_config.html:\n   84  					</p>\n   85  					<p>\n   86: 						 {Honoree Name}\n   87  					</p>\n   88  					<p>\n   ..\n  527  						Optional </span>\n  528  						<label for=\"memoree_full_name\" class=\"inMemoryOf\">In memory of</label>\n  529: 						<input type=\"text\" placeholder=\"{Honoree Name}\" id=\"memoree_full_name\" name=\"memoree_full_name\" maxlength=\"40\">\n  530  						<span class=\"info ifEmptyDefault\">\n  531  						If left empty we will use the name as entered above. </span>\n  ...\n  534  						<legend class=\"inHonorOf\">\n  535  						In honor of </legend>\n  536: 						<label for=\"honoree_first_name\">\n  537  						Full Name </label>\n  538: 						<input type=\"text\" style=\"float: left;\" class=\"hasMname js_fname-pers jsreq\" placeholder=\"First name\" id=\"honoree_first_name\" name=\"honoree_first_name\">\n  539  						<p class=\"info form-error errorActive\" style=\"display: none;\">\n  540  							 Oops! First name is required.\n  541  						</p>\n  542: 						<input type=\"text\" class=\"mnamefld\" placeholder=\"M.I.\" maxlength=\"3\" name=\"honoree_middle_initial\">\n  543: 						<input type=\"text\" class=\"extra js_lname-pers jsreq\" placeholder=\"Last name\" name=\"honoree_last_name\">\n  544  						<p class=\"info form-error errorActive\" style=\"display:none;\">\n  545  							 Oops! Last name is required.\n  ...\n  548  						<span class=\"info-sec\">\n  549  						Optional </span>\n  550: 						<label for=\"honoree_full_name\" class=\"inHonorOf\">In honor of</label>\n  551: 						<input type=\"text\" placeholder=\"{Honoree Name}\" id=\"honoree_full_name\" name=\"honoree_full_name\" maxlength=\"40\">\n  552  						<span class=\"info ifEmptyDefault\">\n  553  						If left empty we will use the name as entered above. </span>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\reus_donate_form_scripts.html:\n  622              product_id = cardID;\n  623              if (checkFields()) {\n  624:               toFirstName = $(\"input[name='honoree_first_name']\").val();\n  625:               toMI = $(\"input[name='honoree_middle_initial']\").val() || false;\n  626:               toLastName = $(\"input[name='honoree_last_name']\").val();\n  627:               toInHonorOf = $(\"input[name='honoree_full_name']\").val() || false;\n  628                toFullName = '';\n  629                fromName = $(\"input[name='from_name']\").val();\n  ...\n  833              toCountry = $(\"select#send_to_country option:selected\").val();\n  834              toFirstName = $(\"input[name='memoree_first_name']\").val();\n  835:             toMI = $(\"input[name='honoree_middle_initial']\").val() || false;\n  836:             toLastName = $(\"input[name='honoree_last_name']\").val();\n  837              toInHonorOf = $(\"input[name='memoree_full_name']\").val() || false;\n  838              toFullName = '';\n  ...\n  953            product_id = cardID;   \n  954            if (checkFields()) {\n  955:             toFirstName = encodeURIComponent($(\"input[name='honoree_first_name']\").val());\n  956:             toMI = encodeURIComponent($(\"input[name='honoree_middle_initial']\").val()) || false;\n  957:             toLastName = encodeURIComponent($(\"input[name='honoree_last_name']\").val());\n  958:             toInHonorOf = encodeURIComponent($(\"input[name='honoree_full_name']\").val()) || false;\n  959              toEmail = encodeURIComponent($(\"input[name='to_email_address']\").val());\n  960              toFullName = '';\n  ...\n 1281            var ecard_subject = ecard_first_name + \" \" + ecard_last_name + \" has sent you an e-card\";\n 1282            var ecard_message = cardProperties[7];\n 1283:           var honoreeProduct = cardProperties[9];\n 1284            var occassionType = cardProperties[11];\n 1285            var prodURL = 'https://secure2.convio.net/wish/site/Ecard?ecard_id=1061&ecard_form=true&cons_info_component=t&cons_first_name=' + ecard_first_name + '&cons_last_name=' + ecard_last_name + '&cons_email=' + ecard_sender_email + '&cons_mail_opt_in=t&cons_email_opt_in=on&cons_email_opt_in_requested=true&s_rememberMe=on&sendtoemail=' + ecard_recipient_email + '&stationery_layout_chooser=true&stationery_layout_id=' + ecard_stationary_id + '&subject=' + ecard_subject + '&message=' + ecard_message + '&taf_send=Send+eCard++&denySubmit=&pgwrap=n';\n 1286:           donation_data += \"&product_url_1=\" + encodeURIComponent(honoreeProduct) + \"&s_productURL1=\" + encodeURIComponent(prodURL);\n 1287          } else if (cardProperties[1] == 'cert01' || cardProperties[1] == 'cert03') {\n 1288:           var honoreeName = cardProperties[3];\n 1289            var productFromName = cardProperties[4];\n 1290:           var honoreeProduct = cardProperties[5];\n 1291:           var honoreeProductName = cardProperties[6];\n 1292            var occassionType = cardProperties[7];\n 1293            \n 1294:           //var prodURL = \"http://site.wish.org/site/PageNavigator/products.html?key=\" + today + \"&pdf=\" + honoreeProduct + \"&HonorName=\" + encodeURIComponent(honoreeName) + \"&DonorName=\" + encodeURIComponent(productFromName);\n 1295  \n 1296            // new treatment for secure PDF links for certificates\n ....\n 1299            var certProductID = cardProperties[9];\n 1300            var timeStamp = Date.today().toString('ddMMyyyy');\n 1301:           var stringToHash = certProductID + honoreeName + productFromName + timeStamp + pdfSalt;\n 1302            var hashedString = CryptoJS.MD5(stringToHash).toString();\n 1303            var hashTail = hashedString.substring(hashedString.length - 10);\n 1304:           var prodURL = baseCertURL + '?p=' + encodeURIComponent(certProductID) + '&h=' + encodeURIComponent(honoreeName) + '&d=' + encodeURIComponent(productFromName) + '&t=' + encodeURIComponent(timeStamp) + '&s=' + hashTail;\n 1305  \n 1306            bitlyURL = get_short_url(prodURL);\n 1307:           donation_data += \"&s_bitlyURL=\" + bitlyURL + \"&product_url_1=\" + bitlyURL + \"&s_productURL1=\" + encodeURIComponent(prodURL) + \"&s_productURL1Name=\" + encodeURIComponent(honoreeProductName);\n 1308          } else if (cardProperties[1] == 'cert02') {\n 1309:           var honoreeName = cardProperties[3];\n 1310:           var honoreeProduct = cardProperties[4];\n 1311:           var honoreeProductName = cardProperties[5];\n 1312            var occassionType = cardProperties[6];\n 1313            \n 1314:           //var prodURL = \"http://site.wish.org/site/PageNavigator/products.html?key=\" + today + \"&pdf=\" + honoreeProduct + \"&HonorName=\" + encodeURIComponent(honoreeName);\n 1315  \n 1316            // new treatment for secure PDF links for certificates\n ....\n 1319            var certProductID = cardProperties[8];\n 1320            var timeStamp = Date.today().toString('ddMMyyyy');\n 1321:           var stringToHash = certProductID + honoreeName + timeStamp + pdfSalt;\n 1322            var hashedString = CryptoJS.MD5(stringToHash).toString();\n 1323            var hashTail = hashedString.substring(hashedString.length - 10);\n 1324:           var prodURL = baseCertURL + '?p=' + encodeURIComponent(certProductID) + '&h=' + encodeURIComponent(honoreeName) + '&t=' + encodeURIComponent(timeStamp) + '&s=' + hashTail;\n 1325            \n 1326            var bitlyURL = get_short_url(prodURL);\n 1327:           donation_data += \"&s_bitlyURL=\" + bitlyURL + \"&product_url_1=\" + bitlyURL + \"&s_productURL1=\" + encodeURIComponent(prodURL) + \"&s_productURL1Name=\" + encodeURIComponent(honoreeProductName);\n 1328          } else if (cardProperties[1] == 'card01') {\n 1329:           var honoreeName = cardProperties[3];\n 1330:           var honoreeProduct = cardProperties[10];\n 1331:           var honoreeProductName = cardProperties[12];\n 1332            var prodMsgLine1 = cardProperties[13];\n 1333            var prodMsgLine2 = cardProperties[14];\n 1334            var prodMsgLine3 = cardProperties[15];\n 1335:           var prodURL = \"http://site.wish.org/site/PageNavigator/products.html?key=\" + today + \"&pdf=\" + honoreeProduct + \"&HonorName=\" + encodeURIComponent(honoreeName) + \"&line1=\" + encodeURIComponent(prodMsgLine1) + \"&line2=\" + encodeURIComponent(prodMsgLine2) + \"&line3=\" + encodeURIComponent(prodMsgLine3);\n 1336            bitlyURL = get_short_url(prodURL);\n 1337:           donation_data += \"&s_bitlyURL=\" + bitlyURL + \"&product_url_1=\" + bitlyURL + \"&s_productURL1=\" + encodeURIComponent(prodURL) + \"&s_productURL1Name=\" + encodeURIComponent(honoreeProductName);\n 1338          } else if (cardProperties[1] == 'card02') {\n 1339:           var honoreeName = cardProperties[3];\n 1340            var productFromName = cardProperties[10];\n 1341:           var honoreeProduct = cardProperties[11];\n 1342:           var honoreeProductName = cardProperties[12];\n 1343:           var prodURL = \"http://site.wish.org/site/PageNavigator/products.html?key=\" + today + \"&pdf=\" + honoreeProduct + \"&HonorName=\" + encodeURIComponent(honoreeName) + \"&DonorName=\" + encodeURIComponent(productFromName);\n 1344            bitlyURL = get_short_url(prodURL);\n 1345:           donation_data += \"&s_bitlyURL=\" + bitlyURL + \"&product_url_1=\" + bitlyURL + \"&s_productURL1=\" + encodeURIComponent(prodURL) + \"&s_productURL1Name=\" + encodeURIComponent(honoreeProductName);\n 1346          } else if (cardProperties[1] == 'card03' || cardProperties[1] == 'card04') {\n 1347:           var honoreeName = cardProperties[3];\n 1348            var productFromName = cardProperties[10];\n 1349:           var honoreeProduct = cardProperties[11];\n 1350:           var honoreeProductName = cardProperties[12];\n 1351            var shippingNameFirst = cardProperties[15];\n 1352            var shippingNameMiddle = cardProperties[16];\n 1353            var shippingNameLast = cardProperties[17];\n 1354:           var prodURL = \"http://site.wish.org/site/PageNavigator/products.html?key=\" + today + \"&pdf=\" + honoreeProduct + \"&HonorName=\" + encodeURIComponent(honoreeName) + \"&DonorName=\" + encodeURIComponent(productFromName);\n 1355            bitlyURL = get_short_url(prodURL);\n 1356:           donation_data += \"&s_bitlyURL=\" + bitlyURL + \"&product_url_1=\" + bitlyURL + \"&s_productURL1=\" + encodeURIComponent(prodURL) + \"&s_productURL1Name=\" + encodeURIComponent(honoreeProductName) + \"&shipping.name.first=\" + shippingNameFirst + \"&shipping.name.middle=\" + shippingNameMiddle + \"&shipping.name.last=\" + shippingNameLast;\n 1357          } else if (cardProperties[1] == \"card-blank\") {\n 1358:           var honoreeProductName = cardProperties[2];\n 1359            var occassionType = cardProperties[3];\n 1360:           donation_data += \"&product_url_1=blank&s_productURL1=blank&s_productURL1Name=\" + encodeURIComponent(honoreeProductName);\n 1361          }\n 1362          if (donation_data.indexOf(\"product_url_1\") == -1) {\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR05_05.html:\n    3  <h4>Sentiment</h4>\n    4  \n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to <br>\n    7  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR05_06.html:\n    4  \n    5    <p>You're Appreciated</p>\n    6:   <p>{Honoree Name}</p>\n    7    <p>A donation has been made in your name to <br>\n    8    the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR05_09.html:\n    3  <h4>Sentiment</h4>\n    4  <p>Happy Mother's Day</p>\n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to <br>\n    7  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR06_04.html:\n    4  \n    5  <p>Happy Birthday</p>\n    6: <p>{Honoree Name}</p>\n    7  <p>A donation has been made in your name to <br>\n    8  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR06_05.html:\n    5  \n    6  <p>Happy Birthday</p>\n    7: <p>{Honoree Name}</p>\n    8  <p>A donation has been made in your name to <br>\n    9  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR06_06.html:\n    5  \n    6  <p>Happy Birthday</p>\n    7: <p>{Honoree Name}</p>\n    8  <p>A donation has been made in your name to <br>\n    9  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR08_01.html:\n    4  \n    5  <p>Happy Father's Day</p>\n    6: <p>{Honoree Name}</p>\n    7  <p>A donation has been made in your name to <br>\n    8  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR08_03.html:\n    3  <h4>Sentiment</h4>\n    4  <p>In Celebration of the Wedding of</p>\n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to <br>\n    7  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR09_02.html:\n    3  <h4>Sentiment</h4>\n    4  <p>In Celebration of the Wedding of</p>\n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made to the Make-A-Wish<sup>®</sup> Foundation in honor of your attendance <br>\n    7  <p>This gift is most appreciated and will help make a special child's wish come true</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR10_03.html:\n    3  <h4>Sentiment</h4>\n    4  <p>Merry Christmas</p>\n    5: <p>{Honoree Name}</p>\n    6  <p>May the spirit of Chrismas shine upon you all year long.</p>\n    7  <p>A donation has been made in your name to the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR11_03.html:\n    3  <h4>Sentiment</h4>\n    4  <p>Thinking of you, my Valentine</p>\n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to <br>\n    7  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR11_05.html:\n    3  <h4>Sentiment</h4>\n    4  <p>Thank You</p>\n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to <br>\n    7  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR11_10.html:\n    3  <h4>Sentiment</h4>\n    4  \n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to <br>\n    7  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR11_11.html:\n    3  <h4>Sentiment</h4>\n    4  \n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to <br>\n    7  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR11_16.html:\n    3  <h4>Sentiment</h4>\n    4  <p>Happy Valentine's Day</p>\n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to <br>\n    7  the Make-A-Wish<sup>®</sup> Foundation by</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR11_17.html:\n    3  <h4>Sentiment</h4>\n    4  <p>Happy Holidays</p>\n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to the Make-A-Wish<sup>®</sup> Foundation by</p>\n    7  <p>{Donor Name}</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR11_18.html:\n    3  <h4>Sentiment</h4>\n    4  <p>Happy Holidays</p>\n    5: <p>{Honoree Name}</p>\n    6  <p>A donation has been made in your name to the Make-A-Wish<sup>®</sup> Foundation by</p>\n    7  <p>{Donor Name}</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_CR11_19.html:\n    2  <h3>Holiday Certificate <span class=\"card-detail\">Size: 8 1/2\" X 11\"</span></h3>\n    3  <h4>Sentiment</h4>\n    4: <p>{Honoree Name}</p>\n    5  <p>A donation has been made in your name to the Make-A-Wish<sup>®</sup> Foundation by</p>\n    6  <p>{Donor Name}</p>\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_MC08_01.html:\n    4  <h4>Front Sentiment</h4>\n    5  <p>A donation in honor of<br />\n    6: {Honoree Name}<br />\n    7  has been made to the Make-A-Wish Foundation® by<br />\n    8  {Your Name}<br />\n\nC:\\Users\\v-ben.cloutier\\Desktop\\projects\\GitHub\\WISH-National-Donation-Form\\donation form\\cards\\reus_card_TCB08_01.html:\n    4  <h4>Front Sentiment</h4>\n    5  <p>A donation in memory of<br />\n    6: {Honoree Name}<br />\n    7  has been made to the Make-A-Wish Foundation® by<br />\n    8  {Your Name}<br />\n\n92 matches across 23 files\n",
-			"settings":
-			{
-				"buffer_size": 18700,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "donation form/donate_thankyou.html",
-			"settings":
-			{
-				"buffer_size": 11034,
+				"buffer_size": 2503,
 				"line_ending": "Windows"
 			}
 		}
@@ -282,11 +280,16 @@
 	},
 	"file_history":
 	[
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/Current/mda/new/mda.sql",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/donate.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/chapters_addl.json",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_100.html",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/zip-codes.json",
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/chapters.json",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/html_body.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_head_chapter_conditionals.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_100.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_card_CR06_05.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_scripts.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_thankyou_adhoc_masthead_SPEA01_01.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_thankyou_adhoc_footer_banner_SPEA01_01.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_thankyou_adhoc_footer_banner_SPEB01_01.html",
@@ -328,12 +331,9 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_001.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_nav.html",
 		"/C/Users/v-ben.cloutier/Documents/iMacros/Macros/populate_autoresponders.iim",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/donate.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/products.json",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_card_ECT08_02.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/css/donate.css",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/chapters.json",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/assets/js/zip-codes.json",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/head_element.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_product_select.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/winterholiday_12_02.html",
@@ -407,9 +407,7 @@
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_008.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_007.html",
 		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_006.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_005.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_003.html",
-		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_form_country_list.html"
+		"/C/Users/v-ben.cloutier/Desktop/projects/GitHub/WISH-National-Donation-Form/donation form/reus_donate_wrpr_meta_session_005.html"
 	],
 	"find":
 	{
@@ -431,6 +429,29 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"product_url_1",
+			"bitlyurl",
+			"submitdonation",
+			"product_url_1",
+			"formfundid",
+			"search",
+			"zip_array",
+			"optin",
+			"facebook_url",
+			"facebook",
+			"prodURL",
+			"website_url",
+			"s_",
+			"rowspan",
+			"cons",
+			"optin",
+			"launch",
+			"step",
+			"showStep",
+			"showStep3",
+			"launchCard",
+			"card_type",
+			"1882",
 			"honoree",
 			"email",
 			"center",
@@ -535,30 +556,7 @@
 			"s334",
 			"wish society",
 			"wish_society",
-			"cert01",
-			"mother",
-			"luminate",
-			"eAdd",
-			"optin",
-			" height=\"234\"",
-			"optin",
-			"$('.product-thumb').html('<img src=",
-			"#chapter_id",
-			"031-000",
-			"#chapter_id",
-			"$(chaptersjson",
-			"chapter_id",
-			"78758",
-			"#chapter_id",
-			"optin",
-			"blur",
-			"optin",
-			"ecard01",
-			"ecard_stationary_id",
-			"ecard",
-			"products.json",
-			"product_1_honoree_message",
-			"wedding"
+			"cert01"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -704,470 +702,30 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
+					"file": "/C/Users/v-ben.cloutier/Desktop/bug list.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 221,
+						"buffer_size": 498,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								221,
-								221
+								347,
+								347
 							]
 						],
 						"settings":
 						{
-							"auto_name": "378, 5",
+							"auto_name": "378, 5 (deep link to occasion)",
 							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "donation form/reus_donate_form_scripts.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 68386,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1780,
-								1785
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 397.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 18700,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										221,
-										228
-									],
-									[
-										289,
-										296
-									],
-									[
-										361,
-										368
-									],
-									[
-										428,
-										435
-									],
-									[
-										676,
-										683
-									],
-									[
-										719,
-										726
-									],
-									[
-										766,
-										773
-									],
-									[
-										808,
-										815
-									],
-									[
-										867,
-										874
-									],
-									[
-										1061,
-										1068
-									],
-									[
-										1273,
-										1280
-									],
-									[
-										1300,
-										1307
-									],
-									[
-										1331,
-										1338
-									],
-									[
-										1594,
-										1601
-									],
-									[
-										1807,
-										1814
-									],
-									[
-										2114,
-										2121
-									],
-									[
-										2286,
-										2293
-									],
-									[
-										2312,
-										2319
-									],
-									[
-										2560,
-										2567
-									],
-									[
-										2681,
-										2688
-									],
-									[
-										2918,
-										2925
-									],
-									[
-										3021,
-										3028
-									],
-									[
-										3040,
-										3047
-									],
-									[
-										3065,
-										3072
-									],
-									[
-										3474,
-										3481
-									],
-									[
-										3547,
-										3554
-									],
-									[
-										3639,
-										3646
-									],
-									[
-										3718,
-										3725
-									],
-									[
-										4069,
-										4076
-									],
-									[
-										4159,
-										4166
-									],
-									[
-										4462,
-										4469
-									],
-									[
-										4553,
-										4560
-									],
-									[
-										4663,
-										4670
-									],
-									[
-										4760,
-										4767
-									],
-									[
-										5117,
-										5124
-									],
-									[
-										5844,
-										5851
-									],
-									[
-										6024,
-										6031
-									],
-									[
-										6136,
-										6143
-									],
-									[
-										6193,
-										6200
-									],
-									[
-										6421,
-										6428
-									],
-									[
-										6473,
-										6480
-									],
-									[
-										6803,
-										6810
-									],
-									[
-										7129,
-										7136
-									],
-									[
-										7494,
-										7501
-									],
-									[
-										7595,
-										7602
-									],
-									[
-										7649,
-										7656
-									],
-									[
-										7706,
-										7713
-									],
-									[
-										7934,
-										7941
-									],
-									[
-										7986,
-										7993
-									],
-									[
-										8262,
-										8269
-									],
-									[
-										8570,
-										8577
-									],
-									[
-										8903,
-										8910
-									],
-									[
-										9004,
-										9011
-									],
-									[
-										9058,
-										9065
-									],
-									[
-										9116,
-										9123
-									],
-									[
-										9437,
-										9444
-									],
-									[
-										9489,
-										9496
-									],
-									[
-										9882,
-										9889
-									],
-									[
-										9983,
-										9990
-									],
-									[
-										10096,
-										10103
-									],
-									[
-										10154,
-										10161
-									],
-									[
-										10307,
-										10314
-									],
-									[
-										10359,
-										10366
-									],
-									[
-										10665,
-										10672
-									],
-									[
-										10799,
-										10806
-									],
-									[
-										10912,
-										10919
-									],
-									[
-										10970,
-										10977
-									],
-									[
-										11306,
-										11313
-									],
-									[
-										11358,
-										11365
-									],
-									[
-										11664,
-										11671
-									],
-									[
-										11907,
-										11914
-									],
-									[
-										12120,
-										12127
-									],
-									[
-										12391,
-										12398
-									],
-									[
-										12695,
-										12702
-									],
-									[
-										13017,
-										13024
-									],
-									[
-										13313,
-										13320
-									],
-									[
-										13609,
-										13616
-									],
-									[
-										13905,
-										13912
-									],
-									[
-										14205,
-										14212
-									],
-									[
-										14537,
-										14544
-									],
-									[
-										14869,
-										14876
-									],
-									[
-										15281,
-										15288
-									],
-									[
-										15669,
-										15676
-									],
-									[
-										15978,
-										15985
-									],
-									[
-										16271,
-										16278
-									],
-									[
-										16564,
-										16571
-									],
-									[
-										16885,
-										16892
-									],
-									[
-										17199,
-										17206
-									],
-									[
-										17528,
-										17535
-									],
-									[
-										17916,
-										17923
-									],
-									[
-										18258,
-										18265
-									],
-									[
-										18566,
-										18573
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1177,12 +735,12 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "donation form/donate_thankyou.html",
+					"buffer": 1,
+					"file": "donation form/reus_donate_ar_sustaining_subsequent_plaintext.html",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 11034,
+						"buffer_size": 2503,
 						"regions":
 						{
 						},
@@ -1200,7 +758,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5690.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
