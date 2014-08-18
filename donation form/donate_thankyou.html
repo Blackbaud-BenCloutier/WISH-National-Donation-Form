@@ -260,7 +260,7 @@ console.log("test");
         '</div>';
       }
     var bitlyURL = "[[S80:productURL1]]";
-    str += '<p style="margin-top:10px;"><a href="' + ((bitlyURL == '') ? arr['product_url'] : bitlyURL) + '" target="_blank">Click here to view your' + arr['occasion_type'] + ' card</a></p>';
+    str += '<p style="margin-top:10px;"><a href="[[S80:productURL1]]" target="_blank">Click here to view your' + arr['occasion_type'] + ' card</a></p>';
       str += '</div><div class="clearfix"></div>';
       $('#card_preview').html(str);
     }
