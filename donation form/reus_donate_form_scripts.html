@@ -696,9 +696,9 @@ $(document).ready(function () {
             product_id = cardID;
             if (checkFields()) {
               toFirstName = $("input[name='honoree_first_name']").val();
-              toMI = $("input[name='honoree_middle_initial']").val() || false;
+              toMI = $("input[name='honoree_middle_initial']").val();
               toLastName = $("input[name='honoree_last_name']").val();
-              toInHonorOf = $("input[name='honoree_full_name']").val() || false;
+              toInHonorOf = $("input[name='honoree_full_name']").val();
               toFullName = '';
               fromName = $("input[name='from_name']").val();
               if (!toInHonorOf) {
@@ -731,9 +731,9 @@ $(document).ready(function () {
             product_id = cardID;
             if (checkFields()) {
               toFirstName = $("input[name='memoree_first_name']").val();
-              toMI = $("input[name='memoree_middle_initial']").val() || false;
+              toMI = $("input[name='memoree_middle_initial']").val();
               toLastName = $("input[name='memoree_last_name']").val();
-              toInHonorOf = $("input[name='memoree_full_name']").val() || false;
+              toInHonorOf = $("input[name='memoree_full_name']").val();
               toFullName = '';
               fromName = $("input[name='from_name']").val();
               if (!toInHonorOf) {
@@ -795,7 +795,7 @@ $(document).ready(function () {
           product_id = cardID;
           if (checkFields()) {
             toFirstName = $("input[name='send_to_first_name']").val();
-            toMI = $("input[name='send_to_middle_initial']").val() || false;
+            toMI = $("input[name='send_to_middle_initial']").val();
             toLastName = $("input[name='send_to_last_name']").val();
             toFullName = '';
             toAddress1 = $("input[name='send_to_street_address_1']").val();
@@ -853,7 +853,7 @@ $(document).ready(function () {
           product_id = cardID;
           if (checkFields()) {
             toFirstName = $("input[name='send_to_first_name']").val();
-            toMI = $("input[name='send_to_middle_initial']").val() || false;
+            toMI = $("input[name='send_to_middle_initial']").val();
             toLastName = $("input[name='send_to_last_name']").val();
             toFullName = '';
             toAddress1 = $("input[name='send_to_street_address_1']").val();
@@ -907,7 +907,7 @@ $(document).ready(function () {
           product_id = cardID;
           if (checkFields()) {
             shippingFirstName = $("input[name='send_to_first_name']").val();
-            shippingMI = $("input[name='send_to_middle_initial']").val() || false;
+            shippingMI = $("input[name='send_to_middle_initial']").val();
             shippingLastName = $("input[name='send_to_last_name']").val();
             toAddress1 = $("input[name='send_to_street_address_1']").val();
             toAddress2 = $("input[name='send_to_street_address_2']").val();
@@ -916,9 +916,9 @@ $(document).ready(function () {
             toZip = $("input[name='send_to_postal_code']").val();
             toCountry = $("select#send_to_country option:selected").val();
             toFirstName = $("input[name='memoree_first_name']").val();
-            toMI = $("input[name='honoree_middle_initial']").val() || false;
+            toMI = $("input[name='honoree_middle_initial']").val();
             toLastName = $("input[name='honoree_last_name']").val();
-            toInHonorOf = $("input[name='memoree_full_name']").val() || false;
+            toInHonorOf = $("input[name='memoree_full_name']").val();
             toFullName = '';
             shippingFullName = '';
             fromName = $("input[name='from_name']").val();
@@ -1041,10 +1041,10 @@ $(document).ready(function () {
           e.preventDefault();
           product_id = cardID;   
           if (checkFields()) {
-            toFirstName = encodeURIComponent($("input[name='honoree_first_name']").val()) || encodeURIComponent($("input[name='memoree_first_name']").val());
-            toMI = encodeURIComponent($("input[name='honoree_middle_initial']").val()) || encodeURIComponent($("input[name='memoree_middle_initial']").val());
-            toLastName = encodeURIComponent($("input[name='honoree_last_name']").val()) || encodeURIComponent($("input[name='memoree_last_name']").val());
-            toInHonorOf = encodeURIComponent($("input[name='honoree_full_name']").val()) || false;
+            toFirstName = encodeURIComponent($("input[name='honoree_first_name']").val());
+            toMI = encodeURIComponent($("input[name='honoree_middle_initial']").val());
+            toLastName = encodeURIComponent($("input[name='honoree_last_name']").val());
+            toInHonorOf = encodeURIComponent($("input[name='honoree_full_name']").val());
             toEmail = encodeURIComponent($("input[name='to_email_address']").val());
             toFullName = '';
             fromName = encodeURIComponent($("input[name='from_name']").val());
