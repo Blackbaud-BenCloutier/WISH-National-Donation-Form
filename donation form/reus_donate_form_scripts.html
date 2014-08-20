@@ -701,8 +701,8 @@ $(document).ready(function () {
               toInHonorOf = $("input[name='honoree_full_name']").val();
               toFullName = '';
               fromName = $("input[name='from_name']").val();
-              if (!toInHonorOf) {
-                if (toMI) {
+              if (toInHonorOf.length < 1) {
+                if (toMI.length > 0) {
                   toFullName = toFirstName + " " + toMI + " " + toLastName;
                 } else {
                   toFullName = toFirstName + " " + toLastName
@@ -736,8 +736,8 @@ $(document).ready(function () {
               toInHonorOf = $("input[name='memoree_full_name']").val();
               toFullName = '';
               fromName = $("input[name='from_name']").val();
-              if (!toInHonorOf) {
-                if (toMI) {
+              if (toInHonorOf.length < 1) {
+                if (toMI.length > 0) {
                   toFullName = toFirstName + " " + toMI + " " + toLastName;
                 } else {
                   toFullName = toFirstName + " " + toLastName
@@ -1493,7 +1493,7 @@ $(document).ready(function () {
                       $('#mainform input').each(function(){$(this).val('');});
                       window.onbeforeunload = function(){};
                       if(isPaypal) {window.location = paypalRedirectUrl;}
-                      else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=" + form_chid;}
+                      else {window.location = "https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=" + chid;}
                     }
                   });
                 };
@@ -1549,7 +1549,7 @@ $(document).ready(function () {
   // PayPal button
   $("a.button-submit:eq(1)").click(function (e) {
     e.preventDefault();
-    submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=' + encodeURIComponent('https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=' + form_chid) + '&finish_error_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_paypal_error]]');
+    submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=' + encodeURIComponent('https://secure2.convio.net/wish/site/SPageServer?pagename=donate_thankyou&chid=' + mawf.CartView.donations()[0].donorIntent()) + '&finish_error_redirect=[[T1:https://secure2.convio.net/wish/site/SPageServer?pagename=donate_paypal_error]]');
   });
 
   // Process Donation
