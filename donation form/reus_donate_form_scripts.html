@@ -470,7 +470,7 @@ $(document).ready(function () {
           mawf.shutDownProductModal();
         }
       });
-      selectCard(type);
+      selectCard(id);
     },
     selectCard = function(cardID) {
       $(productsjson['product']).each(function (index, arr) {
@@ -1334,7 +1334,7 @@ $(document).ready(function () {
         }
         $('#source').val($('#foreign_key2').val() + ',' + $('#foreign_key3').val() + ',' + $('#foreign_key4').val());
         $('#product_id').val(product_id);
-        if (cardProperties[1] == 'ecard01') {
+        if (cardProperties[1] == 'ecard01' || cardProperties[1] == 'ecard02') {
           var ecard_first_name = $("input[name='billing.name.first']").val();
           var ecard_last_name = $("input[name='billing.name.last']").val();
           var ecard_sender_email = $("input[name='donor.email']").val();
