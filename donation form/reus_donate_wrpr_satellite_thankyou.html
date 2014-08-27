@@ -15,16 +15,16 @@ var _mawData = {
     
     {
       "amount": {
-        "single": [[?[[S80:sat_skew]]::MG05-01::null::"[[S80:designeeAmt1]]"]],
-        "pledge": [[?[[S80:sat_skew]]::MG05-01::"[[S80:designeeAmt1]]"::null]]
+        "single": [[?[[S80:sat_skew]]::MG05-01::null::"[[S120:dc:giftAmount]]".slice(1)]],
+        "pledge": [[?[[S80:sat_skew]]::MG05-01::"[[S120:dc:giftAmount]]".slice(1)::null]]
       },
 
       "behalf": {
-        "card": [[?xxnullx::x[[S80:sat_card_occasion_type]]x:: null :: "[[S80:sat_card_occasion_type]]" ]],
-        "eCard": [[?xxnullx::x[[S80:sat_ecard_occasion_type]]x:: null :: "[[S80:sat_ecard_occasion_type]]" ]],
-        "eCert": [[?xxnullx::x[[S80:sat_ecert_occasion_type]]x:: null :: "[[S80:sat_ecert_occasion_type]]" ]]  
+        "card": [[?x[[S80:sat_skew]]::xECT::null::[[?x[[S80:sat_skew]]::xCR::null::"[[S80:occasion_type]]"]]]],
+        "eCard": [[?x[[S80:sat_skew]]::xECT::"[[S80:occasion_type]]"::[[?x[[S80:sat_skew]]::xCR::null::null]]]],
+        "eCert": [[?x[[S80:sat_skew]]::xECT::null::[[?x[[S80:sat_skew]]::xCR::"[[S80:occasion_type]]"::null]]]]
       },
-
+      
       "destination": "[[S80:chid]]",
       "donationChapter": "[[S80:sat_chapter_id]]",
       "skew": "[[S80:sat_skew]]"
