@@ -136,6 +136,7 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
         } else if (search_value.length == 2) {
           $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
             if(search_value.toLowerCase() == arr['state_province'].toLowerCase()) {
+              chapter_id = arr['office_id'];
               $('#no_valid_region').remove();
               $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
             }
