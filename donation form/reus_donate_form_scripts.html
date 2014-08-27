@@ -1307,11 +1307,12 @@ $(document).ready(function () {
     paypalRedirectUrl = '',
     zip_array = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'../assets/js/zip-codes.json','dataType':'json','success':function(data){json=data;}});return json;})(),
     showError = function(pageError, fieldError) {
-      if(fieldError == 'There was a problem encountered while processing your donation.'){
+      if(fieldError == ''){
         alert('Oops!  There was an error processing your donation.  Please contact your financial institution for more information.');
       } else {
         alert(pageError + " " + fieldError);
       }
+      console.log(fieldError);
       $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
     },
     submitDonation = function(button_element, donation_data){
