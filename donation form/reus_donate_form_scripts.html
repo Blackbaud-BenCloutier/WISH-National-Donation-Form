@@ -126,7 +126,7 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
               }
             } else {
               if(parseInt(chapter_id.substr(0,3)) >= 500) {
-                if(office_name_regex.test(arr['p2p_states'])) {
+                if(office_name_regex.test(arr['office_name'])) {
                   $('#no_valid_region').remove();
                   $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
                 }
