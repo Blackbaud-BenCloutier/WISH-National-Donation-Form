@@ -1355,7 +1355,7 @@ $(document).ready(function () {
             }
           });
 
-          donation_data += '&ecard.id=' + ecard_id + '&ecard.message=' + encodeURIComponent(ecard_message) + '&ecard.subject=' + encodeURIComponent(ecard_subject) + '&ecard.recipients=' + ecard_recipient_email + '&ecard.send=true' + '&product_url_1=' + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL);
+          donation_data += '&ecard.id=' + ecard_id + '&ecard.message=' + ecard_message + '&ecard.subject=' + ecard_subject + '&ecard.recipients=' + ecard_recipient_email + '&ecard.send=true' + '&product_url_1=' + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL);
         } else if (cardProperties[1] == 'cert01' || cardProperties[1] == 'cert03') {
           var honoreeName = cardProperties[3];
           var productFromName = cardProperties[4];
