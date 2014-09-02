@@ -370,35 +370,44 @@ $(document).ready(function () {
 
   // Initialization
 
-  // Sync JSON info
-  $(chapters_addljson['allChaptersAddl']['chapter']).each(function (index, arr) {
-    if(form_chid == arr['office_id'].substr(0,3)) {
-      // Footer Links
-      if(arr['facebook_acct'].length > 0){
-        $('#footer_0_footermiddle_0_aFacebook').attr('href',arr['facebook_acct']);
-        $('#facebook_url').val(arr['facebook_acct']);
-      }
-      if(arr['twitter_acct'].length > 0) {
-        $('#footer_0_footermiddle_0_aTwitter').attr('href',arr['twitter_acct']);
-        $('#twitter_url').val(arr['twitter_acct']);
-      }
-      if(arr['youtube_url'].length > 0) {
-        $('#footer_0_footermiddle_0_aYouTube').attr('href',arr['youtube_url']);
-        $('#youtube_url').val(arr['youtube_url']);
-      }
-      // CEO Info
-      if(arr['receipt_signature_name'].length > 0){
-        $('#s_ceo_name').val(arr['receipt_signature_name']);
-      }
-      if(arr['receipt_signature_title'].length > 0){
-        $('#s_ceo_title').val(arr['receipt_signature_title']);
-      }
-      // Web Links
-      if(arr['website_url'].length > 0) {
-        $('#s_website_url').val(arr['website_url']);
-      }
-    }
-  });
+  // Removing temporarily
+  // // Sync JSON info
+  // $(chapters_addljson['allChaptersAddl']['chapter']).each(function (index, arr) {
+  //   if(form_chid == arr['office_id'].substr(0,3)) {
+  //     // Footer Links
+  //     if(arr['facebook_acct'].length > 0){
+  //       $('#footer_0_footermiddle_0_aFacebook').attr('href',arr['facebook_acct']);
+  //       $('#s_facebook_url').val(arr['facebook_acct']);
+  //     }
+  //     if(arr['twitter_acct'].length > 0) {
+  //       $('#footer_0_footermiddle_0_aTwitter').attr('href',arr['twitter_acct']);
+  //       $('#s_twitter_url').val(arr['twitter_acct']);
+  //     }
+  //     if(arr['youtube_url'].length > 0) {
+  //       $('#footer_0_footermiddle_0_aYouTube').attr('href',arr['youtube_url']);
+  //       $('#s_youtube_url').val(arr['youtube_url']);
+  //     }
+  //     // CEO Info
+  //     if(arr['receipt_signature_name'].length > 0){
+  //       $('#s_ceo_name').val(arr['receipt_signature_name']);
+  //     }
+  //     if(arr['receipt_signature_title'].length > 0){
+  //       $('#s_ceo_title').val(arr['receipt_signature_title']);
+  //     }
+  //     // Web Links
+  //     if(arr['website_url'].length > 0) {
+  //       $('a').each(function(){
+  //         var href = $(this).attr('href');
+  //         if(href){
+  //           if(href.indexOf('[[S80:website_url]]') != -1) {
+  //             $(this).attr('href',href.replace('[[S80:website_url]]',arr['website_url']))
+  //           }
+  //         }
+  //       });
+  //       $('#s_website_url').val(arr['website_url']);
+  //     }
+  //   }
+  // });
 
   // Product Selection
 
@@ -885,7 +894,7 @@ $(document).ready(function () {
             $('#card_preview').show();
             $('#card_create').hide();
             $('#card_send_to').show();
-            $('#card_send_to blurbtext').html(
+            $('#card_send_to .blurbtext').html(
               '<p>' + decodeURIComponent(toFullName) + '</p>' +
               '<p>' + decodeURIComponent(toAddress1) + '</p>' +
               '<p>' + decodeURIComponent(toAddress2) + '</p>' +
@@ -928,8 +937,8 @@ $(document).ready(function () {
             toZip = $("input[name='send_to_postal_code']").val();
             toCountry = $("select#send_to_country option:selected").val();
             toFirstName = $("input[name='memoree_first_name']").val();
-            toMI = $("input[name='honoree_middle_initial']").val();
-            toLastName = $("input[name='honoree_last_name']").val();
+            toMI = $("input[name='memoree_middle_initial']").val();
+            toLastName = $("input[name='memoree_last_name']").val();
             toInHonorOf = $("input[name='memoree_full_name']").val();
             toFullName = '';
             shippingFullName = '';

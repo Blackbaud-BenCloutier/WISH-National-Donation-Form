@@ -143,14 +143,10 @@ var honoree_first_name = '[[S120:dc:custom:custom_string74]]',
 $.ajax({'async':false,'global':false,'url':'https://secure2.wish.org/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(productsjson){
   $(productsjson['product']).each(function (index,arr){
     if(arr['card_id']==card_id){
-console.log("test");
       var str = '';
       card_image=arr['card_image1'];
-      $('#card_preview').show().append(
-        
-      );
       str += '<div style="height:234px;float:right;width:auto;padding:0;" class="product-thumb left">' +
-          '<img height="140" src="' + card_image + '">' +
+          '<img width="108" src="' + card_image + '">' +
         '</div>' +
         '<div style="width:190px;">';
       if(send_to_first_name != '' ||
@@ -163,20 +159,29 @@ console.log("test");
         send_to_postal_code != '' ||
         send_to_country != ''
       ){
-        str += '<div class="blurb">' +
-          '<h3>Send To</h3>' +
-          '<div class="blurbtext">' +
-            (send_to_first_name != '')?('<p>' + send_to_first_name + '</p>'):'' +
-            (send_to_middle_initial != '')?('<p>' + send_to_middle_initial + '</p>'):'' +
-            (send_to_last_name != '')?('<p>' + send_to_last_name + '</p>'):'' +
-            (send_to_street_address1 != '')?('<p>' + send_to_street_address1 + '</p>'):'' +
-            (send_to_street_address2 != '')?('<p>' + send_to_street_address2 + '</p>'):'' +
-            (send_to_city != '')?('<p>' + send_to_city + '</p>'):'' +
-            (send_to_state != '')?('<p>' + send_to_state + '</p>'):'' +
-            (send_to_postal_code != '')?('<p>' + send_to_postal_code + '</p>'):'' +
-            (send_to_country != '')?('<p>' + send_to_country + '</p>'):'' +
-          '</div>' +
-        '</div>';
+        if( ! (send_to_first_name == '' &&
+        send_to_middle_initial == '' &&
+        send_to_last_name == '' &&
+        send_to_street_address1 == '' &&
+        send_to_street_address2 == '' &&
+        send_to_city == '' &&
+        send_to_state == '' &&
+        send_to_postal_code == '') ) {
+          str += '<div class="blurb">' +
+            '<h3>Send To</h3>' +
+            '<div class="blurbtext">' +
+              ((send_to_first_name != '')?('<p>' + send_to_first_name + '</p>'):'') +
+              ((send_to_middle_initial != '')?('<p>' + send_to_middle_initial + '</p>'):'') +
+              ((send_to_last_name != '')?('<p>' + send_to_last_name + '</p>'):'') +
+              ((send_to_street_address1 != '')?('<p>' + send_to_street_address1 + '</p>'):'') +
+              ((send_to_street_address2 != '')?('<p>' + send_to_street_address2 + '</p>'):'') +
+              ((send_to_city != '')?('<p>' + send_to_city + '</p>'):'') +
+              ((send_to_state != '')?('<p>' + send_to_state + '</p>'):'') +
+              ((send_to_postal_code != '')?('<p>' + send_to_postal_code + '</p>'):'') +
+              ((send_to_country != '')?('<p>' + send_to_country + '</p>'):'') +
+            '</div>' +
+          '</div>';
+        }
       }
       if(personal_message != '' ||
         personal_message_line_1 != '' ||
@@ -186,10 +191,10 @@ console.log("test");
         str += '<div class="blurb">' +
           '<h3>Personal Message</h3>' +
           '<div class="blurbtext">' +
-            (personal_message != '')?('<p>' + personal_message + '</p>'):'' +
-            (personal_message_line_1 != '')?('<p>' + personal_message_line_1 + '</p>'):'' +
-            (personal_message_line_2 != '')?('<p>' + personal_message_line_2 + '</p>'):'' +
-            (personal_message_line_3 != '')?('<p>' + personal_message_line_3 + '</p>'):'' +
+            ((personal_message != '')?('<p>' + personal_message + '</p>'):'') +
+            ((personal_message_line_1 != '')?('<p>' + personal_message_line_1 + '</p>'):'') +
+            ((personal_message_line_2 != '')?('<p>' + personal_message_line_2 + '</p>'):'') +
+            ((personal_message_line_3 != '')?('<p>' + personal_message_line_3 + '</p>'):'') +
           '</div>' +
         '</div>';
       }
@@ -218,7 +223,7 @@ console.log("test");
           str += '<div class="blurb">' +
             '<h3>In Honor Of</h3>' +
             '<div class="blurbtext">' +
-              '<p>' + honoree_full_name + '</p>' +
+              '<p>' + honoree_first_name + ' ' + honoree_middle_initial + ' ' + honoree_last_name + ' "' + honoree_full_name + '"</p>' +
             '</div>' +
           '</div>';
         } else {
@@ -239,7 +244,7 @@ console.log("test");
           str += '<div class="blurb">' +
             '<h3>In Memory Of</h3>' +
             '<div class="blurbtext">' +
-              '<p>' + memoree_full_name + '</p>' +
+              '<p>' + memoree_first_name + ' ' + memoree_middle_initial + ' ' + memoree_last_name + ' "' +memoree_full_name + '"</p>' +
             '</div>' +
           '</div>';
         } else {
