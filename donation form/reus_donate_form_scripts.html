@@ -1138,10 +1138,6 @@ $(document).ready(function () {
         }    
         
       }
-    },
-    editButton = function(card_id){
-      launchCard(card_id);
-      $('.lightbox-rightside a.cont-btn').click();
     };
   $('.infiniteCarousel').infiniteCarousel();
   $('select.event-select,select.type-select').customSelectMenu();
@@ -1317,7 +1313,8 @@ $(document).ready(function () {
   });
   $('#edit_ecard').click(function (e){
     e.preventDefault();
-    editButton(ecard_id);
+    launchCard(product_id);
+    $('.lightbox-rightside a.cont-btn').click();
   });
 
   // Product Selection
