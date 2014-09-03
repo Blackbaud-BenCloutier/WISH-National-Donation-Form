@@ -31,8 +31,8 @@
     "secCatID":"1068",
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Oregon, Inc.",
-    "state_province": "OR",
-    "p2p_states":["Oregon"],
+    "state_province": "OR/WA",
+    "p2p_states":["Oregon","Washington"],
     "postal_code": "97201"
   },
   {
@@ -127,8 +127,8 @@
     "secCatID":"1070",
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Greater Pennsylvania & Southern West Virginia, Inc.",
-    "state_province": "PA",
-    "p2p_states":["Pennsylvania","West Virginia"],
+    "state_province": "PA/WV",
+    "p2p_states":["Pennsylvania"],
     "postal_code": "15219-1938"
   },
   {
@@ -138,7 +138,7 @@
     "surveyID": "1618",
     "office_name": "Make-A-Wish® Greater Pennsylvania & Southern WV, Charleston Office",
     "state_province": "WV",
-	"p2p_states":["Pennsylvania"],
+	"p2p_states":["West Virginia"],
     "postal_code": "25301"
   },
   {
@@ -194,7 +194,7 @@
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Ohio, Kentucky & Indiana",
     "state_province": "OH",
-    "p2p_states":["Ohio", "Kentucky", "Indiana"],
+    "p2p_states":["Ohio"],
     "postal_code": "43235"
   },
   {
@@ -233,8 +233,8 @@
     "center_id":"1035",
     "surveyID": "1648",
     "office_name": "Make-A-Wish® Ohio, Kentucky & Indiana, Kentucky & Southern Indiana Region",
-    "state_province": "KY",
-	"p2p_states":["Kentucky"],
+    "state_province": "IN/KY",
+	"p2p_states":["Indiana","Kentucky"],
     "postal_code": "40222"
   },
   {
@@ -243,7 +243,7 @@
     "center_id":"1035",
     "surveyID": "1648",
     "office_name": "Make-A-Wish® Ohio, Kentucky & Indiana, Indiana Region",
-    "state_province": "IN",
+    "state_province": "OH/IN",
 	"p2p_states":["Ohio", "Indiana"],
     "postal_code": "46278"
   },
@@ -266,7 +266,7 @@
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Northeastern California and Northern Nevada",
     "state_province": "CA",
-    "p2p_states":["California","Nevada"],
+    "p2p_states":["California"],
     "postal_code": "95835"
   },
   {
@@ -323,8 +323,8 @@
     "secCatID":"1049",
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Mid-Atlantic, Inc.",
-    "state_province": "MD",
-    "p2p_states":["Delaware","Maryland", "District Of Columbia"],
+    "state_province": "VA/MD/DC",
+    "p2p_states":["Virginia","Maryland", "District Of Columbia"],
     "postal_code": "20816"
   },
   {
@@ -333,8 +333,8 @@
     "center_id":"1028",
     "surveyID": "1632",
     "office_name": "Make-A-Wish® Mid-Atlantic, Inc., Baltimore Field Office",
-    "state_province": "MD",
-	"p2p_states":["Maryland"],
+    "state_province": "MD/DE",
+	"p2p_states":["Maryland","Delaware"],
     "postal_code": "21093"
   },
   {
@@ -589,7 +589,7 @@
     "secCatID":"1083",
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Texas Gulf Coast & Louisiana",
-    "state_province": "TX",
+    "state_province": "TX/LA",
     "p2p_states":["Texas","Louisiana"],
     "postal_code": "77005"
   },
@@ -718,7 +718,7 @@
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Alaska & Washington",
     "state_province": "WA",
-    "p2p_states":["Alaska","Washington"],
+    "p2p_states":["Washington"],
     "postal_code": "98104"
   },
   {
@@ -749,8 +749,8 @@
     "secCatID":"1050",
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Mid-South",
-    "state_province": "TN",
-    "p2p_states":["Tennessee","Arkansas"],
+    "state_province": "TN/AR/MS",
+    "p2p_states":["Tennessee","Arkansas","Mississippi"],
     "postal_code": "38117"
   },
   {
@@ -760,6 +760,7 @@
     "surveyID": "1633",
     "office_name": "Make-A-Wish® Mid-South¸ Arkansas Office",
     "state_province": "AR",
+    "p2p_states":["Arkansas"],
     "postal_code": "72205"
   },
   {
@@ -782,8 +783,8 @@
     "secCatID":"1058",
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Philadelphia and Susquehanna Valley",
-    "state_province": "PA",
-    "p2p_states":["Pennsylvania"],
+    "state_province": "PA/DE",
+    "p2p_states":["Pennsylvania","Delaware"],
     "postal_code": "19422"
   },
   {
@@ -793,6 +794,7 @@
     "surveyID": "1652",
     "office_name": "Make-A-Wish® Philadelphia and Susquehanna Valley, Susquehanna Valley Office",
     "state_province": "PA",
+    "p2p_states":["Pennsylvania"],
     "postal_code": "17601"
   },
   {
@@ -923,7 +925,7 @@
     "secCatID":"1095",
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Massachusetts and Rhode Island",
-    "state_province": "MA",
+    "state_province": "MA/RI",
     "p2p_states":["Massachusetts","Rhode Island"],
     "postal_code": "02114"
   },
@@ -1034,7 +1036,7 @@
     "center_id":"1030",
     "surveyID": "1637",
     "office_name": "Make-A-Wish® Missouri, Kansas City Regional Office",
-    "state_province": "KS",
+    "state_province": "KS/MO",
 	"p2p_states":["Kansas", "Missouri"],
     "postal_code": "66212"
   },
@@ -1056,8 +1058,8 @@
     "secCatID":"1100",
     "redirect_key":"testBP_reg",
     "office_name": "Make-A-Wish® Guam",
-    "state_province": "GU",
-    "p2p_states":["Guam"],
+    "state_province": "GU/MP",
+    "p2p_states":["Guam","Northern Mariana Islands"],
     "postal_code": "96913"
   },
   {
@@ -1160,7 +1162,8 @@
     "secCatID":"1021",
     "redirect_key":"national_reg",
     "office_name": "Make-A-Wish® America",
-    "state_province": "",
+    "state_province": "AS/FM/MH/PW",
+    "p2p_states":["American Samoa","Federated States of Micronesia","Marshall Islands","Palau"],
     "postal_code": "85016"
   },
   {

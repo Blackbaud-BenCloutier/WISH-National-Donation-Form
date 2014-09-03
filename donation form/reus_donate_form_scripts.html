@@ -135,23 +135,23 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
           });
         } else if (search_value.length == 2) {
           $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-		    var office_name_regex = new RegExp(search_value,'i'),
-            chapter_id = arr['office_id'];
-			if(local_or_international == 'local'){
-				if(parseInt(chapter_id.substr(0,3)) < 500) {
-					if(search_value.toLowerCase() == arr['state_province'].toLowerCase()) {
-					  $('#no_valid_region').remove();
-					  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-					}
-				}
-			} else {
-				if(parseInt(chapter_id.substr(0,3)) >= 500) {
-					if(office_name_regex.test(arr['office_name'])) {
-					  $('#no_valid_region').remove();
-					  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-					}
-              }
-			}
+		        var office_name_regex = new RegExp(search_value,'i'),
+              chapter_id = arr['office_id'];
+        			if(local_or_international == 'local'){
+        				if(parseInt(chapter_id.substr(0,3)) < 500) {
+        					if(arr['state_province'].toLowerCase().indexOf(search_value.toLowerCase()) != -1) {
+        					  $('#no_valid_region').remove();
+        					  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+        					}
+        				}
+        			} else {
+        				if(parseInt(chapter_id.substr(0,3)) >= 500) {
+        					if(office_name_regex.test(arr['office_name'])) {
+        					  $('#no_valid_region').remove();
+        					  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+        					}
+                }
+        			}
           });
         }
       }
