@@ -338,16 +338,6 @@
     "postal_code": "21093"
   },
   {
-    "office_id": "016-002",
-    "designation_id": "1015",
-    "center_id":"1028",
-    "surveyID": "1632",
-    "office_name": "Make-A-Wish® Mid-Atlantic, Inc., Delaware Field Office",
-    "state_province": "DE",
-	"p2p_states":["Delaware"],
-    "postal_code": "19810"
-  },
-  {
     "office_id": "017-000",
     "designation_id": "1016",
     "center_id":"1039",

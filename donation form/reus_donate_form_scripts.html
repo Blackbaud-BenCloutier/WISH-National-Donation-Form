@@ -210,7 +210,7 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
     var $chapterResults = $('.js-chapter-results ul');
     $chapterResults.html('');
     $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-      if (arr['state_province'] == state) {
+      if (arr['state_province'].toLowerCase().indexOf(state.toLowerCase()) != -1) {
         stateResults.push([arr['office_id'], arr['office_name']])
       }
     }); //each loop
