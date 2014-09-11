@@ -772,7 +772,7 @@
     "surveyID": "1652",
     "secCatID":"1058",
     "redirect_key":"testBP_reg",
-    "office_name": "Make-A-Wish® Philadelphia and Susquehanna Valley",
+    "office_name": "Make-A-Wish® Philadelphia, Northern Delaware & Susquehanna Valley",
     "state_province": "PA/DE",
     "p2p_states":["Pennsylvania","Delaware"],
     "postal_code": "19422"
@@ -782,7 +782,7 @@
     "designation_id": "1040",
     "center_id":"1037",
     "surveyID": "1652",
-    "office_name": "Make-A-Wish® Philadelphia and Susquehanna Valley, Susquehanna Valley Office",
+    "office_name": "Make-A-Wish® Philadelphia, Northern Delaware & and Susquehanna Valley, Susquehanna Valley Office",
     "state_province": "PA",
     "p2p_states":["Pennsylvania"],
     "postal_code": "17601"

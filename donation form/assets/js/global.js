@@ -754,7 +754,7 @@ mawf.locator = function (o) {
                 // TA - CLICK
                 } else if (e.type === 'click') {
 					//console.log('click hit');
-					self.$taInput[0].setSelectionRange(0,100);
+					//if (self.$taInput[0]){self.$taInput[0].setSelectionRange(0,100);}
                 }
                 
             }
@@ -1906,8 +1906,8 @@ function open_airline_miles_form(obj) {
 $('.rich-text iframe[src*="youtube.com"]').each(function () {
 	var ifr_source = $(this).attr('src');
 	var wmode = "wmode=transparent";
-	if (ifr_source.indexOf('?') != -1) $(this).attr('src', ifr_source + '&' + wmode);
-	else $(this).attr('src', ifr_source + '?' + wmode);
+	if (ifr_source.indexOf('?') != -1) {$(this).attr('src', ifr_source + '&' + wmode);}
+	else {$(this).attr('src', ifr_source + '?' + wmode);}
 });
 
 

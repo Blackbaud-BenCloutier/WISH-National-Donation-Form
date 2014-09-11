@@ -33,7 +33,7 @@ mawf.donation_init = function (serverDefault) {
     // Check for session cookie
     if ( mawf.hasSavedSession(mawf.cartName) ) {
 
-if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log('Cart session cookie found'); }
+/*if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log('Cart session cookie found'); }*/
 
         try {
             savedSession = mawf.loadSession(mawf.cartName);
@@ -46,7 +46,7 @@ if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log('Cart session cookie
         }
 
     } else { 
-if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log(mawf.cartName+' deleted'); }
+/*if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log(mawf.cartName+' deleted'); }*/
         $.jStorage.deleteKey(mawf.cartName);
         savedSession = {};
     }
@@ -310,7 +310,7 @@ if ( mawf.bug && mawf.bug.sessionSaveActive ) { console.log(mawf.cartName+' dele
             mawf.CartView.productInPreview('');
 
         } else if ($target.is('.prev-btn')) {                       // PRODUCT PREVIEW
-console.log('hit');
+//console.log('hit');
             $container = $target
                 .closest('.js-prod-section')
                 .find('.preview .preview')
@@ -381,7 +381,7 @@ console.log('hit');
 //
     mawf.addFocusState = function(arg) {
         var $step;
-if ( mawf.bug && mawf.bug.logStepFocusing ) { console.log('+++ addFocusState() called by ' + arg.type + ' on ' + mawf.bug.show(arg.target), arg.target); }      
+/*if ( mawf.bug && mawf.bug.logStepFocusing ) { console.log('+++ addFocusState() called by ' + arg.type + ' on ' + mawf.bug.show(arg.target), arg.target); }   */   
 
         if ( typeof arg === 'number' )  { 
             $step = mawf.mainFormVal.$form.data('sections')[arg].$el; // TODO - break reliance on form validator by caching the step sections separately
@@ -390,7 +390,7 @@ if ( mawf.bug && mawf.bug.logStepFocusing ) { console.log('+++ addFocusState() c
         }
 
         if ( $step === undefined ) {                            // Short ciruit or apply
-if ( mawf.bug && mawf.bug.logStepFocusing ) {  console.log('addFocus error; Step not found'); }
+/*if ( mawf.bug && mawf.bug.logStepFocusing ) {  console.log('addFocus error; Step not found'); }*/
             return false;
 
         } else if ( $step.is('.active') === false ) {
@@ -404,7 +404,7 @@ if ( mawf.bug && mawf.bug.logStepFocusing ) {  console.log('addFocus error; Step
 // Removes the .active class (bright blue border) from all steps
 //
     mawf.clearFocusState = function() {
- if ( mawf.bug && mawf.bug.logStepFocusing ) { console.log('--- clearFocusState() called'); }       
+ /*if ( mawf.bug && mawf.bug.logStepFocusing ) { console.log('--- clearFocusState() called'); }       */
         $('.donate-wrap').removeClass('active next');
     };
 //
@@ -736,7 +736,7 @@ mawf.CartViewModel = function (sessionData) {
 
     // EXTEND MODEL WITH RESTORED DONATION DATA
     if ( ($.querystring.CWSID || $.querystring.cwsid) && $.jStorage.index().length === 0 ) {
-if ( mawf.bug && mawf.bug.logCWSIDImport === true) { console.log('Restore from CWSID triggered'); }     
+/*if ( mawf.bug && mawf.bug.logCWSIDImport === true) { console.log('Restore from CWSID triggered'); }     */
 
         var qs  = $.querystring.CWSID || $.querystring.cwsid,
             url = config.getService('GetTransactionRecord').endpoint;
@@ -752,7 +752,7 @@ if ( mawf.bug && mawf.bug.logCWSIDImport === true) { console.log('Restore from C
             'async': false
 
         }).done(function(transaction){
-if ( mawf.bug && mawf.bug.logCWSIDImport === true) { console.log('CWSID restore: returned',transaction); }      
+/*if ( mawf.bug && mawf.bug.logCWSIDImport === true) { console.log('CWSID restore: returned',transaction); }      */
             var val, prop, CW = self.donatorFieldTemplate;
 
             for ( prop in CW ) {
@@ -816,13 +816,13 @@ if ( mawf.bug && mawf.bug.logCWSIDImport === true) { console.log('CWSID restore:
     self.getDateSuffix.functionType = 'helper';
 
     self.startDate1Pretty = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed startDate1Pretty fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed startDate1Pretty fired'); } */
         return self.startDate1() + self.getDateSuffix(self.startDate1()) +  ' of the month';
     });
     self.startDate1Pretty.functionType = 'computed';
 
     self.startDate2Pretty = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed startDate2Pretty fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed startDate2Pretty fired'); }*/
         return self.startDate2() + self.getDateSuffix(self.startDate2()) +  ' of the month';
     });
     self.startDate2Pretty.functionType = 'computed';
@@ -830,7 +830,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed startDa
 // totalDonationToday()
 // Get total donation Today Amount - loop donation arrays
     self.totalDonationToday = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed totalDonationToday fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed totalDonationToday fired'); }*/
         var pretty, i, l,
             total = 0,
             d = self.donations();
@@ -847,7 +847,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed totalDo
 // prettyTotalDonationToday()
 // If there is a decimal, ensure that it has two decimal places
     self.prettyTotalDonationToday = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyTotalDonationToday fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyTotalDonationToday fired'); }*/
         return mawf.prettyMoney(self.totalDonationToday());
     });
     self.prettyTotalDonationToday.functionType = 'computed';
@@ -867,7 +867,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyT
 
 // Get total donation by date1
     self.totalDonationByDate1 = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed totalDonationByDate1 fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed totalDonationByDate1 fired'); }*/
         var total = 0,
             i, l, d = self.donations();
         for (i = 0, l = d.length; i < l; i++) {
@@ -881,7 +881,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed totalDo
 
 // Get total donation by date2
     self.totalDonationByDate2 = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed totalDonationByDate2 fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed totalDonationByDate2 fired'); }*/
         var total = 0,
             i, l, d = self.donations();
         for (i = 0, l = d.length; i < l; i++) {
@@ -897,7 +897,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed totalDo
 // allowAccess() - enables and disables access to the form's personal info section based
 // on the viewmodels donationSelectInProcess variable
     self.allowAccess = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed allowAccess fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed allowAccess fired'); }*/
         if ( self.donationSelectInProcess() )  {
             $('.jsDisableWrap :input')
             .attr('disabled', '')
@@ -934,7 +934,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed allowAc
 
 // Call this when we are done building the ecard.
     self.completeCardSelection = function () {
-console.log('Completing product selection');
+/*console.log('Completing product selection');*/
         var donation;
 
         if ( self.leaveProductBlank() === false && mawf.persFormVal.isValid(mawf.$personalizer, true) === false ) {
@@ -996,7 +996,7 @@ console.log('Completing product selection');
 
 // Tidy up picker - reset categories and type to 1, and state to picking
     self.resetProductBrowser = function() {
-if ( mawf.bug.logPersonalizerSyncing ) { console.log('resetProductBrowser() called'); }
+/*if ( mawf.bug.logPersonalizerSyncing ) { console.log('resetProductBrowser() called'); }*/
 
         self.browserProductType(1);
         self.product1Category(1);
@@ -1341,7 +1341,7 @@ if ( mawf.bug.logPersonalizerSyncing ) { console.log('resetProductBrowser() call
 
 // Sets individual donation process state and triggers master update
     self.setDonationProcessState = function (thisDonation, state) {
-console.log('donation process state change requested to '+state);
+/*console.log('donation process state change requested to '+state);*/
         var noDonationIsInProgress = true,
             old = {},
             i;
@@ -1392,7 +1392,7 @@ console.log('donation process state change requested to '+state);
 // Syncs identically named variables in root to/from open donation
 //
     self.syncRoot = function(syncList, syncDirection) {
-if ( mawf.bug.logPersonalizerSyncing ) { console.log('syncRoot('+syncList+', '+syncDirection+') called'); }
+/*if ( mawf.bug.logPersonalizerSyncing ) { console.log('syncRoot('+syncList+', '+syncDirection+') called'); }*/
         var l, to, list, from;
 
             list = self.syncList[syncList];
@@ -1413,7 +1413,7 @@ if ( mawf.bug.logPersonalizerSyncing ) { console.log('syncRoot('+syncList+', '+s
 // Will sync to donation via syncRoot() when donation is saved 
 //
     self.clearPersonalizer = function(resetViews, donation) {
-if ( mawf.bug.logPersonalizerSyncing ) { console.log('clearPersonalizer(resetViews:'+resetViews+' called on', donation); }
+/*if ( mawf.bug.logPersonalizerSyncing ) { console.log('clearPersonalizer(resetViews:'+resetViews+' called on', donation); }*/
 
         var $selects    = mawf.$personalizer.find('select'),
             list        = self.syncList.personalizer,
@@ -1562,7 +1562,7 @@ if ( mawf.bug.logPersonalizerSyncing ) { console.log('clearPersonalizer(resetVie
 
         prodID     = self.getProductID($target);                        // Product ID
         self.productID(prodID);
-console.log('extracting '+prodID);
+/*console.log('extracting '+prodID);*/
                                                                         // Product thumb
         self.productThumbPath(self.getSelectedThumbPath(prodID));
 
@@ -1580,7 +1580,7 @@ console.log('extracting '+prodID);
     // clearCC()
     // Clear all credit card data in the event of a paypal transaction
     self.clearCC = function() {
-console.log('clear cc called');
+/*console.log('clear cc called');*/
         mawf.CartView.x_ccExpMonth('');
         mawf.CartView.x_ccExpYear('');
         mawf.CartView.x_ccFName('');
@@ -1609,7 +1609,7 @@ console.log('clear cc called');
         catMatch = mawf.matchCategories(curProdType, curCatType, targetProdType);
 
         if ( catMatch !== false ) {
-            console.log('Setting prod type '+targetProdType+' category to '+catMatch);
+            /*console.log('Setting prod type '+targetProdType+' category to '+catMatch);*/
             mawf.loadGridImages([targetProdType - 1, catMatch - 1]);
             mawf.CartView['product' + targetProdType + 'Category'](catMatch);
         }
@@ -1624,7 +1624,7 @@ console.log('clear cc called');
     // sectionState()
     // Uses the donationSelectInProcess flag as a shortcut to set the done check on the donation field
     self.sectionState = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed sectionState fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed sectionState fired'); }*/
         // Type section
         if (self.donationSelectInProcess()) { self.sectionTypeState({current:true}); }
         else                                { self.sectionTypeState({done: true}); }
@@ -1752,7 +1752,7 @@ mawf.CreateDonation = function(args, rootContext) {
 // Set donation Destination
 //
     self.donationDest = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed donationDest fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed donationDest fired'); }*/
         switch (self.donationDestType()) {                          // Monitor donationDestType
             case 'chapter' :
             return self.chapterLocation();
@@ -1796,28 +1796,28 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed donatio
 
 // The combined honor name.
     self.honorName = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed honorName fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed honorName fired'); }*/
         return self.memFirstName() + ' ' + self.memLastName();
     });
     self.honorName.functionType = 'computed';
 
 // The combined name.
     self.fullFromName = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed fullFromName fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed fullFromName fired'); }*/
         return self.productFromFirst() + ' ' + self.productFromLast();
     });
     self.fullFromName.functionType = 'computed';
 
 // Quoted to attr
     self.prettyMemAttr = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyMemAttr fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyMemAttr fired'); }*/
         return "&ldquo; "+self.memAttr()+"&rdquo;";
     });
     self.prettyMemAttr.functionType = 'computed';
 
 // Quoted from attr
     self.prettyProductFromAttr = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyProductFromAttr fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyProductFromAttr fired'); }*/
         return "&ldquo; "+self.productFromAttr()+"&rdquo;";
     });
     self.prettyProductFromAttr.functionType = 'computed';
@@ -1825,7 +1825,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyP
 
 // The combined address
     self.fullToAddress = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed fullToAddress fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed fullToAddress fired'); }*/
         var fta;
         fta = self.productFirstName() + ' ' + self.productMI() + ' ' + self.productLastName() + '<br>' + self.productAddress1() + '<br>';
         fta += self.productAddress2() === '' ? '' : self.productAddress2() + '<br>';
@@ -1854,7 +1854,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed fullToA
 // Set the monthly start day.
 // If the donations dondationStartDate().number matches the date set in arg date obj 1; if not set to 2
     self.donationDate = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed donationDate fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed donationDate fired'); }*/
         return self.monthlyStartType() == 'date1' ? mawf.dates.date1 : mawf.dates.date2;
     });
     self.donationDate.functionType = 'computed';
@@ -1929,7 +1929,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed donatio
     self.localChapterLocatorIsValid.functionType = 'helper';  
 
     self.setPrettyName = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed setPrettyName fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed setPrettyName fired'); }*/
         self.productPrettyName(self.productFirstName() + ' ' + self.productMI() + ' ' + self.productLastName() );
         if (self.productPrettyName() == '  ' ) { self.productPrettyName(''); } // Catch no names
     });
@@ -1938,7 +1938,7 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed setPret
 // Pretty donation amount
 //
     self.prettyDonationAmount = ko.computed(function() {
-if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyDonationAmount fired'); }
+/*if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyDonationAmount fired'); }*/
         var workingAmount = self.donationAmount() ? self.donationAmount() : self.otherDonationAmount();
         return mawf.prettyMoney(workingAmount);
     });
@@ -1974,14 +1974,14 @@ if ( mawf.bug && mawf.bug.logComputeds === true) { console.log('computed prettyD
 // Save cart data localstorage polyfill, omitting private data (denoted by leading underbar)
 //
 mawf.saveSession = function() {
-if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log('----------------------------------\nsaveSession() called'); }
+/*if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log('----------------------------------\nsaveSession() called'); }*/
     var prop,
         i,
         state = ko.toJS(mawf.CartView);
 
     for (prop in state) {                       // Clean out sensitive data
         if (prop.indexOf('x_') === 0) {
-if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log(prop + ' property removed.'); }
+/*if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log(prop + ' property removed.'); }*/
             delete(state[prop]);
         }
     }
@@ -1992,13 +1992,13 @@ if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log(prop + ' property re
 
         for ( prop in state.donations[i] ) {                        // Clean out sensitive data
             if (prop.indexOf('x_') === 0) {
-if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log(prop + ' property removed from donation '+i+'.'); }
+/*if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log(prop + ' property removed from donation '+i+'.'); }*/
                 delete( state.donations[i][prop] );
             }
         }
 
         if ( state.donations[i].isInProcess ) {
-if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log('Unsaved donation cleared.'); }
+/*if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log('Unsaved donation cleared.'); }*/
             delete state.donations[i].donationAmount;
             delete state.donations[i].donationAmount;
 
@@ -2011,7 +2011,7 @@ if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log('Unsaved donation cl
     }
 
 
-if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log('----------------------------------\n'); }
+/*if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log('----------------------------------\n'); }*/
 
     $.jStorage.set( mawf.cartName, $.stringify( state ) );
     $.jStorage.setTTL(mawf.cartName, 86400000); // 24 hour expiration
@@ -2020,16 +2020,16 @@ if ( mawf.bug && mawf.bug.logSessionSaving ) {  console.log('-------------------
 
 mawf.loadSession = function(cartName) {
 if ( mawf.bug && mawf.bug.sessionLoadActive  === false ) { 
-    console.log('loadSession() blocked by debugger setting');
+    /*console.log('loadSession() blocked by debugger setting');*/
     return null;
 }
-console.log('loadSession() called');
+/*console.log('loadSession() called');*/
     if ( cartName) {
         cart = $.jStorage.get(cartName);
 //console.log('Cart loaded: ',cart);
 
     } else {
-console.log('loadSession called with undefined cartName');
+/*console.log('loadSession called with undefined cartName');*/
         return false;
     }
     return cart;
@@ -2145,7 +2145,7 @@ mawf.initProductCategoryMatching = function() {
 
 mawf.matchCategories = function(fromType, fromCat, toType) {
 
-    { console.log('-----------------------------------------\n### Matching Product Cat Nav  ###'); }
+    /*{ console.log('-----------------------------------------\n### Matching Product Cat Nav  ###'); }*/
 
     if ( fromType === toType ) {
         console.warn('matchCategories(): fromType is the same as toType'); return false;
@@ -2159,28 +2159,28 @@ mawf.matchCategories = function(fromType, fromCat, toType) {
     matchTxt = mawf.prodBrowserNavLabels[fromType][fromCat],
     cacheIndex = fromType+'_'+fromCat+'_'+toType;
 
-    console.log('Looking for nav match for '+cacheIndex);
+    /*console.log('Looking for nav match for '+cacheIndex);*/
 
     if ( mawf.prodBrowserCachedMatches[cacheIndex] !== undefined ) {
-        console.log('Cached value returned: '+ mawf.prodBrowserCachedMatches[cacheIndex]);
+        /*console.log('Cached value returned: '+ mawf.prodBrowserCachedMatches[cacheIndex]);*/
         return mawf.prodBrowserCachedMatches[cacheIndex] + 1;
     }
 
     i = mawf.prodBrowserNavLabels[toType].length;
 
     while ( mawf.prodBrowserNavLabels[toType][--i] ) {
-        console.log('----Matching '+matchTxt+' against '+ mawf.prodBrowserNavLabels[toType][i] );
+        /*console.log('----Matching '+matchTxt+' against '+ mawf.prodBrowserNavLabels[toType][i] );*/
         if ( matchTxt === mawf.prodBrowserNavLabels[toType][i] ) {
-            console.log('---Match Found');
+            /*console.log('---Match Found');*/
             mawf.prodBrowserCachedMatches[cacheIndex] = i;
-            console.log('Type '+fromType+' category '+fromCat+' matched '+' Type ' + toType + ' category ' + i);
-            console.log('New nav val cached and returned: ' + mawf.prodBrowserCachedMatches[cacheIndex]);
+            /*console.log('Type '+fromType+' category '+fromCat+' matched '+' Type ' + toType + ' category ' + i);
+            console.log('New nav val cached and returned: ' + mawf.prodBrowserCachedMatches[cacheIndex]);*/
             return i + 1;// Types and categories are not 0 based -> adjust
         }   
     }
 
     mawf.prodBrowserCachedMatches[cacheIndex] = false;
-    console.log('False nav val cached:' + mawf.prodBrowserCachedMatches[cacheIndex]);
+    /*console.log('False nav val cached:' + mawf.prodBrowserCachedMatches[cacheIndex]);*/
     return false;
 };
 
@@ -2273,7 +2273,7 @@ mawf.loadGridImages = function(grid) {
  * returns a jQuery promise
  */
 mawf.handlingRequestToken = function(clearAnyExistingToken) {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingRequestToken() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingRequestToken() called'); }*/
     var request, chained = $.Deferred();
 
     mawf.transToken = (clearAnyExistingToken === true) ? undefined : mawf.transToken;
@@ -2306,14 +2306,14 @@ mawf.handlingRequestToken = function(clearAnyExistingToken) {
 
         chained.done(
             function(resp) {
-                if ( mawf.bug && mawf.bug.logTokenTransaction ) { console.log('- Request token deferred resolved', resp.CWSID); }
+                /*if ( mawf.bug && mawf.bug.logTokenTransaction ) { console.log('- Request token deferred resolved', resp.CWSID); }*/
                 mawf.tokenReqInProgress = false;
                 mawf.transToken = resp.CWSID;
         });
 
         chained.fail(
             function(resp) {
-                if ( mawf.bug && mawf.bug.logTokenTransaction ) { console.log('Request for token received no response - \nstatusText: "'+ resp.statusText + '" responseText:  "'+resp.responseText + '"'); }
+                /*if ( mawf.bug && mawf.bug.logTokenTransaction ) { console.log('Request for token received no response - \nstatusText: "'+ resp.statusText + '" responseText:  "'+resp.responseText + '"'); }*/
 
                 mawf.tokenReqInProgress = false;
                 mawf.processTransactionError(resp);
@@ -2322,7 +2322,7 @@ mawf.handlingRequestToken = function(clearAnyExistingToken) {
         return chained;
 
     } else {
-        if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Shorting - token exists and reuse allowed called'); }      
+        /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Shorting - token exists and reuse allowed called'); }      */
         return chained.resolve();
     }
 };
@@ -2333,7 +2333,7 @@ mawf.handlingRequestToken = function(clearAnyExistingToken) {
  * returns a promise
  */
 mawf.requestToken = function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('requestToken() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('requestToken() called'); }*/
 
     mawf.tokenReqInProgress = true;
 
@@ -2353,7 +2353,7 @@ mawf.requestToken = function() {
 // containing only data the processor wants and using the processor specific names
 //
 mawf.formatTransData = function(model) {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('formatTransData() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('formatTransData() called'); }*/
 
     var i, prop, modelVal, curDon, suffix,
         postData         = {},
@@ -2367,15 +2367,15 @@ mawf.formatTransData = function(model) {
         purchaserID      = model.purchaserID();
 
 
-    if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('-----------------------------------------\n### Building Standard Transaction Data ###'); }
+    /*if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('-----------------------------------------\n### Building Standard Transaction Data ###'); }*/
 
     // DONATOR FIELDS - LOOP AND ASSIGN
-    if ( mawf.bug && mawf.bug.logTransDataBuild ) {console.log('### Extracting Donator Field Template Values ###');}
+    /*if ( mawf.bug && mawf.bug.logTransDataBuild ) {console.log('### Extracting Donator Field Template Values ###');}*/
 
     for ( prop in donatorTemplate ) {
         modelVal = model[donatorTemplate[prop]]();
 
-    if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('CW:'+prop+' App:'+donatorTemplate[prop]+' ('+modelVal+')'); }
+    /*if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('CW:'+prop+' App:'+donatorTemplate[prop]+' ('+modelVal+')'); }*/
         if ( modelVal !== '' && modelVal !== null ) {
             postData[prop] = modelVal;
         }
@@ -2413,11 +2413,11 @@ mawf.formatTransData = function(model) {
         if ( curDon.productAddress1() === '' ) { curDon.productCountry(''); }
 
     // DONATION TEMPLATE    
-        if ( mawf.bug && mawf.bug.logTransDataBuild ) {console.log('### Extracting Donation Field Template Values ###');}
+        /*if ( mawf.bug && mawf.bug.logTransDataBuild ) {console.log('### Extracting Donation Field Template Values ###');}*/
         for ( prop in donationTemplate ) {
             modelVal = mawf.extractDonationTemplateValue( curDon, donationTemplate[prop] );
 
-    if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('CW:'+ prop + '  ->  App:' + donationTemplate[prop] + '  "' + modelVal + '"'); }            
+    /*if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('CW:'+ prop + '  ->  App:' + donationTemplate[prop] + '  "' + modelVal + '"'); }            */
             if ( modelVal ) {                           // Skip empty fields
                 postData[prop+suffix] = modelVal;
             }
@@ -2426,15 +2426,15 @@ mawf.formatTransData = function(model) {
         //if ( curDon.productState().toLowerCase() === 'na' ) { postData['State'+suffix] = ''; }
     }
 
-    console.log(postData);
+    /*console.log(postData);*/
 
     if ( mawf.bug && mawf.bug.logPostAsGet ) {
         var str =  '?';
         for ( prop in postData ) { str += prop + '=' + encodeURI(postData[prop]) + '&'; }
-        console.log(config.getService('StandardCCTrans').endpoint + str.substr(0, str.length-1));
+        /*console.log(config.getService('StandardCCTrans').endpoint + str.substr(0, str.length-1));*/
     }
 
-    if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('-----------------------------------------'); }
+    /*if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('-----------------------------------------'); }*/
 
     return $.Deferred().resolve(postData);
 };
@@ -2476,7 +2476,7 @@ mawf.extractDonationTemplateValue = function(obj, property) {
 // containing only data the processor wants
 //
 mawf.formatTransDataPP = function(model) {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('formatTransDataPP() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('formatTransDataPP() called'); }*/
 
     var i, prop, modelVal, curDon, suffix,
         postData          = {},
@@ -2502,13 +2502,13 @@ mawf.formatTransDataPP = function(model) {
     //if ( postData.State.toLowerCase() == 'na' )   { postData.State = ''; }                    
 
 
-    if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('-----------------------------------------\n### Building PayPal Transaction Data ###'); }
+    /*if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('-----------------------------------------\n### Building PayPal Transaction Data ###'); }*/
 
     for ( prop in donatorTemplate ) {                       // Donator Fields - loop and assign
         if (prop !== '') { 
             modelVal = model[donatorTemplate[prop]]();
 
-    if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('CW:'+prop+' App:'+donatorTemplate[prop]+' ('+modelVal+')'); }
+    /*if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('CW:'+prop+' App:'+donatorTemplate[prop]+' ('+modelVal+')'); }*/
             if ( modelVal !== '' ) {                        // Skip empty values
                 postData[prop] = $.trim(modelVal);
             }
@@ -2523,7 +2523,7 @@ mawf.formatTransDataPP = function(model) {
 
             modelVal = mawf.extractDonationTemplateValue( curDon, donationTemplate[prop] );
 
-    if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('CW:'+prop+'  App:'+donationTemplate[prop]+' ('+modelVal+')'); }
+    /*if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('CW:'+prop+'  App:'+donationTemplate[prop]+' ('+modelVal+')'); }*/
             if ( modelVal ) {                               // Skip empty fields
                 postData[prop+suffix] = $.trim(modelVal);   // Add suffic
             }
@@ -2536,9 +2536,9 @@ mawf.formatTransDataPP = function(model) {
             postData['ProductID'+suffix] =  postData['ProductID'+suffix].toUpperCase();         
         }
     }
-    console.log(postData);
+    /*console.log(postData);*/
 
-    if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('-----------------------------------------'); }
+    /*if ( mawf.bug && mawf.bug.logTransDataBuild ) { console.log('-----------------------------------------'); }*/
 
     // return postData;
 
@@ -2546,7 +2546,7 @@ mawf.formatTransDataPP = function(model) {
 };
 
 mawf.buildPayPalSubmitForm = function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('buildPayPalSubmitForm() called'); }
+   /* if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('buildPayPalSubmitForm() called'); }*/
 
     var ajaxURL, prop,
         postForm = '';
@@ -2566,7 +2566,7 @@ mawf.buildPayPalSubmitForm = function() {
 
 
 mawf.launchTransactionModal = function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('launchTransactionModal() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('launchTransactionModal() called'); }*/
 
     mawf.confirmModal.launch({
         boxSelector:'#js-modal-confirm',
@@ -2580,14 +2580,14 @@ mawf.launchTransactionModal = function() {
 
 
 mawf.handlingEmailSubs = function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingEmailSubs() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingEmailSubs() called'); }*/
 
     var dfd = $.Deferred(),
         standarSignup,
         internationalSignup;
 
     if ( mawf.CartView.updateInternational() ) {                            // INTERNATIONAL SIGN UP
-    console.log('International email sign up:');
+    /*console.log('International email sign up:');*/
 
         internationalSignup = mawf.subscribeToEmail('international', {
             email:      mawf.CartView.eAdd(),
@@ -2600,7 +2600,7 @@ mawf.handlingEmailSubs = function() {
     }
 
     if ( mawf.CartView.updateNational() || mawf.CartView.updateLocal() ) {  // LOCAL/NATIONAL SIGN UP
-    console.log('Standard email sign up:');
+    /*console.log('Standard email sign up:');*/
 
         standardSignup = mawf.subscribeToEmail('standard', {
             email:          mawf.CartView.eAdd(),
@@ -2615,11 +2615,11 @@ mawf.handlingEmailSubs = function() {
 
     $.when(standardSignup, internationalSignup).then(                       // CHAIN EMAIL PROMISES
         function() {                                                        // Success - resolve
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingEmailSubs() resolved'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingEmailSubs() resolved'); }*/
             return dfd.resolve();
         },
         function() {                                                        // Fail - but still resolve
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingEmailSubs() failed'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingEmailSubs() failed'); }*/
             return dfd.resolve();
         }
     );
@@ -2629,27 +2629,27 @@ mawf.handlingEmailSubs = function() {
 
 
 mawf.preparingFormData = function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('preparingFormData() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('preparingFormData() called'); }*/
 
     var dfd = mawf.CartView.paymentType() == 'PayPal' ? mawf.formatTransDataPP( mawf.CartView ) : mawf.formatTransData( mawf.CartView );// Format for processor
 
     dfd.done(
         function(resp) {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('preparingFormData() resolved'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('preparingFormData() resolved'); }*/
             mawf.transData = resp;
         }
     );
 
     dfd.fail(
         function(resp) {
-            console.log('preparingFormData() failed with ', resp);
+            /*console.log('preparingFormData() failed with ', resp);*/
         }
     );
 };
 
 
 mawf.handlingTokenAndData = function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingTokenAndData() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingTokenAndData() called'); }*/
     var dfd = $.Deferred();
 
     $.when(mawf.handlingRequestToken(true))
@@ -2657,11 +2657,11 @@ mawf.handlingTokenAndData = function() {
         $.when(mawf.preparingFormData())
         .then(
             function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingTokenAndData() resolved'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingTokenAndData() resolved'); }*/
             dfd.resolve();
             },
             function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingTokenAndData() failed'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingTokenAndData() failed'); }*/
                 dfd.reject();
         });
     });
@@ -2671,21 +2671,21 @@ mawf.handlingTokenAndData = function() {
 
 
 mawf.handlingFormSubmission = function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingFormSubmission() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('handlingFormSubmission() called'); }*/
     var dfd = $.Deferred();
 
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Building multi promise '); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Building multi promise '); }*/
 
     $.when( mawf.launchTransactionModal(), mawf.handlingTokenAndData(), mawf.handlingEmailSubs() )
     .then(
         function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Multi promise resolved'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Multi promise resolved'); }*/
             dfd.resolve();
         });
 
     dfd.done(
         function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Chained deferred firing'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Chained deferred firing'); }*/
             mawf.execTransaction( mawf.CartView.paymentType(), mawf.transData ); // Send data
 
         }
@@ -2693,14 +2693,14 @@ mawf.handlingFormSubmission = function() {
 
     dfd.fail(
         function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Chained deferred failed'); }           
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('- Chained deferred failed'); }           */
         }
     );
 };
 
 
 mawf.execTransaction = function() {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('execTransaction() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('execTransaction() called'); }*/
 
     var ajaxURL,
         redirectURL = '',
@@ -2717,7 +2717,7 @@ mawf.execTransaction = function() {
 
     } else {
         ajaxURL = config.getService('StandardCCTrans').endpoint;
-        if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('transacting standard cc using endpoint '+ajaxURL); }
+        /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('transacting standard cc using endpoint '+ajaxURL); }*/
 
         request = $.ajax({                          // Perform ajax cc transaction to CW
             url: ajaxURL,
@@ -2729,21 +2729,21 @@ mawf.execTransaction = function() {
 
         chained = request.pipe(                     // Filter
             function(resp) {                        // Possible success
-                console.log('Piping transaction req:', resp);
+                /*console.log('Piping transaction req:', resp);*/
                 try {
 
                     if ( resp.result === '0' || resp.result === '9999' ) {
-                        if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('Transaction filtering request response with ', resp); }                      
+                        /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('Transaction filtering request response with ', resp); }                      */
                         return $.Deferred().resolve(resp);
                     }
                 } catch(e) {
-                    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('Trans resp filter caught error with try/catch on parse of ', resp); }
+                    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('Trans resp filter caught error with try/catch on parse of ', resp); }*/
                 }
 
                 return $.Deferred().reject(resp);
             }
         );
-        console.log('Exec chained state: '+chained.state());
+        /*console.log('Exec chained state: '+chained.state());*/
         chained.done(
             function(resp) {
                 mawf.donationSuccess();
@@ -2751,7 +2751,7 @@ mawf.execTransaction = function() {
 
         chained.fail(
             function(resp) {
-                console.log('Error:' + (resp.textStatus ? 'xhr fail - ' + resp.textStatus : 'Processor fail - ' +resp.result), resp);
+                /*console.log('Error:' + (resp.textStatus ? 'xhr fail - ' + resp.textStatus : 'Processor fail - ' +resp.result), resp);*/
                 mawf.processTransactionError(resp);             
         });
     }
@@ -2759,7 +2759,7 @@ mawf.execTransaction = function() {
 
 
 mawf.getSuccessURL = function(appendToken) {
-    if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('getSuccessURL() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransactionChain ) { console.log('getSuccessURL() called'); }*/
 
     var protocol    = document.location.protocol,
         domain      = document.domain.match(/\.[a-z]{2,4}$/) !== null ? document.domain : 'staging.wish.org',
@@ -3041,7 +3041,7 @@ mawf.adminAlertTypes = {
 };
 
 mawf.reportError = function(data, sendGenericData) {
-    if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('reportError() called with', data, sendGenericData, arguments); }
+    /*if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('reportError() called with', data, sendGenericData, arguments); }*/
 
     var reportObj,
         reportString,
@@ -3057,13 +3057,13 @@ mawf.reportError = function(data, sendGenericData) {
 
     reportString = mawf.packageErrorData(reportObj);
 
-    if ( mawf.bug && mawf.bug.logErrorReports ) { console.log( 'Error report generated: '+reportString); }
+    /*if ( mawf.bug && mawf.bug.logErrorReports ) { console.log( 'Error report generated: '+reportString); }*/
 
     if ( mawf.bug && mawf.bug.sendErrorReports === false ) {    
-        console.log('Error report sending block by flag sendErrorReports.');
+        /*console.log('Error report sending block by flag sendErrorReports.');*/
 
     } else {
-        console.warn( 'Sending error report');
+        /*console.warn( 'Sending error report');*/
         $.post(errorSvc, {'ErrData': reportString});
     }
 };
@@ -3074,7 +3074,7 @@ mawf.reportError = function(data, sendGenericData) {
  * Collects: users time, donor's last name, site domain, protocol, browser type info
  */
 mawf.collectGenericErrorData = function() {
-    if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('collectGenericErrorData() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('collectGenericErrorData() called'); }*/
 
     var  i, prop, data = {};
 
@@ -3099,7 +3099,7 @@ mawf.collectGenericErrorData = function() {
  * @return {[type]}          [description]
  */
 mawf.collectErrorData = function(template, code) {
-    if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('collectErrorData() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('collectErrorData() called'); }*/
 
     var dataObj = {};
 
@@ -3125,7 +3125,7 @@ mawf.collectSanitizedTransData = function() {
 
 
 mawf.packageErrorData = function(dataObj) {
-    if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('packageErrorData() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('packageErrorData() called'); }*/
 
     var prop, reportString = '';
 
@@ -3146,7 +3146,7 @@ mawf.packageErrorData = function(dataObj) {
  * @return {[type]}      [description]
  */
 mawf.processTransactionError = function(resp) {
-    if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('processTransactionError() called with', resp); }
+    /*if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('processTransactionError() called with', resp); }*/
 
     var i, errorTemplate,
         code = resp.statusText || resp.result;
@@ -3256,7 +3256,7 @@ mawf.handleError = function(guide, resp) {
  * Note: Will only work with vars in the main model - mawf.CartView - not in donations sub models
  */
 mawf.transactionErrorCB = function(code) {
-    if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('transactionErrorCB() called'); }
+    /*if ( mawf.bug && mawf.bug.logTransErrorHandling )   { console.log('transactionErrorCB() called'); }*/
 
     var i, ii, actions, trigger, modelVarsArr;
 
