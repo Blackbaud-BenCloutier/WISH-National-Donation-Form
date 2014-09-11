@@ -14,10 +14,13 @@
 [[S51:reus_donate_form_metadata]]
 
 var urlVariableArray = (function(){var vars={};var parts=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value){vars[key]=value;});return vars;})(),
-  center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'https://secure2.wish.org/assets/xml/center_info.xml','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
-  chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.wish.org/assets/js/chapters.json','dataType':'json','success':function(data){json=data;}});return json;})(),
-  chapters_addljson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.wish.org/assets/js/chapters_addl.json','dataType':'json','success':function(data){json=data;}});return json;})(),
-  productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://secure2.wish.org/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+  center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'https://secure2.wish.org/assets/xml/center_info.xml?server_refresh=[[S55:0,9999,5]]','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
+  chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.wish.org/assets/js/chapters.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+  chapters_addljson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.wish.org/assets/js/chapters_addl.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+  productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'../assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+    zip_array = [[S51:reus_donate_form_zipcodes]],
+
+
   form_chid = '[[S80:chid]]'.substr(0,3),
   setUserInfoCookie = function(){
     userInfoCookie = {
@@ -88,8 +91,8 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
     searchForChapters = function(search_value, local_or_international){
       $('ul.search-menu').html('<li id="no_valid_region"><a>Matching Result Not Found!</a></li>');
       if(parseInt(search_value)) {
-        $.getJSON('../assets/js/zip-codes.json', function (data) {
-          $(data['chapter']).each(function (index, arr) {
+       /* $.getJSON('../assets/js/zip-codes.json', function (data) {*/
+          $(zip_array['chapter']).each(function (index, arr) {
             var chapter_id = arr['chapter_id'];
             if (arr['zip_code'] == search_value) {
               $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
@@ -111,7 +114,7 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
               });
             }
           });
-        });
+       /* });*/
       } else {
         if (search_value.length > 2) {
           $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
@@ -135,23 +138,23 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
           });
         } else if (search_value.length == 2) {
           $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-		        var office_name_regex = new RegExp(search_value,'i'),
+            var office_name_regex = new RegExp(search_value,'i'),
               chapter_id = arr['office_id'];
-        			if(local_or_international == 'local'){
-        				if(parseInt(chapter_id.substr(0,3)) < 500) {
-        					if(arr['state_province'].toLowerCase().indexOf(search_value.toLowerCase()) != -1) {
-        					  $('#no_valid_region').remove();
-        					  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-        					}
-        				}
-        			} else {
-        				if(parseInt(chapter_id.substr(0,3)) >= 500) {
-        					if(office_name_regex.test(arr['office_name'])) {
-        					  $('#no_valid_region').remove();
-        					  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-        					}
+              if(local_or_international == 'local'){
+                if(parseInt(chapter_id.substr(0,3)) < 500) {
+                  if(arr['state_province'].toLowerCase().indexOf(search_value.toLowerCase()) != -1) {
+                    $('#no_valid_region').remove();
+                    $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                  }
                 }
-        			}
+              } else {
+                if(parseInt(chapter_id.substr(0,3)) >= 500) {
+                  if(office_name_regex.test(arr['office_name'])) {
+                    $('#no_valid_region').remove();
+                    $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                  }
+                }
+              }
           });
         }
       }
@@ -166,10 +169,10 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
       if(parseInt(postal_code)) {
 
         // load up the zip code file
-        $.getJSON('../assets/js/zip-codes.json', function (data) {
+        /*$.getJSON('../assets/js/zip-codes.json', function (data) {*/
 
           // iterate over each chapter in the file
-          $(data['chapter']).each(function (index, arr) {
+          $(zip_array['chapter']).each(function (index, arr) {
 
             // if we've found a match by zip code...
             if (arr['zip_code'] == postal_code) {
@@ -187,7 +190,7 @@ var urlVariableArray = (function(){var vars={};var parts=window.location.href.re
           // set donor intent using the chapter id
           mawf.CartView.donations()[0].donorIntent(chapter_id);
 
-        });
+       /* });*/
       } else {
 
         // billing zip was non-integer so just set donor intent to national
@@ -731,17 +734,17 @@ $(document).ready(function () {
               } else {
                 toFullName = toInHonorOf;
               }
-			        $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+              $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
               $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
               $('#card_preview').show();
               $('#card_create').hide();
               $('#card_in_honor_of').show();
               $('#card_in_honor_of #honor_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-			        $('#card_in_honor_of #honor_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
+              $('#card_in_honor_of #honor_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
               $('#card_from').show();
               $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
               cardProperties = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew, product_id];
-              $.fancybox.close(); console.log(cardProperties);
+              $.fancybox.close(); /* console.log(cardProperties); */
             }
           });
         } else if(card_form === "cert03") {
@@ -766,17 +769,17 @@ $(document).ready(function () {
               } else {
                 toFullName = toInHonorOf;
               }
-			        $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+              $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
               $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
               $('#card_preview').show();
               $('#card_create').hide();
               $('#card_in_memory_of').show();
               $('#card_in_memory_of #memory_short').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-			        $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
+              $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
               $('#card_from').show();
               $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
               cardProperties = [donationID, 'cert03', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew, product_id];
-              $.fancybox.close(); console.log(cardProperties);
+              $.fancybox.close(); /* console.log(cardProperties); */
             }
           });
         }
@@ -787,14 +790,14 @@ $(document).ready(function () {
           product_id = cardID;
           if (checkFields()) {
             toFullName = $("input[name='wedding_couple_name']").val();
-			      $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
             $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
             $('#card_wedding_couple_name').show();
             $('#card_wedding_couple_name .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
             cardProperties = [donationID, 'cert02', 'certificate', toFullName, productURL, cardName, occasionType, thisSkew, product_id];
-            $.fancybox.close(); console.log(cardProperties);
+            $.fancybox.close(); /* console.log(cardProperties); */
           }
         });
       } else if (card_form === "card01") {
@@ -802,14 +805,14 @@ $(document).ready(function () {
         $('.leaveBlank').click(function (e) {
           e.preventDefault();
           product_id = cardID;
-		      $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+          $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
           $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
           $('#card_preview').show();
           $('#card_create').hide();
           $('#card_send_to').show();
           $('#card_send_to .blurbtext').html('Leave blank and send to me.');
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close(); console.log(cardProperties);
+          $.fancybox.close(); /* console.log(cardProperties); */
         }); //click
         $('#finishCard').click(function (e) {
           e.preventDefault();
@@ -834,7 +837,7 @@ $(document).ready(function () {
             } else {
               toFullName = toFirstName + " " + toLastName;
             }
-			      $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
             $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
@@ -851,7 +854,7 @@ $(document).ready(function () {
             $('#card_personal_message').show();
             $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
             cardProperties = [donationID, 'card01', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, productURL, message, cardName, msgLine1, msgLine2, msgLine3, occasionType, thisSkew];
-            $.fancybox.close(); console.log(cardProperties);
+            $.fancybox.close(); /* console.log(cardProperties); */
           }
         });
       } else if (card_form === "card02") {
@@ -860,14 +863,14 @@ $(document).ready(function () {
         $('.leaveBlank').click(function (e) {
           e.preventDefault();
           product_id = cardID;
-		      $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+          $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
           $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
           $('#card_preview').show();
           $('#card_create').hide();
           $('#card_send_to').show();
           $('#card_send_to .blurbtext').html('Leave blank and send to me.');
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close(); console.log(cardProperties);
+          $.fancybox.close(); /* console.log(cardProperties); */
         });
         $('#finishCard').click(function (e) {
           e.preventDefault();
@@ -889,7 +892,7 @@ $(document).ready(function () {
             } else {
               toFullName = toFirstName + " " + toLastName;
             }
-			      $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
             $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
@@ -906,7 +909,7 @@ $(document).ready(function () {
             $('#card_from').show();
             $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
             cardProperties = [donationID, 'card02', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
-            $.fancybox.close(); console.log(cardProperties);
+            $.fancybox.close(); /* console.log(cardProperties); */
           }
         });
       } else if (card_form === "card03") {
@@ -914,14 +917,14 @@ $(document).ready(function () {
         $('.leaveBlank').click(function (e) {
           e.preventDefault();
           product_id = cardID;
-		      $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+          $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
           $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
           $('#card_preview').show();
           $('#card_create').hide();
           $('#card_send_to').show();
           $('#card_send_to .blurbtext').html('Leave blank and send to me.');
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close(); console.log(cardProperties);
+          $.fancybox.close(); /* console.log(cardProperties); */
         });
         $('#finishCard').click(function (e) {
           e.preventDefault();
@@ -957,7 +960,7 @@ $(document).ready(function () {
             } else {
               shippingFullName = shippingFirstName + "%20" + shippingLastName;
             }
-			      $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
             $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
@@ -973,9 +976,9 @@ $(document).ready(function () {
             );
             $('#card_in_memory_of').show();
             $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-			      $('#card_in_memory_of #memory_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
+            $('#card_in_memory_of #memory_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
             cardProperties = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
-            $.fancybox.close(); console.log(cardProperties);
+            $.fancybox.close(); /* console.log(cardProperties); */
           }
         });
       } else if (card_form === "card04") {
@@ -983,14 +986,14 @@ $(document).ready(function () {
         $('.leaveBlank').click(function (e) {
           e.preventDefault();
           product_id = cardID;
-		      $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+          $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
           $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
           $('#card_preview').show();
           $('#card_create').hide();
           $('#card_send_to').show();
           $('#card_send_to .blurbtext').html('Leave blank and send to me.');
           cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close(); console.log(cardProperties);
+          $.fancybox.close(); /* console.log(cardProperties); */
         });
         $('#finishCard').click(function (e) {
           e.preventDefault();
@@ -1026,7 +1029,7 @@ $(document).ready(function () {
             } else {
               shippingFullName = shippingFirstName + "%20" + shippingLastName;
             }
-			      $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
             $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
             $('#card_preview').show();
             $('#card_create').hide();
@@ -1042,11 +1045,11 @@ $(document).ready(function () {
             );
             $('#card_in_memory_of').show();
             $('#card_in_memory_of #memory_short').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-			      $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
+            $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
             $('#card_from').show();
             $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
             cardProperties = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
-            $.fancybox.close(); console.log(cardProperties);
+            $.fancybox.close(); /* console.log(cardProperties); */
           }
         });
       } else if (card_form === "ecard01" || card_form === "ecard02") {
@@ -1090,7 +1093,7 @@ $(document).ready(function () {
               $('#card_in_honor_of #honor_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
               $('#card_in_honor_of #honor_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
               cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
-              $.fancybox.close(); console.log(cardProperties);
+              $.fancybox.close(); /* console.log(cardProperties); */
             }
           });
         } else if (card_form === "ecard02") {
@@ -1132,7 +1135,7 @@ $(document).ready(function () {
               $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
               $('#card_in_memory_of #memory_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
               cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
-              $.fancybox.close(); console.log(cardProperties);
+              $.fancybox.close(); /* console.log(cardProperties); */
             }
           });
         }    
@@ -1166,7 +1169,7 @@ $(document).ready(function () {
     $('#optinChapter').closest('span').addClass('checked');
     $('#optinChapter').attr('checked','checked');
     $('#optinChapter').closest('.intouch-container').addClass('selected');
-    console.log('not 100');
+    /* console.log('not 100'); */
   }
   $(".option-one").on('click', 'li', function (e) {
     e.preventDefault();
@@ -1214,7 +1217,7 @@ $(document).ready(function () {
     });
   });
   $(".option-two").on('click', 'li', function (e) {
-    //console.log($(this).get(0).tagName);
+    /* console.log($(this).get(0).tagName); */
     e.preventDefault();
     var products = [],
       cardCount = 0;
@@ -1278,7 +1281,7 @@ $(document).ready(function () {
     }
   });
   $('.cancel-btn').click(function () {
-    $.fancybox.close(); console.log(cardProperties);
+    $.fancybox.close(); /* console.log(cardProperties); */
     resetProducts();
     $("input[name='s_sat_skew']").val('');
     $('#card_create').show();
@@ -1323,14 +1326,13 @@ $(document).ready(function () {
 
   var isPaypal = false,
     paypalRedirectUrl = '',
-    zip_array = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'../assets/js/zip-codes.json','dataType':'json','success':function(data){json=data;}});return json;})(),
     showError = function(pageError, fieldError) {
       if(fieldError == ''){
         alert('Oops!  There was an error processing your donation.  Please contact your financial institution for more information.');
       } else {
         alert(pageError + " " + fieldError);
       }
-      console.log(fieldError);
+      /* console.log(fieldError); */
       $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
     },
     submitDonation = function(button_element, donation_data){
@@ -1504,6 +1506,11 @@ $(document).ready(function () {
               data: donation_data,
               requestType: 'POST',
               callback: function (data) {
+if (console.log) { console.log('mainform donation callback'); }
+                if (data['donationResponse']['redirect']) {
+                  isPaypal = true;
+                  paypalRedirectUrl = data['donationResponse']['redirect']['url'];
+                }
                 var finishGift = function() {
                   var center_ids = ['1001','1101'],
                     bools = [($('#optinNational').is(':checked')?true:false),
@@ -1537,7 +1544,7 @@ $(document).ready(function () {
                       center_remove += center_ids[i];
                     }
                   }
-
+if (console.log) { console.log('call update'); }
                   // Opt-ins
                   luminateExtend.api.request({
                     api: 'cons',
@@ -1546,14 +1553,19 @@ $(document).ready(function () {
                     requestType: 'POST',
                     useHTTPS: true,
                     callback: function() {
+if (console.log) { console.log('update callback'); }
                       $.removeCookie("cart");
                       $.jStorage.flush();
                       localStorage.clear();
                       savedSession = {};
                       $('#mainform input').each(function(){$(this).val('');});
                       window.onbeforeunload = function(){};
-                      if(isPaypal) {window.location = paypalRedirectUrl;}
-                      else {window.location = "https://secure2.wish.org/site/SPageServer?pagename=donate_thankyou&chid=" + chid;}
+                      if(isPaypal) {
+if (console.log) { console.log('paypal '+paypalRedirectUrl); }
+window.location.href = paypalRedirectUrl;}
+                      else {
+if (console.log) { console.log('cc redirect'); }
+window.location.href = "https://secure2.wish.org/site/SPageServer?pagename=donate_thankyou&chid=" + chid;}
                     }
                   });
                 };
