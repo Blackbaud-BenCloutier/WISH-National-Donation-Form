@@ -1545,10 +1545,12 @@ mawf.CartViewModel = function (sessionData) {
         for ( var i in self.donations() ) {
             if ( self.donations()[i].donationDestType() == 'international') {
                 self.hasInternationalIntent(true);
+                self.updateInternational(true);
                 return true;
             }
         }
         self.hasInternationalIntent(false);
+        self.updateInternational(false);
     };
     self.setInternationalIntent.functionType = "helper";
 

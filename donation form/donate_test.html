@@ -355,12 +355,12 @@
                         </div>
                     </div>
                     <!-- OPTIONAL INTERNATIONAL SIGN UP OPT-IN -->
-                    <div class="intouch-container clearfix" data-bind="visible: hasInternationalIntent(), css: {selected: hasInternationalIntent()}">
+                    <div class="intouch-container clearfix" data-bind="visible: hasInternationalIntent(), css: {selected: updateInternational()}">
                         <div class="module-form-labeled grid_6 clearfix">
                             <div class="input-wrap clearfix">
                                 <label>
                                     <div class="checker" id="uniform-undefined">
-                                        <span id="optinInternational" data-bind="click: function() {updateInternational() ? updateInternational(false) : updateInternational(true);}, css: {checked: hasInternationalIntent()}"></span>
+                                        <span id="optinInternational" data-bind="click: function() {updateInternational() ? updateInternational(false) : updateInternational(true);}, css: {checked: updateInternational()}"></span>
                                     </div>
                                     Yes! I want to receive Wish Messenger<sup>&reg;</sup>, a quarterly email featuring wish stories, news and other updates from Make-A-Wish<sup>&reg;</sup> International.
                                 </label>
