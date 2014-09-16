@@ -1349,7 +1349,7 @@ $(document).ready(function () {
           today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
 
         setUserInfoCookie();
-        donation_data = donation_data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id) + '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee) + '&remember_me=true&other_amount=' + (0.00 + parseFloat(donation.prettyDonationAmount())) + (isMonthly?'&sustaining.frequency=monthly&sustaining.duration=0':'');
+        donation_data = donation_data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id) + '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee) + '&remember_me=true&other_amount=' + donation.prettyDonationAmount().replace(',','') + (isMonthly?'&sustaining.frequency=monthly&sustaining.duration=0':'');
         if($("input[name='s_sat_skew']").val() === '') {
           if(!isMonthly){
             $("input[name='s_sat_skew']").val('DO02-01');
