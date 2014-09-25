@@ -373,45 +373,6 @@ $(document).ready(function () {
 
   // Initialization
 
-  // Removing temporarily
-  // // Sync JSON info
-  // $(chapters_addljson['allChaptersAddl']['chapter']).each(function (index, arr) {
-  //   if(form_chid == arr['office_id'].substr(0,3)) {
-  //     // Footer Links
-  //     if(arr['facebook_acct'].length > 0){
-  //       $('#footer_0_footermiddle_0_aFacebook').attr('href',arr['facebook_acct']);
-  //       $('#s_facebook_url').val(arr['facebook_acct']);
-  //     }
-  //     if(arr['twitter_acct'].length > 0) {
-  //       $('#footer_0_footermiddle_0_aTwitter').attr('href',arr['twitter_acct']);
-  //       $('#s_twitter_url').val(arr['twitter_acct']);
-  //     }
-  //     if(arr['youtube_url'].length > 0) {
-  //       $('#footer_0_footermiddle_0_aYouTube').attr('href',arr['youtube_url']);
-  //       $('#s_youtube_url').val(arr['youtube_url']);
-  //     }
-  //     // CEO Info
-  //     if(arr['receipt_signature_name'].length > 0){
-  //       $('#s_ceo_name').val(arr['receipt_signature_name']);
-  //     }
-  //     if(arr['receipt_signature_title'].length > 0){
-  //       $('#s_ceo_title').val(arr['receipt_signature_title']);
-  //     }
-  //     // Web Links
-  //     if(arr['website_url'].length > 0) {
-  //       $('a').each(function(){
-  //         var href = $(this).attr('href');
-  //         if(href){
-  //           if(href.indexOf('[[S80:website_url]]') != -1) {
-  //             $(this).attr('href',href.replace('[[S80:website_url]]',arr['website_url']))
-  //           }
-  //         }
-  //       });
-  //       $('#s_website_url').val(arr['website_url']);
-  //     }
-  //   }
-  // });
-
   // Product Selection
 
   var donationID = $('.js_donationConfigurator').attr('data-donation-id'),
@@ -1441,7 +1402,8 @@ $(document).ready(function () {
 
           if (cardProperties[1] == 'ecard01') {
             donation_data += '&s_ecard_to_first=' + encodeURIComponent($("input[name='honoree_first_name']").val()) + '&s_ecard_to_last=' + encodeURIComponent($("input[name='honoree_last_name']").val()) + '&s_ecard_from=' + encodeURIComponent($("input[name='from_name']").val()); 
-          } else {
+          }
+          if (cardProperties[1] == 'ecard02') {
             donation_data += '&s_ecard_to_first=' + encodeURIComponent($("input[name='memoree_first_name']").val()) + '&s_ecard_to_last=' + encodeURIComponent($("input[name='memoree_last_name']").val()) + '&s_ecard_from=' + encodeURIComponent($("input[name='from_name']").val()); 
           }
         } else if (cardProperties[1] == 'cert01' || cardProperties[1] == 'cert03') {
