@@ -1,291 +1,299 @@
-<!--Start e-Dialog ConversionTrack Code -->
-<script type="text/javascript">
-  var s, f, c = document.cookie; s = c.indexOf("ed100006504"); if (s == -1) { s = c.indexOf("eds100006504") };
-  if (s > -1) {
-    c = c.substring(s + 1); c = c.substring(c.indexOf("=") + 1); e = c.indexOf(";"); f = c.substring(0, e == -1 ? c.length : e);
-    document.write('<img src="https://pd.ed10.net/p/0G/WLYW54M/MNS?CEDID=' + f + '&m=5.00&pk=11622042&s=100" height=1  width=1>');
-  }
-</script>
-<!--End e-Dialog ConversionTrack Code -->
-<h3>
-  
-</h3>
-<p>Your support is so important in helping us move ever closer to granting the wish of every eligible child. Your gift will help bring hope to wish kids, repair and strengthen families, and bring communities closer. Thank you for joining us in changing lives forever!</p>
+<!-- wrap page so we can still edit with the redirect in place -->
+[[?[[S8]]::/admin/::::
+    <!--Start e-Dialog ConversionTrack Code -->
+    <script type="text/javascript">
+        var donationCheck = '[[S120:dc:transactionID]]';
+        console.log('donation check = "' + donationCheck + '"');
+        if(donationCheck === 'dc:transactionID' || donationCheck === '0') {
+            window.location.replace("./SPageServer?pagename=donate");
+        }
+      var s, f, c = document.cookie; s = c.indexOf("ed100006504"); if (s == -1) { s = c.indexOf("eds100006504") };
+      if (s > -1) {
+        c = c.substring(s + 1); c = c.substring(c.indexOf("=") + 1); e = c.indexOf(";"); f = c.substring(0, e == -1 ? c.length : e);
+        document.write('<img src="https://pd.ed10.net/p/0G/WLYW54M/MNS?CEDID=' + f + '&m=5.00&pk=11622042&s=100" height=1  width=1>');
+      }
+    </script>
+    <!--End e-Dialog ConversionTrack Code -->
+    <h3>
 
-[[?[[S80:productURL1]]::ecard::<img src="[[S80:productURL1]]" style="display:none" />::]]
+    </h3>
+    <p>Your support is so important in helping us move ever closer to granting the wish of every eligible child. Your gift will help bring hope to wish kids, repair and strengthen families, and bring communities closer. Thank you for joining us in changing lives forever!</p>
 
-
-<!--Donation summary-->
-<div class="donation clearfix">
-  <div class="left">
-    <h6>
-      Details
-    </h6>
-    <p>
-      Transaction Number:
-      [[S120:dc:transactionID]]
-    </p>
-    <p>
-      Date:
-      [[S120:dc:transactionDate]]
-    </p>
-  </div>
-  <div class="right">
-    <a class="button-blue js_print" href="">Print</a> 
-        <a class="button-blue" href="SPageServer?pagename=donate&chid=[[S80:chid]]">Make Another Donation</a>
-  </div>
-</div>
-<!--End donation summary-->
-<div class="donation-list-wrapper">
-  <div class="donation-wrapper" data-product-category="pr-do">
-    <div class="donation collapsed clearfix">
-      <div class="left-container clearfix">
-        <div class="left">
-          <div>
-            <h6>
-              General Donation
-            </h6>
-            <p id="body_1_content_0_maincontent_0_rProducts_ctl00_0_P1_0" class="small ">
-              Thank you! <br>
-              <a href="http://[[S80:website_url]]/ways-to-help/giving/matching-gifts">
-                Check if your company will match this gift &gt;
-              </a>
-            </p>
-            <!-- <p class="set1 set2 set5 set4 set7 set9"> -->
-            <p class="set1 set2 set5 set4 set9"></p>
-            <p class="set6"></p>
-            <p class="set6">Leave blank and send to me</p>
-            
-            <p class="set4 set5"></p>
-            <p class="set7 set8 set9"></p>
-            <p class="set7 set8 set9">Leave blank and send to me</p>
-      
-      
-      [[?xx::x[[S120:dc:custom:custom_string98]]x::::
-      <div id="card_preview" class="donation clearfix" style="margin:0!important;border:0;box-shadow:none;"></div>
-      ]]
-      <p>
-      [[?[[S80:productURL1]]::pdf/?p=CR::<br /><a style="text-decoration:none;color:#006bb6;font-weight:bold;" href="[[S80:productURL1]]" target="_blank"><span>Download [[S80:productURL1Name]]&nbsp;<img width="12" height="10" style="display:inline;border:0;" src="http://site.wish.org/assets/images/ar/arw.gif"></span></a>::]]
-      </p>
+    [[?[[S80:productURL1]]::ecard::<img src="[[S80:productURL1]]" style="display:none" />::]]
 
 
-          </div>
-        </div>
-        <div class="center clearfix">
-          <span class="currency" style="margin-top: 0">
-            [[S120:dc:giftAmount]]
-          </span>
-        </div>
-      </div>
-      <div class="right clearfix">
+    <!--Donation summary-->
+    <div class="donation clearfix">
+      <div class="left">
         <h6>
-          Benefitting 
+          Details
         </h6>
-        <p class="chapter">
-          [[?x[[S80:formDesignee]]x::xx::Make-A-Wish® America::[[E130:"[[S80:formDesignee]]" "Â" "" replaceall]]]]
+        <p>
+          Transaction Number:
+          [[S120:dc:transactionID]]
+        </p>
+        <p>
+          Date:
+          [[S120:dc:transactionDate]]
         </p>
       </div>
+      <div class="right">
+        <a class="button-blue js_print" href="">Print</a>
+            <a class="button-blue" href="SPageServer?pagename=donate&chid=[[S80:chid]]">Make Another Donation</a>
+      </div>
     </div>
-  </div>
-</div>
-<!--<div class="donation clearfix">
-  [[?xxnullx::[[S120:dc:recurringNextPaymentDate]]::::
-  <div class="left">
-    <h4>
-      Total to be charged to card monthly
-      <span>[[S120:dc:giftAmount]]</span>
-    </h4>
-  </div>
-  ]]
-  <div class="right">
-    <h4>
-      Total charged to card today
-      <span class="large">[[S120:dc:giftAmount]]</span>
-    </h4>
-  </div>
-</div>-->
+    <!--End donation summary-->
+    <div class="donation-list-wrapper">
+      <div class="donation-wrapper" data-product-category="pr-do">
+        <div class="donation collapsed clearfix">
+          <div class="left-container clearfix">
+            <div class="left">
+              <div>
+                <h6>
+                  General Donation
+                </h6>
+                <p id="body_1_content_0_maincontent_0_rProducts_ctl00_0_P1_0" class="small ">
+                  Thank you! <br>
+                  <a href="http://[[S80:website_url]]/ways-to-help/giving/matching-gifts">
+                    Check if your company will match this gift &gt;
+                  </a>
+                </p>
+                <!-- <p class="set1 set2 set5 set4 set7 set9"> -->
+                <p class="set1 set2 set5 set4 set9"></p>
+                <p class="set6"></p>
+                <p class="set6">Leave blank and send to me</p>
+
+                <p class="set4 set5"></p>
+                <p class="set7 set8 set9"></p>
+                <p class="set7 set8 set9">Leave blank and send to me</p>
 
 
-<p class="fine-print">
-  For federal income tax purposes, this page will serve to confirm that no goods or services were provided to you for this donation. Please retain this page for your records.
-</p>
+          [[?xx::x[[S120:dc:custom:custom_string98]]x::::
+          <div id="card_preview" class="donation clearfix" style="margin:0!important;border:0;box-shadow:none;"></div>
+          ]]
+          <p>
+          [[?[[S80:productURL1]]::pdf/?p=CR::<br /><a style="text-decoration:none;color:#006bb6;font-weight:bold;" href="[[S80:productURL1]]" target="_blank"><span>Download [[S80:productURL1Name]]&nbsp;<img width="12" height="10" style="display:inline;border:0;" src="http://site.wish.org/assets/images/ar/arw.gif"></span></a>::]]
+          </p>
 
-<script>(function($){$(function(){
 
-[[?xx::x[[S120:dc:custom:custom_string98]]x::::
-var honoree_first_name = '[[S120:dc:custom:custom_string74]]',
-  honoree_middle_initial = '[[S120:dc:custom:custom_string75]]',
-  honoree_last_name = '[[S120:dc:custom:custom_string76]]',
-  honoree_full_name = '[[S120:dc:custom:custom_string77]]',
-  from_name = '[[S120:dc:custom:custom_string78]]',
-  wedding_couple_name = '[[S120:dc:custom:custom_string79]]',
-  to_email_address = '[[S120:dc:custom:custom_string80]]',
-  personal_message = '[[S120:dc:custom:custom_string81]]',
-  send_to_first_name = '[[S120:dc:custom:custom_string82]]',
-  send_to_middle_initial = '[[S120:dc:custom:custom_string83]]',
-  send_to_last_name = '[[S120:dc:custom:custom_string84]]',
-  send_to_street_address1 = '[[S120:dc:custom:custom_string85]]',
-  send_to_street_address2 = '[[S120:dc:custom:custom_string86]]',
-  send_to_city = '[[S120:dc:custom:custom_string87]]',
-  send_to_state = '[[S120:dc:custom:custom_string88]]',
-  send_to_postal_code = '[[S120:dc:custom:custom_string89]]',
-  send_to_country = '[[S120:dc:custom:custom_string90]]',
-  personal_message_line_1 = '[[S120:dc:custom:custom_string91]]',
-  personal_message_line_2 = '[[S120:dc:custom:custom_string92]]',
-  personal_message_line_3 = '[[S120:dc:custom:custom_string93]]',
-  memoree_first_name = '[[S120:dc:custom:custom_string94]]',
-  memoree_middle_initial = '[[S120:dc:custom:custom_string95]]',
-  memoree_last_name = '[[S120:dc:custom:custom_string96]]',
-  memoree_full_name = '[[S120:dc:custom:custom_string97]]',
-  card_id = '[[S120:dc:custom:custom_string98]]',
-  card_image = '';
+              </div>
+            </div>
+            <div class="center clearfix">
+              <span class="currency" style="margin-top: 0">
+                [[S120:dc:giftAmount]]
+              </span>
+            </div>
+          </div>
+          <div class="right clearfix">
+            <h6>
+              Benefitting
+            </h6>
+            <p class="chapter">
+              [[?x[[S80:formDesignee]]x::xx::Make-A-Wish® America::[[E130:"[[S80:formDesignee]]" "Â" "" replaceall]]]]
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="donation clearfix">
+      [[?xxnullx::[[S120:dc:recurringNextPaymentDate]]::::
+      <div class="left">
+        <h4>
+          Total to be charged to card monthly
+          <span>[[S120:dc:giftAmount]]</span>
+        </h4>
+      </div>
+      ]]
+      <div class="right">
+        <h4>
+          Total charged to card today
+          <span class="large">[[S120:dc:giftAmount]]</span>
+        </h4>
+      </div>
+    </div>-->
 
-$.ajax({'async':false,'global':false,'url':'https://secure2.wish.org/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(productsjson){
-  $(productsjson['product']).each(function (index,arr){
-    if(arr['card_id']==card_id){
-      var str = '';
-      card_image=arr['card_image1'];
-      str += '<div style="height:234px;float:right;width:auto;padding:0;" class="product-thumb left">' +
-          '<img width="108" src="' + card_image + '">' +
-        '</div>' +
-        '<div style="width:190px;">';
-      if(send_to_first_name != '' ||
-        send_to_middle_initial != '' ||
-        send_to_last_name != '' ||
-        send_to_street_address1 != '' ||
-        send_to_street_address2 != '' ||
-        send_to_city != '' ||
-        send_to_state != '' ||
-        send_to_postal_code != '' ||
-        send_to_country != ''
-      ){
-        if( ! (send_to_first_name == '' &&
-        send_to_middle_initial == '' &&
-        send_to_last_name == '' &&
-        send_to_street_address1 == '' &&
-        send_to_street_address2 == '' &&
-        send_to_city == '' &&
-        send_to_state == '' &&
-        send_to_postal_code == '') ) {
-          str += '<div class="blurb">' +
-            '<h3>Send To</h3>' +
-            '<div class="blurbtext">' +
-              ((send_to_first_name != '')?('<p>' + send_to_first_name + '</p>'):'') +
-              ((send_to_middle_initial != '')?('<p>' + send_to_middle_initial + '</p>'):'') +
-              ((send_to_last_name != '')?('<p>' + send_to_last_name + '</p>'):'') +
-              ((send_to_street_address1 != '')?('<p>' + send_to_street_address1 + '</p>'):'') +
-              ((send_to_street_address2 != '')?('<p>' + send_to_street_address2 + '</p>'):'') +
-              ((send_to_city != '')?('<p>' + send_to_city + '</p>'):'') +
-              ((send_to_state != '')?('<p>' + send_to_state + '</p>'):'') +
-              ((send_to_postal_code != '')?('<p>' + send_to_postal_code + '</p>'):'') +
-              ((send_to_country != '')?('<p>' + send_to_country + '</p>'):'') +
+
+    <p class="fine-print">
+      For federal income tax purposes, this page will serve to confirm that no goods or services were provided to you for this donation. Please retain this page for your records.
+    </p>
+
+    <script>(function($){$(function(){
+
+    [[?xx::x[[S120:dc:custom:custom_string98]]x::::
+    var honoree_first_name = '[[S120:dc:custom:custom_string74]]',
+      honoree_middle_initial = '[[S120:dc:custom:custom_string75]]',
+      honoree_last_name = '[[S120:dc:custom:custom_string76]]',
+      honoree_full_name = '[[S120:dc:custom:custom_string77]]',
+      from_name = '[[S120:dc:custom:custom_string78]]',
+      wedding_couple_name = '[[S120:dc:custom:custom_string79]]',
+      to_email_address = '[[S120:dc:custom:custom_string80]]',
+      personal_message = '[[S120:dc:custom:custom_string81]]',
+      send_to_first_name = '[[S120:dc:custom:custom_string82]]',
+      send_to_middle_initial = '[[S120:dc:custom:custom_string83]]',
+      send_to_last_name = '[[S120:dc:custom:custom_string84]]',
+      send_to_street_address1 = '[[S120:dc:custom:custom_string85]]',
+      send_to_street_address2 = '[[S120:dc:custom:custom_string86]]',
+      send_to_city = '[[S120:dc:custom:custom_string87]]',
+      send_to_state = '[[S120:dc:custom:custom_string88]]',
+      send_to_postal_code = '[[S120:dc:custom:custom_string89]]',
+      send_to_country = '[[S120:dc:custom:custom_string90]]',
+      personal_message_line_1 = '[[S120:dc:custom:custom_string91]]',
+      personal_message_line_2 = '[[S120:dc:custom:custom_string92]]',
+      personal_message_line_3 = '[[S120:dc:custom:custom_string93]]',
+      memoree_first_name = '[[S120:dc:custom:custom_string94]]',
+      memoree_middle_initial = '[[S120:dc:custom:custom_string95]]',
+      memoree_last_name = '[[S120:dc:custom:custom_string96]]',
+      memoree_full_name = '[[S120:dc:custom:custom_string97]]',
+      card_id = '[[S120:dc:custom:custom_string98]]',
+      card_image = '';
+
+    $.ajax({'async':false,'global':false,'url':'https://secure2.wish.org/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(productsjson){
+      $(productsjson['product']).each(function (index,arr){
+        if(arr['card_id']==card_id){
+          var str = '';
+          card_image=arr['card_image1'];
+          str += '<div style="height:234px;float:right;width:auto;padding:0;" class="product-thumb left">' +
+              '<img width="108" src="' + card_image + '">' +
             '</div>' +
-          '</div>';
+            '<div style="width:190px;">';
+          if(send_to_first_name != '' ||
+            send_to_middle_initial != '' ||
+            send_to_last_name != '' ||
+            send_to_street_address1 != '' ||
+            send_to_street_address2 != '' ||
+            send_to_city != '' ||
+            send_to_state != '' ||
+            send_to_postal_code != '' ||
+            send_to_country != ''
+          ){
+            if( ! (send_to_first_name == '' &&
+            send_to_middle_initial == '' &&
+            send_to_last_name == '' &&
+            send_to_street_address1 == '' &&
+            send_to_street_address2 == '' &&
+            send_to_city == '' &&
+            send_to_state == '' &&
+            send_to_postal_code == '') ) {
+              str += '<div class="blurb">' +
+                '<h3>Send To</h3>' +
+                '<div class="blurbtext">' +
+                  ((send_to_first_name != '')?('<p>' + send_to_first_name + '</p>'):'') +
+                  ((send_to_middle_initial != '')?('<p>' + send_to_middle_initial + '</p>'):'') +
+                  ((send_to_last_name != '')?('<p>' + send_to_last_name + '</p>'):'') +
+                  ((send_to_street_address1 != '')?('<p>' + send_to_street_address1 + '</p>'):'') +
+                  ((send_to_street_address2 != '')?('<p>' + send_to_street_address2 + '</p>'):'') +
+                  ((send_to_city != '')?('<p>' + send_to_city + '</p>'):'') +
+                  ((send_to_state != '')?('<p>' + send_to_state + '</p>'):'') +
+                  ((send_to_postal_code != '')?('<p>' + send_to_postal_code + '</p>'):'') +
+                  ((send_to_country != '')?('<p>' + send_to_country + '</p>'):'') +
+                '</div>' +
+              '</div>';
+            }
+          }
+          if(personal_message != '' ||
+            personal_message_line_1 != '' ||
+            personal_message_line_2 != '' ||
+            personal_message_line_3 != ''
+          ){
+            str += '<div class="blurb">' +
+              '<h3>Personal Message</h3>' +
+              '<div class="blurbtext">' +
+                ((personal_message != '')?('<p>' + personal_message + '</p>'):'') +
+                ((personal_message_line_1 != '')?('<p>' + personal_message_line_1 + '</p>'):'') +
+                ((personal_message_line_2 != '')?('<p>' + personal_message_line_2 + '</p>'):'') +
+                ((personal_message_line_3 != '')?('<p>' + personal_message_line_3 + '</p>'):'') +
+              '</div>' +
+            '</div>';
+          }
+          if(to_email_address != ''){
+            str += '<div class="blurb">' +
+              '<h3>Send To</h3>' +
+              '<div class="blurbtext">' +
+                '<p>' + to_email_address + '</p>' +
+              '</div>' +
+            '</div>';
+          }
+          if(from_name != ''){
+            str += '<div class="blurb">' +
+              '<h3>From</h3>' +
+              '<div class="blurbtext">' +
+                '<p>' + from_name + '</p>' +
+              '</div>' +
+            '</div>';
+          }
+          if(honoree_first_name != '' ||
+            honoree_middle_initial != '' ||
+            honoree_last_name != '' ||
+            honoree_full_name != ''
+          ){
+            if(honoree_full_name != ''){
+              str += '<div class="blurb">' +
+                '<h3>In Honor Of</h3>' +
+                '<div class="blurbtext">' +
+                  '<p>' + honoree_first_name + ' ' + honoree_middle_initial + ' ' + honoree_last_name + ' "' + honoree_full_name + '"</p>' +
+                '</div>' +
+              '</div>';
+            } else {
+              str += '<div class="blurb">' +
+                '<h3>In Honor Of</h3>' +
+                '<div class="blurbtext">' +
+                  '<p>' + honoree_first_name + ' ' + honoree_middle_initial + ' ' + honoree_last_name + '</p>' +
+                '</div>' +
+              '</div>';
+            }
+          }
+          if(memoree_first_name != '' ||
+            memoree_middle_initial != '' ||
+            memoree_last_name != '' ||
+            memoree_full_name != ''
+          ){
+            if(memoree_full_name != ''){
+              str += '<div class="blurb">' +
+                '<h3>In Memory Of</h3>' +
+                '<div class="blurbtext">' +
+                  '<p>' + memoree_first_name + ' ' + memoree_middle_initial + ' ' + memoree_last_name + ' "' +memoree_full_name + '"</p>' +
+                '</div>' +
+              '</div>';
+            } else {
+              str += '<div class="blurb">' +
+                '<h3>In Memory Of</h3>' +
+                '<div class="blurbtext">' +
+                  '<p>' + memoree_first_name + ' ' + memoree_middle_initial + ' ' + memoree_last_name + '</p>' +
+                '</div>' +
+              '</div>';
+            }
+          }
+          if(wedding_couple_name != ''){
+            str += '<div class="blurb">' +
+              '<h3>Wedding Couple Name</h3>' +
+              '<div class="blurbtext">' +
+                '<p>' + wedding_couple_name + '</p>' +
+              '</div>' +
+            '</div>';
+          }
+        var bitlyURL = "[[S80:productURL1]]";
+        [[?[[?x[[S120:dc:custom:custom_string98]]::xECT::T::]][[?x[[S120:dc:custom:custom_string98]]::xCR::T::]]::T::
+          str += '<p style="margin-top:10px;"><a href="[[S80:productURL1]]" target="_blank">Click here to view your ' + arr['occasion_type'] + ' card</a></p>';
+        ::]]
+          str += '</div><div class="clearfix"></div>';
+          $('#card_preview').html(str);
         }
-      }
-      if(personal_message != '' ||
-        personal_message_line_1 != '' ||
-        personal_message_line_2 != '' ||
-        personal_message_line_3 != '' 
-      ){
-        str += '<div class="blurb">' +
-          '<h3>Personal Message</h3>' +
-          '<div class="blurbtext">' +
-            ((personal_message != '')?('<p>' + personal_message + '</p>'):'') +
-            ((personal_message_line_1 != '')?('<p>' + personal_message_line_1 + '</p>'):'') +
-            ((personal_message_line_2 != '')?('<p>' + personal_message_line_2 + '</p>'):'') +
-            ((personal_message_line_3 != '')?('<p>' + personal_message_line_3 + '</p>'):'') +
-          '</div>' +
-        '</div>';
-      }
-      if(to_email_address != ''){
-        str += '<div class="blurb">' +
-          '<h3>Send To</h3>' +
-          '<div class="blurbtext">' +
-            '<p>' + to_email_address + '</p>' +
-          '</div>' +
-        '</div>';
-      }
-      if(from_name != ''){
-        str += '<div class="blurb">' +
-          '<h3>From</h3>' +
-          '<div class="blurbtext">' +
-            '<p>' + from_name + '</p>' +
-          '</div>' +
-        '</div>';
-      }
-      if(honoree_first_name != '' ||
-        honoree_middle_initial != '' ||
-        honoree_last_name != '' ||
-        honoree_full_name != '' 
-      ){
-        if(honoree_full_name != ''){
-          str += '<div class="blurb">' +
-            '<h3>In Honor Of</h3>' +
-            '<div class="blurbtext">' +
-              '<p>' + honoree_first_name + ' ' + honoree_middle_initial + ' ' + honoree_last_name + ' "' + honoree_full_name + '"</p>' +
-            '</div>' +
-          '</div>';
-        } else {
-          str += '<div class="blurb">' +
-            '<h3>In Honor Of</h3>' +
-            '<div class="blurbtext">' +
-              '<p>' + honoree_first_name + ' ' + honoree_middle_initial + ' ' + honoree_last_name + '</p>' +
-            '</div>' +
-          '</div>';
-        }
-      }
-      if(memoree_first_name != '' ||
-        memoree_middle_initial != '' ||
-        memoree_last_name != '' ||
-        memoree_full_name != '' 
-      ){
-        if(memoree_full_name != ''){
-          str += '<div class="blurb">' +
-            '<h3>In Memory Of</h3>' +
-            '<div class="blurbtext">' +
-              '<p>' + memoree_first_name + ' ' + memoree_middle_initial + ' ' + memoree_last_name + ' "' +memoree_full_name + '"</p>' +
-            '</div>' +
-          '</div>';
-        } else {
-          str += '<div class="blurb">' +
-            '<h3>In Memory Of</h3>' +
-            '<div class="blurbtext">' +
-              '<p>' + memoree_first_name + ' ' + memoree_middle_initial + ' ' + memoree_last_name + '</p>' +
-            '</div>' +
-          '</div>';
-        }
-      }
-      if(wedding_couple_name != ''){
-        str += '<div class="blurb">' +
-          '<h3>Wedding Couple Name</h3>' +
-          '<div class="blurbtext">' +
-            '<p>' + wedding_couple_name + '</p>' +
-          '</div>' +
-        '</div>';
-      }
-    var bitlyURL = "[[S80:productURL1]]";
-    [[?[[?x[[S120:dc:custom:custom_string98]]::xECT::T::]][[?x[[S120:dc:custom:custom_string98]]::xCR::T::]]::T::
-      str += '<p style="margin-top:10px;"><a href="[[S80:productURL1]]" target="_blank">Click here to view your ' + arr['occasion_type'] + ' card</a></p>';
-    ::]]
-      str += '</div><div class="clearfix"></div>';
-      $('#card_preview').html(str);
+      });
+    }});
+    ]]
+
+    $('#body_1_h1PageTitle').text('Thank You');
+    if($('.donation .left h4 span').text() == ''){
+      $('.donation .left h4').text('');
     }
-  });
-}});
+
+    });})(jQuery);</script>
+
+    <style>
+        .button-blue {color: #FFFFFF !important;}
+        #card_preview{display: block !important;margin:12px!important;box-shadow:none;}
+        .blurb {display: block !important;margin: 0;}
+      #card_preview .blurb{float:none!important;}
+      .blurb h3 {margin: 0;}
+    </style>
 ]]
-
-$('#body_1_h1PageTitle').text('Thank You');
-if($('.donation .left h4 span').text() == ''){
-  $('.donation .left h4').text('');
-}
-
-});})(jQuery);</script>
-
-<style>
-    .button-blue {color: #FFFFFF !important;}
-    #card_preview{display: block !important;margin:12px!important;box-shadow:none;}
-    .blurb {display: block !important;margin: 0;}
-  #card_preview .blurb{float:none!important;}
-  .blurb h3 {margin: 0;}
-</style>
