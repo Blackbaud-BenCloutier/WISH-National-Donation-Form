@@ -2927,7 +2927,7 @@
 }
   
 .custom-select-menu {
-  background: url(https://secure2.wish.org/assets/images/dropdown-bg-blue.png) left no-repeat;
+  background: url(https://secure2.convio.net/wish/assets/images/dropdown-bg-blue.png) left no-repeat;
   display: inline-block;
   margin-bottom: 8px;
   outline: none;
@@ -3203,7 +3203,7 @@ padding: 12px 40px;
 display: block;
 width: 42px;
 height: 42px;
-background: url(https://secure2.wish.org/assets/images/hover-magnify.png) no-repeat;	
+background: url(https://secure2.convio.net/wish/assets/images/hover-magnify.png) no-repeat;	
 float: left;
 }
 
@@ -3212,7 +3212,7 @@ display: block;
 width: 110px;
 height: 42px;
 margin-left: 18px;
-background: url(https://secure2.wish.org/assets/images/hover-select-card.png) no-repeat;	
+background: url(https://secure2.convio.net/wish/assets/images/hover-select-card.png) no-repeat;	
 float:left;
 }
 
@@ -3234,18 +3234,18 @@ float:left;
   cursor: pointer; 
 }
 #carousel-gallery .forward {
-  background: url('https://secure2.wish.org/assets/images/arrow-left.png') no-repeat center #ffffff;
+  background: url('https://secure2.convio.net/wish/assets/images/arrow-left.png') no-repeat center #ffffff;
   left: 10px;
 }
 #carousel-gallery .back {
-  background: url('https://secure2.wish.org/assets/images/arrow-right.png') no-repeat center #ffffff;
+  background: url('https://secure2.convio.net/wish/assets/images/arrow-right.png') no-repeat center #ffffff;
   right: 20px;
 }
 #carousel-gallery .forward:hover {
-  background: url('https://secure2.wish.org/assets/images/arrow-left.png') no-repeat center #e9f3f9;
+  background: url('https://secure2.convio.net/wish/assets/images/arrow-left.png') no-repeat center #e9f3f9;
 }
 #carousel-gallery .back:hover {
-  background: url('https://secure2.wish.org/assets/images/arrow-right.png') no-repeat center #e9f3f9;
+  background: url('https://secure2.convio.net/wish/assets/images/arrow-right.png') no-repeat center #e9f3f9;
 }
 
 
@@ -3256,7 +3256,7 @@ float:left;
 \******************************************************/
 
 .carousel.wish .tc-paging-item {
-  background: url('https://secure2.wish.org/assets/images/arrow-left.png') no-repeat center;
+  background: url('https://secure2.convio.net/wish/assets/images/arrow-left.png') no-repeat center;
   width: 18px;
   height: 32px; 
   -moz-opacity: 0.8;  
@@ -3264,7 +3264,7 @@ float:left;
   opacity: 0.8; 
 }
 .carousel.wish .tc-paging-item.current { 
-  background: url('https://secure2.wish.org/assets/images/arrow-right.png') no-repeat center;
+  background: url('https://secure2.convio.net/wish/assets/images/arrow-right.png') no-repeat center;
 }
 
 .carousel.wish .tc-paging-item:hover {   

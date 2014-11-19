@@ -14,10 +14,10 @@
 [[S51:reus_donate_form_metadata]]
 
 var urlVariableArray = (function(){var vars={};var parts=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value){vars[key]=value;});return vars;})(),
-  center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'https://secure2.wish.org/assets/xml/center_info.xml?server_refresh=[[S55:0,9999,5]]','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
-  chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.wish.org/assets/js/chapters.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
-  chapters_addljson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'https://secure2.wish.org/assets/js/chapters_addl.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
-  productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'../assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+  center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'../assets/xml/center_info.xml?server_refresh=[[S55:0,9999,5]]','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
+  chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'../assets/js/chapters.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+  chapters_addljson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'../assets/js/chapters_addl.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+  productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://[[S29:SECURE_DOMAIN]][[S29:SECURE_PATH]]../assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
     zip_array = [[S51:reus_donate_form_zipcodes]],
 
 
@@ -315,8 +315,8 @@ $(document).ready(function () {
   luminateExtend.init({
     apiKey: 'mu3fefod',
     path: {
-      nonsecure: 'http://site.wish.org/site/',
-      secure: 'https://secure2.wish.org/site/'
+      nonsecure: 'http://[[S29:DOMAIN]][[S29:PATH]]',
+      secure: 'https://[[S29:SECURE_DOMAIN]][[S29:SECURE_PATH]]'
     }
   });
   $.fn.infiniteCarousel = function () {
@@ -469,13 +469,13 @@ $(document).ready(function () {
           card_image3 = arr['card_image3'] || false;
           card_image4 = arr['card_image4'] || false;
           card_image5 = arr['card_image5'] || false;
-          card_thumbnail = arr['card_thumbnail'] || "https://secure2.wish.org/Card images/General/Certficates/blank.png";
+          card_thumbnail = arr['card_thumbnail'] || "../Card images/General/Certficates/blank.png";
           product_url = arr['product_url'] || false;
           return false;
         }
       });
       launchZoom(card_image2);
-      $('.cardDescription').load('https://secure2.wish.org/site/SPageNavigator/reus_card_' + cardID + '.html #container');
+      $('.cardDescription').load('SPageNavigator/reus_card_' + cardID + '.html #container');
       if (card_type = "card") {
         var cardThumbs = '';
         if (card_image3 != '') {
@@ -571,7 +571,7 @@ $(document).ready(function () {
           card_image3 = arr['card_image3'] || false;
           card_image4 = arr['card_image4'] || false;
           card_image5 = arr['card_image5'] || false;
-          card_thumbnail = arr['card_thumbnail'] || "https://secure2.wish.org/Card images/General/Certficates/blank.png";
+          card_thumbnail = arr['card_thumbnail'] || "../Card images/General/Certficates/blank.png";
           product_url = arr['product_url'] || false;
           skew = cardID;
           $("input[name='s_sat_skew']").val(skew);
@@ -1551,7 +1551,7 @@ if (console.log) { console.log('paypal '+paypalRedirectUrl); }
 window.location.href = paypalRedirectUrl;}
                       else {
 if (console.log) { console.log('cc redirect'); }
-window.location.href = "https://secure2.wish.org/site/SPageServer?pagename=donate_thankyou&chid=" + chid;}
+window.location.href = "SPageServer?pagename=donate_thankyou&chid=" + chid;}
                     }
                   });
                 };
@@ -1607,7 +1607,7 @@ window.location.href = "https://secure2.wish.org/site/SPageServer?pagename=donat
   // PayPal button
   $("a.button-submit:eq(1)").click(function (e) {
     e.preventDefault();
-    submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=' + encodeURIComponent('https://secure2.wish.org/site/SPageServer?pagename=donate_thankyou&chid=' + mawf.CartView.donations()[0].donorIntent()) + '&finish_error_redirect=[[T1:https://secure2.wish.org/site/SPageServer?pagename=donate_paypal_error]]');
+    submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=' + encodeURIComponent('SPageServer?pagename=donate_thankyou&chid=' + mawf.CartView.donations()[0].donorIntent()) + '&finish_error_redirect=[[T1:SPageServer?pagename=donate_paypal_error]]');
   });
 
   // Process Donation

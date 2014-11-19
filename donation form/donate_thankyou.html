@@ -147,7 +147,7 @@
       card_id = '[[S120:dc:custom:custom_string98]]',
       card_image = '';
 
-    $.ajax({'async':false,'global':false,'url':'https://secure2.wish.org/assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(productsjson){
+    $.ajax({'async':false,'global':false,'url':'https://[[S29:SECURE_DOMAIN]][[S29:SECURE_PATH]]../assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(productsjson){
       $(productsjson['product']).each(function (index,arr){
         if(arr['card_id']==card_id){
           var str = '';
