@@ -1601,8 +1601,14 @@ window.location.href = "SPageServer?pagename=donate_thankyou&chid=" + chid;}
   });
   // Standard donation submit button
   $("a.button-submit:eq(0)").click(function (e) {
-    e.preventDefault();
-    submitDonation($(this), 'method=donate&form_id=1420&validate=true');
+    e.preventDefault();        console.log('in a.button-submit submit click');
+      jQuery('input').blur();
+      jQuery('select').blur();
+      var numberOfErrors = jQuery('.input-error').length;
+      console.log("there are " + numberOfErrors + " errors on the form");
+      if(numberOfErrors === 0) {
+          submitDonation($(this), 'method=donate&form_id=1420&validate=true');
+      }
   });
   // PayPal button
   $("a.button-submit:eq(1)").click(function (e) {
