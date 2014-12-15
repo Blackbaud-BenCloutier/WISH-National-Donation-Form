@@ -1608,18 +1608,33 @@ $(document).ready(function () {
 
     });
 
+
+
     $("a.action-btn, a.btn-modal").click(function (e) {
         e.preventDefault();
     });
     // Standard donation submit button
     $("a.button-submit:eq(0)").click(function (e) {
-        e.preventDefault();
-        submitDonation($(this), 'method=donate&form_id=1420&validate=true');
+        e.preventDefault();        console.log('in a.button-submit submit click');
+        jQuery('input').blur();
+        jQuery('select').blur();
+        var numberOfErrors = jQuery('.input-error').length;
+        console.log("there are " + numberOfErrors + " errors on the form");
+        if(numberOfErrors === 0) {
+            submitDonation($(this), 'method=donate&form_id=1420&validate=true');
+        }
     });
     // PayPal button
     $("a.button-submit:eq(1)").click(function (e) {
         e.preventDefault();
-        submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=' + encodeURIComponent('SPageServer?pagename=donate_thankyou&chid=' + mawf.CartView.donations()[0].donorIntent()) + '&finish_error_redirect=[[T1:SPageServer?pagename=donate_paypal_error]]');
+
+        jQuery('input').blur();
+        jQuery('select').blur();
+        var numberOfErrors = jQuery('.input-error').length;
+        console.log("there are " + numberOfErrors + " errors on the form");
+        if(numberOfErrors === 0) {
+            submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=' + encodeURIComponent('SPageServer?pagename=donate_thankyou&chid=' + mawf.CartView.donations()[0].donorIntent()) + '&finish_error_redirect=[[T1:SPageServer?pagename=donate_paypal_error]]');
+        }
     });
 
 
