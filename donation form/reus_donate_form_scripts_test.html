@@ -5,7 +5,7 @@
 
 
 <style>
-.bldr-wrap #card-form fieldset {float:right!important;margin:22px!important;}
+    .bldr-wrap #card-form fieldset {float:right!important;margin:22px!important;}
 </style>
 <script>
 
@@ -14,1630 +14,1616 @@
 [[S51:reus_donate_form_metadata]]
 
 var urlVariableArray = (function(){var vars={};var parts=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value){vars[key]=value;});return vars;})(),
-  center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'../assets/xml/center_info.xml?server_refresh=[[S55:0,9999,5]]','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
-  chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'../assets/js/chapters.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
-  chapters_addljson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'../assets/js/chapters_addl.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
-  productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://[[S29:SECURE_DOMAIN]][[S29:SECURE_PATH]]../assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
-    zip_array = [[S51:reus_donate_form_zipcodes]],
+        center_forms = (function(){var xml=null;$.ajax({'async':false,'global':false,'url':'../assets/xml/center_info.xml?server_refresh=[[S55:0,9999,5]]','dataType':'xml','success':function(data){xml=data;}});return xml;})(),
+        chaptersjson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'../assets/js/chapters.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+        chapters_addljson = (function(){var json=null;$.ajax({'async':false,'global': false,'url':'../assets/js/chapters_addl.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+        productsjson = (function(){var json=null;$.ajax({'async':false,'global':false,'url':'https://[[S29:SECURE_DOMAIN]][[S29:SECURE_PATH]]../assets/js/products.json?server_refresh=[[S55:0,9999,5]]','dataType':'json','success':function(data){json=data;}});return json;})(),
+        zip_array = [[S51:reus_donate_form_zipcodes]],
 
 
-  form_chid = '[[S80:chid]]'.substr(0,3),
-  setUserInfoCookie = function(){
-    userInfoCookie = {
-      'billing.name.title':$('select[name="billing.name.title"]').val(),
-      'billing.name.first':$('input[name="billing.name.first"]').val(),
-      'billing.name.middle':$('input[name="billing.name.middle"]').val(),
-      'billing.name.last':$('input[name="billing.name.last"]').val(),
-      'donor.email':$('input[name="donor.email"]').val(),
-      'donor.phone':$('input[name="donor.phone"]').val(),
-      'billing.address.street1':$('input[name="billing.address.street1"]').val(),
-      'billing.address.street2':$('input[name="billing.address.street2"]').val(),
-      'billing.address.city':$('input[name="billing.address.city"]').val(),
-      'billing.address.state':$('select[name="billing.address.state"]').val(),
-      'billing.address.zip':$('input[name="billing.address.zip"]').val()
-    };
+form_chid = '[[S80:chid]]'.substr(0,3),
+        setUserInfoCookie = function(){
+            userInfoCookie = {
+                'billing.name.title':$('select[name="billing.name.title"]').val(),
+                'billing.name.first':$('input[name="billing.name.first"]').val(),
+                'billing.name.middle':$('input[name="billing.name.middle"]').val(),
+                'billing.name.last':$('input[name="billing.name.last"]').val(),
+                'donor.email':$('input[name="donor.email"]').val(),
+                'donor.phone':$('input[name="donor.phone"]').val(),
+                'billing.address.street1':$('input[name="billing.address.street1"]').val(),
+                'billing.address.street2':$('input[name="billing.address.street2"]').val(),
+                'billing.address.city':$('input[name="billing.address.city"]').val(),
+                'billing.address.state':$('select[name="billing.address.state"]').val(),
+                'billing.address.zip':$('input[name="billing.address.zip"]').val()
+            };
 
-    // Set Cookies For User Info
-      $.cookie.json = true;
-      $.cookie('userinfo', userInfoCookie, { expires: 1 });
-    // End Set Cookies For User Info
-  };
+            // Set Cookies For User Info
+            $.cookie.json = true;
+            $.cookie('userinfo', userInfoCookie, { expires: 1 });
+            // End Set Cookies For User Info
+        };
 
 // Global Vars
 
 (function ($) {
 
-  // Get Donation Info
+    // Get Donation Info
 
-  var level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (50) : (Math.floor(urlVariableArray['level1']))),
-    level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (75) : (Math.floor(urlVariableArray['level2']))),
-    level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3']))),
-    level4 = (((urlVariableArray['level4'] < 1 || isNaN(urlVariableArray['level4']))) ? (250) : (Math.floor(urlVariableArray['level4']))),
-    level5 = (((urlVariableArray['level5'] < 1 || isNaN(urlVariableArray['level5']))) ? (500) : (Math.floor(urlVariableArray['level5']))),
-    level6 = (((urlVariableArray['level6'] < 1 || isNaN(urlVariableArray['level6']))) ? (1000) : (Math.floor(urlVariableArray['level6']))),
-    level7 = (((urlVariableArray['level7'] < 1 || isNaN(urlVariableArray['level7']))) ? (5000) : (Math.floor(urlVariableArray['level7'])));
+    var level1 = (((urlVariableArray['level1'] < 1 || isNaN(urlVariableArray['level1']))) ? (50) : (Math.floor(urlVariableArray['level1']))),
+            level2 = (((urlVariableArray['level2'] < 1 || isNaN(urlVariableArray['level2']))) ? (75) : (Math.floor(urlVariableArray['level2']))),
+            level3 = (((urlVariableArray['level3'] < 1 || isNaN(urlVariableArray['level3']))) ? (100) : (Math.floor(urlVariableArray['level3']))),
+            level4 = (((urlVariableArray['level4'] < 1 || isNaN(urlVariableArray['level4']))) ? (250) : (Math.floor(urlVariableArray['level4']))),
+            level5 = (((urlVariableArray['level5'] < 1 || isNaN(urlVariableArray['level5']))) ? (500) : (Math.floor(urlVariableArray['level5']))),
+            level6 = (((urlVariableArray['level6'] < 1 || isNaN(urlVariableArray['level6']))) ? (1000) : (Math.floor(urlVariableArray['level6']))),
+            level7 = (((urlVariableArray['level7'] < 1 || isNaN(urlVariableArray['level7']))) ? (5000) : (Math.floor(urlVariableArray['level7'])));
 
     // for ad hoc form types SPEB and SPEMB, we need to lock the chapter as national
     if (  (urlVariableArray['form_type'] == "SPEB") || (urlVariableArray['form_type'] == "SPEMB")  ) {
-      chid = "100-000";
+        chid = "100-000";
     } else {
-      chid = '[[S80:chid]]';
+        chid = '[[S80:chid]]';
     }
 
     // Fill out user info
     if($.cookie('userinfo')) {
-      $('select[name="billing.name.title"]').val(JSON.parse($.cookie('userinfo'))['billing.name.title']);
-      $('input[name="billing.name.first"]').val(JSON.parse($.cookie('userinfo'))['billing.name.first']);
-      $('input[name="billing.name.middle"]').val(JSON.parse($.cookie('userinfo'))['billing.name.middle']);
-      $('input[name="billing.name.last"]').val(JSON.parse($.cookie('userinfo'))['billing.name.last']);
-      $('input[name="donor.email"]').val(JSON.parse($.cookie('userinfo'))['donor.email']);
-      $('input[name="donor.phone"]').val(JSON.parse($.cookie('userinfo'))['donor.phone']);
-      $('input[name="billing.address.street1"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street1']);
-      $('input[name="billing.address.street2"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street2']);
-      $('input[name="billing.address.city"]').val(JSON.parse($.cookie('userinfo'))['billing.address.city']);
-      $('select[name="billing.address.state"]').val(JSON.parse($.cookie('userinfo'))['billing.address.state']);
-      $('input[name="billing.address.zip"]').val(JSON.parse($.cookie('userinfo'))['billing.address.zip']);
+        $('select[name="billing.name.title"]').val(JSON.parse($.cookie('userinfo'))['billing.name.title']);
+        $('input[name="billing.name.first"]').val(JSON.parse($.cookie('userinfo'))['billing.name.first']);
+        $('input[name="billing.name.middle"]').val(JSON.parse($.cookie('userinfo'))['billing.name.middle']);
+        $('input[name="billing.name.last"]').val(JSON.parse($.cookie('userinfo'))['billing.name.last']);
+        $('input[name="donor.email"]').val(JSON.parse($.cookie('userinfo'))['donor.email']);
+        $('input[name="donor.phone"]').val(JSON.parse($.cookie('userinfo'))['donor.phone']);
+        $('input[name="billing.address.street1"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street1']);
+        $('input[name="billing.address.street2"]').val(JSON.parse($.cookie('userinfo'))['billing.address.street2']);
+        $('input[name="billing.address.city"]').val(JSON.parse($.cookie('userinfo'))['billing.address.city']);
+        $('select[name="billing.address.state"]').val(JSON.parse($.cookie('userinfo'))['billing.address.state']);
+        $('input[name="billing.address.zip"]').val(JSON.parse($.cookie('userinfo'))['billing.address.zip']);
     }
 
     chapter_prefix = chid.substring(0, 3),
-    getNextMonth = function() {
-      var dayOfMonth = Date.today().toString('d');
-      if (dayOfMonth == '29' || dayOfMonth == '30' || dayOfMonth == '31') {
-        return Date.today().moveToFirstDayOfMonth().addMonths(2).toString('M/d/yyyy');
-      } else {
-        return Date.today().next().month().toString('M/d/yyyy');
-      }
-    },
-    searchForChapters = function(search_value, local_or_international){
-      $('ul.search-menu').html('<li id="no_valid_region"><a>Matching Result Not Found!</a></li>');
-      if(parseInt(search_value)) {
-       /* $.getJSON('../assets/js/zip-codes.json', function (data) {*/
-          $(zip_array['chapter']).each(function (index, arr) {
-            var chapter_id = arr['chapter_id'];
-            if (arr['zip_code'] == search_value) {
-              $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-                if(local_or_international == 'local'){
-                  if(parseInt(chapter_id.substr(0,3)) < 500) {
-                    if (arr['office_id'] == chapter_id) {
-                      $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                      return;
-                    }
-                  }
+            getNextMonth = function() {
+                var dayOfMonth = Date.today().toString('d');
+                if (dayOfMonth == '29' || dayOfMonth == '30' || dayOfMonth == '31') {
+                    return Date.today().moveToFirstDayOfMonth().addMonths(2).toString('M/d/yyyy');
                 } else {
-                  if(parseInt(chapter_id.substr(0,3)) >= 500) {
-                    if (arr['office_id'] == chapter_id) {
-                      $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                      return;
+                    return Date.today().next().month().toString('M/d/yyyy');
+                }
+            },
+            searchForChapters = function(search_value, local_or_international){
+                $('ul.search-menu').html('<li id="no_valid_region"><a>Matching Result Not Found!</a></li>');
+                if(parseInt(search_value)) {
+                    /* $.getJSON('../assets/js/zip-codes.json', function (data) {*/
+                    $(zip_array['chapter']).each(function (index, arr) {
+                        var chapter_id = arr['chapter_id'];
+                        if (arr['zip_code'] == search_value) {
+                            $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+                                if(local_or_international == 'local'){
+                                    if(parseInt(chapter_id.substr(0,3)) < 500) {
+                                        if (arr['office_id'] == chapter_id) {
+                                            $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                                            return;
+                                        }
+                                    }
+                                } else {
+                                    if(parseInt(chapter_id.substr(0,3)) >= 500) {
+                                        if (arr['office_id'] == chapter_id) {
+                                            $('ul.search-menu').html('<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                                            return;
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    /* });*/
+                } else {
+                    if (search_value.length > 2) {
+                        $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+                            var office_name_regex = new RegExp(search_value,'i'),
+                                    chapter_id = arr['office_id'];
+                            if(local_or_international == 'local'){
+                                if(parseInt(chapter_id.substr(0,3)) < 500) {
+                                    if(office_name_regex.test(arr['p2p_states'])) {
+                                        $('#no_valid_region').remove();
+                                        $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                                    }
+                                }
+                            } else {
+                                if(parseInt(chapter_id.substr(0,3)) >= 500) {
+                                    if(office_name_regex.test(arr['office_name'])) {
+                                        $('#no_valid_region').remove();
+                                        $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                                    }
+                                }
+                            }
+                        });
+                    } else if (search_value.length == 2) {
+                        $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+                            var office_name_regex = new RegExp(search_value,'i'),
+                                    chapter_id = arr['office_id'];
+                            if(local_or_international == 'local'){
+                                if(parseInt(chapter_id.substr(0,3)) < 500) {
+                                    if(arr['state_province'].toLowerCase().indexOf(search_value.toLowerCase()) != -1) {
+                                        $('#no_valid_region').remove();
+                                        $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                                    }
+                                }
+                            } else {
+                                if(parseInt(chapter_id.substr(0,3)) >= 500) {
+                                    if(office_name_regex.test(arr['office_name'])) {
+                                        $('#no_valid_region').remove();
+                                        $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
+                                    }
+                                }
+                            }
+                        });
                     }
-                  }
                 }
-              });
+            },
+
+        // function to programmatically set the donor intent based on chapter lookup using billing zip entered by donor
+            setChapterByZip = function(postal_code){
+
+                // we initially assume we won't find a match so set the chapter as national
+                var chapter_id = "100-000";
+
+                if(parseInt(postal_code)) {
+
+                    // load up the zip code file
+                    /*$.getJSON('../assets/js/zip-codes.json', function (data) {*/
+
+                    // iterate over each chapter in the file
+                    $(zip_array['chapter']).each(function (index, arr) {
+
+                        // if we've found a match by zip code...
+                        if (arr['zip_code'] == postal_code) {
+
+                            // set the chapter_id to be returned below
+                            chapter_id = arr['chapter_id'];
+
+                            // stop iterating
+                            return false;
+
+                        }
+
+                    });
+
+                    // set donor intent using the chapter id
+                    mawf.CartView.donations()[0].donorIntent(chapter_id);
+
+                    /* });*/
+                } else {
+
+                    // billing zip was non-integer so just set donor intent to national
+
+                    mawf.CartView.donations()[0].donorIntent(chapter_id);
+
+                }
+
+
+            },
+
+
+            $('.nextMonth').each(function () {
+                $(this).append(getNextMonth());
+            });
+    $('a.state-btn').click(function (e) {
+        e.preventDefault();
+        var state = $(this).text();
+        var stateResults = [];
+        var $chapterResults = $('.js-chapter-results ul');
+        $chapterResults.html('');
+        $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+            if (arr['state_province'].toLowerCase().indexOf(state.toLowerCase()) != -1) {
+                stateResults.push([arr['office_id'], arr['office_name']])
             }
-          });
-       /* });*/
-      } else {
-        if (search_value.length > 2) {
-          $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-            var office_name_regex = new RegExp(search_value,'i'),
-            chapter_id = arr['office_id'];
-            if(local_or_international == 'local'){
-              if(parseInt(chapter_id.substr(0,3)) < 500) {
-                if(office_name_regex.test(arr['p2p_states'])) {
-                  $('#no_valid_region').remove();
-                  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                }
-              }
-            } else {
-              if(parseInt(chapter_id.substr(0,3)) >= 500) {
-                if(office_name_regex.test(arr['office_name'])) {
-                  $('#no_valid_region').remove();
-                  $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                }
-              }
-            }
-          });
-        } else if (search_value.length == 2) {
-          $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-            var office_name_regex = new RegExp(search_value,'i'),
-              chapter_id = arr['office_id'];
-              if(local_or_international == 'local'){
-                if(parseInt(chapter_id.substr(0,3)) < 500) {
-                  if(arr['state_province'].toLowerCase().indexOf(search_value.toLowerCase()) != -1) {
-                    $('#no_valid_region').remove();
-                    $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                  }
-                }
-              } else {
-                if(parseInt(chapter_id.substr(0,3)) >= 500) {
-                  if(office_name_regex.test(arr['office_name'])) {
-                    $('#no_valid_region').remove();
-                    $('ul.search-menu').html($('ul.search-menu').html() + '<li><a href="#" data-office-id="' + chapter_id + '" class="chapter-btn">' + arr['office_name'] + '</a></li>');
-                  }
-                }
-              }
-          });
+        }); //each loop
+        for (var i = 0; i < stateResults.length; i++) {
+            var stateResult = stateResults[i]
+            $chapterResults.append('<li><a class="chapter-btn" data-office-id="' + stateResult[0] + '" href="#" >' + stateResult[1] + '</a></li>');
         }
-      }
-    },
-
-    // function to programmatically set the donor intent based on chapter lookup using billing zip entered by donor
-    setChapterByZip = function(postal_code){
-
-      // we initially assume we won't find a match so set the chapter as national
-      var chapter_id = "100-000";
-
-      if(parseInt(postal_code)) {
-
-        // load up the zip code file
-        /*$.getJSON('../assets/js/zip-codes.json', function (data) {*/
-
-          // iterate over each chapter in the file
-          $(zip_array['chapter']).each(function (index, arr) {
-
-            // if we've found a match by zip code...
-            if (arr['zip_code'] == postal_code) {
-
-              // set the chapter_id to be returned below
-              chapter_id = arr['chapter_id'];
-
-              // stop iterating
-              return false;
-
+    });
+    $(document).on('keyup', '.js_donationDest', function (e) {
+        searchForChapters($(this).val(), 'local');
+    });
+    $(document).on('keyup', '.js_donationToCountry', function (e) {
+        searchForChapters($(this).val(), 'international');
+    });
+    if ((chid && chid != "100-000") || ('[[S334:designation]]' != '')) {
+        var orgChapterName = "";
+        var orgCenter = "";
+        var chapterID = ('[[S334:designation]]' != '')?'[[S334:designation]]':chid;
+        $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+            if (arr['office_id'] == chapterID) {
+                orgChapterName = arr['office_name'];
+                orgCenter = arr['center_id'];
+                mawf.donation_init({
+                    localizedCurrencySymbol: '$',
+                    donorIntentId: chapterID,
+                    donorIntentName: orgChapterName,
+                    donationType1Label: 'A Single Donation',
+                    donationType2Label: 'A Monthly Pledge',
+                    minimumDonation: '1',
+                    donationAmt1: level1,
+                    donationAmt2: level2,
+                    donationAmt3: level3,
+                    donationAmt4: level4,
+                    donationAmt5: level5,
+                    donationAmt6: level6,
+                    donationAmt7: level7,
+                    startDate1: 5,
+                    startDate2: 20,
+                    clearFormMessage: 'Clearing the form will remove all your entered information. Are you sure you wish to proceed?',
+                    clearFormBtnYes: 'Yes, clear form',
+                    clearFormBtnNo: 'No, take me back to the form',
+                    nationalID: '100-000',
+                    nationalName: 'Make-A-Wish® America',
+                    internationalID: '500-000',
+                    internationalName: 'Make-A-Wish® International',
+                    purchaserID: chapterID,
+                    purchaserName: orgChapterName,
+                    sitChapterID: chapterID,
+                    sitChapter: orgChapterName,
+                    sitCenter: orgCenter
+                });
+                return false;
             }
-
-          });
-
-          // set donor intent using the chapter id
-          mawf.CartView.donations()[0].donorIntent(chapter_id);
-
-       /* });*/
-      } else {
-
-        // billing zip was non-integer so just set donor intent to national
-
-        mawf.CartView.donations()[0].donorIntent(chapter_id);
-
-      }
-
-      
-    },
-
-
-  $('.nextMonth').each(function () {
-    $(this).append(getNextMonth());
-  });
-  $('a.state-btn').click(function (e) {
-    e.preventDefault();
-    var state = $(this).text();
-    var stateResults = [];
-    var $chapterResults = $('.js-chapter-results ul');
-    $chapterResults.html('');
-    $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-      if (arr['state_province'].toLowerCase().indexOf(state.toLowerCase()) != -1) {
-        stateResults.push([arr['office_id'], arr['office_name']])
-      }
-    }); //each loop
-    for (var i = 0; i < stateResults.length; i++) {
-      var stateResult = stateResults[i]
-      $chapterResults.append('<li><a class="chapter-btn" data-office-id="' + stateResult[0] + '" href="#" >' + stateResult[1] + '</a></li>');
-    }
-  });
-  $(document).on('keyup', '.js_donationDest', function (e) {
-    searchForChapters($(this).val(), 'local');
-  });
-  $(document).on('keyup', '.js_donationToCountry', function (e) {
-    searchForChapters($(this).val(), 'international');
-  });
-  if ((chid && chid != "100-000") || ('[[S334:designation]]' != '')) {
-    var orgChapterName = "";
-    var orgCenter = "";
-    var chapterID = ('[[S334:designation]]' != '')?'[[S334:designation]]':chid;
-    $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-      if (arr['office_id'] == chapterID) {
-        orgChapterName = arr['office_name'];
-        orgCenter = arr['center_id'];
-        mawf.donation_init({
-          localizedCurrencySymbol: '$',
-          donorIntentId: chapterID,
-          donorIntentName: orgChapterName,
-          donationType1Label: 'A Single Donation',
-          donationType2Label: 'A Monthly Pledge',
-          minimumDonation: '1',
-          donationAmt1: level1,
-          donationAmt2: level2,
-          donationAmt3: level3,
-          donationAmt4: level4,
-          donationAmt5: level5,
-          donationAmt6: level6,
-          donationAmt7: level7,
-          startDate1: 5,
-          startDate2: 20,
-          clearFormMessage: 'Clearing the form will remove all your entered information. Are you sure you wish to proceed?',
-          clearFormBtnYes: 'Yes, clear form',
-          clearFormBtnNo: 'No, take me back to the form',
-          nationalID: '100-000',
-          nationalName: 'Make-A-Wish® America',
-          internationalID: '500-000',
-          internationalName: 'Make-A-Wish® International',
-          purchaserID: chapterID,
-          purchaserName: orgChapterName,
-          sitChapterID: chapterID,
-          sitChapter: orgChapterName,
-          sitCenter: orgCenter
         });
-        return false;
-      }
-    });
-    $('#localOptin').insertBefore('#nationalOptin');
-    $('.intouch-container:eq(0)').addClass('selected');
-    $('.intouch-container:eq(0) input').prop('checked', true);
-    $("input[name='s_sat_chapter_id']").val(chapterID);
-  } else {
-    mawf.donation_init({
-      localizedCurrencySymbol: '$',
-      donorIntentId: '100-000',
-      donorIntentName: 'Make-A-Wish® America',
-      donationType1Label: 'A Single Donation',
-      donationType2Label: 'A Monthly Pledge',
-      minimumDonation: '1',
-      donationAmt1: level1,
-      donationAmt2: level2,
-      donationAmt3: level3,
-      donationAmt4: level4,
-      donationAmt5: level5,
-      donationAmt6: level6,
-      donationAmt7: level7,
-      startDate1: 5,
-      startDate2: 20,
-      clearFormMessage: 'Clearing the form will remove all your entered information. Are you sure you wish to proceed?',
-      clearFormBtnYes: 'Yes, clear form',
-      clearFormBtnNo: 'No, take me back to the form',
-      nationalID: '100-000',
-      nationalName: 'Make-A-Wish® America',
-      internationalID: '500-000',
-      internationalName: 'Make-A-Wish® International',
-      purchaserID: '100-000',
-      purchaserName: 'Make-A-Wish® America',
-      sitChapterID: '100-000',
-      sitChapter: 'Make-A-Wish® America',
-      sitCenter: '1001'
-    });
-    $("input[name='s_sat_chapter_id']").val("100-000");
-  }
-  // Get Donation Info
+        $('#localOptin').insertBefore('#nationalOptin');
+        $('.intouch-container:eq(0)').addClass('selected');
+        $('.intouch-container:eq(0) input').prop('checked', true);
+        $("input[name='s_sat_chapter_id']").val(chapterID);
+    } else {
+        mawf.donation_init({
+            localizedCurrencySymbol: '$',
+            donorIntentId: '100-000',
+            donorIntentName: 'Make-A-Wish® America',
+            donationType1Label: 'A Single Donation',
+            donationType2Label: 'A Monthly Pledge',
+            minimumDonation: '1',
+            donationAmt1: level1,
+            donationAmt2: level2,
+            donationAmt3: level3,
+            donationAmt4: level4,
+            donationAmt5: level5,
+            donationAmt6: level6,
+            donationAmt7: level7,
+            startDate1: 5,
+            startDate2: 20,
+            clearFormMessage: 'Clearing the form will remove all your entered information. Are you sure you wish to proceed?',
+            clearFormBtnYes: 'Yes, clear form',
+            clearFormBtnNo: 'No, take me back to the form',
+            nationalID: '100-000',
+            nationalName: 'Make-A-Wish® America',
+            internationalID: '500-000',
+            internationalName: 'Make-A-Wish® International',
+            purchaserID: '100-000',
+            purchaserName: 'Make-A-Wish® America',
+            sitChapterID: '100-000',
+            sitChapter: 'Make-A-Wish® America',
+            sitCenter: '1001'
+        });
+        $("input[name='s_sat_chapter_id']").val("100-000");
+    }
+    // Get Donation Info
 
 })(jQuery);
 
 $(document).ready(function () {
 
-  // Initialization
+    // Initialization
 
-  luminateExtend.init({
-    apiKey: 'mu3fefod',
-    path: {
-      nonsecure: 'http://[[S29:DOMAIN]][[S29:PATH]]',
-      secure: 'https://[[S29:SECURE_DOMAIN]][[S29:SECURE_PATH]]'
-    }
-  });
-  $.fn.infiniteCarousel = function () {
-    function repeat(str, num) {
-      return new Array(num + 1).join(str);
-    }
-    return this.each(function () {
-      var $wrapper = $('> div', this).css('overflow', 'hidden'),
-        $slider = $wrapper.find('> ul'),
-        $items = $slider.find('> li'),
-        $single = $items.filter(':first'),
-        singleWidth = 280,
-        visible = Math.ceil($wrapper.innerWidth() / singleWidth);
-      if (visible === 0) {
-        visible = 1;
-      }
-      if (($items.length < 3) != 0) {
-        $slider.append(repeat('<li class="empty" />', visible - ($items.length % visible)));
-        $items = $slider.find('> li');
-      }
-      $items.filter(':first').before($items.slice($items.length - 1).clone().addClass('cloned'));
-      $items.filter(':last').after($items.slice(0,1).clone().addClass('cloned'));
-      $items = $slider.find('> li');
-      $wrapper.scrollLeft(singleWidth);
-      function gotoPage(dir) {
-        var left = singleWidth * dir; 
-        $wrapper.filter(':not(:animated)').animate({
-          scrollLeft: '+=' + left
-        }, 500, function () {
-          if (dir === 1) {
-            $items.filter(':last').after($items.slice(2,3).clone());
-            $items.filter(':first').remove();
-          } else if (dir === -1) {
-            $items.filter(':first').before($items.slice(3,4).clone());
-            $items.filter(':last').remove();
-          }
-          $items = $slider.find('> li');
-          $wrapper.scrollLeft(singleWidth);
-        });
-        return false;
-      }
-      $wrapper.after('<a class="arrow back"></a><a class="arrow forward"></a>');
-      $('a.back', this).click(function () {
-        return gotoPage(1);
-      });
-      $('a.forward', this).click(function () {
-        return gotoPage(-1);
-      });
-      $(this).bind('goto', function (event, page) {
-        gotoPage(page);
-      });
+    luminateExtend.init({
+        apiKey: 'mu3fefod',
+        path: {
+            nonsecure: 'http://[[S29:DOMAIN]][[S29:PATH]]',
+            secure: 'https://[[S29:SECURE_DOMAIN]][[S29:SECURE_PATH]]'
+        }
     });
-  };
-
-  // Initialization
-
-  // Product Selection
-
-  var donationID = $('.js_donationConfigurator').attr('data-donation-id'),
-    cardProperties = [],
-    occasionTypes = [],
-    ecard_id = '',
-    card_name = '',
-    card_type = '',
-    card_form = '',
-    occasion_type = '',
-    card_image1 = '',
-    card_image2 = '',
-    card_image3 = '',
-    card_image4 = '',
-    card_image5 = '',
-    card_thumbnail = '',
-    product_url = '',
-    skew = '',
-    giftTypeButtons = $("#giftTypes").html(),
-    initProducts = $("ul#products").html(),
-    product_id = '',
-    validateFail = function(currentElement) {
-      currentElement.addClass('input-error');
-      currentElement.next("p").show();
-      currentElement.prev("label").addClass("label-error");
-      $(".bldr-wrap #card-form .mnamefld").prev("fieldset").css({
-        "position": "relative;"
-      });
-      $(".bldr-wrap #card-form .mnamefld").css({
-        "left": "300px",
-        "margin-left": "12px",
-        "position": "absolute",
-        "top": "12px"
-      });
-      if ($("#send_to_state").hasClass("input-error")) {
-        $("#uniform-send_to_state span").addClass("input-error");
-        $("#uniform-send_to_state").next("p").show();
-        $("#uniform-send_to_state").prev("label").addClass("label-error");
-      }
-    },
-    validatePass = function(currentElement) {
-      currentElement.removeClass('input-error');
-      currentElement.next("p").hide();
-      currentElement.prev("label").removeClass("label-error");
-      if ($("#send_to_state").hasClass("input-error")) {
-        $("#uniform-send_to_state span").removeClass("input-error");
-        $("#uniform-send_to_state").next("p").hide();
-        $("#uniform-send_to_state").prev("label").removeClass("label-error");
-      }
-    },
-    checkFields = function () {
-      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-        ret = true;
-      $('#step3 .jsreq:visible').each(function () {
-        if ($(this).hasClass('js_email')){
-          if (emailRegex.test($(this).val())) { validatePass($(this)); }
-          else { validateFail($(this)); ret = false; }
+    $.fn.infiniteCarousel = function () {
+        function repeat(str, num) {
+            return new Array(num + 1).join(str);
         }
-        else if ($(this).val() == '') { validateFail($(this)); ret = false; }
-        else { validatePass($(this)); }
-      });
-      return ret;
-    },
-    launchCard = function(id) {
-      $.fancybox({
-        href: '#js-prod-personalizer',
-        autoSize: false,
-        width: '1018px',
-        height: '585px',
-        padding: 0,
-        scrolling: 'no',
-        modal: true,
-        closeBtn: false,
-        margin: [5, 5, 5, 5],
-        afterShow: function () {
-          mawf.$personalizer.find('select').trigger('change');
-          $.fancybox.update(); 
-        },
-        afterClose: function () {
-          mawf.shutDownProductModal();
-        }
-      });
-      selectCard(id);
-    },
-    selectCard = function(cardID) {
-      $(productsjson['product']).each(function (index, arr) {
-        if (arr['card_id'] == cardID) {
-          ecard_id = arr['ecard_id'] || false;
-          card_name = arr['card_name'];
-          card_type = arr['card_type'];
-          occasion_type = arr['occasion_type'];
-          card_image1 = arr['card_image1'];
-          card_image2 = arr['card_image2'] || false;
-          card_image3 = arr['card_image3'] || false;
-          card_image4 = arr['card_image4'] || false;
-          card_image5 = arr['card_image5'] || false;
-          card_thumbnail = arr['card_thumbnail'] || "../Card images/General/Certficates/blank.png";
-          product_url = arr['product_url'] || false;
-          return false;
-        }
-      });
-      launchZoom(card_image2);
-      $('.cardDescription').load('SPageNavigator/reus_card_' + cardID + '.html #container');
-      if (card_type = "card") {
-        var cardThumbs = '';
-        if (card_image3 != '') {
-          cardThumbs = '<img src="' + card_image2 + '" class="card-thumb" />' + '<img src="' + card_image3 + '" class="card-thumb" />';
-        }
-        if (card_image4 != '') {
-          cardThumbs = cardThumbs + '<img src="' + card_image4 + '" class="card-thumb" />';
-        }
-        if (card_image5 != '') {
-          cardThumbs = cardThumbs + '<img src="' + card_image5 + '" class="card-thumb" />';
-        }
-        $(".card-thumbs").html(cardThumbs);
-      }
-      $("img.card-thumb").click(function (e) {
-        e.preventDefault();
-        launchZoom($(this).attr("src"));
-      });
-      $('.top-actions .back-btn').show();
-      $('.top-actions .cancel-btn').hide();
-      $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
-      $('#step1').hide();
-      $('#step2').show();
-      $('#step3').hide();
-      $('.lightbox-rightside').on('click', 'a.cont-btn', function (e) {
-        if (!$(this).parents().hasClass('disabled')) {
-          e.preventDefault();
-          customizeCard(cardID);
-        }
-      });
-      return;
-    },
-    launchZoom = function(cardURL) {
-      $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img id="zoom_preview" style="display: none;" src="' + cardURL + '" alt="" /></span>')
-      $('#zoom_preview').load(function(){
-          var productHeight = $(this).height();
-          var productWidth = $(this).width();
-          if (productHeight == productWidth) {
-            $(this).addClass('square');
-          } else if (productHeight > productWidth) {
-            $(this).addClass('portrait');
-          } else if (productHeight < productWidth) {
-            $(this).addClass('landscape');
-          }
-          $(this).attr('style', '');   
+        return this.each(function () {
+            var $wrapper = $('> div', this).css('overflow', 'hidden'),
+                    $slider = $wrapper.find('> ul'),
+                    $items = $slider.find('> li'),
+                    $single = $items.filter(':first'),
+                    singleWidth = 280,
+                    visible = Math.ceil($wrapper.innerWidth() / singleWidth);
+            if (visible === 0) {
+                visible = 1;
+            }
+            if (($items.length < 3) != 0) {
+                $slider.append(repeat('<li class="empty" />', visible - ($items.length % visible)));
+                $items = $slider.find('> li');
+            }
+            $items.filter(':first').before($items.slice($items.length - 1).clone().addClass('cloned'));
+            $items.filter(':last').after($items.slice(0,1).clone().addClass('cloned'));
+            $items = $slider.find('> li');
+            $wrapper.scrollLeft(singleWidth);
+            function gotoPage(dir) {
+                var left = singleWidth * dir;
+                $wrapper.filter(':not(:animated)').animate({
+                    scrollLeft: '+=' + left
+                }, 500, function () {
+                    if (dir === 1) {
+                        $items.filter(':last').after($items.slice(2,3).clone());
+                        $items.filter(':first').remove();
+                    } else if (dir === -1) {
+                        $items.filter(':first').before($items.slice(3,4).clone());
+                        $items.filter(':last').remove();
+                    }
+                    $items = $slider.find('> li');
+                    $wrapper.scrollLeft(singleWidth);
+                });
+                return false;
+            }
+            $wrapper.after('<a class="arrow back"></a><a class="arrow forward"></a>');
+            $('a.back', this).click(function () {
+                return gotoPage(1);
+            });
+            $('a.forward', this).click(function () {
+                return gotoPage(-1);
+            });
+            $(this).bind('goto', function (event, page) {
+                gotoPage(page);
+            });
         });
-      $('#productImageContainer').zoom();
-    },
-    launchOccasion = function(type, occasion) {
-      $(productsjson['product']).each(function (index, arr) {
-        if( decodeURIComponent(type).toLowerCase() == arr['card_type'].toLowerCase() &&
-            decodeURIComponent(occasion).toLowerCase() == arr['occasion_type'].toLowerCase() ) {
-          $.fancybox({
-            href: '#js-prod-personalizer',
-            autoSize: false,
-            width: '1018px',
-            height: '585px',
-            padding: 0,
-            scrolling: 'no',
-            modal: true,
-            closeBtn: false,
-            margin: [5, 5, 5, 5],
-            afterShow: function () {
-              mawf.$personalizer.find('select').trigger('change');
-              $.fancybox.update();
-              $('.custom-select-menu:eq(0) li').each(function(){
-                if( $(this).html().toLowerCase() == decodeURIComponent(occasion).toLowerCase() ) {
-                  $(this).click();
+    };
+
+    // Initialization
+
+    // Product Selection
+
+    var donationID = $('.js_donationConfigurator').attr('data-donation-id'),
+            cardProperties = [],
+            occasionTypes = [],
+            ecard_id = '',
+            card_name = '',
+            card_type = '',
+            card_form = '',
+            occasion_type = '',
+            card_image1 = '',
+            card_image2 = '',
+            card_image3 = '',
+            card_image4 = '',
+            card_image5 = '',
+            card_thumbnail = '',
+            product_url = '',
+            skew = '',
+            giftTypeButtons = $("#giftTypes").html(),
+            initProducts = $("ul#products").html(),
+            product_id = '',
+            validateFail = function(currentElement) {
+                currentElement.addClass('input-error');
+                currentElement.next("p").show();
+                currentElement.prev("label").addClass("label-error");
+                $(".bldr-wrap #card-form .mnamefld").prev("fieldset").css({
+                    "position": "relative;"
+                });
+                $(".bldr-wrap #card-form .mnamefld").css({
+                    "left": "300px",
+                    "margin-left": "12px",
+                    "position": "absolute",
+                    "top": "12px"
+                });
+                if ($("#send_to_state").hasClass("input-error")) {
+                    $("#uniform-send_to_state span").addClass("input-error");
+                    $("#uniform-send_to_state").next("p").show();
+                    $("#uniform-send_to_state").prev("label").addClass("label-error");
                 }
-              });
-              $('.custom-select-menu:eq(1) li').each(function(){
-                if( $(this).attr('data-option-value').toLowerCase() == decodeURIComponent(type).toLowerCase() ) {
-                  $(this).click();
-                }
-              });
             },
-            afterClose: function () {
-              mawf.shutDownProductModal();
-            }
-          });
-        }
-      });
-    },
-    customizeCard = function(cardID) {
-      $(productsjson['product']).each(function (index, arr) {
-        if (arr['card_id'] == cardID) {
-          ecard_id = arr['ecard_id'] || false;
-          card_name = arr['card_name'];
-          card_type = arr['card_type'];
-          card_form = arr['card_form'];
-          occasion_type = arr['occasion_type'];
-          card_image1 = arr['card_image1'];
-          card_image2 = arr['card_image2'] || false;
-          card_image3 = arr['card_image3'] || false;
-          card_image4 = arr['card_image4'] || false;
-          card_image5 = arr['card_image5'] || false;
-          card_thumbnail = arr['card_thumbnail'] || "../Card images/General/Certficates/blank.png";
-          product_url = arr['product_url'] || false;
-          skew = cardID;
-          $("input[name='s_sat_skew']").val(skew);
-          return false;
-        }
-      });
-      showStep3(ecard_id, card_name, card_type, card_form, occasion_type, card_image1, card_image2, card_image3, card_thumbnail, product_url, skew, cardID);
-      return;
-    },
-    resetProducts = function(previousStep) {
-      $('#step3 .jsreq').each(function () {
-        $(this).removeClass('input-error');
-        $(this).next("p").hide();
-        $(this).prev("label").removeClass("label-error");
-      });
-      $("#uniform-send_to_state span").removeClass("input-error");
-      $("#uniform-send_to_state").next("p").hide();
-      $("#uniform-send_to_state").prev("label").removeClass("label-error");
-      $(".bldr-wrap #card-form .mnamefld").css({
-        "left": "0px",
-        "margin-left": "12px",
-        "position": "relative",
-        "top": "0px"
-      });
-
-      if(typeof previousStep == "undefined" || typeof previousStep == "false"){
-        $(".option-one li.selected").removeClass("selected");
-        $(".option-two li.selected").removeClass("selected");
-        $(".option-one label").removeClass("selection-made").text("Select Occasion");
-        $(".option-two label").removeClass("selection-made").text("Select Card Type");
-        $(".option-one input").attr("value", "Select Occasion");
-        $(".option-two input").attr("value", "Select Card Type");
-        $('#cardCount').text('');
-        $('.select-area-2').addClass('disabled');
-        $('.select-area-3').addClass("disabled");
-        $('#carousel-gallery').addClass("disabled");
-        $('.option-two ul').css({
-          opacity: 0
-        });
-        $('#carousel-gallery .wrapper').html('<ul id="products">' + initProducts + "</ul>");
-      }
-
-      products = '';
-      $("#step3 input").val('');
-      $("#step3 textarea").val('');
-      $("#send_to_state option:first").attr("selected", "selected");
-      $('#step1').show();
-      $('#step2').hide();
-      $('#step3').hide();
-      toFirstName = '';
-      toMI = '';
-      toLastName = '';
-      toInHonorOf = '';
-      toEmail = '';
-      toFullName = '';
-      fromName = '';
-      toAddress1 = '';
-      toAddress2 = '';
-      toCity = '';
-      toState = '';
-      toZip = '';
-      toCountry = '';
-      message = '';
-      ecardID = '';
-      cardName = '';
-      cardType = '';
-      occasionType = '';
-      cardImage1 = '';
-      cardImage2 = '';
-      cardImage3 = '';
-      cardThumbnail = '';
-      productURL = '';
-      skew = '';
-      product_id = '';
-    },
-    showStep3 = function (ecardID, cardName, cardType, cardForm, occasionType, cardImage1, cardImage2, cardImage3, cardThumbnail, productURL, thisSkew, cardID)
-    {
-      $('#step1, #step2, .top-actions .back-btn').hide();
-      $('#step3, .top-actions .cancel-btn').show();
-      $('#step3 #productTitle').text(cardName);
-      $('.cardThumbnail').attr('src', cardThumbnail);
-      var toFirstName = '';
-      var toMI = '';
-      var toLastName = '';
-      var toInHonorOf = '';
-      var toEmail = '';
-      var toFullName = '';
-      var fromName = '';
-      var toAddress1 = '';
-      var toAddress2 = '';
-      var toCity = '';
-      var toState = '';
-      var toZip = '';
-      var toCountry = '';
-      var message = '';
-      $("input[name='s_occasion_type']").val(occasionType);
-      $('#js-prod-personalizer h1').text('Customize ' + cardType);
-      $('#card-form fieldset, .bottomButtons a').hide();
-      $('#card_send_to,#card_personal_message,#card_to,#card_from,#card_in_honor_of,#card_in_memory_of,#card_wedding_couple_name').hide();
-      if (card_form === "cert01" || card_form === "cert03") {
-        $('#from_info').html('Your name or family name will appear on the certificate exactly as you type it here. Limit 40 characters including spaces.'); 
-        if (card_form === "cert01"){
-          $('fieldset.cert01, #finishCertificate').show();
-          $('#honor_info').html('Would you like a different name printed on the certificate?');
-          $('#finishCertificate').click(function (e) {
-            e.preventDefault();
-            product_id = cardID;
-            if (checkFields()) {
-              toFirstName = $("input[name='honoree_first_name']").val();
-              toMI = $("input[name='honoree_middle_initial']").val();
-              toLastName = $("input[name='honoree_last_name']").val();
-              toInHonorOf = $("input[name='honoree_full_name']").val();
-              toFullName = '';
-              fromName = $("input[name='from_name']").val();
-              if (toInHonorOf.length < 1) {
-                if (toMI.length > 0) {
-                  toFullName = toFirstName + " " + toMI + " " + toLastName;
-                } else {
-                  toFullName = toFirstName + " " + toLastName
+            validatePass = function(currentElement) {
+                currentElement.removeClass('input-error');
+                currentElement.next("p").hide();
+                currentElement.prev("label").removeClass("label-error");
+                if ($("#send_to_state").hasClass("input-error")) {
+                    $("#uniform-send_to_state span").removeClass("input-error");
+                    $("#uniform-send_to_state").next("p").hide();
+                    $("#uniform-send_to_state").prev("label").removeClass("label-error");
                 }
-              } else {
-                toFullName = toInHonorOf;
-              }
-              $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-              $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-              $('#card_preview').show();
-              $('#card_create').hide();
-              $('#card_in_honor_of').show();
-                var nameString = decodeURIComponent(toFirstName);
-                if(decodeURIComponent(toMI).length > 0) { nameString += ' ' + decodeURIComponent(toMI) }
-                nameString += ' ' + decodeURIComponent(toLastName);
-                if(decodeURIComponent(toFullName) !== nameString) {
-                    $('#card_in_honor_of #honor_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+            },
+            checkFields = function () {
+                var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                        ret = true;
+                $('#step3 .jsreq:visible').each(function () {
+                    if ($(this).hasClass('js_email')){
+                        if (emailRegex.test($(this).val())) { validatePass($(this)); }
+                        else { validateFail($(this)); ret = false; }
+                    }
+                    else if ($(this).val() == '') { validateFail($(this)); ret = false; }
+                    else { validatePass($(this)); }
+                });
+                return ret;
+            },
+            launchCard = function(id) {
+                $.fancybox({
+                    href: '#js-prod-personalizer',
+                    autoSize: false,
+                    width: '1018px',
+                    height: '585px',
+                    padding: 0,
+                    scrolling: 'no',
+                    modal: true,
+                    closeBtn: false,
+                    margin: [5, 5, 5, 5],
+                    afterShow: function () {
+                        mawf.$personalizer.find('select').trigger('change');
+                        $.fancybox.update();
+                    },
+                    afterClose: function () {
+                        mawf.shutDownProductModal();
+                    }
+                });
+                selectCard(id);
+            },
+            selectCard = function(cardID) {
+                $(productsjson['product']).each(function (index, arr) {
+                    if (arr['card_id'] == cardID) {
+                        ecard_id = arr['ecard_id'] || false;
+                        card_name = arr['card_name'];
+                        card_type = arr['card_type'];
+                        occasion_type = arr['occasion_type'];
+                        card_image1 = arr['card_image1'];
+                        card_image2 = arr['card_image2'] || false;
+                        card_image3 = arr['card_image3'] || false;
+                        card_image4 = arr['card_image4'] || false;
+                        card_image5 = arr['card_image5'] || false;
+                        card_thumbnail = arr['card_thumbnail'] || "../Card images/General/Certficates/blank.png";
+                        product_url = arr['product_url'] || false;
+                        return false;
+                    }
+                });
+                launchZoom(card_image2);
+                $('.cardDescription').load('SPageNavigator/reus_card_' + cardID + '.html #container');
+                if (card_type = "card") {
+                    var cardThumbs = '';
+                    if (card_image3 != '') {
+                        cardThumbs = '<img src="' + card_image2 + '" class="card-thumb" />' + '<img src="' + card_image3 + '" class="card-thumb" />';
+                    }
+                    if (card_image4 != '') {
+                        cardThumbs = cardThumbs + '<img src="' + card_image4 + '" class="card-thumb" />';
+                    }
+                    if (card_image5 != '') {
+                        cardThumbs = cardThumbs + '<img src="' + card_image5 + '" class="card-thumb" />';
+                    }
+                    $(".card-thumbs").html(cardThumbs);
                 }
-                $('#card_in_honor_of #honor_short').html('<p>' + nameString + '</p>');
-              $('#card_from').show();
-              $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
-              cardProperties = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew, product_id];
-			  $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Honor Of</h6>' + ((toInHonorOf.length > 1) ? '<p>"' + decodeURIComponent(toFullName) + '"</p>' : '' ) + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p>');
-              $.fancybox.close(); console.log(cardProperties);
-            }
-          });
-        } else if(card_form === "cert03") {
-          $('fieldset.cert03, #finishCertificate').show();
-          $('#memorial_info').html('Would you like a different name printed on the certificate?');
-          $('#finishCertificate').click(function (e) {
-            e.preventDefault();
-            product_id = cardID;
-            if (checkFields()) {
-              toFirstName = $("input[name='memoree_first_name']").val();
-              toMI = $("input[name='memoree_middle_initial']").val();
-              toLastName = $("input[name='memoree_last_name']").val();
-              toInHonorOf = $("input[name='memoree_full_name']").val();
-              toFullName = '';
-              fromName = $("input[name='from_name']").val();
-              if (toInHonorOf.length < 1) {
-                if (toMI.length > 0) {
-                  toFullName = toFirstName + " " + toMI + " " + toLastName;
-                } else {
-                  toFullName = toFirstName + " " + toLastName
+                $("img.card-thumb").click(function (e) {
+                    e.preventDefault();
+                    launchZoom($(this).attr("src"));
+                });
+                $('.top-actions .back-btn').show();
+                $('.top-actions .cancel-btn').hide();
+                $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
+                $('#step1').hide();
+                $('#step2').show();
+                $('#step3').hide();
+                $('.lightbox-rightside').on('click', 'a.cont-btn', function (e) {
+                    if (!$(this).parents().hasClass('disabled')) {
+                        e.preventDefault();
+                        customizeCard(cardID);
+                    }
+                });
+                return;
+            },
+            launchZoom = function(cardURL) {
+                $('.productImageContainer').html('<span class="zoom" id="productImageContainer"><img id="zoom_preview" style="display: none;" src="' + cardURL + '" alt="" /></span>')
+                $('#zoom_preview').load(function(){
+                    var productHeight = $(this).height();
+                    var productWidth = $(this).width();
+                    if (productHeight == productWidth) {
+                        $(this).addClass('square');
+                    } else if (productHeight > productWidth) {
+                        $(this).addClass('portrait');
+                    } else if (productHeight < productWidth) {
+                        $(this).addClass('landscape');
+                    }
+                    $(this).attr('style', '');
+                });
+                $('#productImageContainer').zoom();
+            },
+            launchOccasion = function(type, occasion) {
+                $(productsjson['product']).each(function (index, arr) {
+                    if( decodeURIComponent(type).toLowerCase() == arr['card_type'].toLowerCase() &&
+                            decodeURIComponent(occasion).toLowerCase() == arr['occasion_type'].toLowerCase() ) {
+                        $.fancybox({
+                            href: '#js-prod-personalizer',
+                            autoSize: false,
+                            width: '1018px',
+                            height: '585px',
+                            padding: 0,
+                            scrolling: 'no',
+                            modal: true,
+                            closeBtn: false,
+                            margin: [5, 5, 5, 5],
+                            afterShow: function () {
+                                mawf.$personalizer.find('select').trigger('change');
+                                $.fancybox.update();
+                                $('.custom-select-menu:eq(0) li').each(function(){
+                                    if( $(this).html().toLowerCase() == decodeURIComponent(occasion).toLowerCase() ) {
+                                        $(this).click();
+                                    }
+                                });
+                                $('.custom-select-menu:eq(1) li').each(function(){
+                                    if( $(this).attr('data-option-value').toLowerCase() == decodeURIComponent(type).toLowerCase() ) {
+                                        $(this).click();
+                                    }
+                                });
+                            },
+                            afterClose: function () {
+                                mawf.shutDownProductModal();
+                            }
+                        });
+                    }
+                });
+            },
+            customizeCard = function(cardID) {
+                $(productsjson['product']).each(function (index, arr) {
+                    if (arr['card_id'] == cardID) {
+                        ecard_id = arr['ecard_id'] || false;
+                        card_name = arr['card_name'];
+                        card_type = arr['card_type'];
+                        card_form = arr['card_form'];
+                        occasion_type = arr['occasion_type'];
+                        card_image1 = arr['card_image1'];
+                        card_image2 = arr['card_image2'] || false;
+                        card_image3 = arr['card_image3'] || false;
+                        card_image4 = arr['card_image4'] || false;
+                        card_image5 = arr['card_image5'] || false;
+                        card_thumbnail = arr['card_thumbnail'] || "../Card images/General/Certficates/blank.png";
+                        product_url = arr['product_url'] || false;
+                        skew = cardID;
+                        $("input[name='s_sat_skew']").val(skew);
+                        return false;
+                    }
+                });
+                showStep3(ecard_id, card_name, card_type, card_form, occasion_type, card_image1, card_image2, card_image3, card_thumbnail, product_url, skew, cardID);
+                return;
+            },
+            resetProducts = function(previousStep) {
+                $('#step3 .jsreq').each(function () {
+                    $(this).removeClass('input-error');
+                    $(this).next("p").hide();
+                    $(this).prev("label").removeClass("label-error");
+                });
+                $("#uniform-send_to_state span").removeClass("input-error");
+                $("#uniform-send_to_state").next("p").hide();
+                $("#uniform-send_to_state").prev("label").removeClass("label-error");
+                $(".bldr-wrap #card-form .mnamefld").css({
+                    "left": "0px",
+                    "margin-left": "12px",
+                    "position": "relative",
+                    "top": "0px"
+                });
+
+                if(typeof previousStep == "undefined" || typeof previousStep == "false"){
+                    $(".option-one li.selected").removeClass("selected");
+                    $(".option-two li.selected").removeClass("selected");
+                    $(".option-one label").removeClass("selection-made").text("Select Occasion");
+                    $(".option-two label").removeClass("selection-made").text("Select Card Type");
+                    $(".option-one input").attr("value", "Select Occasion");
+                    $(".option-two input").attr("value", "Select Card Type");
+                    $('#cardCount').text('');
+                    $('.select-area-2').addClass('disabled');
+                    $('.select-area-3').addClass("disabled");
+                    $('#carousel-gallery').addClass("disabled");
+                    $('.option-two ul').css({
+                        opacity: 0
+                    });
+                    $('#carousel-gallery .wrapper').html('<ul id="products">' + initProducts + "</ul>");
                 }
-              } else {
-                toFullName = toInHonorOf;
-              }
-              $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-              $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-              $('#card_preview').show();
-              $('#card_create').hide();
-              $('#card_in_memory_of').show();
-              $('#card_in_memory_of #memory_short').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-              $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
-              $('#card_from').show();
-              $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
-              cardProperties = [donationID, 'cert03', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew, product_id];
-			  $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Honor Of</h6>' + ((toInHonorOf.length > 1) ? '<p>"' + decodeURIComponent(toFullName) + '"</p>' : '' ) + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p>');
-              $.fancybox.close(); console.log(cardProperties);
-            }
-          });
-        }
-      } else if (card_form === "cert02") {
-        $('fieldset.cert02, #finishCertificate').show(); 
-        $('#finishCertificate').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          if (checkFields()) {
-            toFullName = $("input[name='wedding_couple_name']").val();
-            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_wedding_couple_name').show();
-            $('#card_wedding_couple_name .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
-            cardProperties = [donationID, 'cert02', 'certificate', toFullName, productURL, cardName, occasionType, thisSkew, product_id];
-			$("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Honor Of</h6>' + ((toInHonorOf.length > 1) ? '<p>"' + decodeURIComponent(toFullName) + '"</p>' : '' ) + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p>');
-            $.fancybox.close(); console.log(cardProperties);
-          }
-        });
-      } else if (card_form === "card01") {
-        $('fieldset.card01, #finishCard, .leaveBlank').show();
-        $('.leaveBlank').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-          $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-          $('#card_preview').show();
-          $('#card_create').hide();
-          $('#card_send_to').show();
-          $('#card_send_to .blurbtext').html('Leave blank and send to me.');
-          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close(); console.log(cardProperties);
-        }); //click
-        $('#finishCard').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          if (checkFields()) {
-            toFirstName = $("input[name='send_to_first_name']").val();
-            toMI = $("input[name='send_to_middle_initial']").val();
-            toLastName = $("input[name='send_to_last_name']").val();
-            toFullName = '';
-            toAddress1 = $("input[name='send_to_street_address_1']").val();
-            toAddress2 = $("input[name='send_to_street_address_2']").val();
-            toCity = $("input[name='send_to_city']").val();
-            toState = $("select#send_to_state option:selected").val();
-            toZip = $("input[name='send_to_postal_code']").val();
-            toCountry = $("select#send_to_country option:selected").val();
-            var msgLine1 = $("input[name='personal_message_line_1']").val();
-            var msgLine2 = $("input[name='personal_message_line_2']").val();
-            var msgLine3 = $("input[name='personal_message_line_3']").val();
-            if(msgLine1 !== undefined && msgLine1 !== '') { message += msgLine1 + '</br />'; }
-            if(msgLine2 !== undefined && msgLine2 !== '') { message += msgLine2 + '</br />'; }
-            if(msgLine3 !== undefined && msgLine3 !== '') { message += msgLine3 + '</br />'; }
-              if (toMI) {
-              toFullName = toFirstName + " " + toMI + " " + toLastName;
-            } else {
-              toFullName = toFirstName + " " + toLastName;
-            }
-            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_send_to').show();
-            $('#card_send_to .blurbtext').html(
-              '<p>' + decodeURIComponent(toFullName) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
-              '<p>' + decodeURIComponent(toCity) + '</p>' +
-              '<p>' + decodeURIComponent(toState) + '</p>' +
-              '<p>' + decodeURIComponent(toZip) + '</p>' +
-              '<p>' + decodeURIComponent(toCountry) + '</p>'
-            );
-            $('#card_personal_message').show();
-            $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
-            cardProperties = [donationID, 'card01', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, productURL, message, cardName, msgLine1, msgLine2, msgLine3, occasionType, thisSkew];
-		    $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>Send To</h6><p>' + decodeURIComponent(toFullName) + '</p>' +'<p>' + decodeURIComponent(toAddress1) + '</p>' +'<p>' + decodeURIComponent(toAddress2) + '</p>' +'<p>' + decodeURIComponent(toCity) + '</p>' +'<p>' + decodeURIComponent(toState) + '</p>' +'<p>' + decodeURIComponent(toZip) + '</p>' +'<p>' + decodeURIComponent(toCountry) + '</p>' + '<h6>Personalization</h6>' + ((msgLine1)?'<p>Line 1:' + decodeURIComponent(msgLine1) + '</p>':'') + ((msgLine2)?'<p>Line 2:' + decodeURIComponent(msgLine2) + '</p>':'') + '</p>' + ((msgLine3)?'<p>Line 3:' + decodeURIComponent(msgLine3) + '</p>':'') + '</p>');
-            $.fancybox.close(); console.log(cardProperties);
-          }
-        });
-      } else if (card_form === "card02") {
-        $('.card02, #finishCard, .leaveBlank').show();
-        $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
-        $('.leaveBlank').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-          $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-          $('#card_preview').show();
-          $('#card_create').hide();
-          $('#card_send_to').show();
-          $('#card_send_to .blurbtext').html('Leave blank and send to me.');
-          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close(); console.log(cardProperties);
-        });
-        $('#finishCard').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          if (checkFields()) {
-            toFirstName = $("input[name='send_to_first_name']").val();
-            toMI = $("input[name='send_to_middle_initial']").val();
-            toLastName = $("input[name='send_to_last_name']").val();
-            toFullName = '';
-            toAddress1 = $("input[name='send_to_street_address_1']").val();
-            toAddress2 = $("input[name='send_to_street_address_2']").val();
-            toCity = $("input[name='send_to_city']").val();
-            toState = $("select#send_to_state option:selected").val();
-            toZip = $("input[name='send_to_postal_code']").val();
-            toCountry = $("select#send_to_country option:selected").val();
-            fromName = $("input[name='from_name']").val();
-            if (toMI) {
-              toFullName = toFirstName + " " + toMI + " " + toLastName;
-            } else {
-              toFullName = toFirstName + " " + toLastName;
-            }
-            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_send_to').show();
-            $('#card_send_to .blurbtext').html(
-              '<p>' + decodeURIComponent(toFullName) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
-              '<p>' + decodeURIComponent(toCity) + '</p>' +
-              '<p>' + decodeURIComponent(toState) + '</p>' +
-              '<p>' + decodeURIComponent(toZip) + '</p>' +
-              '<p>' + decodeURIComponent(toCountry) + '</p>'
-            );
-            $('#card_from').show();
-            $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
-            cardProperties = [donationID, 'card02', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
-		  $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><h6>Send To</h6><p>' + decodeURIComponent(toFullName) + '</p><p>' + decodeURIComponent(toAddress1) + '</p>' +'<p>' + decodeURIComponent(toAddress2) + '</p>' +'<p>' + decodeURIComponent(toCity) + '</p>' +'<p>' + decodeURIComponent(toState) + '</p>' +'<p>' + decodeURIComponent(toZip) + '</p>' +'<p>' + decodeURIComponent(toCountry) + '</p>');
-            $.fancybox.close(); console.log(cardProperties);
-          }
-        });
-      } else if (card_form === "card03") {
-        $('fieldset.card03, #finishCard, .leaveBlank').show();
-        $('.leaveBlank').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-          $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-          $('#card_preview').show();
-          $('#card_create').hide();
-          $('#card_send_to').show();
-          $('#card_send_to .blurbtext').html('Leave blank and send to me.');
-          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close(); console.log(cardProperties);
-        });
-        $('#finishCard').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          if (checkFields()) {
-            shippingFirstName = $("input[name='send_to_first_name']").val();
-            shippingMI = $("input[name='send_to_middle_initial']").val();
-            shippingLastName = $("input[name='send_to_last_name']").val();
-            toAddress1 = $("input[name='send_to_street_address_1']").val();
-            toAddress2 = $("input[name='send_to_street_address_2']").val();
-            toCity = $("input[name='send_to_city']").val();
-            toState = $("select#send_to_state option:selected").val();
-            toZip = $("input[name='send_to_postal_code']").val();
-            toCountry = $("select#send_to_country option:selected").val();
-            toFirstName = $("input[name='memoree_first_name']").val();
-            toMI = $("input[name='memoree_middle_initial']").val();
-            toLastName = $("input[name='memoree_last_name']").val();
-            toInHonorOf = $("input[name='memoree_full_name']").val();
-            toFullName = '';
-            shippingFullName = '';
-            fromName = $("input[name='from_name']").val();
-            if (!toInHonorOf) {
-              if (toMI) {
-                toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
-              } else {
-                toFullName = toFirstName + "%20" + toLastName;
-              }
-            } else {
-              toFullName = toInHonorOf;
-            }
-            if (shippingMI) {
-              shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
-            } else {
-              shippingFullName = shippingFirstName + "%20" + shippingLastName;
-            }
-            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_send_to').show();
-            $('#card_send_to .blurbtext').html(
-              '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
-              '<p>' + decodeURIComponent(toCity) + '</p>' +
-              '<p>' + decodeURIComponent(toState) + '</p>' +
-              '<p>' + decodeURIComponent(toZip) + '</p>' +
-              '<p>' + decodeURIComponent(toCountry) + '</p>'
-            );
-            $('#card_in_memory_of').show();
-            $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-            $('#card_in_memory_of #memory_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
-            cardProperties = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
-		  $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Memory Of</h6><p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><p>"' + decodeURIComponent(toFullName) + '"</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><p>' + decodeURIComponent(toFullName) + '</p>' +'<p>' + decodeURIComponent(toAddress1) + '</p>' +'<p>' + decodeURIComponent(toAddress2) + '</p>' +'<p>' + decodeURIComponent(toCity) + '</p>' +'<p>' + decodeURIComponent(toState) + '</p>' +'<p>' + decodeURIComponent(toZip) + '</p>' +'<p>' + decodeURIComponent(toCountry) + '</p>');
-            $.fancybox.close(); console.log(cardProperties);
-          }
-        });
-      } else if (card_form === "card04") {
-        $('fieldset.card04, #finishCard, .leaveBlank').show();
-        $('.leaveBlank').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-          $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-          $('#card_preview').show();
-          $('#card_create').hide();
-          $('#card_send_to').show();
-          $('#card_send_to .blurbtext').html('Leave blank and send to me.');
-          cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
-          $.fancybox.close(); console.log(cardProperties);
-        });
-        $('#finishCard').click(function (e) {
-          e.preventDefault();
-          product_id = cardID;
-          if (checkFields()) {
-            shippingFirstName = $("input[name='send_to_first_name']").val();
-            shippingMI = $("input[name='send_to_middle_initial']").val();
-            shippingLastName = $("input[name='send_to_last_name']").val();
-            toAddress1 = $("input[name='send_to_street_address_1']").val();
-            toAddress2 = $("input[name='send_to_street_address_2']").val();
-            toCity = $("input[name='send_to_city']").val();
-            toState = $("select#send_to_state option:selected").val();
-            toZip = $("input[name='send_to_postal_code']").val();
-            toCountry = $("select#send_to_country option:selected").val();
-            toFirstName = $("input[name='memoree_first_name']").val();
-            toMI = $("input[name='memoree_middle_initial']").val();
-            toLastName = $("input[name='memoree_last_name']").val();
-            toInHonorOf = $("input[name='memoree_full_name']").val(); 
-            toFullName = '';
-            shippingFullName = '';
-            fromName = $("input[name='from_name']").val();
-            if (toInHonorOf === '') {
-              if (toMI !== '') {
-                toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
-              } else {
-                toFullName = toFirstName + "%20" + toLastName;
-              }
-            } else {
-              toFullName = toInHonorOf;
-            }
-            if (shippingMI) {
-              shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
-            } else {
-              shippingFullName = shippingFirstName + "%20" + shippingLastName;
-            }
-            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-            $('#card_preview').show();
-            $('#card_create').hide();
-            $('#card_send_to').show();
-            $('#card_send_to .blurbtext').html(
-              '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress1) + '</p>' +
-              '<p>' + decodeURIComponent(toAddress2) + '</p>' +
-              '<p>' + decodeURIComponent(toCity) + '</p>' +
-              '<p>' + decodeURIComponent(toState) + '</p>' +
-              '<p>' + decodeURIComponent(toZip) + '</p>' +
-              '<p>' + decodeURIComponent(toCountry) + '</p>'
-            );
-            $('#card_in_memory_of').show();
-            $('#card_in_memory_of #memory_short').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-            $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
-            $('#card_from').show();
-            $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
-            cardProperties = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
-			$("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Memory Of</h6><p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><p>"' + decodeURIComponent(toFullName) + '"</p><h6>From</h6><p>"' + decodeURIComponent(fromName) + '"</p><p>' + decodeURIComponent(toFullName) + '</p>' +'<p>' + decodeURIComponent(toAddress1) + '</p>' +'<p>' + decodeURIComponent(toAddress2) + '</p>' +'<p>' + decodeURIComponent(toCity) + '</p>' +'<p>' + decodeURIComponent(toState) + '</p>' +'<p>' + decodeURIComponent(toZip) + '</p>' +'<p>' + decodeURIComponent(toCountry) + '</p>');
-            $.fancybox.close(); console.log(cardProperties);
-          }
-        });
-      } else if (card_form === "ecard01" || card_form === "ecard02") {
-        $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
-        if (card_form === "ecard01") {
-          $('fieldset.ecard01, #finisheCard').show();
-          $('#honor_info').html('Would you like a different name to appear in the ecard?');
-          $('#finisheCard').click(function (e) {
-            e.preventDefault();
-            product_id = cardID;
-             
-            if (checkFields()) {
-              toFirstName = encodeURIComponent($("input[name='honoree_first_name']").val());
-              toMI = encodeURIComponent($("input[name='honoree_middle_initial']").val());
-              toLastName = encodeURIComponent($("input[name='honoree_last_name']").val());
-              toInHonorOf = encodeURIComponent($("input[name='honoree_full_name']").val());
-              toEmail = encodeURIComponent($("input[name='to_email_address']").val());
-              toFullName = '';
-              fromName = encodeURIComponent($("input[name='from_name']").val());
-              message = encodeURIComponent($("textarea[name='personal_message']").val());
-              if (!toInHonorOf) {
-                if (toMI) {
-                  toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
-                } else {
-                  toFullName = toFirstName + "%20" + toLastName
-                }
-              } else {
-                toFullName = toInHonorOf
-              }
-              $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-              $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-              $('#card_preview').show();
-              $('#card_create').hide();
-              $('#card_to').show();
-              $('#card_to .blurbtext').html('<p>' + decodeURIComponent(toEmail) + '</p>');
-              $('#card_from').show();
-              $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
-              $('#card_personal_message').show();
-              $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
-              $('#card_in_honor_of').show();
-                var nameString = decodeURIComponent(toFirstName);
-                if(decodeURIComponent(toMI).length > 0) { nameString += ' ' + decodeURIComponent(toMI) }
-                nameString += ' ' + decodeURIComponent(toLastName);
-                if(decodeURIComponent(toFullName) !== nameString) {
-                    $('#card_in_honor_of #honor_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-                }
-              $('#card_in_honor_of #honor_short').html('<p>' + nameString + '</p>');
-              cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
-			  $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6>' + ((toInHonorOf)?'<h6>In Honor Of</h6><p>"' + decodeURIComponent(toFullName) + '"</p>' : '') + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><h6>Send To</h6><p>' + decodeURIComponent(toEmail) + '</p>' + ((message)?'<h6>Personal Message</h6><p>' + decodeURIComponent(message) + '</p>': '' ));
-              $.fancybox.close(); console.log(cardProperties);
-            }
-          });
-        } else if (card_form === "ecard02") {
-          $('fieldset.ecard02, #finisheCard').show();
-          $('#memorial_info').html('Would you like a different name to appear in the ecard?');
-          $('#finisheCard').click(function (e) {
-            e.preventDefault();
-            product_id = cardID;
-             
-            if (checkFields()) {
-              toFirstName = encodeURIComponent($("input[name='memoree_first_name']").val());
-              toMI = encodeURIComponent($("input[name='memoree_middle_initial']").val());
-              toLastName = encodeURIComponent($("input[name='memoree_last_name']").val());
-              toInMemoryOf = encodeURIComponent($("input[name='memoree_full_name']").val());
-              toEmail = encodeURIComponent($("input[name='to_email_address']").val());
-              toFullName = '';
-              fromName = encodeURIComponent($("input[name='from_name']").val());
-              message = encodeURIComponent($("textarea[name='personal_message']").val());
-              if (!toInMemoryOf) {
-                if (toMI) {
-                  toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
-                } else {
-                  toFullName = toFirstName + "%20" + toLastName
-                }
-              } else {
-                toFullName = toInMemoryOf
-              }
-              $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
-              $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
-              $('#card_preview').show();
-              $('#card_create').hide();
-              $('#card_to').show();
-              $('#card_to .blurbtext').html('<p>' + decodeURIComponent(toEmail) + '</p>');
-              $('#card_from').show();
-              $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
-              $('#card_personal_message').show();
-              $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
-              $('#card_in_memory_of').show();
-              $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-              $('#card_in_memory_of #memory_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
-              cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
-			  $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6>' + ((toInHonorOf)?'<h6>In Honor Of</h6><p>"' + decodeURIComponent(toFullName) + '"</p>' : '') + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><h6>Send To</h6><p>' + decodeURIComponent(toEmail) + '</p>' + ((message)?'<h6>Personal Message</h6><p>' + decodeURIComponent(message) + '</p>': '' ));
-              $.fancybox.close(); console.log(cardProperties);
-            }
-          });
-        }    
-        
-      }
-    };
-  $('.infiniteCarousel').infiniteCarousel();
-  $('select.event-select,select.type-select').customSelectMenu();
-  $('.option-one li:first,.option-two li:first').remove();
-  $('#carousel-gallery,.select-area-2,.select-area-3').addClass('disabled');
-  $(productsjson['product']).each(function (index, arr) {
-    if ($.inArray(arr['occasion_type'], occasionTypes) == -1) {
-      occasionTypes.push(arr['occasion_type']);
-    }
-  });
-  for (var i in occasionTypes) {
-    $('.event-select').append('<option value="' + occasionTypes[i] + '">' + occasionTypes[i] + '</option>')
-    $('#selectOccasion ul').append('<li data-option-value="' + occasionTypes[i] + '">' + occasionTypes[i] + '</li>')
-  }
-  for (var index in urlVariableArray) {
-    if (index == 'card_type') {
-      launchCard(urlVariableArray[index]);
-    }
-  }
-  [[?x[[S334:type]]x::xx::::
-    [[?x[[S334:occasion]]x::xx::::
-      launchOccasion('[[S334:type]]','[[S334:occasion]]');
-    ]]
-  ]]
-  if (chid !== '100-000') {
-    $('#optinChapter').closest('span').addClass('checked');
-    $('#optinChapter').attr('checked','checked');
-    $('#optinChapter').closest('.intouch-container').addClass('selected');
-    /* console.log('not 100'); */
-  }
-  $(".option-one").on('click', 'li', function (e) {
-    e.preventDefault();
-    var thisEcardProduct = [],
-      thisCertificateProduct = [],
-      thisCardProduct = [],
-      thisOccasion = $(this).text(),
-      availableTypes = [],
-      optionHTML = '',
-      listHTML = '',
-      certificateMsg = "Create a printable certificate.",
-      cardMsg = "We\'ll mail a card on your behalf.",
-      ecardMsg = "Send an e-card.";
-    $('#finishCertificate, #finishCard, #finisheCard').unbind("click");
-    if (!$("#carousel-gallery").hasClass("disabled")) {
-      $("ul#products").remove();
-      $("a.arrow").remove();
-      $("h4#cardCount").text('');
-    }
-    $(productsjson['product']).each(function (index, arr) {
-      if (arr['occasion_type'] == thisOccasion && $.inArray(arr['card_type'], availableTypes) == -1) {
-        availableTypes.push(arr['card_type']);
-      }
-    });
-    for (i in availableTypes) {
-      optionHTML += '<option value="' + availableTypes[i] + '">' + availableTypes[i] + '</option>';
-      listHTML += '<li data-option-value="' + availableTypes[i] + '">' + availableTypes[i] + '<br /><span data-option-value="' + availableTypes[i] + '">';
-      if (availableTypes[i] == "Certificate") {
-        listHTML += certificateMsg;
-      }
-      if (availableTypes[i] == "Card") {
-        listHTML += cardMsg;
-      }
-      if (availableTypes[i] == "E-Card") {
-        listHTML += ecardMsg;
-      }
-      listHTML += '</span></li>';
-    }
-    $('.type-select').html(optionHTML);
-    $('#selectCardType ul').html(listHTML);
-    $('#selectCardType label').text('Select Card Type');
-    $('div.select-area-2').removeClass("disabled");
-    $('.option-two ul').css({
-      opacity: 1
-    });
-  });
-  $(".option-two").on('click', 'li', function (e) {
-    /* console.log($(this).get(0).tagName); */
-    e.preventDefault();
-    var products = [],
-      cardCount = 0;
-    $(productsjson['product']).each(function (index, arr) {
-      if (arr['card_type'] == $('#selectCardType li.selected').attr('data-option-value') && arr['occasion_type'] == $('#selectOccasion input[type=hidden]').val()) {
-        if (arr['is_new'].toLowerCase() == "true") {
-          products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '" class="new-item"></li>');
-        } else {
-          products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '"></li>');
-        }
-        cardCount++;
-      }
-    });
-    $("ul#products").remove();
-    $("a.arrow").remove();
-    if (cardCount > 3) {
-      $('#carousel-gallery .wrapper').append('<ul id="products">' + products + products + '</ul>');
-    } else {
-      $('#carousel-gallery .wrapper').append('<ul id="products">' + products + '</ul>');
-    }
-    $('.infiniteCarousel').infiniteCarousel();
-    if (cardCount < 3) {
-      $("a.arrow").unbind("click").css({
-        'opacity': '.2',
-        'cursor': 'none'
-      });
-      $("a.arrow").click(function (e) {
-        e.preventDefault();
-      });
-    }
-    if (cardCount == 1) {
-      $('#cardCount').text(cardCount + '  Card');
-    } else {
-      $('#cardCount').text(cardCount + '  Cards');
-    }
-    $('div.select-area-3').removeClass("disabled");
-    $('div#carousel-gallery').removeClass("disabled");
-  });
-  $('.wrapper').on('click', 'a.magnify', function (e) {
-    if (!$(this).parents().hasClass('disabled')) {
-      e.preventDefault();
-      var card_id = $(this).attr('data-cardid');
-      if (card_id.substring(0, 2) == 'EC') {
-        $(productsjson['product']).each(function (index, arr) {
-        if (arr['card_id'] == card_id) {
-          ecard_id = arr['ecard_id'] || false;
-          product_url = arr['product_url'] || false;
-          return false;
-        }
-      });
-      window.open(product_url, "ecard",'height=900,width=1100,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
-      } else {
-        selectCard(card_id);
-      }
-    }
-  });
-  $('.wrapper').on('click', 'a.select-card', function (e) {
-    if (!$(this).parents().hasClass('disabled')) {
-      e.preventDefault();
-      customizeCard($(this).attr('data-cardid'));
-    }
-  });
-  $('.cancel-btn').click(function () {
-    $.fancybox.close(); console.log(cardProperties);
-    resetProducts();
-    $("input[name='s_sat_skew']").val('');
-    $('#card_create').show();
-    $('#card_preview').hide();
-  });
-  $('.back-btn').click(function (e) {
-    e.preventDefault();
-    resetProducts(true);
-    $('.top-actions .back-btn').hide();
-    $('.top-actions .cancel-btn').show();
-    $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
-    $('#step1').show();
-    $('#step2').hide();
-    $('#step3').hide();
-  });
-  $('.ecard-btn').click(function (e) {
-    e.preventDefault();
-    mawf.CartView.productMasterState('picking');
-    $('.product-thumb').html('');
-    $('#card_preview .blurb p').remove();
-    $.fancybox({
-      href: '#js-prod-personalizer',
-      autoSize: true,
-      width: '960px',
-      scrolling: 'no',
-      padding: 0,
-      modal: true,
-      closeBtn : false,
-      margin: [5,5,5,5]
-    });
-    resetProducts();
-  });
-  $('#edit_ecard').click(function (e){
-    e.preventDefault();
-    launchCard(product_id);
-    $('.lightbox-rightside a.cont-btn').click();
-  });
 
-  // Product Selection
-
-  // Process Donation
-
-  var isPaypal = false,
-    paypalRedirectUrl = '',
-    showError = function(pageError, fieldError) {
-      if(fieldError == ''){
-        alert('Oops!  There was an error processing your donation.  Please contact your financial institution for more information.');
-      } else {
-        alert(pageError + " " + fieldError);
-      }
-      /* console.log(fieldError); */
-      $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
-    },
-    submitDonation = function(button_element, donation_data){
-      if($('.input-error').length > 0){
-        $('.input-error:eq(0)').focus().blur();
-      } else {
-        // BZ 950
-          [[?x[[S334:intent]]x::xzipx::
-            $(zip_array['chapter']).each(function (index, arr) {
-              if (arr['zip_code'] == $('#ccPostal').val()) {
-                mawf.CartView.donations()[0].donorIntent(arr['chapter_id']);
-              }
-            });
-          ::]]
-        // BZ 950
-
-        var donation = mawf.CartView.donations()[0],
-          chid = donation.donorIntent(),
-          isMonthly = (donation.donationType() == 2),
-          officeID = null,
-          short_chid = chid.substr(0,3),
-          donation_form_id = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid + ' + form').attr('id')) : ('1563')),
-          formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish® International')),
-          today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
-
-        setUserInfoCookie();
-        donation_data = donation_data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id) + '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee) + '&remember_me=true&other_amount=' + (0.00 + parseFloat(donation.prettyDonationAmount())) + (isMonthly?'&sustaining.frequency=monthly&sustaining.duration=0':'');
-        if($("input[name='s_sat_skew']").val() === '') {
-          if(!isMonthly){
-            $("input[name='s_sat_skew']").val('DO02-01');
-          } else if(isMonthly) {
-            $("input[name='s_sat_skew']").val('MG05-01');
-          }
-        }
-        if($('#foreign_key1').val()=='') {
-          $('#foreign_key1').val(metadata_campaign_id);
-        }
-        if($('#foreign_key2').val()=='') {
-          if(chid.substr(4,3) == '000') {
-            $('#foreign_key2').val('UR-' + chid.substr(0,3) + '-01');
-          }
-          else {
-            $('#foreign_key2').val('UR-' + chid + '-F');
-          }
-        }
-        if( form_chid === '100' ) {
-          if( short_chid === '100' ) {
-            if($('#foreign_key3').val() === ''){
-              $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_national_monthly : metadata_national_office_code) );
-            }
-            if($('#foreign_key4').val() === ''){
-              $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_chid);
-            }
-          }
-          else {
-            if($('#foreign_key3').val() === ''){
-              $('#foreign_key3').val(metadata_appeal_year + '-82S-' + (isMonthly ? metadata_national_monthly : metadata_national_office_code) );
-            }
-            if($('#foreign_key4').val() === ''){
-              $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_chid);
-            }
-          }
-        }
-        else {
-          if($('#foreign_key3').val() === ''){
-            $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_chapter_monthly : metadata_chapter_office_code) );
-          }
-          if($('#foreign_key4').val() === ''){
-            $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_chid);
-          }
-        }
-        if($('#foreign_key5').val()=='') {
-          $('#foreign_key5').val(metadata_subtype);
-        }
-        $('#source').val($('#foreign_key2').val() + ',' + $('#foreign_key3').val() + ',' + $('#foreign_key4').val());
-        $('#product_id').val(product_id);
-        if (cardProperties[1] == 'ecard01' || cardProperties[1] == 'ecard02') {
-          var ecard_first_name = $("input[name='billing.name.first']").val();
-          var ecard_last_name = $("input[name='billing.name.last']").val();
-          var ecard_sender_email = $("input[name='donor.email']").val();
-          var ecard_recipient_email = cardProperties[4];
-          var ecard_stationary_id = cardProperties[8];
-          var ecard_subject = ecard_first_name + " " + ecard_last_name + " has sent you an e-card";
-          var ecard_message = cardProperties[7];
-          var card_id = cardProperties[8];
-          var honoreeProduct = cardProperties[9];
-          var occassionType = cardProperties[11];
-          var prodURL = '';
-
-          $(productsjson['product']).each(function (index, arr){
-            if(arr['ecard_id'] == ecard_id) {
-              prodURL = arr['product_url'];
-            }
-          });
-
-          donation_data += '&ecard.id=' + ecard_id + '&ecard.message=' + ecard_message + '&ecard.subject=' + ecard_subject + '&ecard.recipients=' + ecard_recipient_email + '&ecard.send=true' + '&product_url_1=' + encodeURIComponent(prodURL) + '&s_productURL1=' + encodeURIComponent(prodURL);
-
-          if($("input[name='honoree_first_name']").val().length > 0) {
-            donation_data += '&s_ecard_to_first=' + encodeURIComponent($("input[name='honoree_first_name']").val()) + '&s_ecard_to_last=' + encodeURIComponent($("input[name='honoree_last_name']").val()) + '&s_ecard_from=' + encodeURIComponent($("input[name='from_name']").val()); 
-          } else {
-            donation_data += '&s_ecard_to_first=' + encodeURIComponent($("input[name='memoree_first_name']").val()) + '&s_ecard_to_last=' + encodeURIComponent($("input[name='memoree_last_name']").val()) + '&s_ecard_from=' + encodeURIComponent($("input[name='from_name']").val()); 
-          }
-        } else if (cardProperties[1] == 'cert01' || cardProperties[1] == 'cert03') {
-          var honoreeName = cardProperties[3];
-          var productFromName = cardProperties[4];
-          var honoreeProduct = cardProperties[5];
-          var honoreeProductName = cardProperties[6];
-          var occassionType = cardProperties[7];
-          // new treatment for secure PDF links for certificates
-          var baseCertURL = "http://certificates.wish.org/pdf";
-          var pdfSalt = "L89adkhoQ";
-          var certProductID = cardProperties[9];
-          var timeStamp = Date.today().toString('ddMMyyyy');
-          var stringToHash = certProductID + honoreeName + productFromName + timeStamp + pdfSalt;
-          var hashedString = CryptoJS.MD5(stringToHash).toString();
-          var hashTail = hashedString.substring(hashedString.length - 10);
-          var prodURL = baseCertURL + '?p=' + encodeURIComponent(certProductID) + '&h=' + encodeURIComponent(honoreeName) + '&d=' + encodeURIComponent(productFromName) + '&t=' + encodeURIComponent(timeStamp) + '&s=' + hashTail;
-
-          donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
-        } else if (cardProperties[1] == 'cert02') {
-          var honoreeName = cardProperties[3];
-          var honoreeProduct = cardProperties[4];
-          var honoreeProductName = cardProperties[5];
-          var occassionType = cardProperties[6];
-
-          // new treatment for secure PDF links for certificates
-          var baseCertURL = "http://certificates.wish.org/pdf";
-          var pdfSalt = "L89adkhoQ";
-          var certProductID = cardProperties[8];
-          var timeStamp = Date.today().toString('ddMMyyyy');
-          var stringToHash = certProductID + honoreeName + timeStamp + pdfSalt;
-          var hashedString = CryptoJS.MD5(stringToHash).toString();
-          var hashTail = hashedString.substring(hashedString.length - 10);
-          var prodURL = baseCertURL + '?p=' + encodeURIComponent(certProductID) + '&h=' + encodeURIComponent(honoreeName) + '&t=' + encodeURIComponent(timeStamp) + '&s=' + hashTail;
-          
-          donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
-        } else if (cardProperties[1] == 'card01') {
-          var honoreeName = cardProperties[3];
-          var honoreeProduct = cardProperties[10];
-          var honoreeProductName = cardProperties[12];
-          var prodMsgLine1 = cardProperties[13];
-          var prodMsgLine2 = cardProperties[14];
-          var prodMsgLine3 = cardProperties[15];
-          var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&line1=" + encodeURIComponent(prodMsgLine1) + "&line2=" + encodeURIComponent(prodMsgLine2) + "&line3=" + encodeURIComponent(prodMsgLine3);
-          donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
-        } else if (cardProperties[1] == 'card02') {
-          var honoreeName = cardProperties[3];
-          var productFromName = cardProperties[10];
-          var honoreeProduct = cardProperties[11];
-          var honoreeProductName = cardProperties[12];
-          var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
-          donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
-        } else if (cardProperties[1] == 'card03' || cardProperties[1] == 'card04') {
-          var honoreeName = cardProperties[3];
-          var productFromName = cardProperties[10];
-          var honoreeProduct = cardProperties[11];
-          var honoreeProductName = cardProperties[12];
-          var shippingNameFirst = cardProperties[15];
-          var shippingNameMiddle = cardProperties[16];
-          var shippingNameLast = cardProperties[17];
-          var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
-          donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName) + "&shipping.name.first=" + shippingNameFirst + "&shipping.name.middle=" + shippingNameMiddle + "&shipping.name.last=" + shippingNameLast;
-        } else if (cardProperties[1] == "card-blank") {
-          var honoreeProductName = cardProperties[2];
-          var occassionType = cardProperties[3];
-          donation_data += "&product_url_1=blank&s_productURL1=blank&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
-        }
-        if (donation_data.indexOf("product_url_1") == -1) {
-          donation_data += "&product_url_1=none&s_productURL1=none&s_productURL1Name=none";
-        }
-        $(button_element).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true);
-        
-        luminateExtend.api.request({
-          api: 'donation',
-          data: 'method=getDonationFormInfo&form_id=' +
-            /form_id=(\d{4,5})/.exec(donation_data)[1],
-          requestType: 'POST',
-          callback: function (data) {
-            if(data.errorResponse) {
-              donation_data += '&level_id=2031';
-            } else {
-              donation_data += '&level_id=' + data.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
-            }
-            luminateExtend.api.request({
-              api: 'donation',
-              form: '#mainform',
-              data: donation_data,
-              requestType: 'POST',
-              callback: function (data) {
-if (console.log) { console.log('mainform donation callback'); }
-                if (data['donationResponse']['redirect']) {
-                  isPaypal = true;
-                  paypalRedirectUrl = data['donationResponse']['redirect']['url'];
-                }
-                var finishGift = function() {
-                  var center_ids = ['1001','1101'],
-                    bools = [($('#optinNational').is(':checked')?true:false),
-                      ($('#optinInternational').hasClass('checked')?true:false),
-                      ($('#optinChapter').is(':checked')?true:false)],
-                    center_remove = '',
-                    center_add = '';
-
-                  // Set 3rd center ID
-                  $(zip_array['chapter']).each(function (index, arr) {
-                    if (arr['zip_code'] == $('#ccPostal').val()) {
-                      $('#chapter_id').val(arr['chapter_id']);
-                      $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
-                        if ($('#chapter_id').val() == arr['office_id']) {
-                          center_ids.push(arr['center_id']);
+                products = '';
+                $("#step3 input").val('');
+                $("#step3 textarea").val('');
+                $("#send_to_state option:first").attr("selected", "selected");
+                $('#step1').show();
+                $('#step2').hide();
+                $('#step3').hide();
+                toFirstName = '';
+                toMI = '';
+                toLastName = '';
+                toInHonorOf = '';
+                toEmail = '';
+                toFullName = '';
+                fromName = '';
+                toAddress1 = '';
+                toAddress2 = '';
+                toCity = '';
+                toState = '';
+                toZip = '';
+                toCountry = '';
+                message = '';
+                ecardID = '';
+                cardName = '';
+                cardType = '';
+                occasionType = '';
+                cardImage1 = '';
+                cardImage2 = '';
+                cardImage3 = '';
+                cardThumbnail = '';
+                productURL = '';
+                skew = '';
+                product_id = '';
+            },
+            showStep3 = function (ecardID, cardName, cardType, cardForm, occasionType, cardImage1, cardImage2, cardImage3, cardThumbnail, productURL, thisSkew, cardID)
+            {
+                $('#step1, #step2, .top-actions .back-btn').hide();
+                $('#step3, .top-actions .cancel-btn').show();
+                $('#step3 #productTitle').text(cardName);
+                $('.cardThumbnail').attr('src', cardThumbnail);
+                var toFirstName = '';
+                var toMI = '';
+                var toLastName = '';
+                var toInHonorOf = '';
+                var toEmail = '';
+                var toFullName = '';
+                var fromName = '';
+                var toAddress1 = '';
+                var toAddress2 = '';
+                var toCity = '';
+                var toState = '';
+                var toZip = '';
+                var toCountry = '';
+                var message = '';
+                $("input[name='s_occasion_type']").val(occasionType);
+                $('#js-prod-personalizer h1').text('Customize ' + cardType);
+                $('#card-form fieldset, .bottomButtons a').hide();
+                $('#card_send_to,#card_personal_message,#card_to,#card_from,#card_in_honor_of,#card_in_memory_of,#card_wedding_couple_name').hide();
+                if (card_form === "cert01" || card_form === "cert03") {
+                    $('#from_info').html('Your name or family name will appear on the certificate exactly as you type it here. Limit 40 characters including spaces.');
+                    if (card_form === "cert01"){
+                        $('fieldset.cert01, #finishCertificate').show();
+                        $('#honor_info').html('Would you like a different name printed on the certificate?');
+                        $('#finishCertificate').click(function (e) {
+                            e.preventDefault();
+                            product_id = cardID;
+                            if (checkFields()) {
+                                toFirstName = $("input[name='honoree_first_name']").val();
+                                toMI = $("input[name='honoree_middle_initial']").val();
+                                toLastName = $("input[name='honoree_last_name']").val();
+                                toInHonorOf = $("input[name='honoree_full_name']").val();
+                                toFullName = '';
+                                fromName = $("input[name='from_name']").val();
+                                if (toInHonorOf.length < 1) {
+                                    if (toMI.length > 0) {
+                                        toFullName = toFirstName + " " + toMI + " " + toLastName;
+                                    } else {
+                                        toFullName = toFirstName + " " + toLastName
+                                    }
+                                } else {
+                                    toFullName = toInHonorOf;
+                                }
+                                $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                                $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                                $('#card_preview').show();
+                                $('#card_create').hide();
+                                $('#card_in_honor_of').show();
+                                var nameString = decodeURIComponent(toFirstName);
+                                if(decodeURIComponent(toMI).length > 0) { nameString += ' ' + decodeURIComponent(toMI) }
+                                nameString += ' ' + decodeURIComponent(toLastName);
+                                if(decodeURIComponent(toFullName) !== nameString) {
+                                    $('#card_in_honor_of #honor_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+                                }
+                                $('#card_in_honor_of #honor_short').html('<p>' + nameString + '</p>');
+                                $('#card_from').show();
+                                $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
+                                cardProperties = [donationID, 'cert01', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew, product_id];
+                                $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Honor Of</h6>' + ((toInHonorOf.length > 1) ? '<p>"' + decodeURIComponent(toFullName) + '"</p>' : '' ) + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p>');
+                                $.fancybox.close(); console.log(cardProperties);
+                            }
+                        });
+                    } else if(card_form === "cert03") {
+                        $('fieldset.cert03, #finishCertificate').show();
+                        $('#memorial_info').html('Would you like a different name printed on the certificate?');
+                        $('#finishCertificate').click(function (e) {
+                            e.preventDefault();
+                            product_id = cardID;
+                            if (checkFields()) {
+                                toFirstName = $("input[name='memoree_first_name']").val();
+                                toMI = $("input[name='memoree_middle_initial']").val();
+                                toLastName = $("input[name='memoree_last_name']").val();
+                                toInHonorOf = $("input[name='memoree_full_name']").val();
+                                toFullName = '';
+                                fromName = $("input[name='from_name']").val();
+                                if (toInHonorOf.length < 1) {
+                                    if (toMI.length > 0) {
+                                        toFullName = toFirstName + " " + toMI + " " + toLastName;
+                                    } else {
+                                        toFullName = toFirstName + " " + toLastName
+                                    }
+                                } else {
+                                    toFullName = toInHonorOf;
+                                }
+                                $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                                $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                                $('#card_preview').show();
+                                $('#card_create').hide();
+                                $('#card_in_memory_of').show();
+                                $('#card_in_memory_of #memory_short').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+                                $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
+                                $('#card_from').show();
+                                $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
+                                cardProperties = [donationID, 'cert03', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew, product_id];
+                                $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Honor Of</h6>' + ((toInHonorOf.length > 1) ? '<p>"' + decodeURIComponent(toFullName) + '"</p>' : '' ) + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p>');
+                                $.fancybox.close(); console.log(cardProperties);
+                            }
+                        });
+                    }
+                } else if (card_form === "cert02") {
+                    $('fieldset.cert02, #finishCertificate').show();
+                    $('#finishCertificate').click(function (e) {
+                        e.preventDefault();
+                        product_id = cardID;
+                        if (checkFields()) {
+                            toFullName = $("input[name='wedding_couple_name']").val();
+                            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                            $('#card_preview').show();
+                            $('#card_create').hide();
+                            $('#card_wedding_couple_name').show();
+                            $('#card_wedding_couple_name .blurbtext').html('<p>' + decodeURIComponent(toFullName) + '</p>');
+                            cardProperties = [donationID, 'cert02', 'certificate', toFullName, productURL, cardName, occasionType, thisSkew, product_id];
+                            $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Honor Of</h6>' + ((toInHonorOf.length > 1) ? '<p>"' + decodeURIComponent(toFullName) + '"</p>' : '' ) + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p>');
+                            $.fancybox.close(); console.log(cardProperties);
                         }
-                      });
-                    }
-                  });
+                    });
+                } else if (card_form === "card01") {
+                    $('fieldset.card01, #finishCard, .leaveBlank').show();
+                    $('.leaveBlank').click(function (e) {
+                        e.preventDefault();
+                        product_id = cardID;
+                        $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                        $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                        $('#card_preview').show();
+                        $('#card_create').hide();
+                        $('#card_send_to').show();
+                        $('#card_send_to .blurbtext').html('Leave blank and send to me.');
+                        cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+                        $.fancybox.close(); console.log(cardProperties);
+                    }); //click
+                    $('#finishCard').click(function (e) {
+                        e.preventDefault();
+                        product_id = cardID;
+                        if (checkFields()) {
+                            toFirstName = $("input[name='send_to_first_name']").val();
+                            toMI = $("input[name='send_to_middle_initial']").val();
+                            toLastName = $("input[name='send_to_last_name']").val();
+                            toFullName = '';
+                            toAddress1 = $("input[name='send_to_street_address_1']").val();
+                            toAddress2 = $("input[name='send_to_street_address_2']").val();
+                            toCity = $("input[name='send_to_city']").val();
+                            toState = $("select#send_to_state option:selected").val();
+                            toZip = $("input[name='send_to_postal_code']").val();
+                            toCountry = $("select#send_to_country option:selected").val();
+                            var msgLine1 = $("input[name='personal_message_line_1']").val();
+                            var msgLine2 = $("input[name='personal_message_line_2']").val();
+                            var msgLine3 = $("input[name='personal_message_line_3']").val();
+                            if(msgLine1 !== undefined && msgLine1 !== '') { message += msgLine1 + '</br />'; }
+                            if(msgLine2 !== undefined && msgLine2 !== '') { message += msgLine2 + '</br />'; }
+                            if(msgLine3 !== undefined && msgLine3 !== '') { message += msgLine3 + '</br />'; }
+                            if (toMI) {
+                                toFullName = toFirstName + " " + toMI + " " + toLastName;
+                            } else {
+                                toFullName = toFirstName + " " + toLastName;
+                            }
+                            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                            $('#card_preview').show();
+                            $('#card_create').hide();
+                            $('#card_send_to').show();
+                            $('#card_send_to .blurbtext').html(
+                                    '<p>' + decodeURIComponent(toFullName) + '</p>' +
+                                            '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+                                            '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+                                            '<p>' + decodeURIComponent(toCity) + '</p>' +
+                                            '<p>' + decodeURIComponent(toState) + '</p>' +
+                                            '<p>' + decodeURIComponent(toZip) + '</p>' +
+                                            '<p>' + decodeURIComponent(toCountry) + '</p>'
+                            );
+                            $('#card_personal_message').show();
+                            $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
+                            cardProperties = [donationID, 'card01', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, productURL, message, cardName, msgLine1, msgLine2, msgLine3, occasionType, thisSkew];
+                            $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>Send To</h6><p>' + decodeURIComponent(toFullName) + '</p>' +'<p>' + decodeURIComponent(toAddress1) + '</p>' +'<p>' + decodeURIComponent(toAddress2) + '</p>' +'<p>' + decodeURIComponent(toCity) + '</p>' +'<p>' + decodeURIComponent(toState) + '</p>' +'<p>' + decodeURIComponent(toZip) + '</p>' +'<p>' + decodeURIComponent(toCountry) + '</p>' + '<h6>Personalization</h6>' + ((msgLine1)?'<p>Line 1:' + decodeURIComponent(msgLine1) + '</p>':'') + ((msgLine2)?'<p>Line 2:' + decodeURIComponent(msgLine2) + '</p>':'') + '</p>' + ((msgLine3)?'<p>Line 3:' + decodeURIComponent(msgLine3) + '</p>':'') + '</p>');
+                            $.fancybox.close(); console.log(cardProperties);
+                        }
+                    });
+                } else if (card_form === "card02") {
+                    $('.card02, #finishCard, .leaveBlank').show();
+                    $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
+                    $('.leaveBlank').click(function (e) {
+                        e.preventDefault();
+                        product_id = cardID;
+                        $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                        $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                        $('#card_preview').show();
+                        $('#card_create').hide();
+                        $('#card_send_to').show();
+                        $('#card_send_to .blurbtext').html('Leave blank and send to me.');
+                        cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+                        $.fancybox.close(); console.log(cardProperties);
+                    });
+                    $('#finishCard').click(function (e) {
+                        e.preventDefault();
+                        product_id = cardID;
+                        if (checkFields()) {
+                            toFirstName = $("input[name='send_to_first_name']").val();
+                            toMI = $("input[name='send_to_middle_initial']").val();
+                            toLastName = $("input[name='send_to_last_name']").val();
+                            toFullName = '';
+                            toAddress1 = $("input[name='send_to_street_address_1']").val();
+                            toAddress2 = $("input[name='send_to_street_address_2']").val();
+                            toCity = $("input[name='send_to_city']").val();
+                            toState = $("select#send_to_state option:selected").val();
+                            toZip = $("input[name='send_to_postal_code']").val();
+                            toCountry = $("select#send_to_country option:selected").val();
+                            fromName = $("input[name='from_name']").val();
+                            if (toMI) {
+                                toFullName = toFirstName + " " + toMI + " " + toLastName;
+                            } else {
+                                toFullName = toFirstName + " " + toLastName;
+                            }
+                            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                            $('#card_preview').show();
+                            $('#card_create').hide();
+                            $('#card_send_to').show();
+                            $('#card_send_to .blurbtext').html(
+                                    '<p>' + decodeURIComponent(toFullName) + '</p>' +
+                                            '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+                                            '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+                                            '<p>' + decodeURIComponent(toCity) + '</p>' +
+                                            '<p>' + decodeURIComponent(toState) + '</p>' +
+                                            '<p>' + decodeURIComponent(toZip) + '</p>' +
+                                            '<p>' + decodeURIComponent(toCountry) + '</p>'
+                            );
+                            $('#card_from').show();
+                            $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
+                            cardProperties = [donationID, 'card02', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew];
+                            $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><h6>Send To</h6><p>' + decodeURIComponent(toFullName) + '</p><p>' + decodeURIComponent(toAddress1) + '</p>' +'<p>' + decodeURIComponent(toAddress2) + '</p>' +'<p>' + decodeURIComponent(toCity) + '</p>' +'<p>' + decodeURIComponent(toState) + '</p>' +'<p>' + decodeURIComponent(toZip) + '</p>' +'<p>' + decodeURIComponent(toCountry) + '</p>');
+                            $.fancybox.close(); console.log(cardProperties);
+                        }
+                    });
+                } else if (card_form === "card03") {
+                    $('fieldset.card03, #finishCard, .leaveBlank').show();
+                    $('.leaveBlank').click(function (e) {
+                        e.preventDefault();
+                        product_id = cardID;
+                        $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                        $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                        $('#card_preview').show();
+                        $('#card_create').hide();
+                        $('#card_send_to').show();
+                        $('#card_send_to .blurbtext').html('Leave blank and send to me.');
+                        cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+                        $.fancybox.close(); console.log(cardProperties);
+                    });
+                    $('#finishCard').click(function (e) {
+                        e.preventDefault();
+                        product_id = cardID;
+                        if (checkFields()) {
+                            shippingFirstName = $("input[name='send_to_first_name']").val();
+                            shippingMI = $("input[name='send_to_middle_initial']").val();
+                            shippingLastName = $("input[name='send_to_last_name']").val();
+                            toAddress1 = $("input[name='send_to_street_address_1']").val();
+                            toAddress2 = $("input[name='send_to_street_address_2']").val();
+                            toCity = $("input[name='send_to_city']").val();
+                            toState = $("select#send_to_state option:selected").val();
+                            toZip = $("input[name='send_to_postal_code']").val();
+                            toCountry = $("select#send_to_country option:selected").val();
+                            toFirstName = $("input[name='memoree_first_name']").val();
+                            toMI = $("input[name='memoree_middle_initial']").val();
+                            toLastName = $("input[name='memoree_last_name']").val();
+                            toInHonorOf = $("input[name='memoree_full_name']").val();
+                            toFullName = '';
+                            shippingFullName = '';
+                            fromName = $("input[name='from_name']").val();
+                            if (!toInHonorOf) {
+                                if (toMI) {
+                                    toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
+                                } else {
+                                    toFullName = toFirstName + "%20" + toLastName;
+                                }
+                            } else {
+                                toFullName = toInHonorOf;
+                            }
+                            if (shippingMI) {
+                                shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
+                            } else {
+                                shippingFullName = shippingFirstName + "%20" + shippingLastName;
+                            }
+                            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                            $('#card_preview').show();
+                            $('#card_create').hide();
+                            $('#card_send_to').show();
+                            $('#card_send_to .blurbtext').html(
+                                    '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
+                                            '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+                                            '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+                                            '<p>' + decodeURIComponent(toCity) + '</p>' +
+                                            '<p>' + decodeURIComponent(toState) + '</p>' +
+                                            '<p>' + decodeURIComponent(toZip) + '</p>' +
+                                            '<p>' + decodeURIComponent(toCountry) + '</p>'
+                            );
+                            $('#card_in_memory_of').show();
+                            $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+                            $('#card_in_memory_of #memory_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
+                            cardProperties = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
+                            $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Memory Of</h6><p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><p>"' + decodeURIComponent(toFullName) + '"</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><p>' + decodeURIComponent(toFullName) + '</p>' +'<p>' + decodeURIComponent(toAddress1) + '</p>' +'<p>' + decodeURIComponent(toAddress2) + '</p>' +'<p>' + decodeURIComponent(toCity) + '</p>' +'<p>' + decodeURIComponent(toState) + '</p>' +'<p>' + decodeURIComponent(toZip) + '</p>' +'<p>' + decodeURIComponent(toCountry) + '</p>');
+                            $.fancybox.close(); console.log(cardProperties);
+                        }
+                    });
+                } else if (card_form === "card04") {
+                    $('fieldset.card04, #finishCard, .leaveBlank').show();
+                    $('.leaveBlank').click(function (e) {
+                        e.preventDefault();
+                        product_id = cardID;
+                        $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                        $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                        $('#card_preview').show();
+                        $('#card_create').hide();
+                        $('#card_send_to').show();
+                        $('#card_send_to .blurbtext').html('Leave blank and send to me.');
+                        cardProperties = [donationID, 'card-blank', cardName, occasionType, thisSkew];
+                        $.fancybox.close(); console.log(cardProperties);
+                    });
+                    $('#finishCard').click(function (e) {
+                        e.preventDefault();
+                        product_id = cardID;
+                        if (checkFields()) {
+                            shippingFirstName = $("input[name='send_to_first_name']").val();
+                            shippingMI = $("input[name='send_to_middle_initial']").val();
+                            shippingLastName = $("input[name='send_to_last_name']").val();
+                            toAddress1 = $("input[name='send_to_street_address_1']").val();
+                            toAddress2 = $("input[name='send_to_street_address_2']").val();
+                            toCity = $("input[name='send_to_city']").val();
+                            toState = $("select#send_to_state option:selected").val();
+                            toZip = $("input[name='send_to_postal_code']").val();
+                            toCountry = $("select#send_to_country option:selected").val();
+                            toFirstName = $("input[name='memoree_first_name']").val();
+                            toMI = $("input[name='memoree_middle_initial']").val();
+                            toLastName = $("input[name='memoree_last_name']").val();
+                            toInHonorOf = $("input[name='memoree_full_name']").val();
+                            toFullName = '';
+                            shippingFullName = '';
+                            fromName = $("input[name='from_name']").val();
+                            if (toInHonorOf === '') {
+                                if (toMI !== '') {
+                                    toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
+                                } else {
+                                    toFullName = toFirstName + "%20" + toLastName;
+                                }
+                            } else {
+                                toFullName = toInHonorOf;
+                            }
+                            if (shippingMI) {
+                                shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
+                            } else {
+                                shippingFullName = shippingFirstName + "%20" + shippingLastName;
+                            }
+                            $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                            $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                            $('#card_preview').show();
+                            $('#card_create').hide();
+                            $('#card_send_to').show();
+                            $('#card_send_to .blurbtext').html(
+                                    '<p>' + decodeURIComponent(shippingFullName) + '</p>' +
+                                            '<p>' + decodeURIComponent(toAddress1) + '</p>' +
+                                            '<p>' + decodeURIComponent(toAddress2) + '</p>' +
+                                            '<p>' + decodeURIComponent(toCity) + '</p>' +
+                                            '<p>' + decodeURIComponent(toState) + '</p>' +
+                                            '<p>' + decodeURIComponent(toZip) + '</p>' +
+                                            '<p>' + decodeURIComponent(toCountry) + '</p>'
+                            );
+                            $('#card_in_memory_of').show();
+                            $('#card_in_memory_of #memory_short').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+                            $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
+                            $('#card_from').show();
+                            $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
+                            cardProperties = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
+                            $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Memory Of</h6><p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><p>"' + decodeURIComponent(toFullName) + '"</p><h6>From</h6><p>"' + decodeURIComponent(fromName) + '"</p><p>' + decodeURIComponent(toFullName) + '</p>' +'<p>' + decodeURIComponent(toAddress1) + '</p>' +'<p>' + decodeURIComponent(toAddress2) + '</p>' +'<p>' + decodeURIComponent(toCity) + '</p>' +'<p>' + decodeURIComponent(toState) + '</p>' +'<p>' + decodeURIComponent(toZip) + '</p>' +'<p>' + decodeURIComponent(toCountry) + '</p>');
+                            $.fancybox.close(); console.log(cardProperties);
+                        }
+                    });
+                } else if (card_form === "ecard01" || card_form === "ecard02") {
+                    $('#from_info').html('Your name or family name will be printed on the card exactly as you type it here. Limit 40 characters including spaces.');
+                    if (card_form === "ecard01") {
+                        $('fieldset.ecard01, #finisheCard').show();
+                        $('#honor_info').html('Would you like a different name to appear in the ecard?');
+                        $('#finisheCard').click(function (e) {
+                            e.preventDefault();
+                            product_id = cardID;
 
-                  for(var i = 0; i < center_ids.length; i++) {
-                    if (bools[i]) {
-                      if (center_add.length > 0) {
-                        center_add += ',';
-                      }
-                      center_add += center_ids[i];
-                    } else {
-                      if (center_remove.length > 0) {
-                        center_remove += ',';
-                      }
-                      center_remove += center_ids[i];
-                    }
-                  }
-if (console.log) { console.log('call update'); }
-                  // Opt-ins
-                  luminateExtend.api.request({
-                    api: 'cons',
-                    data: 'method=update&add_center_opt_in_ids=' + center_add + '&remove_center_opt_in_ids=' + center_remove + '&primary_email=' + encodeURIComponent($("#eAdd").val()),
-                    requiresAuth: true,
-                    requestType: 'POST',
-                    useHTTPS: true,
-                    callback: function() {
-if (console.log) { console.log('update callback'); }
-                      $.removeCookie("cart");
-                      $.jStorage.flush();
-                      localStorage.clear();
-                      savedSession = {};
-                      $('#mainform input').each(function(){$(this).val('');});
-                      window.onbeforeunload = function(){};
-                      if(isPaypal) {
-if (console.log) { console.log('paypal '+paypalRedirectUrl); }
-window.location.href = paypalRedirectUrl;}
-                      else {
-if (console.log) { console.log('cc redirect'); }
-window.location.href = "SPageServer?pagename=donate_thankyou&chid=" + chid;}
-                    }
-                  });
-                };
+                            if (checkFields()) {
+                                toFirstName = encodeURIComponent($("input[name='honoree_first_name']").val());
+                                toMI = encodeURIComponent($("input[name='honoree_middle_initial']").val());
+                                toLastName = encodeURIComponent($("input[name='honoree_last_name']").val());
+                                toInHonorOf = encodeURIComponent($("input[name='honoree_full_name']").val());
+                                toEmail = encodeURIComponent($("input[name='to_email_address']").val());
+                                toFullName = '';
+                                fromName = encodeURIComponent($("input[name='from_name']").val());
+                                message = encodeURIComponent($("textarea[name='personal_message']").val());
+                                if (!toInHonorOf) {
+                                    if (toMI) {
+                                        toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
+                                    } else {
+                                        toFullName = toFirstName + "%20" + toLastName
+                                    }
+                                } else {
+                                    toFullName = toInHonorOf
+                                }
+                                $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                                $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                                $('#card_preview').show();
+                                $('#card_create').hide();
+                                $('#card_to').show();
+                                $('#card_to .blurbtext').html('<p>' + decodeURIComponent(toEmail) + '</p>');
+                                $('#card_from').show();
+                                $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
+                                $('#card_personal_message').show();
+                                $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
+                                $('#card_in_honor_of').show();
+                                var nameString = decodeURIComponent(toFirstName);
+                                if(decodeURIComponent(toMI).length > 0) { nameString += ' ' + decodeURIComponent(toMI) }
+                                nameString += ' ' + decodeURIComponent(toLastName);
+                                if(decodeURIComponent(toFullName) !== nameString) {
+                                    $('#card_in_honor_of #honor_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+                                }
+                                $('#card_in_honor_of #honor_short').html('<p>' + nameString + '</p>');
+                                cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
+                                $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6>' + ((toInHonorOf)?'<h6>In Honor Of</h6><p>"' + decodeURIComponent(toFullName) + '"</p>' : '') + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><h6>Send To</h6><p>' + decodeURIComponent(toEmail) + '</p>' + ((message)?'<h6>Personal Message</h6><p>' + decodeURIComponent(message) + '</p>': '' ));
+                                $.fancybox.close(); console.log(cardProperties);
+                            }
+                        });
+                    } else if (card_form === "ecard02") {
+                        $('fieldset.ecard02, #finisheCard').show();
+                        $('#memorial_info').html('Would you like a different name to appear in the ecard?');
+                        $('#finisheCard').click(function (e) {
+                            e.preventDefault();
+                            product_id = cardID;
 
-                if (data['donationResponse']['redirect']) {
-                  isPaypal = true;
-                  paypalRedirectUrl = data['donationResponse']['redirect']['url'];
-                  finishGift();
+                            if (checkFields()) {
+                                toFirstName = encodeURIComponent($("input[name='memoree_first_name']").val());
+                                toMI = encodeURIComponent($("input[name='memoree_middle_initial']").val());
+                                toLastName = encodeURIComponent($("input[name='memoree_last_name']").val());
+                                toInMemoryOf = encodeURIComponent($("input[name='memoree_full_name']").val());
+                                toEmail = encodeURIComponent($("input[name='to_email_address']").val());
+                                toFullName = '';
+                                fromName = encodeURIComponent($("input[name='from_name']").val());
+                                message = encodeURIComponent($("textarea[name='personal_message']").val());
+                                if (!toInMemoryOf) {
+                                    if (toMI) {
+                                        toFullName = toFirstName + "%20" + toMI + "%20" + toLastName;
+                                    } else {
+                                        toFullName = toFirstName + "%20" + toLastName
+                                    }
+                                } else {
+                                    toFullName = toInMemoryOf
+                                }
+                                $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
+                                $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
+                                $('#card_preview').show();
+                                $('#card_create').hide();
+                                $('#card_to').show();
+                                $('#card_to .blurbtext').html('<p>' + decodeURIComponent(toEmail) + '</p>');
+                                $('#card_from').show();
+                                $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
+                                $('#card_personal_message').show();
+                                $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
+                                $('#card_in_memory_of').show();
+                                $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+                                $('#card_in_memory_of #memory_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
+                                cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
+                                $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6>' + ((toInHonorOf)?'<h6>In Honor Of</h6><p>"' + decodeURIComponent(toFullName) + '"</p>' : '') + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><h6>Send To</h6><p>' + decodeURIComponent(toEmail) + '</p>' + ((message)?'<h6>Personal Message</h6><p>' + decodeURIComponent(message) + '</p>': '' ));
+                                $.fancybox.close(); console.log(cardProperties);
+                            }
+                        });
+                    }
+
                 }
-                if (data['donationResponse']['donation']) {
-                  finishGift();
-                }
-                if (data['donationResponse']['errors']) {
-                  var fieldError = '';
-                  if (data['donationResponse']['errors']['fieldError']) {
-                    if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
-                      $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
-                        fieldError = fieldError + arr + " ";
-                      });
-                    } else {
-                      fieldError = data['donationResponse']['errors']['fieldError'];
-                    }
-                  }
-                  showError(data['donationResponse']['errors']['pageError'], fieldError);
-                }
-              }
-            });
-          }
-        });
-      }
-    };
-
-  // bind a handler to billing zip field to look up chapter for certain ad-hoc form types
-  $('input#ccPostal').blur(function() {
-
-    // if form type is ad hoc "C" type, then determine donor intent from billing zip 
-    if (  (urlVariableArray['form_type'] == "SPEC") || (urlVariableArray['form_type'] == "SPEMC")  ) {
-
-      setChapterByZip($('input#ccPostal').val());
-
-    }
-
-  });
-
-  $("a.action-btn, a.btn-modal").click(function (e) {
-    e.preventDefault();
-  });
-  // Standard donation submit button
-  $("a.button-submit:eq(0)").click(function (e) {
-    e.preventDefault();        console.log('in a.button-submit submit click');
-      jQuery('input').blur();
-      jQuery('select').blur();
-      var numberOfErrors = jQuery('.input-error').length;
-      console.log("there are " + numberOfErrors + " errors on the form");
-      if(numberOfErrors === 0) {
-          submitDonation($(this), 'method=donate&form_id=1420&validate=true');
-      }
-    submitDonation($(this), 'method=donate&form_id=1420&validate=true');
-  });
-  // PayPal button
-  $("a.button-submit:eq(1)").click(function (e) {
-        e.preventDefault();
-
-        jQuery('input').blur();
-        jQuery('select').blur();
-        var numberOfErrors = jQuery('.input-error').length;
-        console.log("there are " + numberOfErrors + " errors on the form");
-        if(numberOfErrors === 0) {
-            submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=' + encodeURIComponent('SPageServer?pagename=donate_thankyou&chid=' + mawf.CartView.donations()[0].donorIntent()) + '&finish_error_redirect=[[T1:SPageServer?pagename=donate_paypal_error]]');
+            };
+    $('.infiniteCarousel').infiniteCarousel();
+    $('select.event-select,select.type-select').customSelectMenu();
+    $('.option-one li:first,.option-two li:first').remove();
+    $('#carousel-gallery,.select-area-2,.select-area-3').addClass('disabled');
+    $(productsjson['product']).each(function (index, arr) {
+        if ($.inArray(arr['occasion_type'], occasionTypes) == -1) {
+            occasionTypes.push(arr['occasion_type']);
         }
-  });
+    });
+    for (var i in occasionTypes) {
+        $('.event-select').append('<option value="' + occasionTypes[i] + '">' + occasionTypes[i] + '</option>')
+        $('#selectOccasion ul').append('<li data-option-value="' + occasionTypes[i] + '">' + occasionTypes[i] + '</li>')
+    }
+    for (var index in urlVariableArray) {
+        if (index == 'card_type') {
+            launchCard(urlVariableArray[index]);
+        }
+    }
+    [[?x[[S334:type]]x::xx::::
+    [[?x[[S334:occasion]]x::xx::::
+    launchOccasion('[[S334:type]]','[[S334:occasion]]');
+    ]]
+    ]]
+    if (chid !== '100-000') {
+        $('#optinChapter').closest('span').addClass('checked');
+        $('#optinChapter').attr('checked','checked');
+        $('#optinChapter').closest('.intouch-container').addClass('selected');
+        /* console.log('not 100'); */
+    }
+    $(".option-one").on('click', 'li', function (e) {
+        e.preventDefault();
+        var thisEcardProduct = [],
+                thisCertificateProduct = [],
+                thisCardProduct = [],
+                thisOccasion = $(this).text(),
+                availableTypes = [],
+                optionHTML = '',
+                listHTML = '',
+                certificateMsg = "Create a printable certificate.",
+                cardMsg = "We\'ll mail a card on your behalf.",
+                ecardMsg = "Send an e-card.";
+        $('#finishCertificate, #finishCard, #finisheCard').unbind("click");
+        if (!$("#carousel-gallery").hasClass("disabled")) {
+            $("ul#products").remove();
+            $("a.arrow").remove();
+            $("h4#cardCount").text('');
+        }
+        $(productsjson['product']).each(function (index, arr) {
+            if (arr['occasion_type'] == thisOccasion && $.inArray(arr['card_type'], availableTypes) == -1) {
+                availableTypes.push(arr['card_type']);
+            }
+        });
+        for (i in availableTypes) {
+            optionHTML += '<option value="' + availableTypes[i] + '">' + availableTypes[i] + '</option>';
+            listHTML += '<li data-option-value="' + availableTypes[i] + '">' + availableTypes[i] + '<br /><span data-option-value="' + availableTypes[i] + '">';
+            if (availableTypes[i] == "Certificate") {
+                listHTML += certificateMsg;
+            }
+            if (availableTypes[i] == "Card") {
+                listHTML += cardMsg;
+            }
+            if (availableTypes[i] == "E-Card") {
+                listHTML += ecardMsg;
+            }
+            listHTML += '</span></li>';
+        }
+        $('.type-select').html(optionHTML);
+        $('#selectCardType ul').html(listHTML);
+        $('#selectCardType label').text('Select Card Type');
+        $('div.select-area-2').removeClass("disabled");
+        $('.option-two ul').css({
+            opacity: 1
+        });
+    });
+    $(".option-two").on('click', 'li', function (e) {
+        /* console.log($(this).get(0).tagName); */
+        e.preventDefault();
+        var products = [],
+                cardCount = 0;
+        $(productsjson['product']).each(function (index, arr) {
+            if (arr['card_type'] == $('#selectCardType li.selected').attr('data-option-value') && arr['occasion_type'] == $('#selectOccasion input[type=hidden]').val()) {
+                if (arr['is_new'].toLowerCase() == "true") {
+                    products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '" class="new-item"></li>');
+                } else {
+                    products.push('<li><div class="hover-bar"><a class="magnify" href="#" data-cardID="' + arr['card_id'] + '"></a><a class="select-card" href="#" data-cardID="' + arr['card_id'] + '"></a></div><img src="' + arr['card_image1'] + '"></li>');
+                }
+                cardCount++;
+            }
+        });
+        $("ul#products").remove();
+        $("a.arrow").remove();
+        if (cardCount > 3) {
+            $('#carousel-gallery .wrapper').append('<ul id="products">' + products + products + '</ul>');
+        } else {
+            $('#carousel-gallery .wrapper').append('<ul id="products">' + products + '</ul>');
+        }
+        $('.infiniteCarousel').infiniteCarousel();
+        if (cardCount < 3) {
+            $("a.arrow").unbind("click").css({
+                'opacity': '.2',
+                'cursor': 'none'
+            });
+            $("a.arrow").click(function (e) {
+                e.preventDefault();
+            });
+        }
+        if (cardCount == 1) {
+            $('#cardCount').text(cardCount + '  Card');
+        } else {
+            $('#cardCount').text(cardCount + '  Cards');
+        }
+        $('div.select-area-3').removeClass("disabled");
+        $('div#carousel-gallery').removeClass("disabled");
+    });
+    $('.wrapper').on('click', 'a.magnify', function (e) {
+        if (!$(this).parents().hasClass('disabled')) {
+            e.preventDefault();
+            var card_id = $(this).attr('data-cardid');
+            if (card_id.substring(0, 2) == 'EC') {
+                $(productsjson['product']).each(function (index, arr) {
+                    if (arr['card_id'] == card_id) {
+                        ecard_id = arr['ecard_id'] || false;
+                        product_url = arr['product_url'] || false;
+                        return false;
+                    }
+                });
+                window.open(product_url, "ecard",'height=900,width=1100,modal=yes,alwaysRaised=yes,toolbar=no,menubar=0,status=0,copyhistory=0,scrollbars=yes,resizable=1');
+            } else {
+                selectCard(card_id);
+            }
+        }
+    });
+    $('.wrapper').on('click', 'a.select-card', function (e) {
+        if (!$(this).parents().hasClass('disabled')) {
+            e.preventDefault();
+            customizeCard($(this).attr('data-cardid'));
+        }
+    });
+    $('.cancel-btn').click(function () {
+        $.fancybox.close(); console.log(cardProperties);
+        resetProducts();
+        $("input[name='s_sat_skew']").val('');
+        $('#card_create').show();
+        $('#card_preview').hide();
+    });
+    $('.back-btn').click(function (e) {
+        e.preventDefault();
+        resetProducts(true);
+        $('.top-actions .back-btn').hide();
+        $('.top-actions .cancel-btn').show();
+        $('#js-prod-personalizer h1').text('Select a certificate, card, or e-card');
+        $('#step1').show();
+        $('#step2').hide();
+        $('#step3').hide();
+    });
+    $('.ecard-btn').click(function (e) {
+        e.preventDefault();
+        mawf.CartView.productMasterState('picking');
+        $('.product-thumb').html('');
+        $('#card_preview .blurb p').remove();
+        $.fancybox({
+            href: '#js-prod-personalizer',
+            autoSize: true,
+            width: '960px',
+            scrolling: 'no',
+            padding: 0,
+            modal: true,
+            closeBtn : false,
+            margin: [5,5,5,5]
+        });
+        resetProducts();
+    });
+    $('#edit_ecard').click(function (e){
+        e.preventDefault();
+        launchCard(product_id);
+        $('.lightbox-rightside a.cont-btn').click();
+    });
+
+    // Product Selection
+
+    // Process Donation
+
+    var isPaypal = false,
+            paypalRedirectUrl = '',
+            showError = function(pageError, fieldError) {
+                if(fieldError == ''){
+                    alert('Oops!  There was an error processing your donation.  Please contact your financial institution for more information.');
+                } else {
+                    alert(pageError + " " + fieldError);
+                }
+                /* console.log(fieldError); */
+                $("a.button-submit").css("cursor", "pointer").removeClass("disabled").removeAttr("disabled");
+            },
+            submitDonation = function(button_element, donation_data){
+                if($('.input-error').length > 0){
+                    $('.input-error:eq(0)').focus().blur();
+                } else {
+                    // BZ 950
+                    [[?x[[S334:intent]]x::xzipx::
+                    $(zip_array['chapter']).each(function (index, arr) {
+                        if (arr['zip_code'] == $('#ccPostal').val()) {
+                            mawf.CartView.donations()[0].donorIntent(arr['chapter_id']);
+                        }
+                    });
+                ::]]
+                    // BZ 950
+
+                    var donation = mawf.CartView.donations()[0],
+                            chid = donation.donorIntent(),
+                            isMonthly = (donation.donationType() == 2),
+                            officeID = null,
+                            short_chid = chid.substr(0,3),
+                            donation_form_id = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid + ' + form').attr('id')) : ('1563')),
+                            formDesignee = ( (parseInt(short_chid) < 500) ? ($(center_forms).find('office#' + short_chid).parent().attr('name')) : ('Make-A-Wish® International')),
+                            today = Date.today().toString('M/dd/yyyy') || "8/20/2013";
+
+                    setUserInfoCookie();
+                    donation_data = donation_data.replace(/form_id=\d{4}/,'form_id=' + donation_form_id) + '&s_chid=' + chid + '&s_formDesignee=' + encodeURIComponent(formDesignee) + '&remember_me=true&other_amount=' + (0.00 + parseFloat(donation.prettyDonationAmount())) + (isMonthly?'&sustaining.frequency=monthly&sustaining.duration=0':'');
+                    if($("input[name='s_sat_skew']").val() === '') {
+                        if(!isMonthly){
+                            $("input[name='s_sat_skew']").val('DO02-01');
+                        } else if(isMonthly) {
+                            $("input[name='s_sat_skew']").val('MG05-01');
+                        }
+                    }
+                    if($('#foreign_key1').val()=='') {
+                        $('#foreign_key1').val(metadata_campaign_id);
+                    }
+                    if($('#foreign_key2').val()=='') {
+                        if(chid.substr(4,3) == '000') {
+                            $('#foreign_key2').val('UR-' + chid.substr(0,3) + '-01');
+                        }
+                        else {
+                            $('#foreign_key2').val('UR-' + chid + '-F');
+                        }
+                    }
+                    if( form_chid === '100' ) {
+                        if( short_chid === '100' ) {
+                            if($('#foreign_key3').val() === ''){
+                                $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_national_monthly : metadata_national_office_code) );
+                            }
+                            if($('#foreign_key4').val() === ''){
+                                $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_chid);
+                            }
+                        }
+                        else {
+                            if($('#foreign_key3').val() === ''){
+                                $('#foreign_key3').val(metadata_appeal_year + '-82S-' + (isMonthly ? metadata_national_monthly : metadata_national_office_code) );
+                            }
+                            if($('#foreign_key4').val() === ''){
+                                $('#foreign_key4').val('ON-' + metadata_national_office_code + '-' + form_chid);
+                            }
+                        }
+                    }
+                    else {
+                        if($('#foreign_key3').val() === ''){
+                            $('#foreign_key3').val(metadata_appeal_year + '-NSP-' + (isMonthly ? metadata_chapter_monthly : metadata_chapter_office_code) );
+                        }
+                        if($('#foreign_key4').val() === ''){
+                            $('#foreign_key4').val('ON-' + metadata_chapter_office_code + '-' + form_chid);
+                        }
+                    }
+                    if($('#foreign_key5').val()=='') {
+                        $('#foreign_key5').val(metadata_subtype);
+                    }
+                    $('#source').val($('#foreign_key2').val() + ',' + $('#foreign_key3').val() + ',' + $('#foreign_key4').val());
+                    $('#product_id').val(product_id);
+                    if (cardProperties[1] == 'ecard01' || cardProperties[1] == 'ecard02') {
+                        var ecard_first_name = $("input[name='billing.name.first']").val();
+                        var ecard_last_name = $("input[name='billing.name.last']").val();
+                        var ecard_sender_email = $("input[name='donor.email']").val();
+                        var ecard_recipient_email = cardProperties[4];
+                        var ecard_stationary_id = cardProperties[8];
+                        var ecard_subject = ecard_first_name + " " + ecard_last_name + " has sent you an e-card";
+                        var ecard_message = cardProperties[7];
+                        var card_id = cardProperties[8];
+                        var honoreeProduct = cardProperties[9];
+                        var occassionType = cardProperties[11];
+                        var prodURL = '';
+
+                        $(productsjson['product']).each(function (index, arr){
+                            if(arr['ecard_id'] == ecard_id) {
+                                prodURL = arr['product_url'];
+                            }
+                        });
+
+                        donation_data += '&ecard.id=' + ecard_id + '&ecard.message=' + ecard_message + '&ecard.subject=' + ecard_subject + '&ecard.recipients=' + ecard_recipient_email + '&ecard.send=true' + '&product_url_1=' + encodeURIComponent(prodURL) + '&s_productURL1=' + encodeURIComponent(prodURL);
+
+                        if($("input[name='honoree_first_name']").val().length > 0) {
+                            donation_data += '&s_ecard_to_first=' + encodeURIComponent($("input[name='honoree_first_name']").val()) + '&s_ecard_to_last=' + encodeURIComponent($("input[name='honoree_last_name']").val()) + '&s_ecard_from=' + encodeURIComponent($("input[name='from_name']").val());
+                        } else {
+                            donation_data += '&s_ecard_to_first=' + encodeURIComponent($("input[name='memoree_first_name']").val()) + '&s_ecard_to_last=' + encodeURIComponent($("input[name='memoree_last_name']").val()) + '&s_ecard_from=' + encodeURIComponent($("input[name='from_name']").val());
+                        }
+                    } else if (cardProperties[1] == 'cert01' || cardProperties[1] == 'cert03') {
+                        var honoreeName = cardProperties[3];
+                        var productFromName = cardProperties[4];
+                        var honoreeProduct = cardProperties[5];
+                        var honoreeProductName = cardProperties[6];
+                        var occassionType = cardProperties[7];
+                        // new treatment for secure PDF links for certificates
+                        var baseCertURL = "http://certificates.wish.org/pdf";
+                        var pdfSalt = "L89adkhoQ";
+                        var certProductID = cardProperties[9];
+                        var timeStamp = Date.today().toString('ddMMyyyy');
+                        var stringToHash = certProductID + honoreeName + productFromName + timeStamp + pdfSalt;
+                        var hashedString = CryptoJS.MD5(stringToHash).toString();
+                        var hashTail = hashedString.substring(hashedString.length - 10);
+                        var prodURL = baseCertURL + '?p=' + encodeURIComponent(certProductID) + '&h=' + encodeURIComponent(honoreeName) + '&d=' + encodeURIComponent(productFromName) + '&t=' + encodeURIComponent(timeStamp) + '&s=' + hashTail;
+
+                        donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
+                    } else if (cardProperties[1] == 'cert02') {
+                        var honoreeName = cardProperties[3];
+                        var honoreeProduct = cardProperties[4];
+                        var honoreeProductName = cardProperties[5];
+                        var occassionType = cardProperties[6];
+
+                        // new treatment for secure PDF links for certificates
+                        var baseCertURL = "http://certificates.wish.org/pdf";
+                        var pdfSalt = "L89adkhoQ";
+                        var certProductID = cardProperties[8];
+                        var timeStamp = Date.today().toString('ddMMyyyy');
+                        var stringToHash = certProductID + honoreeName + timeStamp + pdfSalt;
+                        var hashedString = CryptoJS.MD5(stringToHash).toString();
+                        var hashTail = hashedString.substring(hashedString.length - 10);
+                        var prodURL = baseCertURL + '?p=' + encodeURIComponent(certProductID) + '&h=' + encodeURIComponent(honoreeName) + '&t=' + encodeURIComponent(timeStamp) + '&s=' + hashTail;
+
+                        donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
+                    } else if (cardProperties[1] == 'card01') {
+                        var honoreeName = cardProperties[3];
+                        var honoreeProduct = cardProperties[10];
+                        var honoreeProductName = cardProperties[12];
+                        var prodMsgLine1 = cardProperties[13];
+                        var prodMsgLine2 = cardProperties[14];
+                        var prodMsgLine3 = cardProperties[15];
+                        var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&line1=" + encodeURIComponent(prodMsgLine1) + "&line2=" + encodeURIComponent(prodMsgLine2) + "&line3=" + encodeURIComponent(prodMsgLine3);
+                        donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
+                    } else if (cardProperties[1] == 'card02') {
+                        var honoreeName = cardProperties[3];
+                        var productFromName = cardProperties[10];
+                        var honoreeProduct = cardProperties[11];
+                        var honoreeProductName = cardProperties[12];
+                        var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
+                        donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
+                    } else if (cardProperties[1] == 'card03' || cardProperties[1] == 'card04') {
+                        var honoreeName = cardProperties[3];
+                        var productFromName = cardProperties[10];
+                        var honoreeProduct = cardProperties[11];
+                        var honoreeProductName = cardProperties[12];
+                        var shippingNameFirst = cardProperties[15];
+                        var shippingNameMiddle = cardProperties[16];
+                        var shippingNameLast = cardProperties[17];
+                        var prodURL = "http://site.wish.org/site/PageNavigator/products.html?key=" + today + "&pdf=" + honoreeProduct + "&HonorName=" + encodeURIComponent(honoreeName) + "&DonorName=" + encodeURIComponent(productFromName);
+                        donation_data += "&product_url_1=" + encodeURIComponent(prodURL) + "&s_productURL1=" + encodeURIComponent(prodURL) + "&s_productURL1Name=" + encodeURIComponent(honoreeProductName) + "&shipping.name.first=" + shippingNameFirst + "&shipping.name.middle=" + shippingNameMiddle + "&shipping.name.last=" + shippingNameLast;
+                    } else if (cardProperties[1] == "card-blank") {
+                        var honoreeProductName = cardProperties[2];
+                        var occassionType = cardProperties[3];
+                        donation_data += "&product_url_1=blank&s_productURL1=blank&s_productURL1Name=" + encodeURIComponent(honoreeProductName);
+                    }
+                    if (donation_data.indexOf("product_url_1") == -1) {
+                        donation_data += "&product_url_1=none&s_productURL1=none&s_productURL1Name=none";
+                    }
+                    $(button_element).css("cursor", "not-allowed").addClass("disabled").attr("disabled", true);
+
+                    luminateExtend.api.request({
+                        api: 'donation',
+                        data: 'method=getDonationFormInfo&form_id=' +
+                                /form_id=(\d{4,5})/.exec(donation_data)[1],
+                        requestType: 'POST',
+                        callback: function (data) {
+                            if(data.errorResponse) {
+                                donation_data += '&level_id=2031';
+                            } else {
+                                donation_data += '&level_id=' + data.getDonationFormInfoResponse.donationLevels.donationLevel[3].level_id;
+                            }
+                            luminateExtend.api.request({
+                                api: 'donation',
+                                form: '#mainform',
+                                data: donation_data,
+                                requestType: 'POST',
+                                callback: function (data) {
+                                    if (console.log) { console.log('mainform donation callback'); }
+                                    if (data['donationResponse']['redirect']) {
+                                        isPaypal = true;
+                                        paypalRedirectUrl = data['donationResponse']['redirect']['url'];
+                                    }
+                                    var finishGift = function() {
+                                        var center_ids = ['1001','1101'],
+                                                bools = [($('#optinNational').is(':checked')?true:false),
+                                                    ($('#optinInternational').hasClass('checked')?true:false),
+                                                    ($('#optinChapter').is(':checked')?true:false)],
+                                                center_remove = '',
+                                                center_add = '';
+
+                                        // Set 3rd center ID
+                                        $(zip_array['chapter']).each(function (index, arr) {
+                                            if (arr['zip_code'] == $('#ccPostal').val()) {
+                                                $('#chapter_id').val(arr['chapter_id']);
+                                                $(chaptersjson['allChapters']['chapter']).each(function (index, arr) {
+                                                    if ($('#chapter_id').val() == arr['office_id']) {
+                                                        center_ids.push(arr['center_id']);
+                                                    }
+                                                });
+                                            }
+                                        });
+
+                                        for(var i = 0; i < center_ids.length; i++) {
+                                            if (bools[i]) {
+                                                if (center_add.length > 0) {
+                                                    center_add += ',';
+                                                }
+                                                center_add += center_ids[i];
+                                            } else {
+                                                if (center_remove.length > 0) {
+                                                    center_remove += ',';
+                                                }
+                                                center_remove += center_ids[i];
+                                            }
+                                        }
+                                        if (console.log) { console.log('call update'); }
+                                        // Opt-ins
+                                        luminateExtend.api.request({
+                                            api: 'cons',
+                                            data: 'method=update&add_center_opt_in_ids=' + center_add + '&remove_center_opt_in_ids=' + center_remove + '&primary_email=' + encodeURIComponent($("#eAdd").val()),
+                                            requiresAuth: true,
+                                            requestType: 'POST',
+                                            useHTTPS: true,
+                                            callback: function() {
+                                                if (console.log) { console.log('update callback'); }
+                                                $.removeCookie("cart");
+                                                $.jStorage.flush();
+                                                localStorage.clear();
+                                                savedSession = {};
+                                                $('#mainform input').each(function(){$(this).val('');});
+                                                window.onbeforeunload = function(){};
+                                                if(isPaypal) {
+                                                    if (console.log) { console.log('paypal '+paypalRedirectUrl); }
+                                                    window.location.href = paypalRedirectUrl;}
+                                                else {
+                                                    if (console.log) { console.log('cc redirect'); }
+                                                    window.location.href = "SPageServer?pagename=donate_thankyou&chid=" + chid;}
+                                            }
+                                        });
+                                    };
+
+                                    if (data['donationResponse']['redirect']) {
+                                        isPaypal = true;
+                                        paypalRedirectUrl = data['donationResponse']['redirect']['url'];
+                                        finishGift();
+                                    }
+                                    if (data['donationResponse']['donation']) {
+                                        finishGift();
+                                    }
+                                    if (data['donationResponse']['errors']) {
+                                        var fieldError = '';
+                                        if (data['donationResponse']['errors']['fieldError']) {
+                                            if ($.isArray(data['donationResponse']['errors']['fieldError'])) {
+                                                $(data['donationResponse']['errors']['fieldError']).each(function (index, arr) {
+                                                    fieldError = fieldError + arr + " ";
+                                                });
+                                            } else {
+                                                fieldError = data['donationResponse']['errors']['fieldError'];
+                                            }
+                                        }
+                                        showError(data['donationResponse']['errors']['pageError'], fieldError);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            };
+
+    // bind a handler to billing zip field to look up chapter for certain ad-hoc form types
+    $('input#ccPostal').blur(function() {
+
+        // if form type is ad hoc "C" type, then determine donor intent from billing zip
+        if (  (urlVariableArray['form_type'] == "SPEC") || (urlVariableArray['form_type'] == "SPEMC")  ) {
+
+            setChapterByZip($('input#ccPostal').val());
+
+        }
+
+    });
+
+    $("a.action-btn, a.btn-modal").click(function (e) {
+        e.preventDefault();
+    });
+    // Standard donation submit button
+    $("a.button-submit:eq(0)").click(function (e) {
+        e.preventDefault();
+        submitDonation($(this), 'method=donate&form_id=1420&validate=true');
+    });
+    // PayPal button
+    $("a.button-submit:eq(1)").click(function (e) {
+        e.preventDefault();
+        submitDonation($(this), 'method=startDonation&form_id=1420&validate=true&extproc=paypal&finish_success_redirect=' + encodeURIComponent('SPageServer?pagename=donate_thankyou&chid=' + mawf.CartView.donations()[0].donorIntent()) + '&finish_error_redirect=[[T1:SPageServer?pagename=donate_paypal_error]]');
+    });
 
 
-  // Process Donation
+    // Process Donation
 
 });
 
