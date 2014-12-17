@@ -1409,7 +1409,7 @@ $(document).ready(function () {
                             }
                         });
 
-                        donation_data += '&ecard.id=' + ecard_id + '&ecard.message=' + encodeURIComponent(ecard_message) + '&ecard.subject=' + encodeURIComponent(ecard_subject) + '&ecard.recipients=' + ecard_recipient_email + '&ecard.send=true' + '&product_url_1=' + encodeURIComponent(prodURL) + '&s_productURL1=' + encodeURIComponent(prodURL);
+                        donation_data += '&ecard.id=' + ecard_id + '&ecard.message=' + ecard_message + '&ecard.subject=' + ecard_subject + '&ecard.recipients=' + ecard_recipient_email + '&ecard.send=true' + '&product_url_1=' + encodeURIComponent(prodURL) + '&s_productURL1=' + encodeURIComponent(prodURL);
 
                         if($("input[name='honoree_first_name']").val().length > 0) {
                             donation_data += '&s_ecard_to_first=' + encodeURIComponent($("input[name='honoree_first_name']").val()) + '&s_ecard_to_last=' + encodeURIComponent($("input[name='honoree_last_name']").val()) + '&s_ecard_from=' + encodeURIComponent($("input[name='from_name']").val());
