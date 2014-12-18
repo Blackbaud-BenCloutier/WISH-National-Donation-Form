@@ -1641,4 +1641,19 @@ $(document).ready(function () {
 
 });
 
+(function ($) {
+	function isIE () {
+		var myNav = navigator.userAgent.toLowerCase();
+		return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+	}
+	if (isIE() <= 9) {
+			$("#mainform input").each(function(){
+				if($(this).attr("placeholder")){
+					var self = $(this);
+					self.removeAttr("placeholder");
+				}
+			});
+	}
+})(jQuery);
+
 </script>
