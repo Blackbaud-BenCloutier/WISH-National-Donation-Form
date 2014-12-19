@@ -1,3 +1,27 @@
+<script>
+(function ($) {
+	//redirect optimization yo
+	function getParameterByName(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+	if(!document.referrer || document.referrer == ""){
+		if(getParameterByName("pagename") == "donate_thankyou"){
+			var chid = getParameterByName("chid");
+			if(chid){
+				window.location.replace("https://secure2.convio.net/wishdev/site/SPageServer?pagename=donate_test&chid=" + chid);
+			}
+			else{
+				window.location.replace("https://secure2.convio.net/wishdev/site/SPageServer?pagename=donate_test");
+			}
+		}
+	}
+})(jQuery);
+</script>
+
+
 <!-- wrap page so we can still edit with the redirect in place -->
 [[?[[S8]]::/admin/::::
     <!--Start e-Dialog ConversionTrack Code -->
