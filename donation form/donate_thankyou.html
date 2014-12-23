@@ -29,7 +29,7 @@
         var donationCheck = '[[S120:dc:transactionID]]';
         console.log('donation check = "' + donationCheck + '"');
         if(donationCheck === 'dc:transactionID' || donationCheck === '0') {
-            window.location.replace("./SPageServer?pagename=donate_test");
+            window.location.replace("./SPageServer?pagename=donate");
         }
       var s, f, c = document.cookie; s = c.indexOf("ed100006504"); if (s == -1) { s = c.indexOf("eds100006504") };
       if (s > -1) {
@@ -63,7 +63,7 @@
       </div>
       <div class="right">
         <a class="button-blue js_print" href="">Print</a>
-            <a class="button-blue" href="SPageServer?pagename=donate_test&chid=[[S80:chid]]">Make Another Donation</a>
+            <a class="button-blue" href="SPageServer?pagename=donate&chid=[[S80:chid]]">Make Another Donation</a>
       </div>
     </div>
     <!--End donation summary-->
