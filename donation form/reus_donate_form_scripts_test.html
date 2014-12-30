@@ -454,7 +454,7 @@ $(document).ready(function () {
                         mawf.shutDownProductModal();
                     }
                 });
-                selectCard(id);
+                //selectCard(id);
             },
             selectCard = function(cardID) {
                 $(productsjson['product']).each(function (index, arr) {
@@ -1263,10 +1263,10 @@ $(document).ready(function () {
     });
     $('.cancel-btn').click(function () {
         $.fancybox.close(); console.log(cardProperties);
-        resetProducts();
+        /*resetProducts();
         $("input[name='s_sat_skew']").val('');
         $('#card_create').show();
-        $('#card_preview').hide();
+        $('#card_preview').hide();*/
     });
     $('.back-btn').click(function (e) {
         e.preventDefault();
