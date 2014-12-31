@@ -1406,7 +1406,13 @@ $(document).ready(function () {
                         var ecard_sender_email = $("input[name='donor.email']").val();
                         var ecard_recipient_email = cardProperties[4];
                         var ecard_stationary_id = cardProperties[8];
-                        var ecard_subject = ecard_first_name + " " + ecard_last_name + " has sent you an e-card";
+                        var ecard_subject;
+                        // use 'From Name' if available
+                        if(cardProperties[5].length > 1) {
+                            ecard_subject = cardProperties[5] + " has sent you an e-card";
+                        } else {
+                            ecard_subject = ecard_first_name + " " + ecard_last_name + " has sent you an e-card";
+                        }
                         var ecard_message = cardProperties[7];
                         var card_id = cardProperties[8];
                         var honoreeProduct = cardProperties[9];
