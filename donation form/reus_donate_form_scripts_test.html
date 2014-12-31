@@ -8,7 +8,7 @@
     .bldr-wrap #card-form fieldset {float:right!important;margin:22px!important;}
 </style>
 <script>
-
+console.log('in reus donate form scripts test');
 // Global Vars
 
 [[S51:reus_donate_form_metadata]]
@@ -732,8 +732,12 @@ $(document).ready(function () {
                                     } else {
                                         toFullName = toFirstName + " " + toLastName
                                     }
+                                    $('#card_in_memory_of #memory_full').html('<p></p>');
+                                    console.log('no optional name  ');
                                 } else {
                                     toFullName = toInHonorOf;
+                                    $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+                                    console.log('optional name is ' + toFullName);
                                 }
                                 $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
                                 $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
@@ -741,7 +745,6 @@ $(document).ready(function () {
                                 $('#card_create').hide();
                                 $('#card_in_memory_of').show();
                                 $('#card_in_memory_of #memory_short').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-                                $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
                                 $('#card_from').show();
                                 $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
                                 cardProperties = [donationID, 'cert03', 'certificate', toFullName, fromName, productURL, cardName, occasionType, thisSkew, product_id];
@@ -924,8 +927,12 @@ $(document).ready(function () {
                                 } else {
                                     toFullName = toFirstName + "%20" + toLastName;
                                 }
+                                $('#card_in_memory_of #memory_full').html('<p></p>');
+                                console.log('no optional name');
                             } else {
                                 toFullName = toInHonorOf;
+                                $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+                                console.log('optional name is ' + toFullName);
                             }
                             if (shippingMI) {
                                 shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
@@ -947,7 +954,6 @@ $(document).ready(function () {
                                             '<p>' + decodeURIComponent(toCountry) + '</p>'
                             );
                             $('#card_in_memory_of').show();
-                            $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
                             $('#card_in_memory_of #memory_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
                             cardProperties = [donationID, 'card03', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
                             $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6><h6>In Memory Of</h6><p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><p>"' + decodeURIComponent(toFullName) + '"</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><p>' + decodeURIComponent(toFullName) + '</p>' +'<p>' + decodeURIComponent(toAddress1) + '</p>' +'<p>' + decodeURIComponent(toAddress2) + '</p>' +'<p>' + decodeURIComponent(toCity) + '</p>' +'<p>' + decodeURIComponent(toState) + '</p>' +'<p>' + decodeURIComponent(toZip) + '</p>' +'<p>' + decodeURIComponent(toCountry) + '</p>');
@@ -994,8 +1000,12 @@ $(document).ready(function () {
                                 } else {
                                     toFullName = toFirstName + "%20" + toLastName;
                                 }
+                                $('#card_in_memory_of #memory_full').html('<p></p>');
+                                console.log('no optional nam');
                             } else {
                                 toFullName = toInHonorOf;
+                                $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
+                                console.log('optional name is ' + toFullName);
                             }
                             if (shippingMI) {
                                 shippingFullName = shippingFirstName + "%20" + shippingMI + "%20" + shippingLastName;
@@ -1018,7 +1028,6 @@ $(document).ready(function () {
                             );
                             $('#card_in_memory_of').show();
                             $('#card_in_memory_of #memory_short').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
-                            $('#card_in_memory_of #memory_full').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
                             $('#card_from').show();
                             $('#card_from .blurbtext').html('<p>' + decodeURIComponent(fromName) + '</p>');
                             cardProperties = [donationID, 'card04', 'card', toFullName, toAddress1, toAddress2, toCity, toState, toZip, toCountry, fromName, productURL, cardName, occasionType, thisSkew, shippingFirstName, shippingMI, shippingLastName];
@@ -1098,8 +1107,10 @@ $(document).ready(function () {
                                     } else {
                                         toFullName = toFirstName + "%20" + toLastName
                                     }
+                                    $('#card_in_memory_of #memory_full').html('<p></p>');
                                 } else {
                                     toFullName = toInMemoryOf
+                                    $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
                                 }
                                 $('.product-thumb-name').html('<h3>' + decodeURIComponent(cardName) + '</h3>');
                                 $('.product-thumb').html('<img src="' + decodeURIComponent(cardImage1) + '" width="140">');
@@ -1112,7 +1123,6 @@ $(document).ready(function () {
                                 $('#card_personal_message').show();
                                 $('#card_personal_message .blurbtext').html('<p>' + decodeURIComponent(message) + '</p>');
                                 $('#card_in_memory_of').show();
-                                $('#card_in_memory_of #memory_full').html('<p>"' + decodeURIComponent(toFullName) + '"</p>');
                                 $('#card_in_memory_of #memory_short').html('<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p>');
                                 cardProperties = [donationID, 'ecard01','ecard', toFullName, toEmail, fromName, cardName, message, ecardID, productURL, cardName, occasionType, thisSkew];
                                 $("#theRealActualWishSummaryCauseWeTheBest").html('<img src="' + decodeURIComponent(cardImage1) + '" width="50"><h6>' + decodeURIComponent(cardName) + '</h6>' + ((toInHonorOf)?'<h6>In Honor Of</h6><p>"' + decodeURIComponent(toFullName) + '"</p>' : '') + '<p>' + decodeURIComponent(toFirstName) + " " + decodeURIComponent(toMI) + " " + decodeURIComponent(toLastName) + '</p><h6>From</h6><p>' + decodeURIComponent(fromName) + '</p><h6>Send To</h6><p>' + decodeURIComponent(toEmail) + '</p>' + ((message)?'<h6>Personal Message</h6><p>' + decodeURIComponent(message) + '</p>': '' ));
