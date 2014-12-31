@@ -1654,6 +1654,12 @@ $(document).ready(function () {
 				}
 			});
 	}
+	
+	$('#from_name').after('<input type="text" id="s_from_name" name="s_from_name" maxlength="40" style="display:none;">');
+	$('#from_name').change(function() {
+	   $('#s_from_name').val($(this).val())
+	});
+
 })(jQuery);
 
 </script>
