@@ -1278,6 +1278,12 @@ $(document).ready(function () {
         $('#card_create').show();
         $('#card_preview').hide();*/
     });
+	$('#remove_ecard').click(function(){
+        resetProducts();
+        $("input[name='s_sat_skew']").val('');
+        $('#card_create').show();
+        $('#card_preview').hide();
+	}
     $('.back-btn').click(function (e) {
         e.preventDefault();
         resetProducts(true);
